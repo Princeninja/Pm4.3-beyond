@@ -18,7 +18,7 @@
 
 							<treechildren>
 							
-								<!-- --> <treeitem id="testbtn" label="Test" /> 
+								<!-- --> <treeitem id="testbtnremote" label="Test" /> 
 								<treeitem id="ofvisit" label="Office Visits" />
 							  	<treeitem id="ptchart" label="PtChart" />
 								<!--<treeitem id="soapsht" label="Soap Sheet" />-->
