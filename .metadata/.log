@@ -1,0 +1,10 @@
+!SESSION 2018-10-18 20:45:50.207 -----------------------------------------------
+eclipse.buildId=M20110210-1200
+java.version=1.8.0_171
+java.vendor=Oracle Corporation
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=en_US
+Framework arguments:  -product org.eclipse.epp.package.jee.product
+Command-line arguments:  -data C:\Users\program\git\Pm4.3-beyond -os win32 -ws win32 -arch x86_64 -product org.eclipse.epp.package.jee.product
+
+!ENTRY org.eclipse.ui 4 4 2018-10-18 20:45:55.074
+!MESSAGE Unable to create menu item "org.zkoss.eclipse.services.commands.studio_forum", command "org.zkoss.eclipse.services.commands.studio_forum" not defined

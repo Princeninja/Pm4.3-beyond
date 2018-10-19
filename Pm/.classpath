@@ -17,5 +17,6 @@
 	<classpathentry kind="lib" path="nanoxml/XMLElement.class"/>
 	<classpathentry kind="lib" path="nanoxml/XMLParseException.class"/>
 	<classpathentry kind="lib" path="C:/Users/program/Heliosworkspace/swifttab-0.8.0.jar"/>
+	<classpathentry kind="lib" path="C:/Users/program/Heliosworkspace/Pm/WebContent/WEB-INF/lib/zcommon.jar"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>
