@@ -1,0 +1,75 @@
+<?page title="Close/Satisfy Orders" contentType="text/html;charset=UTF-8"?>
+<zk>
+<window id="ordersCloseWin" title="Enter/Edit Orders" border="normal" width="600px" position="center"  mode="modal" apply="palmed.OrdersCloseWinController" > <!-- mode="modal"-->
+	<label id="ptname" />
+	<vbox>
+		<!--  groupbox>-->
+			<grid>
+				<columns>
+					<column label="" width="80px" />
+					<column label="" width="320px" />
+				</columns>
+				<rows>
+					<row>
+						<label value="Date" />
+						<label id="lblDate" />
+					</row>
+					<row >
+						<label value="Order" />
+						<label id="lblDesc" />
+					</row>
+					<row >
+						<label value="Instructions" />
+						<label id="lblNote" />
+					</row>
+					<row>
+						<label value="Priority" />
+						<label id="lblPriority" />
+					</row>
+					<row>
+						<label value="Provider" />
+						<label id="lblProvider" />
+					</row>
+					<row >
+						<label value="Indications" />
+						<label id="lblIndications" />
+					</row>
+
+				</rows>
+			</grid>
+			
+			
+			<grid>
+				<columns>
+					<column label="" width="80px" />
+					<column label="" width="320px" />
+				</columns>
+				<rows>
+					<row>
+						<label value="Status" />
+						<label id="lblStatus" value="Closed" />
+					</row>
+					<row>
+						<label value="Close/Satisfy Date" />
+						<textbox id="txtDateSatisfied" maxlength="10" width="80px" />
+					</row>
+					<row>
+						<label value="Reason" />
+						<listbox id="lboxReason" mold="select" rows="1" />
+					</row>
+
+				</rows>
+			</grid>
+			
+
+
+	</vbox>
+		
+	<hbox>
+		<button id="btnSave" label="Save" width="80px" />
+		<button id="btnCancel" label="Cancel" width="80px" />
+	</hbox>
+
+
+</window>
+</zk>

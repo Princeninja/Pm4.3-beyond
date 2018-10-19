@@ -1,0 +1,151 @@
+<?taglib uri="http://www.zkoss.org/dsp/web/core" prefix="c"?>
+<zk xmlns="http://www.zkoss.org/2005/zul"
+	xmlns:h="http://www.w3.org/1999/xhtml"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.zkoss.org/2005/zul http://www.zkoss.org/2005/zul/zul.xsd">
+
+	<window id="mainMenuWindow" border="none" mode="embedded" height="100%" apply="palmed.MainMenuController">
+
+		<style>.z-groupbox-body { background-color : white}</style>
+
+
+
+				<groupbox id="groupbox_menu" mold="3d" height="100%" contentStyle="background-color: white" style="overflow:auto;position:relative" > <!-- ; overflow:auto -->
+					<caption style="color: #000000; font-weight: bold;" label="Main Menu" /> <!-- ${c:l('menu.Title')}"  -->
+						
+						<!-- MAIN MENU -->
+						<tree id="mainMenuTree" >
+
+							<treechildren>
+							
+								<!-- <treeitem id="testbtn" label="Test" />  --> 
+								<treeitem id="ofvisit" label="Office Visits" />
+							  	<treeitem id="ptchart" label="PtChart" />
+								<!--<treeitem id="soapsht" label="Soap Sheet" />-->
+								<treeitem id="ptledger" label="PtLedger" />
+								<treeitem id="scheduler" label="Scheduler" />
+								<treeitem id="rxstatus" label="Rx Status" />
+								
+								<treeitem id="patients" label="Patients" open="false" >
+									<treechildren>
+										<treeitem id="editpt" label="Edit Patient" />
+										<treeitem id="newpt" label="New Patient" />
+										<treeitem id="deletept" label="Delete/Hide Patient" />
+										<treeitem id="listpt" label="Patient Lists" />
+									</treechildren>
+								</treeitem>
+								<treeitem id="lkupd" label="Look-up App" open="false" />
+								<!-- <treechildren>
+										<treeitem id="lkupd " label="Codes" />
+									</treechildren>
+								</treeitem>-->
+								<treeitem id="remind" label="Reminders" open="false" >
+									<treechildren>
+										<treeitem id="reminders" label="Patient Reminders" />
+									</treechildren>
+								</treeitem>
+								<treeitem id="ptbilling" label="Patient Billing" open="false" >
+									<treechildren>
+										<treeitem id="billing" label="Bills" open="false" >
+											<treechildren>
+												<treeitem id="bills_print" label="Print Bills" />
+												<treeitem id="bills_setup" label="Set Up Bills" />
+												<treeitem id="bills_billchg" label="Post Billing Charges" />
+												<treeitem id="bills_finance" label="Post Finance Charges" />
+											</treechildren>
+										</treeitem>
+										<treeitem id="insurance" label="Insurance" open="false" >
+											<treechildren>
+												<treeitem id="ins_batch" label="Batch Insurance" />
+												<treeitem id="ecs" label="Electronic Claims" open="false" >
+													<!--  <treechildren>
+														<treeitem id="ecs_transmit" label="Transmit Clains" />
+														<treeitem id="ecs_archive" label="Archive Claims" />
+														<treeitem id="ecs_setup" label="ECS Preferences" />
+													</treechildren>
+													-->
+												</treeitem>
+												<treeitem id="eobs" label="Archived EOBs" />
+	
+												<treeitem id="ins_reports" label="Insurance Reports" />
+												<treeitem id="ins_forms" label="Manage Insurance Forms" />
+											</treechildren>
+										</treeitem>
+										
+										<treeitem id="collections" label="Collections" />
+										<treeitem id="aging" label="Aged Accounts" />
+									</treechildren>
+								</treeitem>
+								
+								
+								<treeitem id="admin" label="Admin" open="false" >								
+									<treechildren>
+										<treeitem label="Providers" open="false" >
+											<treechildren>
+												<treeitem id="editprov" label="Edit Provider" />
+												<treeitem id="newprov" label="New Provider" />
+											</treechildren>
+										</treeitem>
+										<treeitem label="Immunizations" open="false" >
+											<treechildren>
+												<treeitem id="vaccvx" label="Vaccine CVX Table" />
+												<treeitem id="vacmvx" label="Vaccine MVX Table" />
+											</treechildren>
+										</treeitem>
+										<treeitem id="dgndc" label="Diagnosis Codes" >
+										</treeitem>
+										<treeitem id="srvcde" label="Service Codes" />
+										<!-- <treechildren>
+										<treeitem id="dgndcde" label="Diagnosis Code(s)" />
+										</treechildren> -->
+										<treeitem id="ppoIns" label="Insurance Carriers" />
+										<treeitem id="phrdsphar" label="Pharmacies" />
+										<treeitem id="userwin" label="User Management" />
+										<treeitem id="useredit" label="User Edit" />
+										<treeitem id="erxconfig" label="eRx Config" />
+										<treeitem id="erxprov" label="eRx Providers" />
+										<treeitem id="ProbTbl" label="Problem List Master Table" />
+										<treeitem id="stdDict" label="Standard Dictations" />
+										<treeitem label="Lab Setups" open="false" >
+											<treechildren>
+												<treeitem id="labimport" label="Import HL7 Lab" />
+												<treeitem id="labobstbl" label="Lab Observations" />
+												<treeitem id="labbat" label="Lab Battery" />
+												<treeitem id="labfac" label="Lab Facilities" />
+											</treechildren>
+										</treeitem>
+										
+										<treeitem id="cdsRules" label="Clinical Decision Support Rules" />
+										<treeitem id="cqm" label="Clinical Quality Measures" />
+										<treeitem id="amc" label="Automated Measure Calculation" />
+										<treeitem id="audit" label="Audit Log" />
+										<treeitem label="Transfer Utils" open="false" >
+											<treechildren>
+												<treeitem id="xfrVitals" label="Transfer Vitals" />
+												<treeitem id="setDemographics" label="Set Demographics" />
+												<treeitem id="xfrPARs" label="Transfer PARs" />
+											</treechildren>
+										</treeitem>
+										<treeitem id="cdmDashboard" label="CDM Dashboard" />
+										
+									</treechildren>
+								</treeitem>
+								<treeitem id="labint" label="Lab Interface" />	
+								<treeitem id="pmimport" label="Import Documents" />
+								<treeitem id="about" label="About PAL/MED" open="true" >
+									<treechildren>
+												<treeitem id="changelog" label="Change-log" />
+												<treeitem id="comings" label="Coming Soon!" />
+												<treeitem id="FAQ" label="FAQS" />
+									</treechildren>
+								</treeitem>
+								<!-- <treeitem id="foxnews" label="Fox News" /> -->
+							</treechildren>											
+						</tree>
+						
+						
+				</groupbox>
+
+	</window>
+</zk>
+

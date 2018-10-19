@@ -1,0 +1,168 @@
+<?page title="Add/Edit Immunization" contentType="text/html;charset=UTF-8"?>
+<zk>
+<window id="immAddWin" title="Enter/Edit Immunization" border="normal" width="800px" position="center"  mode="modal" apply="palmed.ImmAddWinController" > 
+	<label id="ptname" />
+	<hbox>
+		<!--  groupbox>-->
+			<grid>
+				<columns>
+					<column label="" width="80px" />
+					<column label="" width="320px" />
+				</columns>
+				<rows>
+					<row>
+						<label value="Misc" />
+						<div>
+						<checkbox id="cbMisc" />   <!-- onCheck="setMisc(cbMisc.isChecked())" /> -->
+						<textbox id="txtMisc" maxlength="40" width="280px" disabled="true" />
+						</div>
+					</row>
+					<row id="rowMed1" >
+						<label value="Vaccination" />
+						<label id="lblVaccine" value="(select on right)"/>
+					</row>
+					<row id="rowMed2">
+						<label value="" />
+						<vbox>
+							<hbox widths="40px,40px">
+								<label value="CVX:" />
+								<label id="lblCVX" value="" />
+								<label id="lblCVXinfo" value="" />
+							</hbox>
+							<hbox widths="40px,40px">
+								<label value="MVX:" />
+								<label id="lblMVX" value="" />
+								<label id="lblMVXinfo" value="" />
+							</hbox>
+							<hbox>
+								<label value="Info:" />
+								<label id="lblInfo" />
+							</hbox>
+						</vbox>
+					</row>
+					<row>
+						<label value="Date" />
+						<textbox id="txtDate" maxlength="10" width="80px" />
+					</row>
+					<row>
+						<label value="Time" />
+						<textbox id="txtTime" maxlength="10" width="80px" />
+					</row>
+					<row>
+						<label value="Lot Number" />
+						<textbox id="txtLotNumber" maxlength="16" width="120px" />
+					</row>
+					<row>
+						<label value="Expiration Date" />
+						<textbox id="txtExpDate" maxlength="10" width="80px" />
+					</row>
+					<row>
+						<label value="Amount Given" />
+						<hbox>
+							<textbox id="txtAmount" maxlength="6" width="80px" />
+							<listbox id="lboxUnits"  width="80px" rows="1" mold="select" />
+						</hbox>
+					</row>
+					<row>
+						<label value="Site" />
+						<hbox>
+							<listbox id="lboxSite"  width="80px" rows="1" mold="select" />
+							<label value="Text" />
+							<textbox id="txtSite" maxlength="10" width="80px" />
+						</hbox>
+					</row>
+					<row>
+						<label value="Route" />
+						<listbox id="lboxRoute"  width="80px" rows="1" mold="select" />
+					</row>
+					<row>
+						<label value="Provider" />
+						<listbox id="lboxProvider"  width="200px" rows="1" mold="select" />
+					</row>
+					<row>
+						<label value="Information Source" />
+						<listbox id="lboxSource"  width="200px" rows="1" mold="select" />
+					</row>
+					<row>
+						<label value="Notes" />
+						<textbox id="txtNote" maxlength="80" width="300px" />
+					</row>
+
+				</rows>
+			</grid>
+
+		<!--</groupbox>-->
+		
+		<groupbox id="gbSrc" hflex="1">
+			<vbox vflex="1" hflex="1" >
+			<hbox>
+				<button id="btnSearch" label="Search" width="80px" />
+				<textbox id="txtSearch" maxlength="40" width="200px" />
+			</hbox>
+			<tabbox id="tbox" >
+				<tabs>
+					<tab id="tabShortcut" label="Shortcut" />
+					<tab id="tabCVX" label="Vaccines/CVX" />
+					<tab id="tabMVX" label="Mfr/MVX" />
+				</tabs>
+				<tabpanels>
+					<tabpanel id="tpShortcut" >
+						<listbox id="lboxShortcut" rows="20" hflex="1" vflex="1" >
+							<listhead id="lhShortcut" >
+								<listheader id="lhdrShortcut" label="Immunization Shortcut" sort="auto" />
+							</listhead>
+						</listbox>
+					</tabpanel>
+					<tabpanel id="tpCVX" >
+						<listbox id="lboxCVX" rows="20" hflex="1" vflex="1" >
+							<listhead id="lhCVX" >
+								<listheader id="lhdrCVX" label="CVX" width="60px" sort="auto" />
+								<listheader id="lhdrVac" label="Vaccines" sort="auto" />
+							</listhead>
+						</listbox>
+					</tabpanel>
+					<tabpanel id="tpMVX" >
+						<listbox id="lboxMVX" rows="20" hflex="1" vflex="1" >
+							<listhead id="lhMVX" >
+								<listheader id="lhdrMVX" label="MVX" width="60px" sort="auto" />
+								<listheader id="lhdrMfr" label="Manufacturer" sort="auto" />
+							</listhead>
+						</listbox>
+					</tabpanel>
+				</tabpanels>
+			</tabbox>
+			<button id="btnSelect" label="Select" width="80px" />
+			</vbox>
+		</groupbox>
+	</hbox>
+		
+		
+	<hbox>
+		<button id="btnSave" label="Save" width="80px" />
+		<button id="btnCancel" label="Cancel" width="80px" />
+	</hbox>
+
+<zscript>
+
+	void setMisc( boolean flg ){
+	
+		rowMed1.setVisible( ! flg );
+		rowMed2.setVisible( ! flg );
+		tabShortcut.setDisabled( flg );
+		tabCVX.setDisabled( flg );
+		tabMVX.setDisabled( flg );
+		btnSelect.setDisabled( flg );
+		btnSearch.setDisabled( flg );
+		lboxShortcut.setDisabled( flg );
+		lboxCVX.setDisabled( flg );
+		lboxMVX.setDisabled( flg );
+		txtMisc.setDisabled( ! flg );
+		txtSearch.setDisabled( flg );		
+		return;
+	}
+	
+</zscript>
+
+</window>
+
+</zk>

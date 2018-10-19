@@ -1,0 +1,72 @@
+<?page title="Family2" contentType="text/html;charset=UTF-8"?>
+<zk xmlns:h="http://www.w3.org/1999/xhtml">
+<window id="hxFamily2Win" border="none" mode="embedded" vflex="1" hflex="1" apply="palmed.HxFamilyItemWinController">
+	<vbox vflex="true" hflex="true" >
+		<label>Family History:</label>
+	
+		<hbox widths="50%,50%" vflex="true" hflex="true" >
+		
+			<vbox vflex="true" hflex="true" >
+					
+			<listbox id="lboxFamHx" vflex="true" hflex="true" rows="10" > <!-- emptyMessage="No matching items." -->
+				<listhead>
+					<listheader label="Member" width="80px" sort="auto" />
+					<listheader label="Desc" sort="auto" />
+				</listhead>
+			</listbox>
+				<button id="btnRemove" label="Remove" width="80px" />
+			</vbox>
+			
+			<vbox hflex="max" vflex="100%" >
+				<grid fixedLayout="true">
+					<columns>
+						<column width="80px" />
+						<column />
+					</columns>
+					<rows>
+						<row>
+							<label value="Member" />
+							<listbox id="lboxMember" mold="select" width="160px" />
+						</row>
+					</rows>
+				</grid>
+				<grid vflex="false">
+					<columns>
+						<column width="80px" />
+						<column width="220px" />
+						<column />
+					</columns>
+					<rows>
+						<row>
+							<button id="btnSearch" label="Search" width="75px" />
+							<textbox id="txtSearch" maxlength="40" width="200px" />
+							<checkbox id="cbPreselect" label="Preselect Fam Hx" />
+						</row>
+					</rows>
+				</grid>
+				<listbox id="lboxProbTbl" vflex="true" hflex="true" rows="10" > <!-- emptyMessage="No matching items." -->
+					<listhead id="lhdr" >
+						<listheader label="Desc" sort="auto" />
+						<!-- listheader width="80px" label="Code" sort="auto" / -->
+					</listhead>
+				</listbox>
+				<grid vflex="false">
+					<columns>
+						<column width="80px" />
+						<column width="220px" />
+						<column />
+					</columns>
+					<rows>
+						<row>
+							<label value="Note" /> 
+							<textbox id="txtNote" maxlength="40" width="200px" />(ex: age, date, type, etc)
+						</row>
+					</rows>
+				</grid>
+				<button id="btnAdd" label="++ Add" width="80px" />
+			</vbox>	
+		</hbox>
+		
+	</vbox>
+</window>	
+</zk>

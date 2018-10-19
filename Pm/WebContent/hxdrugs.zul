@@ -1,0 +1,95 @@
+<?page title="Drug Abuse" contentType="text/html;charset=UTF-8"?>
+
+
+<zk xmlns:h="http://www.w3.org/1999/xhtml">
+	<vbox>
+	
+		<hbox widths="50%,50%" >
+		
+			<vbox>
+				<label>Drug Abuse:</label>
+					
+				<grid fixedLayout="true">
+					<columns>
+						<column width="80px" />
+						<column />
+					</columns>
+					<rows>
+						<row> Drug Use Status<listbox id="lboxDrugsStatus" mold="select" width="200px" rows="1" /></row>
+						<row> Notes <textbox id="txtDrugsNotes" maxlength="40" width="300px" forward="onChangeDrugs"/> </row>
+					</rows>
+				</grid>
+				<div id="divCurrentDrugs" >
+					<label>Current Use:</label>
+					<grid fixedLayout="true">
+						<columns>
+							<column />
+							<column />
+							<column />
+						</columns>
+						<rows>
+							<row> 
+								<checkbox id="cbCurM"	forward="onChangeDrugs" label="Marijuana" />		<!--  onCheck="doChecked( self.isChecked(), 'M')" -->
+								<checkbox id="cbCurN"	forward="onChangeDrugs" label="Narcotics" />
+								<checkbox id="cbCurP"	forward="onChangeDrugs" label="PCP" />
+							</row>
+							<row> 
+								<checkbox id="cbCurH"	forward="onChangeDrugs" label="Heroin" />
+								<checkbox id="cbCurB"	forward="onChangeDrugs" label="Benzodiazapines" />
+								<checkbox id="cbCurL"	forward="onChangeDrugs" label="LSD" />
+							</row>
+							<row> 
+								<checkbox id="cbCurC"	forward="onChangeDrugs" label="Cocaine" />
+								<checkbox id="cbCurA"	forward="onChangeDrugs" label="Methamphetamine" />
+								<checkbox id="cbCurS"	forward="onChangeDrugs" label="Bath Salts" />
+							</row>
+							<row> 
+								<checkbox id="cbCurE"	forward="onChangeDrugs" label="Ecstacy" />
+								<checkbox id="cbCurI"	forward="onChangeDrugs" label="Inhalants" />
+								<checkbox id="cbCurO"	forward="onChangeDrugs" label="Other" />
+							</row>						
+						</rows>
+					</grid>
+				</div>
+			</vbox>
+			
+			<vbox>
+				<div id="divPastDrugs" >
+					<label>Past Use:</label>
+					<grid fixedLayout="true">
+						<columns>
+							<column />
+							<column />
+							<column />
+						</columns>
+						<rows>
+							<row> 
+								<checkbox id="cbPastM"	forward="onChangeDrugs" label="Marijuana" />
+								<checkbox id="cbPastN"	forward="onChangeDrugs" label="Narcotics" />
+								<checkbox id="cbPastP"	forward="onChangeDrugs" label="PCP" />
+							</row>
+							<row> 
+								<checkbox id="cbPastH"	forward="onChangeDrugs" label="Heroin" />
+								<checkbox id="cbPastB"	forward="onChangeDrugs" label="Benzodiazapines" />
+								<checkbox id="cbPastL"	forward="onChangeDrugs" label="LSD" />
+							</row>
+							<row> 
+								<checkbox id="cbPastC"	forward="onChangeDrugs" label="Cocaine" />
+								<checkbox id="cbPastA"	forward="onChangeDrugs" label="Methamphetamine" />
+								<checkbox id="cbPastS"	forward="onChangeDrugs" label="Bath Salts" />
+							</row>
+							<row> 
+								<checkbox id="cbPastE"	forward="onChangeDrugs" label="Ecstacy" />
+								<checkbox id="cbPastI"	forward="onChangeDrugs" label="Inhalants" />
+								<checkbox id="cbPastO"	forward="onChangeDrugs" label="Other" />
+							</row>						
+						</rows>
+					</grid>
+				</div>
+			
+			</vbox>							
+		</hbox>
+		
+	</vbox>
+	
+</zk>

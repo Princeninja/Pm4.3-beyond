@@ -1,0 +1,149 @@
+<?page title="Enter/Edit User Info" contentType="text/html;charset=UTF-8"?>
+<zk>
+	<zscript>
+		String width= arg.get( "flgPerms" ) ? "700px": "360px";
+	</zscript>
+<window id="userEditWin" title="Enter/Edit User Info" border="normal" width="${width}" position="center" mode="modal" apply="palmed.UserEditWinController" >
+	<label id="lblUserName" value="J. Richard Palen, MD" />
+	<hbox>
+		<!--  groupbox>-->
+			<grid hflex="1" >
+				<columns>
+					<column label="" width="80px" />
+					<column label="" width="220px" />
+				</columns>
+				<rows>
+					<row>
+						<label value="Login" />
+						<textbox id="txtLogin" maxlength="10" width="80px" />
+					</row>
+					<row>
+						<label value="Password" />
+						<textbox id="txtPassword1" maxlength="10" width="80px" type="password" />
+					</row>
+					<row>
+						<label value="(repeat)" />
+						<textbox id="txtPassword2" maxlength="10" width="80px" type="password" />
+					</row>
+					
+					<row if="${arg.flgPerms}" >
+						<label value="Status" />
+						<hbox>
+							<radiogroup>
+								<radio id="rbActive" label="Active" />
+								<radio id="rbInactive" label="Inactive" />
+							</radiogroup>
+						</hbox>
+					</row>
+					
+					<row>
+						<label value="First Name" />
+						<textbox id="txtFirst" maxlength="16" width="180px" />
+					</row>
+					<row>
+						<label value="Middle Name" />
+						<textbox id="txtMiddle" maxlength="16" width="180px" />
+					</row>
+					<row>
+						<label value="Last Name" />
+						<textbox id="txtLast" maxlength="20" width="220px" />
+					</row>
+					<row>
+						<label value="Suffix" />
+						<textbox id="txtSuffix" maxlength="8" width="100px" />
+					</row>
+					
+					<row if="${arg.flgPerms}" >
+						<label value="Provider Link" />
+						<listbox id="provListbox" maxlength="40" width="200px" mold="select" rows="1" />
+					</row>
+
+				</rows>
+			</grid>
+
+		<!--</groupbox>-->
+		<div id="divPerms" hflex="1" if="${arg.flgPerms}" >
+		<groupbox hflex="1" if="${arg.flgPerms}">
+			<caption label="Access Permissions" />
+			
+			
+			
+			<tabbox>
+				<tabs>
+					<tab label="Roles" />
+					<tab label="Medical" />
+					<tab label="Financial" />
+					<tab label="System" />
+				</tabs>
+				<tabpanels>
+						<tabpanel >
+						<vbox>
+							<label value="Roles:" />
+							<radiogroup>
+								<vbox>
+								<radio id="rbClerical" label="Clerical" />
+								<radio id="rbManager" label="Manager" />
+								<radio id="rbAdmin" label="Administrator" />
+								<radio id="rbNurse" label="Nurse" />
+								<radio id="rbMidlevel" label="Midlevel" />
+								<radio id="rbPhysician" label="Physician" />
+								<radio id="rbEmergency" label="Emergency Access" />
+								</vbox>
+							</radiogroup>
+							<button id="btnApply" label="Apply" width="80px" />
+							<label value="Select the user's role above.  Press [Apply] to load default permissions for that role." />
+						</vbox>
+					</tabpanel>
+					<tabpanel >
+						<vbox>
+						<label value="Medical Permissions:" />
+						<checkbox id="cbMedView" label="View Medical Record" />
+						<checkbox id="cbMedEnter" label="Add Problems/Allergies/Meds" />
+						<checkbox id="cbMedEdit" label="Edit Medical Record Entries" />
+						<checkbox id="cbMedRx" label="E-Prescribing" />
+						<checkbox id="cbMedSoap" label="Enter SOAP Notes" />
+						<checkbox id="cbMedRpt" label="Print Medical Reports" />
+						<checkbox id="cbMedDB" label="Medical Database Searches" />
+						<label value="Check the permissions above that you wish to grant.  Uncheck those that you wish to deny." />
+						</vbox>
+					</tabpanel>
+					<tabpanel >
+						<vbox>
+						<label value="Financial Permissions:" />
+						<checkbox id="cbFinView" label="View Patient Account" />
+						<checkbox id="cbFinPost" label="Post Charges/Payments" />
+						<checkbox id="cbFinCor" label="Make Corrections" />
+						<checkbox id="cbFinDly" label="View/Print Daily Reports" />
+						<checkbox id="cbFinRep" label="View/Print Practice Reports" />
+						<label value="Check the permissions above that you wish to grant.  Uncheck those that you wish to deny." />
+						</vbox>
+					</tabpanel>
+					<tabpanel >
+						<vbox>
+						<label value="System Permissions:" />
+						<checkbox id="cbUser" label="User Management" />
+						<checkbox id="cbProblem" label="Problem Solvers" />
+						<checkbox id="cbMaint" label="Maintenance" />
+						<checkbox id="cbBackup" label="Backup" />
+						<checkbox id="cbRemote" label="Remote Access" />
+						<label value="Check the permissions above that you wish to grant.  Uncheck those that you wish to deny." />
+						</vbox>
+					</tabpanel>
+				</tabpanels>
+			</tabbox>
+			
+		</groupbox>
+		</div>
+		
+	</hbox>
+		
+		
+	<hbox>
+		<button id="btnSave" label="Save" width="80px" />
+		<button id="btnCancel" label="Cancel" width="80px" />
+	</hbox>
+
+
+
+</window>
+</zk>

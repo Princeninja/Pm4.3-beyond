@@ -1,0 +1,33 @@
+<?page title="Blood" contentType="text/html;charset=UTF-8"?>
+<zk xmlns:h="http://www.w3.org/1999/xhtml">
+	<vbox>
+		<label>History:</label>
+	
+		<hbox widths="50%,50%" >
+		
+
+				<grid fixedLayout="true">
+					<columns>
+						<column width="80px" />
+						<column />
+					</columns>
+					<rows>
+						<row> <label /> <checkbox id="cbBloodTypeKnown" label="Blood Type Known" forward="onChange" /> </row>
+						<row id="rowBloodType"> Blood Type 
+							<hbox>
+							<listbox id="lbBloodType" mold="select" width="80px" forward="onChange" /> 
+							<listbox id="lbRhesusFactor" mold="select" width="80px" forward="onChange" />
+							</hbox> 
+						</row>
+						<row> <label /> <checkbox id="cbReaction" label="Has had transfusion reaction" forward="onChange" /> </row>
+						<row> <label /> <checkbox id="cbDonate" label="Willing to donate blood" forward="onChange" /> </row>
+						<row> <label /> <checkbox id="cbDeclinesBlood" label="Declines transfusion or blood products" forward="onChange" /> </row>
+						<row> Notes <textbox id="txtBloodNotes" maxlength="40" width="300px" forward="onChange" /> </row>
+					</rows>
+				</grid>
+			
+		</hbox>
+		
+	</vbox>
+	
+</zk>

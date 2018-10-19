@@ -1,0 +1,42 @@
+<?page title="new page title" contentType="text/html;charset=UTF-8"?>
+<zk>
+<window id="faqWin" title="FAQ's." mode="modal" border="normal" vflex="1" hflex="1" position="center">
+
+<vbox height="100%" width="100%"  align="center" pack="center" >
+
+<label value="PAL/MED" style="font-size:36px" />
+<space />
+<label value=" Pm 4.29 FAQ's" style="font-size:20px" />
+<space />
+<hbox pack="stretch" width="100%"> 
+			<vbox>
+				<hbox> Last Update : 09/28/18 </hbox>
+				<hbox> Detailed Answers: </hbox>
+				<hbox> ** How do I create a prescription?** </hbox>
+					<hbox>  -To access the button to create a prescription, choose a provider and follow the prompts. </hbox>
+				<hbox> ** How do I double-click?** </hbox>
+					<hbox>  -Simply double click on the intended Patient/Insurance/Medication. </hbox>
+				<hbox> ** How do see prescription status?** </hbox>
+					<hbox>  -To access the Newcrop button to create a status window, choose a provider and follow the prompts. </hbox>
+				<hbox> ** Do I have to verify my Identity each time?** </hbox>
+					<hbox>  -Yes, to access Newcrop the program needs to know who is currently at the computer. </hbox>
+				<hbox> ** Why can't I import a Lab?** </hbox>
+					<hbox>  -Currently, the program only imports text files (.txt). When an import fails the ideal file path is displayed. </hbox>
+				<hbox> ** I imported a Lab how do I see it?** </hbox>
+					<hbox> -If the lab was imported, open PtChart for patient and check Lab and Lab Notes tabs. </hbox>
+				<hbox> ** Why can't I print a lab request?** </hbox>
+					<hbox>  -To print a lab, make sure you have a request completed and saved before clicking on the print button. </hbox>
+				
+				
+				</vbox>
+</hbox>
+<space />
+<label value="Copyright (c) 2011 by PAL/MED Development Corporation" style="font-size:normal" />
+<space />
+<button id="close" label="Close" onClick="faqWin.detach();" />
+
+</vbox>
+<!-- <hbox> **  ** </hbox>  <hbox>   - </hbox> -->
+
+</window>
+</zk>

@@ -1,0 +1,74 @@
+<?page title="History" contentType="text/html;charset=UTF-8"?>
+<!-- Patient History -->
+<!-- (This ZUL calls other ZULs: hxtobacco.zul, hxetoh.zul, and hxdrugs.zul.) -->
+
+<zk>
+	
+		<window  id="historyWin" border="none"  mode="embedded" width="100%" height="100%" apply="palmed.HistoryWinController" >
+		
+				<tabbox id="history_tabbox" width="100%" height="95%" style="padding: 0px">
+					<tabs id="history_tabs">
+						<tab id="t_procedures" label="Procedures" />
+						<tab id="t_ob" label="OB" />
+						<tab id="t_gyn" label="Gyn" />
+						<tab id="t_blood" label="Blood" />
+						<tab id="t_family1" label="Family1" />
+						<tab id="t_family2" label="Family2" />
+						<tab id="t_tobacco" label="Tobacco" />
+						<tab id="t_etoh" label="Alcohol" />
+						<tab id="t_drugs" label="Drugs" />
+					</tabs>
+					<tabpanels id="ehistory_tabpanels" vflex="1" hflex="1" style="overflow:auto">
+						<tabpanel id="tp_procedures" vflex="1" hflex="1" >
+							<!-- include id="pg1" src="hxproc.zul" / -->
+						</tabpanel>
+						
+						<tabpanel id="tp_ob" vflex="1" hflex="1" style="overflow:auto">
+							<include id="pgOb" src="hxob.zul" />
+						</tabpanel>
+						
+						<tabpanel id="tp_gyn" vflex="1" hflex="1" style="overflow:auto">
+							<include id="pgGyn" src="hxgyn.zul" />
+						</tabpanel>
+						
+						<tabpanel id="tp_blood" vflex="1" hflex="1" style="overflow:auto">
+							<include id="pgBlood" src="hxblood.zul" />
+						</tabpanel>
+						
+						<tabpanel id="tp_family1" vflex="1" hflex="1" style="overflow:auto">
+							<include id="pgHxFamily" src="hxfamily1.zul" />
+						</tabpanel>
+						
+						<tabpanel id="tp_family2" vflex="1" hflex="1" style="overflow:auto">
+							<!-- include id="pgFamily2" src="hxfamily2.zul" / -->
+						</tabpanel>
+						
+						<tabpanel id="tp_tobacco" vflex="1" hflex="1" style="overflow:auto">
+							<include id="pg4" src="hxtobacco.zul" />
+						</tabpanel>
+						
+						<tabpanel id="tp_etoh" vflex="1" hflex="1" style="overflow:auto">
+							<include id="pgEtOH" src="hxetoh.zul" />
+						</tabpanel>
+						
+						<tabpanel id="tp_drugs" vflex="1" hflex="1" style="overflow:auto">
+							<include id="pgDrugs" src="hxdrugs.zul" />
+						</tabpanel>
+					</tabpanels>
+				</tabbox>
+
+				<hbox>
+					<button id="btnSave" label="Save" width="80px" />
+					<button id="btnCancel" label="Cancel" width="80px" />
+				</hbox>
+
+
+
+			
+			
+		</window>
+
+
+
+
+</zk>

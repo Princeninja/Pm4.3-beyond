@@ -1,0 +1,53 @@
+<?page title="Edit Ppo practice specific info" contentType="text/html;charset=UTF-8"?>
+<!--  Practice Info for Insurance Carrier  -->
+<zk xmlns:h="http://www.w3.org/1999/xhtml">
+	<div>
+	<h:h3>Edit Practice Specific info </h:h3>
+	
+	<grid align="start">
+		<columns>
+			<column  width="50%" />
+		</columns> 
+		<rows>
+			<row>
+   
+   <vbox>
+	<grid>
+		<columns>
+			<column width="80px" />
+			<column />
+		</columns>
+		<rows>
+			<row> Insurance Company ID (ETS) <textbox id="InsCmpID" maxlength="10" /> </row>
+			<row> Insurance Company sub ID (ETS) <textbox id="InsCmpSubID" maxlength="10" /> </row>
+			<row> ETS record code <textbox id="EtsRecCode" maxlength="15" /> </row>
+			<row> Copay dollar amount <textbox id="HmoCopayAmount" maxlength="8" /> </row>
+		</rows>
+	</grid>
+	<grid>
+		<columns>
+			<column width="80px" />
+			<column />
+		</columns>
+		<rows>
+
+			<row> Surcharge for not paying copay at visit <textbox id="HmoNoPmtSurcharge" maxlength="10" /> </row>  
+			<row> Copay percent <textbox id="HmoCopayPercent" maxlength="11" /> </row>
+
+			<row> Carrier's NEIC number <textbox id="NEIC" maxlength="12" /> </row>
+			<row> Carrier's NEIC sub ID number <textbox id="NEICsubID" maxlength="12" /> </row>
+			<row> MediGAP number <textbox id="MediGAP" maxlength="12" /> </row>
+			<row> Last char for NEIC sub ID <textbox id="NEICsubIDx" maxlength="12" /> </row>
+		</rows>
+	</grid>
+
+	</vbox>			
+			
+			
+			</row>
+		</rows>
+	</grid>
+	
+	</div>
+	
+</zk>

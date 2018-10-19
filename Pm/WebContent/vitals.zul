@@ -1,0 +1,85 @@
+<?page title="Vitals" contentType="text/html;charset=UTF-8"?>
+<zk>
+<window id="vitalsWin"  border="none" mode="embedded" vflex="1" hflex="1" apply="palmed.VitalsWinController" >
+
+	<borderlayout >
+		<west width="400px" splittable="true" collapsible="true" >
+			<hbox  vflex="1" hflex="1" >
+				<vbox>
+					<button id="newvitals" label="New" width="80px" />
+					<button id="edit" label="Edit" width="80px" />
+					<button id="delete" label="Delete" width="80px" />
+					<button id="print" label="Print" width="80px" />					
+					<button id="growth" label="Growth" width="80px" />					
+				</vbox>
+	
+				<listbox id="vitalsListbox"  vflex="1" hflex="1" >
+					<listhead>
+						<listheader width="80px" label="Date" sort="auto" />
+						<listheader width="60px" label="Temp" ><button id="g_temp" label="G" onClick="graphSelected( graphTemp );"/></listheader>
+						<listheader width="60px" label="Pulse" ><button id="g_pulse" label="G" onClick="graphSelected( graphP );"/></listheader>
+						<listheader width="60px" label="Resp" ><button id="g_resp" label="G" onClick="graphSelected( graphR );"/></listheader>
+						<listheader width="60px" label="BP" ><button id="g_bp" label="G" onClick="graphSelected( graphBP );"/></listheader>
+						<listheader width="60px" label="Ht" ><button id="g_ht" label="G" onClick="graphSelected( graphHt );"/></listheader>
+						<listheader width="60px" label="Wt" ><button id="g_wt" label="G" onClick="graphSelected( graphWt );"/></listheader>
+						<listheader width="60px" label="Head" ><button id="g_head" label="G" onClick="graphSelected( infantHC );"/></listheader>
+						<listheader width="60px" label="PO2" ><button id="g_PO2" label="G" onClick="graphSelected( graphPO2 );"/></listheader>
+						<listheader width="60px" label="BMI" ><button id="g_BMI" label="G" onClick="graphSelected( graphBMI );"/></listheader>
+					</listhead>
+				</listbox>
+			</hbox>	
+		</west>	
+		
+		
+		<center id="bl_center"  flex="true" >
+			<vbox>
+				<listbox id="graphListbox" rows="1" mold="select" >
+					<listitem id="graphTemp" label="Temperature" />
+					<listitem id="graphHt" label="Height" />
+					<listitem id="graphWt" label="Weight" />
+					<listitem id="graphBP" label="Blood Pressure" />
+					<listitem id="graphP" label="Pulse" />
+					<listitem id="graphR" label="Respiration" />
+					<listitem id="graphPO2" label="Pulse Ox" />
+					<listitem id="graphBMI" label="BMI" />
+					<listitem id="infantWt" label="Infant: Weight x Age" />
+					<listitem id="infantLen" label="Infant: Length x Age" />
+					<listitem id="infantHC" label="Infant: Head Circ x Age" />
+					<listitem id="infantWtLen" label="Infant: Weight x Length" />
+					<listitem id="growthWt" label="Pediatric: Weight x Age" />
+					<listitem id="growthHt" label="Pediatric: Height x Age" />
+					<listitem id="growthBMI" label="Pediatric: BMI x Age" />
+					<listitem id="growthWtHt" label="Pediatric: Weight x Height" />
+				</listbox>
+
+				<window id="chartWin" mode="embedded" border="none" vflex="1" hflex="1" >
+				<!--  div id="divChart" hflex="1" vflex="1" >-->
+	
+				<!-- /div> -->
+				<!-- chart id="vitalsChart" title="Vitals Chart" width="600"    height="250" type="time_series" threeD="false" fgAlpha="128" />-->
+				</window>
+			</vbox>
+		</center>
+	</borderlayout>
+		
+
+
+
+	<zscript><![CDATA[
+	                  
+	    void graphSelected( Listitem i ){
+	    	graphListbox.selectItem( i );
+	    	Events.sendEvent("onSelect", graphListbox, null); 
+	    	return;
+	    }
+	                  
+	    ]]>
+	</zscript>
+
+		
+
+</window>
+
+
+
+</zk>

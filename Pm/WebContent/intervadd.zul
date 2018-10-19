@@ -1,0 +1,38 @@
+<?page title="Enter/Edit Interventions" contentType="text/html;charset=UTF-8"?>
+<zk>
+<window id="ivAddWin" title="Enter/Edit Interventions" border="normal" width="800px" position="center"  mode="modal" apply="palmed.InterventionAddWinController" > <!-- mode="modal"-->
+	<label id="ptname" />
+	<hbox>
+			<grid>
+				<columns>
+					<column label="" width="80px" />
+					<column label="" width="320px" />
+				</columns>
+				<rows>
+					<row>
+						<label value="Date" />
+						<textbox id="txtDate" maxlength="10" width="80px" />
+					</row>
+					<row>
+						<label value="Intervention" />
+						<listbox id="lboxInt" width="300px" rows="1" mold="select" />
+					</row>
+					<row>
+						<label value="Notes" />
+						<textbox id="txtNote" maxlength="80" width="300px" />
+					</row>
+
+				</rows>
+			</grid>
+
+	</hbox>
+		
+		
+	<hbox>
+		<button id="btnSave" label="Save" width="80px" />
+		<button id="btnCancel" label="Cancel" width="80px" />
+	</hbox>
+
+
+</window>
+</zk>

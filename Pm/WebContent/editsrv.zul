@@ -1,0 +1,65 @@
+<?page title="Edit Service Codes"  contentType="text/html;charset=UTF-8"?>
+<!-- This form is used to enter and edit Service Codes  -->
+<zk xmlns:h="http://www.w3.org/1999/xhtml" >
+<window id="editSrvWin" title="New Service Code" border="normal" width="800px" position="center" mode="modal" apply="palmed.EditSrvWinController" >
+
+<div>
+	<h:h3>Create/Edit A Service Code:</h:h3>
+	
+	<hbox> Code: <label id="l_srvcode" value="New Srv Code"/></hbox>
+	<grid align="start">
+		<columns>
+			<column width="45%" />
+			<column width="45%" />
+			<column width="45%" />
+		</columns>
+		<rows>
+			<row>
+	
+	<vbox>
+	<grid>
+		<columns>
+			<column width="110px" />
+			<column />
+		</columns>
+		<rows>
+			<row> Description <textbox id="srvDesc" maxlength="45" cols="15" width ="90%" /> </row>
+			<row> Abbreviation <textbox id="srvAbbr" maxlength="15" cols="10" width ="90%" /> </row>
+			<row> Code 1 <textbox id="srvCode1" maxlength="10" cols="10" width ="90%" /> </row>
+			<row> Code 2 <textbox id="srvCode2" maxlength="10" cols="10" width ="90%" /> </row>
+			<row> Code 3 <textbox id="srvCode3" maxlength="10" cols="10" width ="90%" /> </row>
+			<row> Relative Value (rv)<textbox id="srvrv" maxlength="11" cols="10" width ="90%" constraint="  /^[0-9]{0,6}?(?:[.][0-9]{1,3})?$/: Please enter a valid Dollar amount! Thanks. "/> </row> <!-- ? = optional, \$? -->
+			<row> Default Charge <textbox id="srvdc" maxlength="10" cols="10" width ="90%" /> </row>
+			<row> Default Write-off<textbox id="srvwo" maxlength="10" cols="10" width ="90%" /> </row>
+			<row> Default Assignment <textbox id="srvda" maxlength="10" cols="10" width ="90%" /> </row>
+		</rows>
+	</grid>
+	</vbox>
+	
+	<vbox visible = "false" id="feebox" >
+	<grid>
+		<columns>
+			<column width="75px" />
+			<column />
+		</columns>
+		<rows>
+			<row >Effective Date <textbox id="srvedate" maxlength="10" cols="12" width="90" constraint="no past, no empty: Please enter a date that is both valid and current/future. " /> </row>
+			<row> Fee  <textbox id="srvfee" maxlength="13" cols="12" width="90" /> </row>
+			<row> Adjustment Amount <textbox id="srvadj" maxlength="13" cols="12" width="90"  /> </row> <!-- disabled="true" -->
+			<row> Assigned Portion <textbox id="srvasn" maxlength="13" cols="12" width="90"  /> </row>
+		</rows>
+	</grid>
+	</vbox>	
+</row>
+</rows>
+</grid>
+</div>
+
+<hbox>
+	<button id="save" label="Save" width="80px" />
+	<button id="cancel" label="Cancel" width="80px" />
+</hbox>
+			
+
+</window>
+</zk>

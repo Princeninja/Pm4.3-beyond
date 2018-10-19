@@ -1,0 +1,50 @@
+<?page title="Resolve/Remove Problem" contentType="text/html;charset=UTF-8"?>
+<zk>
+<window id="probResWin" title="Resolve/Remove Problem" border="normal" width="700px" position="center" mode="modal" apply="palmed.ProbResWinController" >
+	<label id="ptname" />
+			<grid>
+				<columns>
+					<column label="" width="80px" />
+					<column label="" width="220px" />
+				</columns>
+				<rows>
+					<row>
+						<label value="Date" />
+						<label id="lblStartDate" />
+					</row>
+					<row>
+						<label value="Type" />
+						<label id="lblType" />
+					</row>
+					<row>
+						<label value="Problem" />
+						<label id="lblProblem" />
+					</row>
+					<row>
+						<label value="Code" />
+						<label id="lblCode" />
+					</row>
+					<row>
+						<label value="Resolved Date" />
+						<textbox id="txtStopDate" maxlength="10" width="100px" />
+					</row>
+					<row>
+						<label value="Explanation" />
+						<textbox id="txtExp" maxlength="40" width="200px" />
+					</row>
+					<row>
+						<label value="ACTION:" />
+						<label id="lblAction" value="" />
+					</row>
+				</rows>
+			</grid>
+
+		
+	<hbox>
+		<button id="btnSave" label="Save" width="80px" />
+		<button id="btnCancel" label="Cancel" width="80px" />
+	</hbox>
+
+
+</window>
+</zk>

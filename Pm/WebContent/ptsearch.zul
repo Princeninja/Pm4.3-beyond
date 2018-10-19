@@ -1,0 +1,103 @@
+<?page title="PtSearch" contentType="text/html;charset=UTF-8"?>
+<zk>
+<window id="ptSearchWin" title="Patient Search" border="normal"  width="640px" mode="modal" apply="palmed.PtSearchController">
+
+		<hbox pack="stretch" width="100%">
+		<tabbox id="tabbox" width="500px" >
+			<tabs>
+				<tab label="Patient Name" />
+				<tab label="Birthdate" />
+				<tab label="SSN" />
+				<tab label="Pt Number" />
+			</tabs>
+			<tabpanels>
+				<tabpanel>
+					<grid>
+						<columns>
+							<column label="" />
+							<column label="" />
+						</columns>
+						<rows>
+							<row>
+								<label value="First Name" />
+								<textbox id="firstname" cols="10" />
+							</row>
+							<row>
+								<label value="Middle Name" />
+								<textbox id="middlename" cols="10" />
+							</row>
+							<row>
+								<label value="Last Name" />
+								<textbox id="lastname" cols="15" />
+							</row>
+						</rows>
+					</grid>
+				</tabpanel>
+				<tabpanel>
+					<label value="Birthdate" />
+					<textbox id="birthdate" cols="10" constraint="no future: Please enter a valid date"/>
+				</tabpanel>
+				<tabpanel>
+					<label value="SSN" />
+					<textbox id="ssn" cols="11" />
+				</tabpanel>
+				<tabpanel>
+					<label value="Pt Number" />
+					<textbox id="ptnum" cols="16" />
+				</tabpanel>
+
+				</tabpanels>
+
+		</tabbox>
+		
+		
+		<vbox>
+		<button id="searchBtn" label="Search" width="80px"  />
+		<button id="exitBtn" label="Exit" width="80px" />
+		</vbox>
+		
+		</hbox>
+
+		<separator />
+
+		<!--  Advanced Search Options -->
+		<groupbox width="200px" mold="3d" open="false" >
+			<caption label="Advanced Search Options" />
+			<radiogroup >
+			<vbox>
+		    <radio id="rb_normal" label="Normal" />             
+		    <radio id="rb_asubstring" label="Anchored Sub" />             
+		    <radio id="rb_usubstring" label="Unanchored Sub" />
+		    <radio id="rb_soundex" label="Sounds Like" />
+		    </vbox>
+			</radiogroup>
+		</groupbox> 
+		
+		<separator />
+
+	<hbox>
+	<listbox mold="select" rows="1" id="lastFndListbox" width="200px" />
+	<button id="lastFndBtn" label="Last Found" width="80px" />
+	</hbox>
+	
+	<separator />
+	
+	
+	<groupbox id="multFndGroupbox" mold="3d" open="false" >
+		<caption label="Patients Found" />
+		<listbox id="multFndListbox" rows="10">
+			<listhead>
+				<listheader label="Patient Name" width="240px" sort="auto"/>
+				<listheader label="Birthdate" />
+				<listheader label="SSN" />
+				<listheader label="Rec" sort="auto"/>
+			</listhead>
+		</listbox>
+		<button id="selectBtn" label="Select" width="80px" />
+	</groupbox>
+	
+	<!-- Hidden control used to pass info back to calling class. -->
+	<intbox id="ptrec" visible="false" />
+	
+</window>
+</zk>

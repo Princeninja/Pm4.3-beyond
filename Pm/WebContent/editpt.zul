@@ -1,0 +1,55 @@
+<?page title="Edit Patient" contentType="text/html;charset=UTF-8"?>
+
+<!-- Edit Patient Information -->
+<!-- (This ZUL calls other ZULs: editpt1.zul, editpt2.zul, and editpt3.zul.) -->
+
+<zk>
+	<!-- Outer window to hide ID space of inner window - so doesn't have to be unique -->
+	<window border="none" width="100%" height="100%" >
+	
+		<window  id="editPtWin" title="Edit Patient" border="normal"  width="100%" height="100%" apply="palmed.EditPtWinController" >
+		
+			<hbox> Name: <label id="l_ptName" value="New Patient"/></hbox>
+			
+		
+		
+			<!-- MODULE CONTENT AREA -->
+				
+			<div id="divCenter" >
+
+				<tabbox id="editpt_tabbox" width="100%" style="padding: 0px">
+					<tabs id="editpt_tabs">
+						<tab id="t_editpt1" label="Patient" />
+						<tab id="t_nok" label="Next of Kin" />
+						<tab id="t_ins" label="Insurance" />
+						<tab id="t_electronic" label="Electronic" />
+					</tabs>
+					<tabpanels id="editpt_tabpanels">					
+						<tabpanel id="tp_editpt1" >
+							<include id="pg1" src="editpt1.zul" />
+						</tabpanel>
+						<tabpanel id="tp_nok" >
+							<include id="pg2" src="editpt2.zul" />
+						</tabpanel>
+						<tabpanel id="tp_ins" >
+							<include id="pg3" src="editpt3.zul" />
+						</tabpanel>
+						<tabpanel id="tp_electronic" >
+							<include id="pg4" src="editpt4.zul" />
+						</tabpanel>
+					</tabpanels>
+				</tabbox>
+			</div>
+			
+			<hbox>
+				<button id="save" label="Save" width="80px" />
+				<button id="cancel" label="Cancel" width="80px" />
+			</hbox>
+			
+			
+		</window>
+	</window>
+
+
+
+</zk>

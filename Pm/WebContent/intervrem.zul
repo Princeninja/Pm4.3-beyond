@@ -1,0 +1,37 @@
+<?page title="Remove Interventions" contentType="text/html;charset=UTF-8"?>
+<zk>
+<window id="ivRemoveWin" title="Remove an Intervention" border="normal" width="440px" position="center" apply="palmed.InterventionRemoveWinController" > <!-- mode="modal"-->
+	<label id="ptname" />
+	<hbox>
+			<grid>
+				<columns>
+					<column label="" width="80px" />
+					<column label="" width="320px" />
+				</columns>
+				<rows>
+					<row>
+						<label value="Date" />
+						<label id="lblDate" />
+					</row>
+					<row>
+						<label value="Intervention" />
+						<label id="lblInt" />
+					</row>
+					<row>
+						<label value="Reason" />
+						<listbox id="lboxReason" mold="select" rows="1" width="200px" />
+					</row>
+
+				</rows>
+			</grid>
+		
+	</hbox>
+		
+		
+	<hbox>
+		<button id="btnSave" label="Remove" width="80px" />
+		<button id="btnCancel" label="Cancel" width="80px" />
+	</hbox>
+
+</window>
+</zk>

@@ -1,0 +1,61 @@
+<?page title="Audit Log" contentType="text/html;charset=UTF-8"?>
+<zk>
+<window id="auditWin" border="none" mode="embedded" vflex="1" hflex="1" apply="palmed.AuditWinController" >
+
+	<hbox vflex="1" >
+		<vbox>
+			<label value="Month" />
+			<listbox id="lboxMonth" mold="select" rows="1" >
+				<listitem label="" />
+				<listitem label="1" />
+				<listitem label="2" />
+				<listitem label="3" />
+				<listitem label="4" />
+				<listitem label="5" />
+				<listitem label="6" />
+				<listitem label="7" />
+				<listitem label="8" />
+				<listitem label="9" />
+				<listitem label="10" />
+				<listitem label="11" />
+				<listitem label="12" />
+			</listbox>
+			
+			<label value="Year" />
+			<listbox id="lboxYear" mold="select" rows="1" >
+				<listitem label="" />
+				<listitem label="2011" />			
+				<listitem label="2012" />							
+			</listbox>
+			
+			<space/>
+			
+			<button id="btnRefresh" label="Refresh" width="80px" />
+			<button id="btnPrint" label="Print" width="80px" />
+			
+			<!-- 
+			<groupbox>
+				<caption label="View" />
+				<radiogroup>
+					<radio id="rbActive" label="Active" checked="true" />
+					<radio id="rbInactive" label="Inactive" />
+					<radio id="rbAll" label="All" />
+				</radiogroup>
+			</groupbox>
+			 -->
+		</vbox>
+		
+		<listbox id="auditListbox" vflex="1" >
+			<listhead>
+				<listheader label="Date" width="80px" sort="auto" />
+				<listheader label="Time" width="60px" sort="auto" />
+				<listheader label="User" width="80px" sort="auto" />
+				<listheader label="Patient" width="200px" sort="auto" />
+				<listheader label="Action" width="200px" sort="auto" />				
+				<listheader label="Note" width="200px" sort="auto" />				
+			</listhead>
+		</listbox>
+	</hbox>
+
+</window>
+</zk>

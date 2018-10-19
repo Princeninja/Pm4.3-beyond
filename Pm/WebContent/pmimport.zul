@@ -1,0 +1,76 @@
+<?page title="PmImport" contentType="text/html;charset=UTF-8"?>
+<zk>
+<window id="pmImportWin"  border="none" mode="embedded" vflex="1" hflex="1" apply="palmed.PmImportWinController">
+
+	<borderlayout>
+	
+		<west width="30%" splittable="true" collapsible="true" >
+			<vbox vflex="1" hflex="1" >
+			
+				<groupbox>
+					<caption label="Patient" />
+					
+					<button id="btnSelectPt" label="Select Pt" width="80px" />
+					
+					<separator />
+					<hbox>Name: <label id="ptname" /></hbox>
+					<hbox>DOB: <label id="ptdob" /></hbox>
+					<hbox>SSN: <label id="ptssn" /></hbox>
+				</groupbox>
+				
+			
+				<groupbox>
+					<caption label="Document Data" />
+					<hbox>Date <textbox id="txtDate" cols="10" /></hbox>
+					<hbox>Desc <combobox id="txtDesc" cols="40" >
+						<comboitem label="" />
+						<comboitem label="Attorney Letter" />
+        				<comboitem label="Chest Xray" />
+				        <comboitem label="Consent Form" />
+				        <comboitem label="Consulting Dr. Letter" />
+				        <comboitem label="CT Scan" />
+				        <comboitem label="Disability Rating Letter" />
+				        <comboitem label="EKG" />
+				        <comboitem label="Holter" />
+				        <comboitem label="Lab Report" />
+				        <comboitem label="Mammogram" />
+				        <comboitem label="Medical Records Release" />
+				        <comboitem label="Medicare Authorization" />
+				        <comboitem label="MRI" />
+				        <comboitem label="Overnight Oximetry" />
+				        <comboitem label="Payment Agreement" />
+				        <comboitem label="Pathology Report" />
+				        <comboitem label="PFS" />
+				        <comboitem label="Xray" />
+					</combobox>
+					</hbox>
+					<button id="btnStore" label="Store" width="80px" />
+					<button id="btnAdd" label="Add To Last" width="80px" visible="false" />
+				</groupbox>
+				
+				<separator />
+				
+				<groupbox>
+					<caption label="Documents" />
+					<listbox id="importListbox"  vflex="1" hflex="1" rows="12" >
+					</listbox>
+					<hbox>
+					<button id="btnRefresh" label="Refresh" width="80px" />
+					<button id="btnDelete" label="Delete" width="80px" />
+					Type: PDF
+					</hbox>
+				</groupbox>
+			</vbox>		
+		</west>
+		
+		
+		<center flex="true" >
+			<iframe id="importIframe" width="100%" height="100%" autohide="true" />		
+		</center>
+		
+
+	</borderlayout>
+
+
+</window>
+</zk>

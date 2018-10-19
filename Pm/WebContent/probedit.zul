@@ -1,0 +1,96 @@
+<?page title="Enter/Edit Problem" contentType="text/html;charset=UTF-8"?>
+<zk>
+<window id="probEditWin" title="Enter/Edit Problem" border="normal" width="800px" height="400px" position="center" mode="modal" apply="palmed.ProbEditWinController" >
+
+	<hbox hflex="max" vflex="100%" >
+	<vbox hflex="min">
+		<!--  groupbox>-->
+			<grid hflex="min" span="1" >
+				<columns>
+					<column label="" width="80px" />
+					<column label="" />
+				</columns>
+				<rows>
+					<row>
+						<label value="Patient" />
+						<label id="ptname"  style="color:blue"/>
+					</row>
+					<row>
+						<label value="Date" />
+						<textbox id="date" maxlength="10" width="80px" style="color:blue"/>
+					</row>
+					<row>
+						<label value="" />
+						<hbox>
+							<radiogroup>
+								<radio id="rbChronic" label="Chronic" />
+								<radio id="rbAcute" label="Acute" />
+							</radiogroup>
+						</hbox>
+					</row>
+					<row>
+						<label value="Problem" />
+						<label id="lblProblem" value="(select on right)" style="color:blue"/>
+					</row>
+					<row>
+						<label value="Code" />
+						<label id="lblCode" multiline="true" value="" style="color:blue" />
+					</row>
+					<row>
+						<label value="Misc" />
+						<textbox id="misc" maxlength="40" width="200px" />
+					</row>
+
+				</rows>
+			</grid>
+
+		<hbox>
+			<button id="save" label="Save" width="80px" />
+			<button id="cancel" label="Cancel" width="80px" />
+		</hbox>
+	</vbox>
+
+	
+	
+
+		<!--</groupbox>-->
+		
+				<vbox hflex="max" vflex="100%" >
+				<hbox>
+					<button id="search" label="Search" width="80px" />
+					<textbox id="srcstr" maxlength="40" width="200px" />
+				</hbox>
+				<listbox id="probTblListbox" vflex="true" hflex="true" >
+					<listhead>
+						<listheader label="Desc" sort="auto" />
+						<listheader width="80px" label="Code" sort="auto" />
+					</listhead>
+				</listbox>
+				<button id="select" label="Select" width="80px" />
+				</vbox>
+			
+<!-- 			<vbox vflex="1" hflex="1" >
+			<hbox>
+				<button id="search" label="Search" width="80px" />
+				<textbox id="srcstr" maxlength="40" width="200px" />
+			</hbox>
+			<listbox id="probTblListbox"  hflex="1" vflex="max" >
+				<listhead>
+					<listheader width="200px" label="Desc" sort="auto" />
+					<listheader width="80px" label="Code" sort="auto" />
+				</listhead>
+			</listbox>
+			<button id="select" label="Select" width="80px" />
+			</vbox>
+	 		<groupbox hflex="1" vflex="1" >
+		</groupbox>
+ -->
+
+		
+		
+	</hbox>
+
+
+
+</window>
+</zk>

@@ -1,0 +1,49 @@
+<?page title="Edit Diagnosis Codes" contentType="text/html;charset=UTF-8"?>
+<!-- This is the form to enter "new" Diagnoses codes -->
+<zk xmlns:h="http://www.w3.org/1999/xhtml">
+<window id="editDgnWin" title=" New Diagnosis Code" border="normal" width="800px" position="center" mode="modal" apply="palmed.EditDgnWinController"  >
+
+<div>
+	<h:h3>Create/Edit A Diagnosis Code:</h:h3>
+	
+	<hbox> Code: <label id="l_dgncode" value="New Dgn Code"/></hbox>
+	<grid align="start">
+		<columns>
+			<column width="45%" />
+			<column width="45%" />
+			<column width="45%" />
+		</columns>
+		<rows>
+			<row>
+	
+	<vbox>
+	<grid>
+		<columns>
+			<column width="110px" />
+			<column />
+		</columns>
+		<rows>
+			<row> Description <textbox id="dgnDesc" maxlength="45" cols="15" width ="90%" /> </row>
+			<row> Abbreviation <textbox id="dgnAbbr" maxlength="15" cols="10" width ="90%" /> </row>
+			<row> Code 1 <textbox id="dgnCode1" maxlength="10" cols="10" width ="90%" /> </row>
+			<row> Code 2 <textbox id="dgnCode2" maxlength="10" cols="10" width ="90%" /> </row>
+			<row> Code 3 <textbox id="dgnCode3" maxlength="10" cols="10" width ="90%" /> </row>
+			<row> Relative Value (rv)<textbox id="dgnrv" maxlength="10" cols="10" width ="90%" constraint="  /^\$?[0-9]{1,6}(?:[.][0-9]{1,3})?$/: Please enter a valid Dollar amount! Thanks." /> </row>
+			<row> Default Charge <textbox id="dgndc" maxlength="10" cols="10" width ="90%" /> </row>
+			<row> Default Write-off<textbox id="dgnwo" maxlength="10" cols="10" width ="90%" /> </row>
+			<row> Default Assignment <textbox id="dgnda" maxlength="10" cols="10" width ="90%" /> </row>
+		</rows>
+	</grid>
+	</vbox>
+</row>
+</rows>
+</grid>
+</div>
+
+<hbox>
+	<button id="save" label="Save" width="80px" />
+	<button id="cancel" label="Cancel" width="80px" />
+</hbox>
+<!-- /^[0-9]{0,6}?(?:[.][0-9]{1,3})?$ -->			
+</window>
+</zk>

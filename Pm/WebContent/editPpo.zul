@@ -1,0 +1,105 @@
+<?page title="Edit Insurance Carriers" contentType="text/html;charset=UTF-8"?>
+<!-- This is the form to enter and edit Insurance Carriers  -->
+<zk xmlns:h="http://www.w3.org/1999/xhtml">
+<window id="editPpoWin"  title="New Insurance Carriers"  border="normal" width="800px" position="center" mode="modal" apply="palmed.EditPpoWinController" >
+
+<div id="divCenter">
+
+	<h:h3>Create/Edit An Insurance Carrier </h:h3>
+	
+<tabbox id="editppo_tabbox" width="100%" style="padding: 0px">
+	<tabs id="editppo_tabs">
+		<tab id="t_ppo" label="Insurance Information" />
+		<tab id="t_ppoinfo" label="Practice Specific Info" />
+	</tabs>
+	<tabpanels id="editppo_tabpanels">
+		<tabpanel id="tp_ppo">
+	<hbox> Edit PPO record Structure: <label id="l_ppo" value="New Insurance Carrier"/> </hbox>
+	
+	<grid align="start">
+		<columns>
+			<column width="45%" />
+			<column width="45%" />
+			<column width="45%" />
+		</columns>
+		<rows>
+			<row>
+			
+		<vbox>
+		<grid>
+			<columns>
+				<column width="110px" />
+				<column />
+			</columns>
+			<rows>
+				<row> Description <textbox id="ppoDesc" maxlength="45" cols="15" width="90" /> </row>
+				<row> Abbreviation <textbox id="ppoAbbr" maxlength="15" cols="10" width="90" /> </row>
+				<row> Contact 1 <textbox id="ppoc1" maxlength="35" cols="15" width="90" /> </row>
+				<row> Contact 2 <textbox id="ppoc2" maxlength="35" cols="15" width="90" /> </row>
+				<row> Contact 3 <textbox id="ppoc3" maxlength="35" cols="15" width="90" /> </row>
+				<row> Contact 4 <textbox id="ppoc4" maxlength="35" cols="15" width="90" /> </row>
+			 </rows>
+		</grid>
+		<grid>
+			<columns>
+				<column width ="90px" />
+				<column />
+		</columns>
+		<rows>
+			<row> Note 1 <textbox id="ppon1" maxlength="30" cols="14" width="90" /> </row>
+			<row> Note 2 <textbox id="ppon2" maxlength="30" cols="14" width="90" /> </row>
+			<row> Note 3 <textbox id="ppon3" maxlength="30" cols="14" width="90" /> </row>
+			<row> Note 4 <textbox id="ppon4" maxlength="30" cols="14" width="90" /> </row>	 
+	      </rows>
+		</grid>
+	</vbox>
+	
+	<vbox>
+	<grid>
+		<columns>
+			<column width="75px" />
+			<column />
+		</columns>
+		<rows>
+			<row> Phone 1 <textbox id="ppop1" maxlength="13" cols="12" width="90" /> </row>
+			<row> Phone 2 <textbox id="ppop2" maxlength="13" cols="12" width="90" /> </row>
+			<row> Phone 3 <textbox id="ppop3" maxlength="13" cols="12" width="90" /> </row>
+			<row> Phone 4 <textbox id="ppop4" maxlength="13" cols="12" width="90" /> </row>
+			<row> Phone 5 <textbox id="ppop5" maxlength="13" cols="12" width="90" /> </row>
+			<row> Phone 6 <textbox id="ppop6" maxlength="13" cols="12" width="90" /> </row>
+		</rows>
+	</grid>
+	
+	<grid>
+		<columns>
+			<column width="80px" />
+			<column />
+		</columns>
+		<rows>
+			<row> Street <textbox id="ppostreet" maxlength="45" cols="15" width="90" /> </row>
+		   <row> Line2 <textbox id="ppoLine2" maxlength="25" cols="13" width="90" /> </row>
+		   <row> City <textbox id="ppocity" maxlength="30" cols="14" width="90" /> </row>
+		   <row> State <textbox id="ppostate" maxlength="30" cols="13" width="90" /> </row>
+		   <row> Zip <textbox id="ppozip" maxlength="12" cols="12" width="90" /> </row>	
+		</rows>							
+	</grid>
+	</vbox>	
+</row>
+</rows>
+</grid>
+</tabpanel>
+<tabpanel id="tp_ppoinfo" >
+		<include id="pg2" src="editPpoinfo.zul" />
+</tabpanel>
+		</tabpanels>
+	</tabbox>
+</div>
+
+<hbox>
+	<button id="save" label="Save" width="80px" />
+	<button id="cancel" label="Cancel" width="80px" />
+</hbox>
+
+
+</window>
+</zk>

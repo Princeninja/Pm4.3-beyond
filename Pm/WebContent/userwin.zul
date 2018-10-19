@@ -1,0 +1,34 @@
+<?page title="Users" contentType="text/html;charset=UTF-8"?>
+<zk>
+<window id="UserWin" border="none" mode="embedded" vflex="1" hflex="1" apply="palmed.UserWinController" >
+
+	<hbox vflex="1" >
+		<vbox>
+			<button id="btnNewUser" label="New" width="80px" />
+			<button id="btnEdit" label="Edit" width="80px" />
+			<button id="btnDelete" label="Delete" width="80px" />
+			<button id="btnPrint" label="Print" width="80px" />
+			
+			<groupbox>
+				<caption label="View" />
+				<radiogroup>
+					<radio id="rbActive" label="Active" checked="true" />
+					<radio id="rbInactive" label="Inactive" />
+					<radio id="rbAll" label="All" />
+				</radiogroup>
+			</groupbox>
+		</vbox>
+		
+		<listbox id="userListbox" vflex="1" >
+			<listhead>
+				<listheader label="Login" width="80px" sort="auto" />
+				<listheader label="Full Name" width="200px" sort="auto" />
+				<listheader label="Role" width="80px" sort="auto" />
+				<listheader id="status" label="Status" width="80px" sort="auto" />
+				<listheader label="Last Signon Date/Time" width="140px" sort="auto" />				
+			</listhead>
+		</listbox>
+	</hbox>
+
+</window>
+</zk>

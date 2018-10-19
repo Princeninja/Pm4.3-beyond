@@ -1,0 +1,57 @@
+<?page title=" Insurance Carrier Window " contentType="text/html;charset=UTF-8"?>
+<zk>
+<window id="PpoWin" border="normal" mode="embedded" width="1000px" vflex="1" hflex="1" apply="palmed.PpoWinController">
+
+<hbox pack="stretch" width="900px"> <!-- removed vlfex and added pack and width  -->
+		<vbox width ="65px">
+			<button id="newppo" label="New" width="80px" />
+			<button id="edit" label="Edit" width="80px" />
+		    <button id="delete" label="Delete" width="80px" />
+		    <button id="restore" label="Restore" width="80px" />
+		    <button id="print" label="Print" width="80px" />
+		    
+		    
+		    <groupbox width="65px">
+		    	<caption label="View type:" />
+		    	<radiogroup>
+		    		<radio id="r_active" label="Active" checked="true" />
+		    		<separator />
+		    		<radio id="r_inactive" label="Inactive" />
+		    		<separator />
+		    		<radio id="r_all" label="All" />
+		       	</radiogroup>
+		     </groupbox>
+		 </vbox>
+		 
+		 <tabbox id="tabbox" width="950px"  > <!-- removed vbox and added tabbox, tabpanels and tabs so horizontal scrollbar could appear -->
+		 <tabs>
+			<tab label="Carrier Information" />
+		</tabs>
+		<tabpanels>
+			<tabpanel>
+			<hbox>
+				<button id="search" label="Search" width="80px" />
+				<textbox id="srcstr" maxlength="60" width="200px" />
+			</hbox>
+				<separator />
+		 <div style="overflow:auto;position:relative"> 	
+			<listbox id="ppoListbox"  hflex="min">
+				<listhead>
+					<listheader label ="Name" sort="auto" />
+					<listheader label ="Abbr"  />
+					<listheader label ="Contact(s)" />
+					<listheader label ="Note(s)"  />
+					<listheader label ="Phone(s)" />
+					<listheader label ="Address"  />
+					<listheader label ="City,State,Zip"  />
+				</listhead>
+			</listbox>
+		 </div>
+	</tabpanel>
+	</tabpanels>
+	</tabbox>
+</hbox>
+	
+	
+</window>
+</zk>

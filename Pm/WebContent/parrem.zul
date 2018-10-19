@@ -1,0 +1,62 @@
+<?page title="Remove A PAR" contentType="text/html;charset=UTF-8"?>
+<zk>
+<window id="parRemoveWin" title="Remove a PAR/Allergy" border="normal" width="440px" position="center" apply="palmed.ParRemoveWinController" > <!-- mode="modal"-->
+	<label id="ptname" />
+	<hbox>
+		<!--  groupbox>-->
+			<grid>
+				<columns>
+					<column label="" width="80px" />
+					<column label="" width="320px" />
+				</columns>
+				<rows>
+					<row>
+						<label value="Date" />
+						<label id="lblStart" />
+					</row>
+					<row>
+						<label value="Medication" />
+						<label id="lblMed" />
+					</row>
+					<row>
+						<label value="Info" />
+						<div>
+						<label value="Code:" />
+						<label id="lblCode" value="" />
+						<separator />
+						<label id="lblEtc" value="" />
+						</div>
+					</row>
+					<row>
+						<label value="Symptoms" />
+						<label id="lblSymptoms" />
+					</row>
+					<row>
+						<label value="Note" />
+						<label id="lblNote" />
+					</row>
+					<row>
+						<label value="DC Date" />
+						<textbox id="txtDate" maxlength="10" width="80px" />
+					</row>
+					<row>
+						<label value="Reason" />
+						<listbox id="lboxReason" mold="select" rows="1" width="200px" />
+					</row>
+
+				</rows>
+			</grid>
+
+		<!--</groupbox>-->
+		
+	</hbox>
+		
+		
+	<hbox>
+		<button id="btnSave" label="Remove" width="80px" />
+		<button id="btnCancel" label="Cancel" width="80px" />
+	</hbox>
+
+</window>
+
+</zk>

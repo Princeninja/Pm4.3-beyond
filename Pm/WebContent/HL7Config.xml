@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- HL7 Practice Configurations -->
+<HL7Config>
+	<MSHSegment>
+		<FieldSeparator>|</FieldSeparator> 
+		<EncodingCharacters>^~\&amp;</EncodingCharacters>
+		<SendingApplication>PALMED</SendingApplication>
+		<SendingFacilityName>RFM001</SendingFacilityName>
+		<RecievingApplication>PathGroup</RecievingApplication>
+		<RecievingFacilityName>PathGroup</RecievingFacilityName>
+		<MessageType>ORM^O01</MessageType>
+		<ProcessingID>D</ProcessingID>
+		<VersionNumber>2.3</VersionNumber>	
+	</MSHSegment>
+	<PIDSegment> 
+		<PIDSetID>1</PIDSetID>
+	</PIDSegment>
+	<ORCSegment>
+		<OrderControl>NW</OrderControl>
+		<ABNStatus>2</ABNStatus>
+	</ORCSegment>
+	<NTESegment>
+		<NTESequenceNum>1</NTESequenceNum>
+	</NTESegment>
+	<OBRSegment>
+		<OBRSetID>1</OBRSetID>
+	</OBRSegment>
+</HL7Config>

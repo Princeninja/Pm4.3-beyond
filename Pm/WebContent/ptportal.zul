@@ -1,0 +1,83 @@
+<?page title="Patient Portal" contentType="text/html;charset=UTF-8"?>
+<zk xmlns:h="http://www.w3.org/1999/xhtml">
+<window id="ptPortalWin" title="Patient Portal" border="normal" apply="palmed.PtPortalWinController" >
+
+	<vbox>
+		<h:h2>Riverside Family Practice</h:h2>
+		<h:p>3129 Blattner Dr</h:p>
+		<h:p>Cape Girardeau, MO  63703</h:p>
+		<h:p>573-335-0166</h:p>
+		<h:p>573-445-7942 fax</h:p>
+		<groupbox width="400px" mold="3d" >
+			<caption label="Disclaimer" />
+			<vbox>
+				<h:p>This Patient Portal facility is intended for use by our patients so that they may have
+				access to their own medical records and for their communication with our office.  Any other 
+				use is prohibited and may be a violation of the patient's confidentiality and the law.</h:p>
+				<h:p>Note: This access will be date/time stamped and logged.</h:p>
+				<checkbox id="agree" label="I Agree" />
+			</vbox>
+			
+		</groupbox>
+		
+		
+		<groupbox width="400px" mold="3d" >
+			<caption label="Login" />
+			<grid>
+				<columns>
+					<column label="" />
+					<column label="" />
+				</columns>
+				<rows>
+					<row>
+						<label value="First Name" />
+						<textbox id="firstname" cols="10" />
+					</row>
+					<row>
+						<label value="Middle Name" />
+						<textbox id="middlename" cols="10" />
+					</row>
+					<row>
+						<label value="Last Name" />
+						<textbox id="lastname" cols="15" />
+					</row>
+					<row>
+						-AND-
+					</row>
+					<row>
+						<label value="PIN Number" />
+						<textbox id="pin" cols="4" />
+					</row>	
+					<row>
+						-AND-
+					</row>
+					<row>
+						<label value="Birthdate" />
+						<textbox id="birthdate" cols="10" constraint="no future: Please enter a valid date"/>
+					</row>
+					<row>
+						-OR-
+					</row>
+					<row>
+						<label value="SSN" />
+						<textbox id="ssn" cols="11" />
+					</row>	
+				</rows>
+			</grid>
+			<hbox>
+				<button id="searchBtn" label="Search" width="80px"  />
+				<button id="exitBtn" label="Exit" width="80px" />
+			</hbox>		
+		</groupbox>
+		<groupbox width="400px" mold="3d" >
+			<caption label="View CCR" />
+			<hbox>
+				<button id="btnViewCCR" label="View CCR" width="80px"  />
+				<button id="btnViewEncCCR" label="View Encrypted CCR" width="140px"  />
+			</hbox>		
+		</groupbox>
+	</vbox>
+
+
+</window>
+</zk>

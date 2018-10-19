@@ -1,0 +1,710 @@
+package palmed;
+
+import java.util.EnumSet;
+import java.util.HashMap;
+import java.util.Map;
+
+
+import usrlib.Date;
+import usrlib.EditHelpers;
+import usrlib.LLHdr;
+import usrlib.Rec;
+import usrlib.Reca;
+import usrlib.RecaFile;
+import usrlib.StructHelpers;
+
+
+//
+//	0	LLHDR	llhdr;		// linked list header
+//	8	Rec		ptrec;		// patient record number
+//	12	Date	date;		// date
+//
+// 16	char	temp[6];	// text temp in deg C
+// 22	char	height[6];	// text height in cm
+// 28	char	weight[6];	// text weight in grams
+// 34	char	head[6];	// text head circ in cm
+// 40	char	sbp[4];		// text systolic blood pressure in mm/Hg
+// 44	char	dbp[4];		// text diastolic blood pressure in mm/Hg
+// 48	char	pO2[4];		// text pulse ox %
+// 52	char	pulse[4];	// text pulse rate
+// 56	char	resp[4];	// text respirations rate
+
+// RecLength = 64;
+
+
+// Note:  Vitals data is saved in string format.  Zero values are assumed to be non-entered
+// data.  Zeroes (or non-entered data) are saved as just "" padded to length.
+
+
+
+
+public class Vitals implements LLItem {
+	
+	public enum Status {
+		
+		CURRENT( "Current", 'C' ),	
+		REMOVED( "Removed", 'R' ),
+		CHANGED( "Superceeded", 'E' );
+		
+		private String label;
+		private int code;
+
+		private static final Map<Integer, Status> lookup = new HashMap<Integer,Status>();
+		
+		static {
+			for ( Status r : EnumSet.allOf(Status.class))
+				lookup.put(r.getCode(), r );
+		}
+
+
+		Status ( String label, int code ){
+			this.label = label;
+			this.code = code & 0xff;
+		}
+		
+		public String getLabel(){ return this.label; }
+		public int getCode(){ return this.code; }
+		public static Status get( int code ){ return lookup.get( code & 0xff ); }
+
+	}
+
+	
+	
+	
+	// fields
+    private byte[] dataStruct;
+    private Reca reca;			// this Reca
+    
+    private final static String fn_vitals = "vitals%02d.med";
+    private final static int recLength = 80;	// record length
+    
+    
+    
+	public Vitals(){
+		
+    	allocateBuffer();
+	}
+
+	
+	
+    public Vitals( Reca reca ){
+
+        // allocate space
+    	allocateBuffer();
+    	
+    	// read vitals record
+    	read( reca );
+    	
+//    	if ( reca.getRec() > 1 ){
+//    		RecaFile.read( reca, dataStruct, Pm.getMedPath(), fn_vitals, getRecordLength());
+//    	}
+    	
+    	// set local copy of reca
+    	this.reca = reca;
+    }
+
+
+	// read vitals
+    
+    public void read( Reca reca ){
+    			
+    	if (( reca == null ) || ( reca.getRec() < 2 )){ SystemHelpers.seriousError( "Vitals.read() bad reca" ); return; }
+		RecaFile.readReca( reca, dataStruct, Pm.getMedPath(), fn_vitals, getRecordLength());
+    }	
+    
+
+    
+    
+    
+    public Reca writeNew(){
+    	
+    	Reca reca;		// vitals reca
+    	int vol;		// volume
+    	
+    	vol = Reca.todayVol();
+    	
+    	reca = RecaFile.newReca( vol, this.dataStruct, Pm.getMedPath(), fn_vitals, getRecordLength());
+    	if (( reca == null ) || ( reca.getRec() < 2 )) SystemHelpers.seriousError( "Vitals.writeNew() bad reca" );
+
+    	return reca;
+    }
+    
+    
+    
+    public boolean write( Reca reca ){
+    	
+    	if (( reca == null ) || ( reca.getRec() < 2 )) SystemHelpers.seriousError( "Vitals.write() bad reca" );
+
+    	// write record
+        RecaFile.writeReca( reca, this.dataStruct, Pm.getMedPath(), fn_vitals, getRecordLength());
+        return true;
+    }
+
+
+    
+    public Reca postNew( Rec ptRec ){
+    	
+		// new vitals
+		Reca reca = LLPost.post( ptRec, this, 
+				new LLPost.LLPost_Helper () {
+					public Reca getReca( MedPt medPt ){ return medPt.getVitalsReca(); }
+					public void setReca( MedPt medPt, Reca reca ){ medPt.setVitalsReca(reca); }
+				}
+		);
+		return reca;
+    }
+    
+
+    public static Reca postNew( Rec ptRec, Date date, double temp, int hr, int rr, int sbp, int dbp, int pO2, double ht, int wt, double hc ){
+    	
+    	Vitals v = new Vitals();
+    	v.setDate( date );
+    	v.setPtRec( ptRec );
+    	v.setTemp( temp );
+    	v.setPulse( hr );
+    	v.setResp( rr );
+    	v.setSBP( sbp );
+    	v.setDBP( dbp );
+    	v.setPO2( pO2 );
+    	v.setHeight( ht );
+    	v.setWeight( wt );
+    	v.setHead( hc );
+    	v.setStatus( Status.CURRENT );
+    	
+    	return v.postNew( ptRec );
+    }
+	
+    /**
+     * getRecordLength
+     */
+    public static int getRecordLength() { return ( recLength ); }
+    
+    private void allocateBuffer(){
+        // allocate data structure space
+        dataStruct = new byte[getRecordLength()];
+    }
+
+    public void setDataStruct(byte[] dataStruct) { this.dataStruct = dataStruct; }
+
+    public byte[] getDataStruct() { return dataStruct; }
+
+   
+    
+    // LLHDR hdr;		// linked list header
+    
+    /**
+     * getLLHdr()
+     * 
+     * Get Linked list header LLHDR from dataStruct.
+     * 
+     * @param none
+     * @return LLHdr
+     */
+    public LLHdr getLLHdr(){
+    	return LLHdr.fromLLHdr(dataStruct, 0);
+    }
+
+    /**
+     * setLLHdr()
+     * 
+     * Set Linked list header LLHDR from dataStruct.
+     * 
+     * @param LLHDR		linked list header
+     * @return void
+     */
+    public void setLLHdr( LLHdr llhdr ){
+    	llhdr.toLLHdr(dataStruct, 0);
+    	return ;
+    }
+
+
+    
+    
+    
+    // DATE date;			// document date, offset 12    
+    
+    /**
+     * getDate()
+     * 
+     * Get date from dataStruct.
+     * 
+     * @param none
+     * @return usrlib.Date
+     */
+    public usrlib.Date getDate(){
+       	return StructHelpers.getDate( dataStruct, 12 );
+    }
+
+    /**
+     * setDate()
+     * 
+     * Set date in dataStruct.
+     * 
+     * @param usrlib.Date		date
+     * @return void
+     */
+    public void setDate( usrlib.Date date ){
+        StructHelpers.setDate( date, dataStruct, 12 );
+        return;
+    }
+
+
+    
+    
+    
+	// RECORD PtRec;		// patient record number, offset 8
+    
+    /**
+     * getPtRec()
+     * 
+     * Get patient record from dataStruct.
+     * 
+     * @param none
+     * @return Rec
+     */
+    public Rec getPtRec(){
+    	return Rec.fromInt( dataStruct, 8 );
+    }
+
+    /**
+     * setPtRec()
+     * 
+     * Set patient record in dataStruct.
+     * 
+     * @param Rec		patient record number
+     * @return void
+     */
+    public void setPtRec( Rec ptRec ){
+    	ptRec.toInt( dataStruct, 8 );
+    }
+
+
+    
+    
+    
+
+	// char	temp[6];		// temperature in degrees C, offset 16
+    
+    /**
+     * getTemp()
+     * 
+     * Get temperature in degrees C from dataStruct.
+     * 
+     * @param none
+     * @return double
+     */
+    public double getTemp(){
+    	return EditHelpers.parseDouble( StructHelpers.getString( dataStruct, 16, 6 ).trim());
+    }
+
+    /**
+     * setTemp()
+     * 
+     * Set temperature in dataStruct in degrees C xx.x.
+     * 
+     * @param double
+     * @return void
+     */
+    public void setTemp( double t ){
+    	String s = ( t == 0 ) ? "": String.format( "%-3.3f", t );
+    	StructHelpers.setStringPadded( s, dataStruct, 16, 6 );
+    	return ;
+    }
+
+
+    
+    
+    
+
+    
+	// char	height[6];		// height in cm, offset 22
+    
+    /**
+     * getHeight()
+     * 
+     * Get height from dataStruct in cm xxx.x.
+     * 
+     * @param none
+     * @return double
+     */
+    public double getHeight(){
+    	return EditHelpers.parseDouble( StructHelpers.getString( dataStruct, 22, 6 ).trim());
+    }
+
+    /**
+     * setHeight()
+     * 
+     * Set height in dataStruct in cm xxx.x.
+     * 
+     * @param double
+     * @return void
+     */
+    public void setHeight( double h ){
+    	String s = ( h == 0 ) ? "": String.format( "% 4.1f", h );
+    	StructHelpers.setStringPadded( s, dataStruct, 22, 6 );
+    	return ;
+    }
+
+
+    
+    
+    
+
+	// char	weight[6];		// weight in grams as 6 digit int string, offset 28
+    
+    /**
+     * getWeight()
+     * 
+     * Get weight from dataStruct in grams xxxxxx.
+     * 
+     * @param none
+     * @return int
+     */
+    public int getWeight(){
+    	return EditHelpers.parseInt( StructHelpers.getString( dataStruct, 28, 6 ).trim());
+    }
+
+    /**
+     * setWeight()
+     * 
+     * Set weight in dataStruct in grams xxxxxx.
+     * 
+     * @param int
+     * @return void
+     */
+    public void setWeight( int w ){
+    	String s = ( w == 0 ) ? "": String.format( "% 6d", w ).substring(1);
+    	StructHelpers.setStringPadded( s, dataStruct, 28, 6 );
+    	return ;
+    }
+
+
+    
+    
+    
+
+    
+    
+	// char	head[6];		// head circumference in cm, offset 34
+    
+    /**
+     * getHead()
+     * 
+     * Get head circumference from dataStruct in cm xxx.x.
+     * 
+     * @param none
+     * @return double
+     */
+    public double getHead(){
+    	return EditHelpers.parseDouble( StructHelpers.getString( dataStruct, 34, 6 ).trim());
+    }
+
+    /**
+     * setHead()
+     * 
+     * Set head circumference in dataStruct in cm xxx.x.
+     * 
+     * @param double
+     * @return void
+     */
+    public void setHead( double c ){
+    	String s = ( c == 0 ) ? "": String.format( "% 4.1f", c );
+    	StructHelpers.setStringPadded( s, dataStruct, 34, 6 );
+    	return ;
+    }
+
+
+    
+    
+    
+
+    
+    
+   	// int sbp;		// systolic BP, offset 40
+    
+    /**
+     * getSBP()
+     * 
+     * Get systolic BP from dataStruct.
+     * 
+     * @param none
+     * @return int
+     */
+    public int getSBP(){
+    	return EditHelpers.parseInt( StructHelpers.getString( dataStruct, 40, 4 ).trim());
+    }
+
+    /**
+     * setSBP()
+     * 
+     * Set systolic BP ID in dataStruct.
+     * 
+     * @param int		systolic BP
+     * @return void
+     */
+    public void setSBP( int i ){
+    	String s = ( i == 0 ) ? "": String.format( "%d", i );
+    	StructHelpers.setStringPadded( s, dataStruct, 40, 4 );
+    }
+    
+
+    
+    
+    
+   	// int dbp;		// diastolic BP, offset 44
+    
+    /**
+     * getDBP()
+     * 
+     * Get diastolic BP from dataStruct.
+     * 
+     * @param none
+     * @return int
+     */
+    public int getDBP(){
+    	return EditHelpers.parseInt( StructHelpers.getString( dataStruct, 44, 4 ).trim());
+    }
+
+    /**
+     * setDBP()
+     * 
+     * Set diastolic BP ID in dataStruct.
+     * 
+     * @param int		diastolic BP
+     * @return void
+     */
+    public void setDBP( int i ){
+    	String s = ( i == 0 ) ? "": String.format( "%d", i );
+    	StructHelpers.setStringPadded( s, dataStruct, 44, 4 );
+    }
+    
+
+    
+    /**
+     * getBP()
+     * 
+     * Get composite BP (systolic/diastolic) from dataStruct.  If SBP and DBP both zero 
+     * (non-entered value) then return "" string.
+     * 
+     * @param none
+     * @return String
+     */
+    public String getBP(){
+
+    	int sbp = getSBP();
+    	int dbp = getDBP();
+
+    	return (( sbp == 0 ) && ( dbp == 0 )) ? "": String.format( "%d/%d", getSBP(), getDBP());
+    }
+
+    
+    
+    
+    
+    
+   	// int pO2;		// pulse ox, offset 48
+    
+    /**
+     * getPO2()
+     * 
+     * Get pulse ox from dataStruct in %.
+     * 
+     * @param none
+     * @return int
+     */
+    public int getPO2(){
+    	return EditHelpers.parseInt( StructHelpers.getString( dataStruct, 48, 4 ).trim());
+    }
+
+    /**
+     * setPO2()
+     * 
+     * Set pulse ox in % in dataStruct.
+     * 
+     * @param int		pulse ox 
+     * @return void
+     */
+    public void setPO2( int i ){
+    	String s = ( i == 0 ) ? "": String.format( "%d", i );
+    	StructHelpers.setStringPadded( s, dataStruct, 48, 4 );
+    }
+    
+
+    
+    
+    
+    
+    
+    
+   	// int pulse;		// pulse rate, offset 52
+    
+    /**
+     * getPulse()
+     * 
+     * Get pulse rate from dataStruct in %.
+     * 
+     * @param none
+     * @return int
+     */
+    public int getPulse(){
+    	return EditHelpers.parseInt( StructHelpers.getString( dataStruct, 52, 4 ).trim());
+    }
+
+    /**
+     * setPulse()
+     * 
+     * Set pulse rate in % in dataStruct.
+     * 
+     * @param int		pulse rate 
+     * @return void
+     */
+    public void setPulse( int i ){
+    	String s = ( i == 0 ) ? "": String.format( "%d", i );
+    	StructHelpers.setStringPadded( s, dataStruct, 52, 4 );
+    }
+    
+
+    
+    
+    
+    
+    
+    
+   	// int resp;		// respiration rate, offset 56
+    
+    /**
+     * getResp()
+     * 
+     * Get respiration rate from dataStruct in %.
+     * 
+     * @param none
+     * @return int
+     */
+    public int getResp(){
+    	return EditHelpers.parseInt( StructHelpers.getString( dataStruct, 56, 4 ).trim());
+    }
+
+    /**
+     * setResp()
+     * 
+     * Set respiration rate in % in dataStruct.
+     * 
+     * @param int		respiration rate 
+     * @return void
+     */
+    public void setResp( int i ){
+    	String s = ( i == 0 ) ? "": String.format( "%d", i );
+    	StructHelpers.setStringPadded( s, dataStruct, 56, 4 );
+    }
+    
+
+    
+    
+    
+    
+    
+    
+   
+        
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+
+
+    
+    
+    
+
+
+
+	// byte	edit;			// num edits, offset 78
+    
+    /**
+     * getEdits()
+     * 
+     * Get num edits from dataStruct.
+     * 
+     * @param none
+     * @return int
+     */
+    public int getEdits(){
+    	return (int) dataStruct[78];
+    }
+
+    /**
+     * setEdits()
+     * 
+     * Set num edits in dataStruct.
+     * 
+     * @param int		'edit'
+     * @return void
+     */
+    public void setEdits( int num ){
+    	dataStruct[78] = (byte)( 0xff & num );
+    }
+
+
+    
+    
+
+
+	// char	status;			// record status, offset 79
+    
+    /**
+     * getStatus()
+     * 
+     * Get status from dataStruct.
+     * 
+     * @param none
+     * @return Status
+     */
+    public Status getStatus(){
+    	return Status.get( dataStruct[79] & 0xff );
+    }
+
+    /**
+     * setStatus()
+     * 
+     * Set status in dataStruct.
+     * 
+     * @param Event
+     * @return void
+     */
+    public void setStatus( Status status ){
+    	dataStruct[79] = (byte)( status.getCode() & 0xff );
+    }
+
+
+    
+    
+
+ 
+
+    public void dump(){
+    	StructHelpers.dump( "Vitals", dataStruct, getRecordLength());
+    	return;
+    }
+
+    
+    
+    /**
+     * toString()
+     * 
+     * Get a printable String representation of this entry.
+     * 
+     * @param none
+     * @return void
+     */
+  
+    public String toString(){
+    	return String.format( "%s %d %d %s %f %f", this.getDate().getPrintable(9), this.getPulse(), this.getResp(), this.getBP(), this.getTemp(), this.getWeight() );
+    }
+
+}

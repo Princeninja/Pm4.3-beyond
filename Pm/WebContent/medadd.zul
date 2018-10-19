@@ -1,0 +1,168 @@
+<?page title="Add Medication" contentType="text/html;charset=UTF-8"?>
+<zk>
+<window id="medAddWin" title="Enter/Edit Medication" border="normal" width="800px" position="center" mode="modal" apply="palmed.MedAddWinController" > <!-- mode="modal"-->
+	<label id="ptname" />
+	<hbox>
+		<!--  groupbox>-->
+			<grid>
+				<columns>
+					<column label="" width="80px" />
+					<column label="" width="320px" />
+				</columns>
+				<rows>
+					<row>
+						<label value="Date" />
+						<textbox id="txtDate" maxlength="10" width="80px" />
+					</row>
+					<row>
+						<label value="Misc" />
+						<div>
+						<checkbox id="cbMisc" onCheck="setMisc(cbMisc.isChecked())"/>
+						<textbox id="txtMiscMed" maxlength="40" width="280px" disabled="true" />
+						</div>
+					</row>
+					<row id="rowMed1" >
+						<label value="Medication" />
+						<label id="lblMed" value="(select on right)"/>
+					</row>
+					<row id="rowMed2">
+						<label value="Info" />
+						<div>
+						<label value="Code:" />
+						<label id="lblCode" value="" />
+						<separator />
+						<label id="lblEtc" value="" />
+						</div>
+					</row>
+					<row>
+						<label value="Dosage" />
+						<div>
+						<listbox id="lbDosage" maxlength="12" width="60px" mold="select" rows="1" />
+						<space spacing="20px" />
+						<label value="Form" />
+						<listbox id="lbForm" maxlength="20" width="100px" mold="select" rows="1" />
+						</div>
+					</row>
+					<row>
+						<label value="Route" />
+						<listbox id="lbRoute" maxlength="40" width="200px" mold="select" rows="1" />
+					</row>
+					<row>
+						<label value="Sched" />
+						<listbox id="lbFreq" maxlength="40" width="200px" mold="select" rows="1" />
+					</row>
+					<row>
+						<label value="" />
+						<checkbox id="cbPRN" label="PRN" />
+					</row>
+					<row>
+						<label value="Add'l Sig" />
+						<textbox id="txtAddlSig" maxlength="80" width="300px" />
+					</row>
+					<row>
+						<label value="" />
+						<checkbox id="cbAcute" label="Acute / One time med" />
+					</row>
+					<row>
+						<label value="" />
+						<checkbox id="cbOutside" label="Outside med" />
+					</row>
+					<row>
+						<label value="" />
+						<checkbox id="cbNMBU" label="Not managed by us / Do not refill" />
+					</row>
+					<row>
+						<label value="" />
+						<checkbox id="cbDAW" label="Dispense as written / Do not substitute" />
+					</row>
+					<row>
+						<label value="Usual" />
+						<div>
+						Number
+						<textbox id="txtNumber" maxlength="4" width="30px" />
+						Refills
+						<textbox id="txtRefills" maxlength="2" width="30px" />
+						</div>
+					</row>
+					<row>
+						<label value="Pharm Msg" />
+						<textbox id="txtMsg" maxlength="80" width="300px" />
+					</row>
+					<row>
+						<label value="Prescriber" />
+						<listbox id="lbPrescriber" maxlength="40" width="200px" mold="select" rows="1" />
+					</row>
+					<row>
+						<label value="Primary Dx" />
+						<listbox id="lbProblem" maxlength="40" width="200px" mold="select" rows="1" />
+					</row>
+
+				</rows>
+			</grid>
+
+		<!--</groupbox>-->
+		
+		<groupbox hflex="1">
+			<vbox vflex="1" hflex="1" >
+			<hbox>
+				<button id="btnSearch" label="Search" width="80px" />
+				<textbox id="txtSearch" maxlength="40" width="200px" />
+			</hbox>
+			<listbox id="medListbox"  hflex="1" height="400px" style="overflow:auto;position:relative"  >
+				<listhead id="lhMedListbox" >
+					<listheader id="name" label="Medication Name" sort="auto" />
+				</listhead>
+			</listbox>
+			<button id="btnSelect" label="Select" width="80px" />
+			</vbox>
+		</groupbox>
+	</hbox>
+		
+		
+	<hbox>
+		<button id="btnSave" label="Save" width="80px" />
+		<button id="btnCancel" label="Cancel" width="80px" />
+	</hbox>
+
+<zscript>
+
+	void setMisc( boolean flg ){
+	
+		rowMed1.setVisible( ! flg );
+		rowMed2.setVisible( ! flg );
+		btnSelect.setDisabled( flg );
+		btnSearch.setDisabled( flg );
+		medListbox.setDisabled( flg );
+		name.setVisible( ! flg );
+		txtMiscMed.setDisabled( ! flg );
+		txtSearch.setDisabled( flg );
+		
+
+<!-- 	if ( cbMisc.isChecked()){
+
+			rowMed1.setVisible( false );
+			rowMed2.setVisible( false );
+			btnSelect.setDisabled( true );
+			btnSearch.setDisabled( true );
+			medListbox.setDisabled( true );
+			name.setVisible( false );
+					
+		} else {
+		
+			rowMed1.setVisible( true );
+			rowMed2.setVisible( true );
+			btnSelect.setDisabled( false );
+			btnSearch.setDisabled( false );
+			medListbox.setDisabled( false );
+			name.setVisible( true );
+		}
+-->		
+		return;
+	}
+	
+</zscript>
+
+</window>
+
+
+</zk>

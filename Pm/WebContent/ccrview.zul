@@ -1,0 +1,18 @@
+<?page title="View CCR/CCD" contentType="text/html;charset=UTF-8"?>
+<zk>
+<window width="750px" height="580px" title="View CCR/CCD" border="normal" mode="overlapped" position="center" closable="true" sizable="true" apply="palmed.CCRViewWinController" >
+
+	<borderlayout>
+		<north hflex="min" >
+			<hbox>
+				<button id="btnClose" label="Close" width="80px" />
+				<button id="btnPrint" label="Print" width="80px" />
+			</hbox>
+		</north>
+		<center vflex='max' hflex='max' style="overflow:auto" >
+			<iframe id='iframe' vflex='max' hflex='max' style='height:500px;width:700px' /> <!--src="${arg.src}" />--> 
+		</center>
+		</borderlayout>
+	
+</window>
+</zk>

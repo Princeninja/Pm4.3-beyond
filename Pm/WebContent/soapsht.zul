@@ -1,0 +1,415 @@
+<?page title="Soap Sheet" contentType="text/html;charset=UTF-8"?>
+<zk>
+<window id="soapShtWin" title="Interactive Soap Sheet" border="normal" vflex="max" hflex="max" position="center" mode="modal" apply="palmed.SoapSheetWinController" >
+<!-- position="center,left"  -->
+
+	<hbox> Pt: <label id="ptname" /> </hbox>
+	<hbox> Age: <label id="ptage" /> Sex: <label id="ptsex" /> </hbox>	
+			
+	<tabbox vflex="max" hflex="max"  >
+		<tabs>
+			<tab id="tabLast" label="Last" />
+			<tab id="tabSubject" label="Subj" />
+			<tab id="tabSheet" label="Sheet" />
+			<tab id="tabROS" label="ROS" />
+			<tab id="tabHx" label="Hx" />
+			<tab id="tabVitals" label="Vitals" />
+			<tab id="tabExam" label="Exam" /> 
+			<tab id="tabAssess" label="Assess" />
+			<tab id="tabOrders" label="Orders" />
+			<tab id="tabRX" label="RX" />
+			<tab id="tabFU" label="F/U" />
+			<tab id="tabCharge" label="Charge" />
+			<tab id="tabSummary" label="Summary" />
+			
+		</tabs>
+		<toolbar>
+			<toolbarbutton label="Vitals" />
+			<toolbarbutton label="Docs" />
+			<toolbarbutton label="Rx" />
+			<toolbarbutton label="Orders" />		
+		</toolbar>
+		<tabpanels style="overflow:auto" >
+		
+
+			<!-- Last Progress Note, etc -->			
+			<tabpanel id="tpLast" vflex="1" hflex="1" >
+
+				<hbox>
+				<vbox>
+					<groupbox mold="default" width="600px" >
+						<caption label="Last Progress Note" />
+						<textbox id="soapTextbox" rows="12" hflex="1" />
+					</groupbox>
+
+					<groupbox mold="default" width="600px" >
+						<caption label="Recent Nursing Notes" />
+						<textbox id="noteTextbox" rows="8" hflex="1" />
+					</groupbox>
+	
+				</vbox>
+
+					<groupbox mold="default" width="300px" >
+						<caption label="Recent Labs" />
+						<textbox id="labTextbox" rows="12" hflex="1" />
+					</groupbox>
+	
+				</hbox>
+
+			</tabpanel>
+			
+
+
+
+
+			<!-- Subjective -->			
+			<tabpanel id="tpSubject" vflex="1" hflex="1" >
+				<vbox>
+					<hbox>Prov: <listbox id="lboxProviders" mold="select" width="300px" /></hbox>
+					<hbox>CC: <textbox id="cc" rows="1" width="300px" /></hbox>
+					<groupbox mold="default" width="600px" >
+						<caption label="Subjective/HPI" />
+						<textbox id="subj" rows="12" hflex="1" />
+					</groupbox>
+				</vbox>
+			</tabpanel>
+			
+				<!-- Soap Sheet Main Summary Window -->
+			<tabpanel id="tpSheet" vflex="1" hflex="1" >
+			<div>
+			<hbox>
+				<vbox>
+					<hbox>
+						<groupbox mold="default" width="300px" >
+							<caption label="Current Problems" />
+							<listbox id="problems"  rows="16" ></listbox>
+						</groupbox>
+						<groupbox mold="default" width="300px" >
+							<caption label="Medications" />
+							<listbox id="meds"  rows="16" ></listbox>
+						</groupbox>
+					</hbox>
+					<groupbox mold="default" width="600px" >
+						<caption label="Clinical Decision Alerts" />
+						<listbox id="lboxAlerts"  rows="8" />
+					</groupbox>
+					
+				</vbox>
+			<vbox>
+				<groupbox mold="default" width="200px" >
+					<caption label="Allergies/PARs" />
+					<listbox id="pars"  rows="5" ></listbox>
+				</groupbox>
+				
+				<groupbox mold="default" width="200px" >
+					<caption label="Operations, Illnesses, and Injuries" />
+					<listbox id="operations" rows="7" />
+				</groupbox>
+			</vbox>				
+			</hbox>
+			</div>
+			
+			</tabpanel>
+						
+			
+			<!-- ROS -->
+			<tabpanel id="tpROS" hflex="max" vflex="max" > 
+				<!-- include src="soap_ros.zul" /> -->
+				<hbox >
+				<vbox>
+					<groupbox id="gbROS" mold="default" width="900px" height="625px" style="overflow:auto">
+						<caption label="ROS" />
+						
+					</groupbox>
+						
+				</vbox>
+
+					<groupbox mold="default" height="300px" width="300px" >
+						<caption label="ROS-Text" />
+						<textbox id="RosTextbox" rows="12" hflex="1" />
+					</groupbox>
+	
+				</hbox>
+			</tabpanel>
+			
+			
+			
+			
+			<!-- History -->
+			<tabpanel id="tpHx" vflex="1" hflex="1" > 
+				<hbox>
+				<vbox>
+					<groupbox id="gbHx" mold="default" width="900px" height="625px" style="overflow:auto">
+						<caption label="Hx-Window" />
+						
+					</groupbox>
+						
+				</vbox>
+
+					<groupbox mold="default" width="300px" height="300px" >
+						<caption label="Hx-Text" />
+						<textbox id="HxTextbox" rows="12" hflex="1" />
+					</groupbox>
+	
+				</hbox>
+			
+			
+			</tabpanel>
+			
+			
+			
+			
+			<!-- Vitals -->
+			<tabpanel id="tpVitals" vflex="1" hflex="1" >
+				<!-- include src="vitals_new.zul" /> -->
+				
+				<hbox>
+				<vbox>
+					<groupbox id="gbVi" mold="default" width="900px" height="625px" style="overflow:auto">
+						<caption label="Vitals-Window" />
+						
+					</groupbox>
+						
+				</vbox>
+
+					<groupbox mold="default" width="300px" height="300px" >
+						<caption label="Vitals-Text" />
+						<textbox id="VitalsTextbox" rows="12" hflex="1" />
+					</groupbox>
+	
+				</hbox>
+			</tabpanel>
+			
+			
+			
+			
+			<!-- Exam -->
+		    <tabpanel id="tpExam" vflex="1" hflex="1" > 
+				<!-- <include src="soap_exam.zul" /> -->
+				<hbox>
+				<vbox>
+					<groupbox id="gbEx" mold="default" width="900px" height="625px" style="overflow:auto">
+						<caption label="Exam-Window" />
+						
+					</groupbox>
+						
+				</vbox>
+
+					<groupbox mold="default" width="300px" height="300px" >
+						<caption label="Exam-Text" />
+						<textbox id="ExamTextbox" rows="12" hflex="1" />
+					</groupbox>
+	
+				</hbox>
+			</tabpanel>  
+			
+			
+			
+			
+			
+			<!-- Assessment -->
+			<tabpanel id="tpAssess" vflex="1" hflex="1" >
+				<!-- <vbox>
+				<hbox>
+				<groupbox mold="default" width="300px" >
+					<caption label="Current Problems" />
+					<listbox id="lboxProblems2"  rows="12" ></listbox>
+				</groupbox>
+				<button label=">>" width="80px" />
+				<groupbox mold="default" width="300px" >
+					<caption label="Assessment" />
+					<listbox id="lboxAssess" rows="12" />
+				</groupbox>
+				</hbox>
+				Free Text
+				<textbox id="txtAssess" width="600px" rows="6" />
+				</vbox> --> 
+			
+			</tabpanel>
+			
+			
+			
+			
+			
+			<!-- Orders -->
+			<tabpanel id="tpOrders" vflex="1" hflex="1" > 
+				<div id="divOrders" vflex="1" >
+				</div>
+				<!-- <include src="soap_orders.zul" /> -->
+				
+				<hbox>
+				<vbox>
+					<groupbox id="gbOrders" mold="default" width="900px" height="625px" style="overflow:auto" >
+						<caption label="Orders" />
+						
+					</groupbox>
+						
+				</vbox>
+
+					<groupbox mold="default" width="300px" height="300px" >
+						<caption label="Orders-Text" />
+						<textbox id="OrdersTextbox" rows="12" hflex="1" />
+					</groupbox>
+	
+				</hbox>
+				
+			</tabpanel>
+			
+			
+			
+			
+			
+			
+			<!-- RX -->
+			<tabpanel id="tpRX" vflex="1" hflex="1" >
+			
+			<hbox>
+				<vbox>
+					<groupbox id="gbRX" mold="default" width="900px" height="625px" style="overflow:auto" >
+						<caption label="Rx-Window" />
+						
+					</groupbox>
+						
+				</vbox>
+
+					<groupbox mold="default" width="300px" height="300px" >
+						<caption label="Rx-Text" />
+						<textbox id="RxTextbox" rows="12" hflex="1" />
+					</groupbox>
+	
+				</hbox>
+			
+			 </tabpanel>
+			
+			
+			
+			
+			
+			<!-- Follow Up -->
+			<tabpanel id="tpFU" vflex="1" hflex="1" >
+				 <hbox vflex="1" hflex="1" >
+				<vbox>
+					<button id="btnSaveFU" label="Save" width="80px" />
+					<button id="btnCancelFU" label="Cancel" width="80px" />
+				</vbox>
+
+				<vbox>
+				<groupbox>
+					<caption label="Interventions" />
+						<hbox><checkbox id="intervBMIHigh" label="BMI high with f/u plan" /></hbox>
+						<hbox><checkbox id="intervBMILow" label="BMI low with f/u plan" /></hbox>
+						<separator />				
+						<hbox><checkbox id="intervNutrition" label="Nutrition Counseling" /></hbox>
+						<hbox><checkbox id="intervDietitian" label="Dietitian consult" /></hbox>
+						<separator />				
+						<hbox><checkbox id="intervSmokingC" label="Smoking Cessation and f/u plan" /></hbox>
+						<hbox><checkbox id="intervActivity" label="Physical Activity Counseling" /></hbox>
+						<separator />				
+				</groupbox>
+
+				<groupbox>
+					<caption label="Instructions" />
+						<hbox><checkbox label="If No Improvement" /></hbox>
+						<separator />				
+						
+						<hbox><checkbox label="Monitor/Log BP" /></hbox>
+						<hbox><checkbox label="Monitor/Log BS" /></hbox>
+						<hbox><checkbox label="Smoking Cessation" /></hbox>
+						<hbox><checkbox label="Diet &amp; Exercise" /></hbox>
+				</groupbox>
+				</vbox>				
+				
+				
+				<groupbox>
+					<caption label="Follow-Up With" />
+						<hbox><checkbox label="Cardiology" /></hbox>
+						<hbox><checkbox label="Dentist" /></hbox>
+						<hbox><checkbox label="Endocrinology" /></hbox>
+						<hbox><checkbox label="Gastroenterology" /></hbox>
+						<hbox><checkbox label="Hematology" /></hbox>
+						<hbox><checkbox label="Infectious Disease" /></hbox>
+						<hbox><checkbox label="Nephrology" /></hbox>
+						<hbox><checkbox label="Neurology" /></hbox>
+						<hbox><checkbox label="Neurosurgery" /></hbox>
+						<hbox><checkbox label="Oncology" /></hbox>
+						<hbox><checkbox label="Ophthalmology" /></hbox>
+						<hbox><checkbox label="Orthopedics" /></hbox>
+						<hbox><checkbox label="Podiatry" /></hbox>
+						<hbox><checkbox label="Pulmonology" /></hbox>
+						<hbox><checkbox label="Rheumatology" /></hbox>
+				</groupbox>
+
+
+				<groupbox>
+					<caption label="Return To Clinic" />
+					<hbox>
+					<div>
+						<hbox><checkbox label="1" /></hbox>
+						<hbox><checkbox label="2" /></hbox>
+						<hbox><checkbox label="3" /></hbox>
+						<hbox><checkbox label="4" /></hbox>
+						<hbox><checkbox label="6" /></hbox>
+					</div>
+					<div>
+						<hbox><checkbox label="Days" /></hbox>
+						<hbox><checkbox label="Weeks" /></hbox>
+						<hbox><checkbox label="Months" /></hbox>
+						<hbox><checkbox label="Years" /></hbox>
+					</div>
+					</hbox>
+										
+				</groupbox>
+
+				</hbox> 
+				<hbox>
+				 <vbox>
+					<groupbox id="gbFU" mold="default" width="600px" style="overflow:auto" >
+						<caption label="F/U" />
+						
+					</groupbox>
+						
+				</vbox>  
+
+					<groupbox mold="default" width="300px" >
+						<caption label="F/U-Text" />
+						<textbox id="FUTextbox" rows="12" hflex="1" />
+					</groupbox>
+	
+				</hbox>
+			
+			</tabpanel>
+			
+			
+			<!-- Charge -->
+			<tabpanel id="tpCharge" vflex="1" hflex="1" > 
+				<hbox>
+				<vbox>
+					<groupbox id="gbCharge" mold="default" width="600px" style="overflow:auto" >
+						<caption label="Charge" />
+						
+					</groupbox>
+						
+				</vbox>
+
+					<groupbox mold="default" width="300px" >
+						<caption label="Charge-Text" />
+						<textbox id="ChargeTextbox" rows="12" hflex="1" />
+					</groupbox>
+	
+				</hbox>
+			
+			</tabpanel>
+			
+			<tabpanel id="tpSummary" vflex="1" hflex="1" > </tabpanel>
+			
+			
+		</tabpanels>
+	</tabbox>
+	
+	<hbox id = "ehbox" > <button id="save" label="Save" width="80px" /> <!--&amp; Minimize  -->
+						<button id="cancel" label="Close ISS" width="80px" />
+						<button id="end" label="End Visit" width="80px" visible="false" /> </hbox>
+
+
+</window>
+</zk>

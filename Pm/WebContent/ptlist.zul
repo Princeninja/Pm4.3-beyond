@@ -1,0 +1,166 @@
+<?page title="Patient Listings" contentType="text/html;charset=UTF-8"?>
+<zk>
+<window id="ptListWin" border="none" mode="embedded" vflex="1" hflex="1" apply="palmed.PtListWinController" >
+
+	<hbox hflex="1" vflex="1" >
+		<vbox width="100px" >
+			<button id="btnSearch" label="Search" width="80px" />
+			<button id="btnDrill" label="Drill Down" width="80px" disabled="true" />
+			<button id="btnReset" label="Reset" width="80px" disabled="true" />
+			<button id="btnPrint" label="Print" width="80px" />
+			
+		</vbox>
+		
+		<vbox vflex="1" hflex="1">
+			<listbox id="lbox" vflex="1" hflex="1">
+				<listhead id="listHead" >
+					<listheader id="lhdrName" width="160px" label="Patient" sort="auto" />
+					<listheader id="lhdrAge" width="50px" label="Age" sort="auto" />
+					<listheader id="lhdrSex" width="30px" label="Sex" sort="auto" />
+				</listhead>
+			</listbox>
+		</vbox>
+		<vbox vflex="1" >
+		<groupbox width="400px" height="600px" vflex="1" >
+			<tabbox hflex="1" vflex="1" >
+				<tabs>
+					<tab id="tabDemo" label="Age/Sex" />
+					<tab id="tabProb" label="Problems" />
+					<tab id="tabMed" label="Meds" />
+					<tab id="tabAllergy" label="Allergy" />
+					<tab id="tabLab" label="Labs" />
+				</tabs>
+				<tabpanels vflex="1" hflex="1" height="400px" style="overflow:auto" >
+					<tabpanel id="tpDemo" hflex="1" vflex="1" >
+						<grid>
+							<columns>
+								<column width="80px" />
+								<column width="300px" />
+							</columns>
+							<rows>
+								<row>
+									<label value="Age" />
+									<vbox>
+										<hbox>
+											<radiogroup>
+												<radio id="rbAgeLess" label="less than" />
+												<radio id="rbAgeGreater" label="greater than or equal to" />
+											</radiogroup>
+										</hbox>
+										<hbox><textbox id="txtAge" maxlength="5" width="60" /><label value="years" /></hbox>
+									</vbox>
+								</row>
+								<row>
+									<label value="Sex" />
+									<hbox>
+										<radiogroup>
+											<radio id="rbSexMale" label="Male" />
+											<radio id="rbSexFemale" label="Female" />
+											<radio id="rbSexNone" label="No Preference" checked="true" />
+										</radiogroup>
+									</hbox>
+								</row>
+							</rows>
+						</grid>
+					</tabpanel>
+				
+					<tabpanel id="tpProb" hflex="1" vflex="1" >
+						<vbox vflex="1" hflex="1" >
+							<hbox><label value="Prob:" /><label id="lblProb" /></hbox>
+							<hbox>
+								<button id="btnSearchProb" label="Search" width="80px" />
+								<textbox id="txtSearchProb" maxlength="20" width="200px" />
+							</hbox>
+							<listbox id="lboxProb" rows="20" hflex="1" vflex="1" >
+								<listhead id="lhProblems" >
+									<listheader id="lhdrProblems" label="Problems" sort="auto" />
+								</listhead>
+							</listbox>
+								<hbox>
+									<radiogroup>
+										<radio id="rbProbInc" label="Includes" checked="true" />
+										<radio id="rbProbDNI" label="Does not include" />
+									</radiogroup>
+								</hbox>
+								<button id="btnSelectProb" label="Select" width="80px" />
+							</vbox>
+					
+					</tabpanel>
+					
+					<tabpanel id="tpMed" hflex="1" vflex="1" >
+						<vbox vflex="1" hflex="1" >
+							<hbox><label value="Med:" /><label id="lblMed" /></hbox>
+							<hbox>
+								<button id="btnSearchMed" label="Search" width="80px" />
+								<textbox id="txtSearchMed" maxlength="20" width="200px" />
+							</hbox>
+							<listbox id="lboxMed" rows="20" hflex="1" vflex="1" >
+								<listhead id="lhMeds" >
+									<listheader id="lhdrMeds" label="Meds" sort="auto" />
+								</listhead>
+							</listbox>
+								<hbox>
+									<radiogroup>
+										<radio id="rbMedInc" label="Includes" checked="true" />
+										<radio id="rbMedDNI" label="Does not include" />
+									</radiogroup>
+								</hbox>
+								<button id="btnSelectMed" label="Select" width="80px" />
+							</vbox>
+					</tabpanel>
+					
+					<tabpanel id="tpAllergy" hflex="1" vflex="1" >
+						<vbox vflex="1" hflex="1" >
+							<hbox><label value="Allergy:" /><label id="lblAllergy" /></hbox>
+							<hbox>
+								<button id="btnSearchAllergy" label="Search" width="80px" />
+								<textbox id="txtSearchAllergy" maxlength="20" width="200px" />
+							</hbox>
+							<listbox id="lboxAllergy" rows="20" hflex="1" vflex="1" >
+								<listhead id="lhAllergy" >
+									<listheader id="lhdrAllergy" label="Allergy" sort="auto" />
+								</listhead>
+							</listbox>
+								<hbox>
+									<radiogroup>
+										<radio id="rbAllergyInc" label="Includes" checked="true" />
+										<radio id="rbAllergyDNI" label="Does not include" />
+									</radiogroup>
+								</hbox>
+								<button id="btnSelectAllergy" label="Select" width="80px" />
+							</vbox>
+					
+					</tabpanel>
+					
+					<tabpanel id="tpLab" hflex="1" vflex="1" >
+						<vbox vflex="1" hflex="1" >
+							<hbox><label value="Lab:" /><label id="lblLab" /></hbox>
+							<hbox>
+								<button id="btnSearchLab" label="Search" width="80px" />
+								<textbox id="txtSearchLab" maxlength="20" width="200px" />
+							</hbox>
+							<listbox id="lboxLab" rows="20" hflex="1" vflex="1" >
+								<listhead id="lhLabs" >
+									<listheader id="lhdrLab" label="Labs" sort="auto" />
+								</listhead>
+							</listbox>
+								<hbox>
+									<radiogroup>
+										<radio id="rbResultAny" label="Any" checked="true" />
+										<radio id="rbResultLess" label="less than" />
+										<radio id="rbResultGreater" label="greater than or equal to" />
+									</radiogroup>
+								</hbox>
+								<hbox><label value="Result Value" /><textbox id="txtResult" maxlength="10" width="100px" /></hbox>
+								<button id="btnSelectLab" label="Select" width="80px" />
+							</vbox>
+					</tabpanel>
+					
+				</tabpanels>
+			</tabbox>
+		</groupbox>
+		</vbox>
+	</hbox>
+</window>
+
+</zk>

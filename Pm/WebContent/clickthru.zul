@@ -1,0 +1,43 @@
+<?page title="Click Thru" contentType="text/html;charset=UTF-8"?>
+<zk xmlns:h="http://www.w3.org/1999/xhtml">
+<window title="NewCrop Click-Thru" border="normal" height='800px' width='1200px'  style="overflow:auto" visible="false" >
+<!-- vflex="1" hflex="1" -->
+	<zscript>
+		<!--  The parameter xmlTag is passed in this page URL as '/clickthru.zul?xmlTag=xxxxxx'.
+		This 'key' is then used to retrieve the XML text to send to newcrop.
+		(The XML text was previously saved to the current Session with the attribute name 'xmlTag'.)
+		 -->
+		 
+		String xmltag = Executions.getCurrent().getParameter( "xmlTag" );
+		String testxml = (String) Sessions.getCurrent().getAttribute( xmltag );
+		
+	</zscript>
+	<!-- 
+	<h:h3>Please Remember:  Med changes made in NewCrop are not yet carried back to PAL/MED.  You need to update med lists in both screens for now.</h:h3>
+	 -->
+	<h:h2>Please wait....</h:h2>
+	<vbox>
+	<hbox>ClickThru=<label value="${clickthru}" />, XmlTag=<label value="${xmltag}" /></hbox>
+	
+    <h:form  name="myform"  method="post" action="${clickthru}"  >
+    	<!--  This is the testing one - "http://preproduction.newcropaccounts.com/InterfaceV7/RxEntry.aspx" -->
+    	<!--  This is the live production one - "https://secure.newcropaccounts.com/InterfaceV7/RxEntry.aspx" -->
+    	<vbox>
+	        <h:input id="Goi" value="Go" type="submit" />
+	        
+			<textbox id="RxInput" name="RxInput" value="${testxml}" rows="15" cols="80"></textbox>
+			<script type="text/javascript" defer="true" >
+				 document.myform.submit();
+			</script>
+		
+    	</vbox>
+	</h:form>
+	</vbox>
+		    
+
+</window>
+
+
+
+
+</zk>

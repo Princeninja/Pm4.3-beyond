@@ -1,0 +1,83 @@
+<?page title="Ecs Window" contentType="text/html;charset=UTF-8"?>
+<zk>
+<!-- Outer window to hide ID space of inner window - so doesn't have to be unique -->
+	<window border="none" vflex="1" hflex="1" >
+
+		<window id="ecsWin"  border="none" mode="embedded" vflex="1" hflex="1" apply="palmed.EcsWinController" >
+		
+		
+			<hbox vflex="1" hflex="1" >
+				<vbox>
+					<label> Select Year </label>
+					<listbox id="ecsYearListbox" rows="1" mold="select" />
+					<button id="btnSend" label="Send" width="80px" />
+					<button id="btnPrint" label="Print" width="80px" />
+					<button id="btnCompile" label="Compile" width="80px" />
+					<button id="btnIndexDgn" label="Index Dgn" width="80px" />
+					
+				</vbox>
+				
+				<tabbox hflex="1" vflex="1" >
+					<tabs>
+						<tab id="t_ecsRpt" label="Reports" />
+						<tab id="t_ecsClaims" label="Claims" />
+					</tabs>
+					<tabpanels>
+						<tabpanel id="tp_ecsRpt" hflex="1" vflex="1" >
+							<borderlayout>	
+								<west width="40%" splittable="true" collapsible="true" >
+									<vbox hflex="1" vflex="1" >
+										
+										<listbox id="ecsRptListbox" vflex="1" hflex="1" >
+											<listhead>
+												<listheader width="200px" label="Description" />
+												<listheader width="80px" label="Size" sort="auto" />
+											</listhead>
+										</listbox>							
+									</vbox>
+								</west>
+								<center flex="true" >											
+									<window id="ecsRptHtmlWin" border="none" vflex="1" hflex="1" >										
+											<!--  I will make these controls programmatically so that they behave and size properly -->		
+											<!-- <html id="ecsRptHTML" vflex="1" hflex="1" ></html> -->
+											<!-- <textbox id="ecsRptTextbox"  rows="2" vflex="1" hflex="1"/> -->
+									</window>						
+								</center>
+							</borderlayout>
+							
+						</tabpanel>
+						
+						
+						<tabpanel id="tp_ecsClaims" hflex="1" vflex="1" >
+							<borderlayout>	
+								<west width="40%" splittable="true" collapsible="true" >
+									<vbox hflex="1" vflex="1" >
+										
+										<listbox id="ecsNsfListbox" vflex="1" hflex="1" >
+											<listhead>
+												<listheader width="200px" label="Description" />
+												<listheader width="80px" label="Size" sort="auto" />
+											</listhead>
+										</listbox>							
+									</vbox>
+								</west>
+								<center flex="true" >											
+									<window id="ecsNsfHtmlWin" border="none" vflex="1" hflex="1" >										
+											<!--  I will make these controls programmatically so that they behave and size properly -->		
+											<!-- <html id="ecsNsfHTML" vflex="1" hflex="1" ></html> -->
+											<!-- <textbox id="ecsNsfTextbox"  rows="2" vflex="1" hflex="1"/> -->
+									</window>						
+								</center>
+							</borderlayout>
+							
+						
+						
+						</tabpanel>
+					</tabpanels>
+				</tabbox>
+			</hbox>		
+		
+		
+		</window>
+</window>
+</zk>

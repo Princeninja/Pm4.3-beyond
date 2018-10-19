@@ -1,0 +1,44 @@
+<?page title="Problems" contentType="text/html;charset=UTF-8"?>
+<zk>
+<window id="probsWin" border="none" mode="embedded" vflex="1" hflex="1" apply="palmed.ProbsWinController">
+
+	<vbox vflex="1" hflex="1" >
+		<groupbox id="gbNoProbs">
+			<caption label="Problems" />
+			<checkbox id="cbNoProbs" label="No Current Problems" checked="false" />
+		</groupbox>
+
+		<hbox vflex="1" >
+			<vbox>
+				<button id="newprob" label="New" width="80px" />
+				<button id="edit" label="Edit" width="80px" />
+				<button id="btnResolved" label="Resolved" width="80px" />
+				<button id="btnRemoved" label="Remove" width="80px" />
+				<button id="btnPrint" label="Print" width="80px" />
+				<button id="btnPubHealth" label="Pub Health" width="80px" />
+				
+				<groupbox>
+					<caption label="View" />
+					<radiogroup>
+						<radio id="r_current" label="Current" checked="true" />
+						<radio id="r_resolved" label="Resolved" />
+						<radio id="r_history" label="History" />
+					</radiogroup>
+				</groupbox>
+			</vbox>
+			
+			<listbox id="probs_listbox" vflex="1" >
+				<listhead>
+					<listheader width="80px" label="Date" sort="auto" />
+					<listheader id="stop" width="80px" label="Resolved" sort="auto" />
+					<listheader id="status" width="80px" label="Status" sort="auto" />
+					<listheader label="Problem" sort="auto" />
+					<listheader width="100px" label="SNOMED-CT" sort="auto" />
+					<listheader width="80px" label="ICD-9" sort="auto" />
+				</listhead>
+			</listbox>
+		</hbox>
+	</vbox>
+
+</window>
+</zk>

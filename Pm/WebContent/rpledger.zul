@@ -1,0 +1,26 @@
+<?page title="Patient Ledger" contentType="text/html;charset=UTF-8"?>
+<zk>
+
+	<!-- Outer window to hide ID space of inner window - so doesn't have to be unique -->
+	<window border="none" >
+
+		<window  id="rpLedgerWin" title="RpLedger" border="normal" apply="palmed.RpLedgerController">
+		<hbox pack="stretch" width="100%">
+			<vbox>
+				<hbox>
+					<label value="Rp:" />
+					<label id="rpname" />
+					<label id="rprec" />
+				</hbox>
+	
+	
+			</vbox>
+	
+		</hbox>
+
+		New Content Here!
+
+		</window>
+	</window>
+
+</zk>

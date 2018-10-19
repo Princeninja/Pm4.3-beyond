@@ -1,0 +1,32 @@
+<?page title="Standard Dictations" contentType="text/html;charset=UTF-8"?>
+<zk>
+<window id="stdDictWin" border="none" mode="embedded" vflex="1" hflex="1" apply="palmed.StdDictWinController" >
+	<hbox vflex="1" >
+		<vbox>
+			<button id="btnNew" label="New" width="80px" />
+			<button id="btnEdit" label="Edit" width="80px" />
+			<button id="btnDelete" label="Delete" width="80px" />
+			
+			<groupbox>
+				<caption label="View" />
+				<radiogroup orient ="vertical">
+					<radio id="rbActive" label="Current" checked="true" />
+					<radio id="rbInactive" label="Removed" />
+					<radio id="rbAll" label="All" />
+				</radiogroup>
+			</groupbox>
+		</vbox>
+		<listbox id="stdDictListbox" rows="10" width="100%" vflex="1">
+			<listhead>
+				<listheader label="Abbr"  width="80px" sort="auto" sortDirection="ascending"/>
+				<listheader label="Subjective" width="200px"/>
+				<listheader label="Objective" width="200px"/>
+				<listheader label="Assessment" width="200px"/>
+				<listheader label="Plan" width="200px"/>
+				<listheader id="status" label="Status" width="80px" sort="auto" />				
+				
+			</listhead>
+		</listbox>
+	</hbox>
+</window>
+</zk>

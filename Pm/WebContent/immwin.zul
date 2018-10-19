@@ -1,0 +1,31 @@
+<?page title="Immunizations" contentType="text/html;charset=UTF-8"?>
+<zk>
+<window id="immWin" border="none" mode="embedded" apply="palmed.ImmWinController">
+
+	<hbox>
+		<vbox>
+			<button id="btnAdd" label="New" width="80px" />
+			<button id="btnEdit" label="Edit" width="80px" />
+			<button id="btnRemove" label="Remove" width="80px" />
+			<button id="btnPrint" label="Print" width="80px" />
+			<button id="btnExport" label="Export" width="80px" />
+		</vbox>
+
+		<listbox id="listbox" >
+			<listhead>
+				<listheader width="80px" label="Date" sort="auto" />
+				<listheader label="Description" sort="auto" />
+				<listheader width="60px" label="CVX" sort="auto" />
+				<listheader width="60px" label="MVX" sort="auto" />
+				<listheader width="80px" label="Lot Number" />
+				<listheader width="80px" label="Exp Date" />
+				<listheader width="80px" label="Site" />
+				<listheader width="80px" label="Amount" />
+				<listheader width="40px" label="Note" />
+			</listhead>
+		</listbox>
+	</hbox>
+
+
+</window>
+</zk>

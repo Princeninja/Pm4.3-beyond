@@ -1,0 +1,75 @@
+<?page title="OB/Gyn History" contentType="text/html;charset=UTF-8"?>
+
+
+<zk xmlns:h="http://www.w3.org/1999/xhtml">
+	<vbox>
+	
+		<hbox widths="50%,50%" >
+			<vbox>
+				<label>OB/Gyn History:</label>
+				<grid fixedLayout="true">
+					<columns>
+						<column width="90px" />
+						<column />
+					</columns>
+					<rows>
+						<row> <label /> <checkbox id="cbMenstrualHxUnavailable" label="Menstrual History Unavailable" forward="onChange" /> </row>
+						<row id="rowMenstrualStatus" > <label /> 
+							<hbox>
+								<radiogroup>
+									<radio id="rbPreMenarchal" label="Pre-Menarchal" forward="onChange" />
+									<radio id="rbMenstruating" label="Menstruating" forward="onChange" />
+									<radio id="rbPostMenopause" label="Post-Menopause" forward="onChange" />
+									<radio id="rbMenstrualUnknown" label="Unknown" forward="onChange" />
+								</radiogroup>								
+							</hbox>
+						</row>
+						<row id="rowMenarche" > Menarche Age <textbox id="txtAgeMenarche" maxlength="4" width="40px" forward="onChange" /></row>
+						<row id="rowMenopause" > Menopause Age <textbox id="txtAgeMenopause" maxlength="4" width="40px" forward="onChange" /></row>
+						<row id="rowFlow" > Menstrual Flow <listbox id="lbFlow" mold="select" width="120px" forward="onChange" /></row>
+						<row id="rowCramps" > <label /> <checkbox id="cbMenstrualCramps" label="Menstrual Cramps" forward="onChange" /> </row>
+						<row id="rowPMS" > <label /> <checkbox id="cbPMSSymptoms" label="PMS Symptoms" forward="onChange" /> </row>
+						<row id="rowMenstrualNotes" > Notes <textbox id="txtMenstrualNotes" maxlength="40" width="300px" forward="onChange" /> </row>
+					</rows>
+				</grid>
+			</vbox>
+
+
+
+			<vbox>
+				<label value="Sexual Activity / Contraception" />
+				<grid fixedLayout="true">
+					<columns>
+						<column width="90px" />
+						<column />
+					</columns>
+					<rows>
+						<row> <label /> <checkbox id="cbSexualHxUnavailable" label="Sexual History Unavailable" forward="onChange" /> </row>
+						<row id="rowSexualStatus" > <label /> 
+							<hbox>
+								<radiogroup>
+									<radio id="rbSexuallyActive" label="Sexually Active" forward="onChange" />
+									<radio id="rbNotSexuallyActive" label="Not Sexually Active" forward="onChange" />
+									<radio id="rbSexuallyUnknown" label="Unknown" forward="onChange" />
+								</radiogroup>								
+							</hbox>
+						</row>
+						<row id="rowContraception" > Contraception <listbox id="lbContraception" mold="select" width="120px" forward="onChange" /></row>
+						<row id="rowDyspareunia" > <label /> <checkbox id="cbDyspareunia" label="Dyspareunia" forward="onChange" /> </row>
+						<row id="rowSameSexEncounters" > <label /> <checkbox id="cbSameSexEncounters" label="Same Sex encounters" forward="onChange" /> </row>
+						<row id="rowSexualNotes" > Notes <textbox id="txtSexualNotes" maxlength="40" width="300px" forward="onChange" /> </row>
+					</rows>
+				</grid>
+			</vbox>
+
+
+
+
+
+
+			
+		</hbox>
+		
+	</vbox>
+	
+</zk>

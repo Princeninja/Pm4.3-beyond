@@ -1,0 +1,62 @@
+<?page title="new page title" contentType="text/html;charset=UTF-8"?>
+<zk>
+<window id="ppoSrchWin" title="Insurance Search" border="normal" width="960px" mode="modal" vflex="1" hflex="1" apply="palmed.PpoSrchController">
+
+<hbox pack="stretch" width="955px"> <!-- removed vlfex and added pack and width  -->
+			 
+		 <tabbox id="tabbox" width="950px"  > <!-- removed vbox and added tabbox, tabpanels and tabs so horizontal scrollbar could appear -->
+		 <tabs>
+			<tab label="Carrier Information" />
+		</tabs>
+		<tabpanels>
+			<tabpanel>
+			<hbox>
+				<button id="search" label="Search" width="80px" />
+				<textbox id="srcstr" maxlength="60" width="200px" />
+			</hbox>
+				<separator />
+		 <div style="overflow:auto;position:relative"> 	
+			<listbox id="ppoListbox"  hflex="min">
+				<listhead>
+					<listheader label ="Name" sort="auto" />
+					<listheader label ="Abbr"  />
+					<listheader label ="Contact(s)" />
+					<listheader label ="Note(s)"  />
+					<listheader label ="Phone(s)" />
+					<listheader label ="Address"  />
+					<listheader label ="City,State,Zip"  />
+				</listhead>
+			</listbox>
+		 </div>
+	</tabpanel>
+	</tabpanels>
+	</tabbox>
+
+ </hbox>
+ <hbox pack="stretch" width="955px" >
+	
+	<!-- <grid width="620px">  
+	   <columns>
+	      <column label="" width="100px" />
+		  <column label="" width="360px" />	   
+	   </columns>
+	     <rows>
+	     <row id="row00">
+	     	 Insured Number <listbox id="insnum" mold="select" rows="1" >
+											<listitem label="Primary" />
+											<listitem label="Secondary" />
+											<listitem label="Tertiary" />
+											</listbox> </row>
+	     </rows>
+	</grid> -->	   
+	<hbox>  
+	<button id="btnSet" label="Set Insurance" width="125px" />
+	<button id="btnCancel" label="Cancel" width="80px"  />
+	</hbox>	
+ </hbox>
+
+	<!-- Hidden control used to pass info back to calling class. -->
+	<intbox id="ppoRec" visible="false" />
+
+</window>
+</zk>

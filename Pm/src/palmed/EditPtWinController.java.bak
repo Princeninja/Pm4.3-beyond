@@ -1,0 +1,559 @@
+package palmed;
+
+import java.io.FileNotFoundException;
+import java.net.MalformedURLException;
+import java.util.EnumSet;
+import java.util.Map;
+
+import org.zkoss.zk.ui.Component;
+import org.zkoss.zk.ui.Components;
+import org.zkoss.zk.ui.Execution;
+import org.zkoss.zk.ui.Executions;
+import org.zkoss.zk.ui.event.Event;
+import org.zkoss.zk.ui.event.EventListener;
+import org.zkoss.zk.ui.util.GenericForwardComposer;
+import org.zkoss.zul.Button;
+import org.zkoss.zul.Checkbox;
+import org.zkoss.zul.Include;
+import org.zkoss.zul.Label;
+import org.zkoss.zul.Listbox;
+import org.zkoss.zul.Messagebox;
+import org.zkoss.zul.Tabpanel;
+import org.zkoss.zul.Textbox;
+import org.zkoss.zul.Window;
+import org.zkoss.zul.api.Listitem;
+
+import usrlib.Address;
+import usrlib.Date;
+import usrlib.Decoders;
+import usrlib.DialogHelpers;
+import usrlib.EditHelpers;
+import usrlib.Name;
+import usrlib.ProgressBox;
+import usrlib.Rec;
+
+public class EditPtWinController extends GenericForwardComposer {
+	
+	Rec ptRec = null;		// patient record
+	EditPt.Operation operation = null;	// operation to perform
+	
+	Tabpanel tabpanel;		// tab panel this window is in
+	
+
+	Window editPtWin;		// autowired - window
+	Include pg1;			// autowired
+	Include pg2;			// autowired
+	Include pg3;			// autowired
+	Include pg4;			// autowired
+	
+	Button save;			// autowired - save button
+	Button cancel;			// autowired - cancel button
+	
+	Label l_ptName;			// autowired
+	
+	Textbox ptFirst;		// autowired
+	Textbox ptMiddle;		// autowired
+	Textbox ptLast;		// autowired
+	Textbox ptSuffix;		// autowired
+	Textbox ptDOB;		// autowired
+	Textbox ptSSN;		// autowired
+	Textbox ptNum1;		// autowired
+	Textbox ptNum2;		// autowired
+	Textbox ptNum3;		// autowired
+	
+	Listbox ptSex;		// autowired
+	Listbox ptRace;		// autowired
+	Listbox ptMarital;	// autowired
+	Listbox ptEthnicity;// autowired
+	Listbox ptLanguage;	// autowired
+
+	Textbox ptStreet;		// autowired
+	Textbox ptLine2;		// autowired
+	Textbox ptCity;		// autowired
+	Textbox ptState;		// autowired
+	Textbox ptZip;		// autowired
+	Textbox ptHome;		// autowired
+	Textbox ptWork;		// autowired
+	Textbox ptCell;		// autowired
+	Textbox ptEmail;		// autowired
+	Textbox ptOccupation;		// autowired
+	Textbox ptProv;		// autowired
+	Textbox ptRdoc;		// autowired
+	Textbox ptEmpGrp;		// autowired
+	Textbox ptPhyDef;		// autowired
+	Textbox ptNH;		// autowired
+	Textbox	email;		// autowired
+	Textbox pin;		// autowired
+	Checkbox allowPortal;	// autowired
+	Checkbox allowEmail;	// autowired
+
+	
+	
+	
+	
+	public void doAfterCompose( Component component ){
+	
+		// Call superclass to do autowiring
+		try {
+			super.doAfterCompose( component );
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		// autowire included file variables and event handlers
+		Components.wireVariables( pg1, this );
+		Components.addForwards( pg1, this );
+
+		Components.wireVariables( pg4, this );
+		Components.addForwards( pg4, this );
+
+	
+		
+		// Get arguments from map
+		Execution exec = Executions.getCurrent();
+	
+		if ( exec != null ){
+			Map<String,Object> myMap = exec.getArg();
+			if ( myMap != null ){
+				try{ operation = (EditPt.Operation) myMap.get( "operation" ); } catch ( Exception e ) { /* ignore */ };
+				try{ ptRec = (Rec) myMap.get( "ptRec" ); } catch ( Exception e ) { /* ignore */ };
+			}
+		}
+		
+		
+		
+		
+		// Is window in a Tabpanel???
+		// Get Tabpanel this window is placed in.
+		// May have to go several layers deep due to enclosing window.
+		if ( component instanceof Tabpanel ){
+			tabpanel = (Tabpanel) component;
+		} else if ( component.getParent() instanceof Tabpanel ){
+			tabpanel = (Tabpanel) component.getParent();
+		} else if ( component.getParent().getParent() instanceof Tabpanel ){
+			tabpanel = (Tabpanel) component.getParent().getParent();
+		}
+
+
+		
+		// Add close tabpanel event listener
+		if ( tabpanel != null ){
+			tabpanel.getLinkedTab().addEventListener( "onClose", new EventListener(){ 
+				public void onEvent( Event ev ) throws Exception { ev.stopPropagation(); onClick$cancel( ev ); }});
+		}
+		
+		
+		
+		// Fill some listboxes
+		EditHelpers.loadSexListbox( ptSex );
+		loadRaceListbox( ptRace );
+		loadLanguageListbox( ptLanguage );
+		loadEthnicityListbox( ptEthnicity );
+
+		
+		
+		
+		
+		
+		
+		
+		
+		if (( operation != null ) && ( operation == EditPt.Operation.NEWPT )){
+			
+			// Create a new patient
+			
+			// Set title of Tabpanel to "New Patient"
+			if ( tabpanel != null ){
+				tabpanel.getLinkedTab().setLabel( "New Patient" );
+				//tabpanel.getLinkedTab().setImage( "ptchart_verysmall.png" );
+			}
+	
+
+			
+		} else {	// operation == EditPt.Operation.EDITPT
+		
+			// make sure we have a patient
+			if (( ptRec == null ) || ptRec.getRec() < 2 ){
+				System.out.println( "Error: EditPtWinController() invalid ptRec, setting to 2" );
+				ptRec = new Rec( 2 );		// default for testing
+			}
+			System.out.println( "EditPtWinController() ptRec=" + ptRec.getRec());
+			
+	
+			// Read patient info DIRPT and INFOPT
+			DirPt dirPt = new DirPt( ptRec );
+	
+			
+			// Set title of Tabpanel to Patient's name
+			if ( tabpanel != null ){
+				tabpanel.getLinkedTab().setLabel( "Edit: " + dirPt.getName().getPrintableNameLFM());
+				//tabpanel.getLinkedTab().setImage( "ptchart_verysmall.png" );
+			}
+	
+		
+			// Get some patient values and set labels
+			//ptrec.setValue( "" + ptRec.getRec());
+			Name n = dirPt.getName();
+			editPtWin.setTitle( n.getPrintableNameLFM());
+	
+			ptFirst.setValue( n.getFirstName());
+			ptMiddle.setValue( n.getMiddleName());
+			ptLast.setValue( n.getLastName());
+			ptSuffix.setValue( n.getSuffix());
+			updatePtName();
+			
+			
+			ptSSN.setValue( dirPt.getSSN());
+			ptNum1.setValue( dirPt.getPtNumber( 1 ));
+			ptNum2.setValue( dirPt.getPtNumber( 2 ));
+			ptNum3.setValue( dirPt.getPtNumber( 3 ));
+	
+			ptDOB.setValue( dirPt.getBirthdate().getPrintable( 9 ));
+	
+			
+			// patient address
+			{
+			Address a = dirPt.getAddress();
+			ptStreet.setValue( a.getStreet());
+			ptLine2.setValue( a.getLine2());
+			ptCity.setValue( a.getCity());
+			ptState.setValue( a.getState());
+			ptZip.setValue( a.getZip_code());
+			ptHome.setValue( a.getHome_ph());
+			ptWork.setValue( a.getWork_ph());
+			}
+			
+			EditHelpers.setListboxSelection( ptSex, dirPt.getSex().getAbbr());
+			EditHelpers.setListboxSelection( ptRace, dirPt.getRace());
+			EditHelpers.setListboxSelection( ptMarital, dirPt.getMarital());
+	
+			EditHelpers.setListboxSelection( ptEthnicity, dirPt.getEthnicity());
+			EditHelpers.setListboxSelection( ptLanguage, dirPt.getLanguage());
+
+	//		EditHelpers.setListboxSelection( ptRelationRP, dirPt.getRelationRP());
+	//		EditHelpers.setListboxSelection( ptRelationRP, dirPt.getRelationRP());
+
+
+			
+			// set patient electronic info
+			email.setValue( dirPt.getEmail());
+			allowEmail.setChecked( dirPt.getAllowEmail());
+			
+			pin.setValue( dirPt.getPIN());
+			allowPortal.setChecked( dirPt.getAllowPtPortal());
+			
+		
+		}
+
+		
+		
+
+		return;
+	}
+	
+	
+	
+	
+	
+	
+	/**
+	 * Save
+	 * 
+	 */
+	
+	
+	public boolean save(){
+		
+		DirPt	dirPt;		// patient directory
+		MedPt	medPt;		// patient medical record
+		
+		
+		//TODO valid flag
+		//TODO follow list
+		//TODO NOK
+		//TODO RP
+		//TODO create ledger
+		//TODO HippaRecordCreate
+		//TODO mdx
+		//TODO SSN index
+		//TODO dly_newpt
+		
+		if (( ptFirst.getValue().trim().length() < 1 )
+				|| (( ptFirst.getValue().trim().length() < 2 ) && ( ptMiddle.getValue().trim().length() < 1 ))
+				|| ( ptLast.getValue().trim().length() < 2 )){
+			DialogHelpers.Messagebox( "You must enter a complete name." );
+			return false;
+		}
+		
+		Name ptName = new Name( ptFirst.getValue(), ptMiddle.getValue(), ptLast.getValue(), ptSuffix.getValue());
+		
+		Date bdate = new Date( ptDOB.getValue());
+		
+		if ( ! bdate.isValid()){			
+			DialogHelpers.Messagebox( "You must enter a birthdate." );
+			return false;
+		}
+
+		
+		
+		
+		// verify unique patient
+		if (( operation != null ) && ( operation == EditPt.Operation.NEWPT )){
+			
+			PtFinder ptfnd = new PtFinder();
+			if ( ptfnd.doSearchName( ptName, bdate ) > 0 ){
+				DialogHelpers.Messagebox( "Patient exists.  You must enter a unique patient name/birthdate." );
+				return false;
+
+			}
+		}
+		
+		
+		
+		
+		
+		if (( operation != null ) && ( operation == EditPt.Operation.NEWPT )){
+
+			// create a new patient
+			
+			dirPt = new DirPt();
+			medPt = new MedPt();
+			
+			// create/allocate a new MedPt record
+			medPt = new MedPt();
+			dirPt.setMedRec( medPt.createNewRecord());
+			
+
+			
+		} else { 
+			
+			
+
+			// make sure we have a patient
+			if ( ptRec.getRec() < 2){
+				System.out.println( "Error: EditPtWinController().save() ptRec=" + ptRec.getRec());
+				ptRec = new Rec( 2 );		// default for testing
+			}
+	
+			// Read patient info DIRPT and INFOPT
+			dirPt = new DirPt( ptRec );
+			medPt = new MedPt( dirPt.getMedRec());
+			
+		}
+	
+			
+		
+		// Load data into DirPt		
+		// set patient's Name, birthdate, sex
+		dirPt.setName( new Name( ptFirst.getValue(), ptMiddle.getValue(), ptLast.getValue(), ptSuffix.getValue()));
+		
+		String strSex = (String) EditHelpers.getListboxSelection( ptSex );
+		if ( strSex == null ) strSex = "";
+		dirPt.setSex( palmed.Sex.get( strSex ));
+		
+		dirPt.setBirthdate( new Date( ptDOB.getValue()));
+		
+		dirPt.setPtNumber( ptNum1.getValue(), 1 );
+		dirPt.setPtNumber( ptNum2.getValue(), 2 );
+		dirPt.setPtNumber( ptNum3.getValue(), 3 );
+
+
+		
+		
+		// Load info into InfoPt
+		// patient's address, SSN, race, marital, relations
+		dirPt.setAddress( new Address( ptStreet.getValue(), ptLine2.getValue(), ptCity.getValue(), ptState.getValue(),
+				ptZip.getValue(), ptHome.getValue(), ptWork.getValue(), "" ));
+		dirPt.setSSN( ptSSN.getValue());
+
+		String marital = (String) EditHelpers.getListboxSelection( ptMarital );
+		if ( marital == null ) marital = "";
+		dirPt.setMarital( marital );
+
+		// race
+		palmed.Race r = (palmed.Race) EditHelpers.getListboxSelection( ptRace );
+		if ( r == null ) r = palmed.Race.UNSPECIFIED;
+		dirPt.setRace( r );
+		
+		// ethnicity
+		palmed.Ethnicity e = (palmed.Ethnicity ) EditHelpers.getListboxSelection( ptEthnicity );
+		if ( e == null ) e = palmed.Ethnicity.UNSPECIFIED;
+		dirPt.setEthnicity( e );
+
+		// language
+		palmed.Language l = (palmed.Language ) EditHelpers.getListboxSelection( ptLanguage );
+		if ( l == null ) l = palmed.Language.UNSPECIFIED;
+		dirPt.setLanguage( l );
+
+
+		// set patient electronic info
+		dirPt.setEmail( email.getValue().trim());
+		dirPt.setAllowEmail( allowEmail.isChecked());
+		
+		dirPt.setPIN( pin.getValue().trim());
+		dirPt.setAllowPtPortal( allowPortal.isChecked());
+		
+		
+		
+		
+		// set validity byte
+		dirPt.setValid();
+		
+		
+		
+
+		
+		System.out.println( "dump" );
+		dirPt.dump();	
+		
+		// Save (write) records back to database
+		if (( operation == EditPt.Operation.NEWPT ) || ( ptRec == null ) || ( ptRec.getRec() == 0 )){
+			
+			// new patient
+			ptRec = dirPt.newPt();
+			medPt.write( dirPt.getMedRec());
+			System.out.println( "new patient created ptrec=" + ptRec.getRec());
+			
+			// log the access
+			AuditLogger.recordEntry( AuditLog.Action.PT_NEW, ptRec, Pm.getUserRec(), null, null );
+			
+		} else {	// EditPt.Operation.EDITPT
+			
+			// existing patient
+			dirPt.writePt( ptRec );
+			medPt.write( dirPt.getMedRec());
+			System.out.println( "edited patient info written, ptrec=" + ptRec.getRec());
+
+			// log the access
+			AuditLogger.recordEntry( AuditLog.Action.PT_EDIT, ptRec, Pm.getUserRec(), null, null );
+		}
+		
+		
+		return true;
+	}
+
+	
+	
+	public void onClose$editPtWin( Event e ) throws InterruptedException{
+		alert( "onCloset event");
+		onClick$cancel( e );
+		return;
+	}
+	
+	
+	
+	public void onClick$save( Event e ) throws InterruptedException{
+
+		//TODO - defaults for yes/no
+		
+		if ( Messagebox.show( "Save this information?", "Save?", Messagebox.YES | Messagebox.NO, Messagebox.QUESTION ) == Messagebox.YES ){
+			
+			//ProgressBox progBox = ProgressBox.show(editPtWin, "Saving..." );
+
+			if ( save()){
+				//progBox.close();
+				closeWin();
+			}
+			
+		} else {
+
+			if ( Messagebox.show( "Continue editing?", "Continue?", Messagebox.YES | Messagebox.NO, Messagebox.QUESTION ) == Messagebox.NO ){
+				closeWin();
+			}
+		}
+
+		return;
+	}
+	
+	
+	
+	public void onClick$cancel( Event e ) throws InterruptedException{
+		
+		if ( Messagebox.show( "Leave without saving ?", "Leave?", Messagebox.YES | Messagebox.NO, Messagebox.QUESTION ) == Messagebox.YES ){
+			
+			closeWin();
+		}
+		
+		return;
+	}
+
+	
+	private void closeWin(){
+		
+		// close editPtWin
+		editPtWin.detach();
+
+		// close tab and tabpanel
+		if ( tabpanel != null ){
+			tabpanel.getLinkedTab().detach();
+			tabpanel.detach();
+		}
+
+		return;
+	}
+	
+	
+	public void onChange$ptFirst$pg1( Event e ){ updatePtName(); }
+	public void onChange$ptMiddle$pg1( Event e ){ updatePtName(); }
+	public void onChange$ptLast$pg1( Event e ){ updatePtName(); }
+	public void onChange$ptSuffix$pg1( Event e ){ updatePtName(); }
+	
+	
+	private void updatePtName(){
+		
+		l_ptName.setValue( ptFirst.getValue() + " " + ptMiddle.getValue() + " " + ptLast.getValue() + " " + ptSuffix.getValue());
+		return;
+	}
+	
+
+	public static void loadRaceListbox( Listbox lb ){
+		
+		Listitem i;
+		
+		i = lb.appendItem( "", null);
+		i.setValue( palmed.Race.UNSPECIFIED );
+		
+		for (  Race r : EnumSet.allOf(Race.class)){
+			i = lb.appendItem( r.getLabel(), null);
+			i.setValue( r );
+		}		
+		
+		return;
+	}
+
+	public static void loadLanguageListbox( Listbox lb ){
+		
+		Listitem i;
+		
+		i = lb.appendItem( "", null);
+		i.setValue( palmed.Language.UNSPECIFIED );
+		
+		for (  Language l : EnumSet.allOf(Language.class)){
+			i = lb.appendItem( l.getLabel(), null);
+			i.setValue( l );
+		}		
+		
+		return;
+	}
+
+	public static void loadEthnicityListbox( Listbox lb ){
+		
+		Listitem i;
+		
+		i = lb.appendItem( "", null);
+		i.setValue( palmed.Ethnicity.UNSPECIFIED );
+		
+		for (  Ethnicity e : EnumSet.allOf(Ethnicity.class)){
+			i = lb.appendItem( e.getLabel(), null);
+			i.setValue( e );
+		}		
+		
+		return;
+	}
+
+
+
+}
+
+/**/

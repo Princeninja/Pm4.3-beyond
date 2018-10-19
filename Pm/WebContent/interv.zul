@@ -1,0 +1,35 @@
+<?page title="Interventions" contentType="text/html;charset=UTF-8"?>
+<zk>
+<window id="ivWin" border="none" mode="embedded" apply="palmed.InterventionWinController">
+
+	<hbox>
+		<vbox>
+			<button id="btnAdd" label="New" width="80px" />
+			<button id="btnEdit" label="Edit" width="80px" />
+			<button id="btnRemove" label="Remove" width="80px" />
+			<button id="btnPrint" label="Print" width="80px" />
+			<groupbox >
+				<caption label="View" />
+				<radiogroup>
+					<vbox>
+					<radio id="r_current" label="Current" checked="true" />
+					<radio id="r_past" label="Past" />
+					<radio id="r_history" label="History" />
+					</vbox>
+				</radiogroup>
+			</groupbox>
+		</vbox>
+
+		<listbox id="listbox"  >
+			<listhead>
+				<listheader width="80px" label="Date" sort="auto" />
+				<listheader label="Intervention" sort="auto" />
+				<listheader label="Notes" />
+				<listheader label="Status" width="80px" sort="auto" />
+			</listhead>
+		</listbox>
+	</hbox>
+
+
+</window>
+</zk>

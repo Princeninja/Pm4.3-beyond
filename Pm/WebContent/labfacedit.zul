@@ -1,0 +1,71 @@
+<?page title="Enter/Edit Lab Facility" contentType="text/html;charset=UTF-8"?>
+<zk>
+<window id="labFacilityEditWin" title="Enter/Edit Lab Facility" border="normal" width="440px" position="center" mode="modal"  apply="palmed.LabFacilityEditWinController" >
+	<hbox  hflex="max" >
+		<!-- groupbox width="510px"> -->
+			<grid hflex="1" span="1" >
+				<columns>
+					<column label="" width="80px" />
+					<column label="" width="320px" />
+				</columns>
+				<rows>
+					<row>
+						<label value="Abbr" />
+						<textbox id="txtAbbr" maxlength="10" width="100px" />
+					</row>
+					<row>
+						<label value="Desc" />
+						<textbox id="txtDesc" maxlength="40" width="300px" />
+					</row>
+					<row>
+						<label value="Street" />
+						<textbox id="txtStreet" maxlength="24" width="200px" />
+					</row>
+					<row>
+						<label value="Line2" />
+						<textbox id="txtLine2" maxlength="24" width="200px" />
+					</row>
+					<row>
+						<label value="City" />
+						<textbox id="txtCity" maxlength="20" width="200px" />
+					</row>
+					<row>
+						<label value="State" />
+						<textbox id="txtState" maxlength="2" width="40px" />
+					</row>
+					<row>
+						<label value="Zip" />
+						<textbox id="txtZip" maxlength="10" width="100px" />
+					</row>
+					<row>
+						<label value="Phone 1" />
+						<textbox id="txtPhone1" maxlength="12" width="120px" />
+					</row>
+					<row>
+						<label value="Phone 2" />
+						<textbox id="txtPhone2" maxlength="12" width="120px" />
+					</row>
+					<row>
+						<label value="" />
+						<hbox>
+							<radiogroup>
+								<radio id="rbActive" label="Active" />
+								<radio id="rbInactive" label="Inactive" />
+							</radiogroup>
+						</hbox>
+					</row>
+				</rows>
+			</grid>
+
+		
+	</hbox>
+		
+		
+		<hbox>
+			<button id="btnSave" label="Save" width="80px" />
+			<button id="btnCancel" label="Cancel" width="80px" />
+		</hbox>
+
+
+</window>
+</zk>

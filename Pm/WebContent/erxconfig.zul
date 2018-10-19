@@ -1,0 +1,180 @@
+<?page title="eRx Config" contentType="text/html;charset=UTF-8"?>
+
+<!-- Edit eRx Config Information  -->
+
+
+<zk xmlns:h="http://www.w3.org/1999/xhtml">
+<window id="eRxConfigWin" title="eRx Config" border="normal" apply="palmed.ERxConfigWinController" >
+
+	<div>
+	<h:h3>Edit eRx Configuration:</h:h3>
+	
+	<hbox>
+	<h:h4>Profile</h:h4>
+	<listbox id="profile" maxlength="20" rows="1" mold="select" >
+		<listitem label="Live" value="false" />
+		<listitem label="Demo" value="true" />
+	</listbox>
+	</hbox>
+	
+	<grid align="start">
+		<columns>
+			<column width="30%" />
+			<column width="30%" />
+			<column width="30%" />
+		</columns>
+		<rows>
+			<row>
+	
+	<vbox>
+			<h:h4>Account Info:</h:h4>
+	<grid>
+		<columns>
+			<column width="80px" />
+			<column />
+		</columns>
+		<rows>
+			<row> Account Name <textbox id="accountName" maxlength="40" /> </row>
+			<row> Account ID <textbox id="accountID" maxlength="16" /> </row>
+			<row> Site ID <textbox id="siteID" maxlength="16" /> </row>
+		
+		</rows>
+	</grid>
+	<grid>
+		<columns>
+			<column width="80px" />
+			<column />
+		</columns>
+		<rows>
+			
+			<row> Street <textbox id="accountStreet" maxlength="24" /> </row>
+			<row> Line 2 <textbox id="accountLine2" maxlength="24" /> </row>
+			<row> City <textbox id="accountCity" maxlength="20" /> </row>
+			<row> State <textbox id="accountState" maxlength="2" /> </row>
+			<row> Zip <textbox id="accountZip" maxlength="10" /> </row>
+			<row> Country <textbox id="accountCountry" maxlength="20" /> </row>
+			<row> Phone <textbox id="accountPhone" maxlength="12" /> </row>
+			<row> Fax <textbox id="accountFax" maxlength="12" /> </row>
+			<row> E-mail Address <textbox id="accountEmail" maxlength="40" /> </row>												
+		</rows>
+	</grid>
+
+	</vbox>
+	
+
+	<vbox>
+				<h:h3>Location Info:</h:h3>
+<!--	<grid>
+		<columns>
+			<column width="80px" />
+			<column />
+		</columns>
+		<rows>
+  			<row> Sex <listbox id="ptSex" mold="select" rows="1" >
+								<listitem label="" value="" />
+								<listitem label="Male" value="M" />
+								<listitem label="Female" value="F" />
+								</listbox> </row>
+			<row> Race <listbox id="ptRace" mold="select" rows="1" >
+								<listitem label="" value="" />
+								<listitem label="Caucasian" value="C" />
+								<listitem label="African American" value="B" />
+								<listitem label="Hispanic" value="H" />
+								<listitem label="Asian" value="A" />
+								<listitem label="Native American" value="N" />
+								<listitem label="Other" value="O" />
+								</listbox> </row>
+			<row> Marital Status <listbox id="ptMarital" mold="select" rows="1" >
+								<listitem label="" value="" />
+								<listitem label="Single" value="S" />
+								<listitem label="Married" value="M" />
+								<listitem label="Divorced" value="D" />
+								<listitem label="Separated" value="X" />
+								<listitem label="Widowed" value="W" />
+								</listbox> </row>
+		</rows>
+
+
+	</grid>
+-->	
+
+	
+	<grid>
+		<columns>
+			<column width="80px" />
+			<column />
+		</columns>
+		<rows>
+			<row> Location Name <textbox id="locationName" maxlength="40" /> </row>
+			<row> Location ID <textbox id="locationID" maxlength="16" /> </row>
+			<row> Street <textbox id="locationStreet" maxlength="24" /> </row>
+			<row> Line 2 <textbox id="locationLine2" maxlength="24" /> </row>
+			<row> City <textbox id="locationCity" maxlength="20" /> </row>
+			<row> State <textbox id="locationState" maxlength="2" /> </row>
+			<row> Zip <textbox id="locationZip" maxlength="10" /> </row>
+			<row> Country <textbox id="locationCountry" maxlength="20" /> </row>
+			<row> Phone <textbox id="locationPhone" maxlength="12" /> </row>
+			<row> Fax <textbox id="locationFax" maxlength="12" /> </row>
+			<row> Contact <textbox id="locationContact" maxlength="40" /> </row>												
+			<row> E-mail Address <textbox id="locationEmail" maxlength="40" /> </row>									
+		</rows>							
+	</grid>
+	</vbox>	
+	
+	<vbox>
+			<h:h3>Partner Info:</h:h3>
+	
+		<grid>
+		<columns>
+			<column width="80px" />
+			<column />
+		</columns>
+		<rows>
+			<row> Partner Name <textbox id="partnerName" maxlength="40" /> </row>
+			<row> Username <textbox id="partnerUsername" maxlength="40" /> </row>
+			<row> Password <textbox id="partnerPassword" maxlength="40" /> </row>
+			<row> Product <textbox id="partnerProduct" maxlength="20" /> </row>
+			<row> Version <textbox id="partnerVersion" maxlength="10" /> </row>
+		</rows>							
+		</grid>
+		<grid>
+		<columns>
+			<column width="80px" />
+			<column />
+		</columns>
+		<rows>
+			<row> Click Thru URL <textbox id="clickThru" maxlength="80" /></row>
+			<row> Web Services URL <textbox id="webServices" maxlength="80" /></row>
+		</rows>							
+		</grid>
+		
+		<hbox>
+			<vbox>
+				<checkbox id="sendPARs" label="Send PARs" />
+				<checkbox id="sendMeds" label="Send Meds" />
+				<checkbox id="sendProbs" label="Send Probs" />						
+			</vbox>
+			
+			<vbox>
+				<checkbox id="cbPoll" label="Poll Newcrop Status" />
+				<checkbox id="newcropManagedMeds" label="Let NewCrop Manage Meds" />
+				<checkbox id="newcropManagedPARs" label="Let NewCrop Manage PARs" />
+			</vbox>
+		</hbox>
+		
+	</vbox>		
+	
+			</row>
+		</rows>
+	</grid>
+	
+	<hbox>
+	<button id="save" label="Save" width="80px" />
+	<button id="cancel" label="Cancel" width="80px" />
+	</hbox>
+
+	
+	</div>
+
+</window>
+</zk>

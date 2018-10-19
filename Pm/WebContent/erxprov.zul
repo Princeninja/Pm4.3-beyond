@@ -1,0 +1,84 @@
+<?page title="ERx Provider Maintenance" contentType="text/html;charset=UTF-8"?>
+
+<!-- Edit eRx Config Information  -->
+
+
+<zk xmlns:h="http://www.w3.org/1999/xhtml">
+<window id="eRxProvWin"  border="none" mode="embedded" vflex="1" hflex="1" apply="palmed.ERxProvWinController" >
+
+	<div>
+	<h:h3>eRx Provider Maintenance:</h:h3>
+	
+	
+	<grid align="start">
+		<columns>
+			<column width="30%" />
+			<column width="30%" />
+			<column width="30%" />
+		</columns>
+		<rows>
+			<row>
+	
+	<vbox>
+			<h:h4>Account Info:</h:h4>
+	<grid>
+		<columns>
+			<column width="80px" />
+			<column />
+		</columns>
+		<rows>
+			<row> Provider <hbox> <listbox id="lbProvider" mold="select" rows="1" width="240"/> <button id="btnQuery" label="Query" /> </hbox></row>
+			<row> Result <textbox id="txtResult" cols="40" rows="8"/> </row>
+		
+		</rows>
+	</grid>
+
+	</vbox>
+	
+
+	<vbox>
+				<h:h3>Location Info:</h:h3>
+	
+	</vbox>	
+	
+	<vbox>
+			<h:h3>Partner Info:</h:h3>
+	
+		
+		
+	</vbox>		
+	
+			</row>
+		</rows>
+	</grid>
+	
+	<hbox>
+	<button id="start" label="Start" width="80px" onClick="start()"/>
+	<button id="cancel" label="Cancel" width="80px" />
+	</hbox>
+
+	
+	</div>
+	
+	
+	<zscript>
+	public void start(){
+
+		// initialize some session type things
+		palmed.SystemHelpers.initApp();
+		
+		palmed.Pm.setMedPath( palmed.PmConfig.getMedPath());
+		palmed.Pm.setOvdPath( palmed.PmConfig.getOvdPath());
+		palmed.Pm.setSchPath( palmed.PmConfig.getSchPath());
+
+		//palmed.Prov.fillListbox( lbProvider, true );
+		return;
+	}
+	
+	
+
+	
+	</zscript>
+
+</window>
+</zk>

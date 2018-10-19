@@ -1,0 +1,107 @@
+<?page title="Social History" contentType="text/html;charset=UTF-8"?>
+
+<!-- Edit Social History -->
+
+
+<zk xmlns:h="http://www.w3.org/1999/xhtml">
+	<vbox>
+		<label value="Social History:"  style="font-weight:bold;"  />
+	
+		<hbox widths="50%,50%" >
+		
+			<vbox>
+				<label value="Cigarette Smoking:" />
+			
+				<grid fixedLayout="true">
+					<columns>
+						<column width="80px" />
+						<column width="220px" />
+						<column />
+					</columns>
+					<rows>
+						<row> Smoking Status <listbox id="lboxSmokingStatus" mold="select" rows="1" width="200px" forward="onChange" />  <label id="lblRecode" /></row>
+					</rows>
+				</grid>
+				<grid id="divSmokingDetails" fixedLayout="true">
+					<columns>
+						<column width="80px" />
+						<column />
+					</columns>
+					<rows>
+						<row> Age Started <textbox id="txtSmokingAgeStarted" maxlength="2" width="40px" forward="onChange"/> </row>
+						<row> Packs/Day <listbox id="lboxSmokingPacksDay" mold="select" rows="1" width="60px" forward="onChange"/> </row>
+						<row id="rowSmokingQuitDate" > Quit Date <textbox id="txtSmokingQuitDate" maxlength="10" width="80px" forward="onChange"/> </row>
+						<row> <label /> <checkbox id="cbAttemptingToQuit" label="Attempting to quit" forward="onChange"/></row>
+						<row> <label /> <checkbox id="cbMultipleAttemptsToQuit" label="Multiple attempts to quit" forward="onChange"/></row>
+						<row> Note <textbox id="txtNotes" maxlength="40" width="300px" forward="onChange"/> </row>
+					</rows>
+				</grid>
+			</vbox>
+			
+			<vbox>
+				
+				<label value="Other Tobacco Use:" />
+	
+				<grid fixedLayout="true">
+					<columns>
+						<column width="80px" />
+						<column />
+					</columns>
+					<rows>
+						<row> Status <listbox id="lboxOtherStatus" mold="select" rows="1" width="200px" forward="onChange" /> <label id="recode2" /></row>
+					</rows>
+				</grid>
+				
+				<div id="divTobaccoDetails" >			
+				<grid fixedLayout="true">
+					<columns>
+						<column width="80px" />
+						<column />
+					</columns>
+					<rows>
+						<row> Tobacco Type <listbox id="lboxOtherProduct" mold="select" rows="1" width="200px" forward="onChange" /> </row>
+						<row> Age Started <textbox id="txtOtherAgeStarted" maxlength="2" width="40px" forward="onChange"/> </row>
+						<row id="rowTobaccoQuitDate" > Quit Date <textbox id="txtOtherQuitDate" maxlength="10" width="80px" forward="onChange"/> </row>
+						<row> Note <textbox id="txtNotes2" maxlength="40" width="300px" forward="onChange"/> </row>
+					</rows>
+				</grid>
+				</div>
+		
+			</vbox>
+			
+		
+		</hbox>
+		
+		<zscript>
+		<!--  void update_recode(){
+			palmed.Smoking.Recode recode = (palmed.Smoking.Recode) usrlib.ZkTools.getListboxSelectionValue( lboxSmokingStatus );
+			if ( recode == null ) recode = palmed.Smoking.Recode.UNSPECIFIED;
+			lblRecode.setValue( "Recode:" + recode.getCode());
+			char r = recode.getCode();
+			
+			
+			divSmokingDetails.setVisible( ! (( r == '4' ) || ( r == '9' ) || ( r == '0' )));
+			
+			rowSmokingQuitDate.setVisible(( recode == palmed.Smoking.Recode.FORMER ));
+			return;
+		}
+		
+		
+		void update_tobacco(){
+			palmed.Smoking.Product prod = (palmed.Smoking.Product) usrlib.ZkTools.getListboxSelectionValue( lboxOtherProduct );
+			if ( prod == null ) prod = palmed.Smoking.Product.EMPTY;			
+			
+			divTobaccoDetails.setVisible( ! ( prod == palmed.Smoking.Product.EMPTY ));
+			
+			palmed.Smoking.UserStatus status = (palmed.Smoking.UserStatus) usrlib.ZkTools.getListboxSelectionValue( lboxOtherStatus );
+			System.out.println( "other tobacco status=" + status );
+			
+			rowTobaccoQuitDate.setVisible(( status == palmed.Smoking.UserStatus.FORMER ));
+			return;
+		}
+		-->
+		</zscript>
+
+	</vbox>
+	
+</zk>

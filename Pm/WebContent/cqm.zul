@@ -1,0 +1,44 @@
+<?page title="CQM" contentType="text/html;charset=UTF-8"?>
+<zk>
+<window id="probTblWin" title="CQM" border="none" mode="embedded" vflex="1" hflex="1" apply="palmed.CQMWinController" >
+
+	<hbox vflex="1" >
+		<vbox>
+			<label value="Year" />
+			<listbox id="lboxYear" width="80px" rows="1" mold="select" >
+			</listbox>
+			<space />
+			<label value="Period" />
+			<listbox id="lboxPeriod" width="160px" rows="1" mold="select" >
+				<listitem label="Annual" value="A" />
+				<listitem label="Semi-Annual Jan-Jun" value="S1" />
+				<listitem label="Semi-Annual Jul-Dec" value="S1" />
+				<listitem label="Quarter 1 Jan-Mar" value="Q1" />
+				<listitem label="Quarter 2 Apr-Jun" value="Q2" />
+				<listitem label="Quarter 3 Jul-Sep" value="Q3" />
+				<listitem label="Quarter 4 Oct-Dec" value="Q4" />					
+			</listbox>
+			<space />
+			<space />
+			<button id="calculate" label="Calculate" width="80px" />
+			<button id="print" label="Print" width="80px" />
+			
+		</vbox>
+		
+		<vbox vflex="1" style="overflow:auto"  >
+		<grid id="grid" vflex="1" width="700px" style="overflow:auto" >
+			<columns>
+				<column width="100px" label="Measure" />
+				<column width="300px" label="Description" />
+				<column width="80px" label="Numerator" />
+				<column width="80px" label="Denominator" />
+				<column width="80px" label="Percent" />
+			</columns>
+			<rows id="rows" style="overflow:auto" >
+			</rows>
+		</grid>
+		</vbox>
+	</hbox>
+
+</window>
+</zk>

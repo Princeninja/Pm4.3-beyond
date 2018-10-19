@@ -1,0 +1,51 @@
+<?page title="Edit Provider" contentType="text/html;charset=UTF-8"?>
+
+<!-- Edit Provider Information -->
+<!-- (This ZUL calls other ZULs: editprov1.zul, editprov2.zul, and editprov3.zul.) -->
+
+<zk>
+	<!-- Outer window to hide ID space of inner window - so doesn't have to be unique -->
+	<window border="none" width="100%" height="100%" >
+	
+		<window  id="provEditWin" title="Edit Provider" border="normal"  width="100%" height="100%" apply="palmed.ProvEditWinController" >
+		
+			<hbox> Name: <label id="l_provName" value="New Provider"/></hbox>
+			
+		
+		
+			<!-- MODULE CONTENT AREA -->
+				
+			<div id="divCenter" >
+
+				<tabbox id="provedit_tabbox" width="100%" style="padding: 0px">
+					<tabs id="provedit_tabs">
+						<tab id="t_provedit1" label="Page 1" />
+						<tab id="t_provedit2" label="Page 2" />
+						<tab id="t_provedit3" label="Page 3" />
+					</tabs>
+					<tabpanels id="provedit_tabpanels">					
+						<tabpanel id="tp_provedit1" >
+							<include id="pg1" src="provedit1.zul" />
+						</tabpanel>
+						<tabpanel id="tp_provedit2" >
+							<include id="pg2" src="provedit2.zul" />
+						</tabpanel>
+						<tabpanel id="tp_provedit3" >
+							<include id="pg3" src="provedit3.zul" />
+						</tabpanel>
+					</tabpanels>
+				</tabbox>
+			</div>
+			
+			<hbox>
+				<button id="save" label="Save" width="80px" />
+				<button id="cancel" label="Cancel" width="80px" />
+			</hbox>
+			
+			
+		</window>
+	</window>
+
+
+
+</zk>

@@ -1,0 +1,35 @@
+<?page title="Procedures, Operations, Illnesses, Injuries" contentType="text/html;charset=UTF-8"?>
+<zk>
+<window id="proceduresWin" border="none" mode="embedded" vflex="1" hflex="1" apply="palmed.HxProceduresWinController">
+	<hbox vflex="1" >
+		<vbox>
+			<button id="btnNew" label="New" width="80px" />
+			<button id="btnEdit" label="Edit" width="80px" />
+			<button id="btnRemove" label="Remove" width="80px" />
+			<button id="btnPrint" label="Print" width="80px" />
+			
+			<groupbox>
+				<caption label="View" />
+				<radiogroup>
+					<vlayout>
+					<radio id="r_all" label="All" checked="true" />
+					<radio id="r_procedures" label="Procedures" />
+					<radio id="r_surgeries" label="Surgeries" />
+					<radio id="r_illnesses" label="Illnesses" />
+					<radio id="r_injuries" label="Injuries" />
+					</vlayout>
+				</radiogroup>
+			</groupbox>
+		</vbox>
+		
+		<listbox id="lboxProcedures" vflex="1" >
+			<listhead>
+				<listheader width="80px" label="Date" sort="auto" />
+				<listheader label="Desc" sort="auto" />
+				<listheader width="100px" label="Type" sort="auto" />
+				<listheader width="100px" label="Code" sort="auto" />
+			</listhead>
+		</listbox>
+	</hbox>
+</window>
+</zk>

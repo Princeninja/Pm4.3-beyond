@@ -1,0 +1,42 @@
+<?page title=" Diagnosis Codes Window " contentType="text/html;charset=UTF-8"?>
+<zk>
+<window id="dgnWin" border="none" mode="embedded" vflex="1" hflex="1" apply="palmed.DgnWincontroller" >
+
+<hbox vflex="1" >
+		<vbox>
+			<button id="newdgn" label="New" width="80px" />
+			<button id="edit" label="Edit" width="80px" />
+			<button id="delete" label="Delete" width="80px" />
+			<button id="print" label="Print" width="80px" />
+			
+			
+			<groupbox>
+				<caption label="View:" />
+				<radiogroup>
+					<radio id="r_active" label="Active" checked="true" />
+					<radio id="r_inactive" label="Inactive" />
+					<radio id="r_all" label="All" />
+				</radiogroup>
+			</groupbox>
+		
+		</vbox>
+		<vbox vflex="1" >
+			<hbox>
+				<button id="search" label="Search" width="80px" />
+				<textbox id="srcstr" maxlength="40" width="200px" />
+			</hbox>
+			<listbox id="dgnListbox" vflex="1" >
+				<listhead>
+					<listheader width="150px" label="Abbr" sort="auto" />
+					<listheader label="Description" sort="auto" />
+					<listheader label="Code 1" width="100px" sort="auto" />
+					<listheader label="Code 2" width="80px" sort="auto" />
+					<listheader label="Code 3" width="80px" sort="auto" />
+					<listheader label="Relative Value(rv)"  width="100px" sort="auto" />
+				</listhead>
+			</listbox>
+		</vbox>
+	</hbox>
+
+</window>
+</zk>

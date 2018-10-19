@@ -1,0 +1,29 @@
+<?page title="EtOH" contentType="text/html;charset=UTF-8"?>
+
+
+<zk xmlns:h="http://www.w3.org/1999/xhtml">
+	<vbox>
+		<hbox widths="50%,50%" >
+		
+			<vbox>
+				<label>Alcohol Use:</label>
+				<grid fixedLayout="true">
+					<columns>
+						<column width="80px" />
+						<column />
+					</columns>
+					<rows>
+						<row> Alcohol Use <listbox id="lboxDrinkingStatus" mold="select" width="200px" rows="1" forward="onChangeDrinking"/> </row>
+						<row id="rowDrinkingAgeStarted" > Age Started <textbox id="txtDrinkingAgeStarted" maxlength="2" width="40px" forward="onChangeDrinking"/> </row>
+						<row id="rowDrinkingQuitDate" > Quit Date <textbox id="txtDrinkingQuitDate" maxlength="10" width="80px" forward="onChangeDrinking"/> </row>
+						<row> Note <textbox id="txtDrinkingNotes" width="300px" maxlength="40" forward="onChangeDrinking"/> </row>
+					</rows>
+				</grid>
+			</vbox>
+			
+			
+		</hbox>
+		
+	</vbox>
+	
+</zk>

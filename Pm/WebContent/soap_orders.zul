@@ -1,0 +1,150 @@
+<?page title="SOAP Orders 2" contentType="text/html;charset=UTF-8"?>
+<zk>
+<window id="SoapShtOrders2Win"  border="none" mode="embedded" height="600px" vflex="1" apply="palmed.SoapShtOrdersWinController" >
+	<hbox widths="50%,50%" >
+		<groupbox height="95%" >
+			<caption label="Possible Orders" />
+			<tree id="tree" rows="16" width="250" onSelect="addOrder()">
+				<treechildren>
+					<treeitem label="Lab" open="false" >
+						<treechildren>
+							<treeitem label="CMP" />
+							<treeitem label="CBC" />
+							<treeitem label="Thyroid Panel" />
+							<treeitem label="TSH" />
+							<treeitem label="Fasting Lipid Panel" />
+							<treeitem label="PSA" />
+							<treeitem label="25-OH-VitD" />
+							<treeitem label="CRP" />
+							<treeitem label="SED Rate" />
+						</treechildren>
+					</treeitem>
+					<treeitem label="Imaging" open="false" >
+						<treechildren>
+							<treeitem label="Xray" open="false" >
+								<treechildren>
+									<treeitem label="Xray Skull" />
+									<treeitem label="Xray Sinus Waters View" />
+									<treeitem label="Xray C-Spine" />
+									<treeitem label="Xray T-Spine" />
+									<treeitem label="Xray L-Spine" />
+									<treeitem label="Xray Chest" />
+									<treeitem label="Xray Rib Series" />
+									<treeitem label="Xray AAS" />
+									<treeitem label="Xray KUB" />
+									<treeitem label="Xray Shoulder" />
+									<treeitem label="Xray Humerus" />
+									<treeitem label="Xray Elbow" />
+									<treeitem label="Xray Arm" />
+									<treeitem label="Xray Wrist" />
+									<treeitem label="Xray Hand" />
+									<treeitem label="Xray Hip" />
+									<treeitem label="Xray Femur" />
+									<treeitem label="Xray Knee" />
+									<treeitem label="Xray Leg" />
+									<treeitem label="Xray Ankle" />
+									<treeitem label="Xray Foot" />
+								</treechildren>
+							</treeitem>
+							<treeitem label="Ultrasound" open="false" >
+								<treechildren>
+									<treeitem label="US Abdomen" />
+									<treeitem label="US RUQ" />
+									<treeitem label="US Pelvis" />
+									<treeitem label="US Neck" />
+									<treeitem label="US Pelvis - Transvaginal" />
+								</treechildren>
+							</treeitem>
+							<treeitem label="CT" open="false" >
+								<treechildren>
+									<treeitem label="CT Head" />
+									<treeitem label="CT Sinuses" />
+									<treeitem label="CT Neck" />
+									<treeitem label="CT C-Spine" />
+									<treeitem label="CT T-Spine" />
+									<treeitem label="CT L-Spine" />
+									<treeitem label="CT Chest" />
+									<treeitem label="CT Abdomen" />
+									<treeitem label="CT Pelvis" />
+									<treeitem label="CT Shoulder" />
+									<treeitem label="CT Humerus" />
+									<treeitem label="CT Elbow" />
+									<treeitem label="CT Arm" />
+									<treeitem label="CT Wrist" />
+									<treeitem label="CT Hand" />
+									<treeitem label="CT Hip" />
+									<treeitem label="CT Femur" />
+									<treeitem label="CT Knee" />
+									<treeitem label="CT Leg" />
+									<treeitem label="CT Ankle" />
+									<treeitem label="CT Foot" />
+								</treechildren>
+							</treeitem>
+							<treeitem label="MRI" open="false" >
+								<treechildren>
+									<treeitem label="MRI Brain" />
+									<treeitem label="MRI Neck" />
+									<treeitem label="MRI C-Spine" />
+									<treeitem label="MRI T-Spine" />
+									<treeitem label="MRI L-Spine" />
+									<treeitem label="MRI Chest" />
+									<treeitem label="MRI Abdomen" />
+									<treeitem label="MRI Pelvis" />
+									<treeitem label="MRI Shoulder" />
+									<treeitem label="MRI Humerus" />
+									<treeitem label="MRI Elbow" />
+									<treeitem label="MRI Arm" />
+									<treeitem label="MRI Wrist" />
+									<treeitem label="MRI Hand" />
+									<treeitem label="MRI Hip" />
+									<treeitem label="MRI Femur" />
+									<treeitem label="MRI Knee" />
+									<treeitem label="MRI Leg" />
+									<treeitem label="MRI Ankle" />
+									<treeitem label="MRI Foot" />
+								</treechildren>
+							</treeitem>
+							<treeitem label="PET" />
+							<treeitem label="DEXA" />
+							<treeitem label="2D Echo" />
+						</treechildren>
+					</treeitem>
+					<treeitem label="EKG 12 Lead" />
+					<treeitem label="Cardiodynamics" />
+					<treeitem label="Sleep Study" />
+					<treeitem label="Overnight Oximetry" />
+					<treeitem label="PFS" />
+
+				</treechildren>
+			</tree>
+			
+			<button id="btnCollapse" label="Collapse" />
+		</groupbox>
+
+		<groupbox>
+			<caption label="New Orders" />
+			<vbox>
+			
+				<listbox id="ordersListbox" rows="18"  vflex="1" hflex="1" />
+				
+				<hbox>
+					<button id="btnPost" label="Post" width="80px" />
+					<button id="btnDelete" label="Delete" width="80px" />
+				</hbox>
+			
+			</vbox>
+		</groupbox>
+		
+	</hbox>
+
+	<zscript>
+		void addOrder(){
+		
+			Listitem item = new Listitem();
+			item.setLabel( tree.getSelectedItem().getLabel());
+			item.setParent( ordersListbox );		
+		}
+		
+	</zscript>
+</window>
+</zk>

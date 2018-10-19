@@ -1,0 +1,85 @@
+<?page title="Enter/Edit Procedures" contentType="text/html;charset=UTF-8"?>
+<zk>
+<window id="procedureEditWin" title="Enter/Edit Procedures" border="normal" width="800px" height="400px" position="center" mode="modal" apply="palmed.ProcedureEditWinController" >
+
+	<hbox hflex="max" widths="50%,50%" vflex="100%" >
+	<vbox hflex="min">
+		<!--  groupbox>-->
+			<grid hflex="min" span="1" >
+				<columns>
+					<column label="" width="80px" />
+					<column label="" />
+				</columns>
+				<rows>
+					<row>
+						<label value="Patient" />
+						<label id="ptname"  style="color:blue"/>
+					</row>
+					<row>
+						<label value="Misc" />
+						<div>
+						<checkbox id="cbMisc" />
+						<textbox id="txtMisc" maxlength="40" width="280px" disabled="true" style="color:blue"/>
+						</div>
+					</row>
+					<row id="rowMed1" >
+						<label value="Procedure" />
+						<label id="lblProcedure"  style="color:blue"/>
+					</row>
+					<row id="rowMed2">
+						<label value="Info" />
+						<div>
+						<label value="Code:" />
+						<label id="lblCode" style="color:blue" />
+						</div>
+					</row>
+					<row>
+						<label value="Date" />
+						<textbox id="txtDate" maxlength="10" width="80px" style="color:blue"/>
+					</row>
+					<row>
+						<label value="Type" />
+						<listbox id="lboxTypes" width="200px" rows="1" mold="select" style="color:blue"/>
+					</row>
+					<row>
+						<label value="Rdoc" />
+						<listbox id="lboxRdoc" width="280px" rows="1" mold="select" style="color:blue"/>
+					</row>
+					<row>
+						<label value="Note" />
+						<textbox id="txtNote" maxlength="80" width="280px" style="color:blue"/>
+					</row>
+
+				</rows>
+			</grid>
+
+		<hbox>
+			<button id="btnSave" label="Save" width="80px" />
+			<button id="btnCancel" label="Cancel" width="80px" />
+		</hbox>
+		
+		<separator />		
+		Note: If there is an option of 'History of' for a patient's past surgery, select that option.
+		<separator />		
+		Note: Select type 'Procedure' for diagnostic procedures such as EGD, Colonoscopy, Mammogram, etc.
+		
+	</vbox>
+
+		<vbox hflex="max" vflex="100%" >
+		<hbox>
+			<button id="btnSearch" label="Search" width="80px" />
+			<textbox id="txtSearch" maxlength="40" width="200px" />
+		</hbox>
+		<listbox id="lboxProbTbl" vflex="true" hflex="true" > <!-- emptyMessage="No matching items." -->
+			<listhead id="lhdr">
+				<listheader label="Desc" sort="auto" />
+				<listheader width="80px" label="Code" sort="auto" />
+			</listhead>
+		</listbox>
+		<button id="btnSelect" label="Select" width="80px" />
+		</vbox>	
+	</hbox>
+
+
+</window>
+</zk>

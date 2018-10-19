@@ -1,0 +1,155 @@
+<?page title="Enter/Edit Lab Results" contentType="text/html;charset=UTF-8"?>
+<zk>
+<window id="labResEditWin" title="Enter/Edit Lab Results" border="normal" width="800px" position="center"  mode="modal" apply="palmed.LabResEditWinController" > 
+	<label id="ptname" />
+	<hbox>
+		<!--  groupbox>-->
+			<grid>
+				<columns>
+					<column label="" width="80px" />
+					<column label="" width="320px" />
+				</columns>
+				<rows>
+					<!--  row>
+						<label value="Misc" />
+						<div>
+						<checkbox id="cbMisc" />    onCheck="setMisc(cbMisc.isChecked())" /> 
+						<textbox id="txtMisc" maxlength="40" width="280px" disabled="true" />
+						</div>
+					</row>
+					-->
+					<row id="rowMed1" >
+						<label value="Lab Observation" />
+						<label id="lblObs" value="(select on right)"/>
+					</row>
+					<row id="rowMed2" >
+						<label value="Lab Battery" />
+						<label id="lblBat" value="(select on right)"/>
+					</row>
+					<row id="rowMed3">
+						<label value="" />
+						<vbox>
+							<hbox widths="80px,80px">
+								<label value="Obs LOINC:" />
+								<label id="lblObsLOINC" value="" />
+							</hbox>
+							<hbox widths="80px,80px">
+								<label value="Bat LOINC:" />
+								<label id="lblBatLOINC" value="" />
+							</hbox>
+							<hbox>
+								<label value="Info:" />
+								<label id="lblObsInfo" />
+							</hbox>
+						</vbox>
+					</row>
+					<row>
+						<label value="Date" />
+						<textbox id="txtDate" maxlength="10" width="80px" />
+					</row>
+					<row>
+						<label value="Time" />
+						<textbox id="txtTime" maxlength="10" width="80px" />
+					</row>
+					<row>
+						<label value="Result" />
+						<textbox id="txtResult" rows="2" width="120px" />
+					</row>
+					<row>
+						<label value="Abnormal Flag" />
+						<listbox id="lboxAbnormalFlag"  width="100px" rows="1" mold="select" />
+					</row>
+					<row>
+						<label value="Result Status" />
+						<listbox id="lboxResultStatus"  width="100px" rows="1" mold="select" />
+					</row>
+					<row>
+						<label value="Specimen Source" />
+						<vbox>
+						<listbox id="lboxSpecimenSource"  width="200px" rows="1" mold="select" />
+						<textbox id="txtSource" width="200px" />
+						</vbox>
+					</row>
+					<row>
+						<label value="Specimen Condition/Disposition" />
+						<vbox>
+						<listbox id="lboxCondition"  width="200px" rows="1" mold="select" />
+						<textbox id="txtCondition" width="200px" />
+						</vbox>
+					</row>
+					<row>
+						<label value="Facility" />
+						<listbox id="lboxFacility"  width="200px" rows="1" mold="select" />
+					</row>
+					<row>
+						<label value="Notes" />
+						<textbox id="txtNote" rows="5" width="300px" style= "overflow:auto" />
+					</row>
+
+				</rows>
+			</grid>
+
+		<!--</groupbox>-->
+		
+		<groupbox id="gbSrc" hflex="1">
+			<vbox vflex="1" hflex="1" >
+			<hbox>
+				<button id="btnSearch" label="Search" width="80px" />
+				<textbox id="txtSearch" maxlength="40" width="200px" />
+			</hbox>
+			<tabbox id="tbox" >
+				<tabs>
+					<tab id="tabBat" label="Battery" />
+					<tab id="tabObs" label="Observation" />
+				</tabs>
+				<tabpanels>
+					<tabpanel id="tpBat" >
+						<listbox id="lboxBat" rows="20" hflex="1" vflex="1" >
+							<listhead id="lhBat" >
+								<listheader id="lhdrBat" label="Lab Battery" sort="auto" />
+							</listhead>
+						</listbox>
+					</tabpanel>
+					<tabpanel id="tpObs" >
+						<listbox id="lboxObs" rows="20" hflex="1" vflex="1" >
+							<listhead id="lhObs" >
+								<listheader id="lhdrObsDesc" label="Description" sort="auto" />
+							</listhead>
+						</listbox>
+					</tabpanel>
+				</tabpanels>
+			</tabbox>
+			<button id="btnSelect" label="Select" width="80px" />
+			</vbox>
+		</groupbox>
+	</hbox>
+		
+		
+	<hbox>
+		<button id="btnSave" label="Save" width="80px" />
+		<button id="btnCancel" label="Cancel" width="80px" />
+	</hbox>
+
+<zscript>
+
+	void setMisc( boolean flg ){
+	
+		rowMed1.setVisible( ! flg );
+		rowMed2.setVisible( ! flg );
+		tabShortcut.setDisabled( flg );
+		tabCVX.setDisabled( flg );
+		tabMVX.setDisabled( flg );
+		btnSelect.setDisabled( flg );
+		btnSearch.setDisabled( flg );
+		lboxShortcut.setDisabled( flg );
+		lboxCVX.setDisabled( flg );
+		lboxMVX.setDisabled( flg );
+		txtMisc.setDisabled( ! flg );
+		txtSearch.setDisabled( flg );		
+		return;
+	}
+	
+</zscript>
+
+</window>
+</zk>

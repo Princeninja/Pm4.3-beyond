@@ -1,0 +1,1597 @@
+package palmed;
+
+import java.io.File;
+import java.util.List;
+
+import org.zkoss.zk.ui.Component;
+import org.zkoss.zk.ui.event.Event;
+import org.zkoss.zk.ui.util.Clients;
+import org.zkoss.zk.ui.util.GenericForwardComposer;
+import org.zkoss.zul.Cell;
+import org.zkoss.zul.Filedownload;
+import org.zkoss.zul.Grid;
+import org.zkoss.zul.Label;
+import org.zkoss.zul.Listbox;
+import org.zkoss.zul.Listcell;
+import org.zkoss.zul.Listheader;
+import org.zkoss.zul.Listitem;
+import org.zkoss.zul.Messagebox;
+import org.zkoss.zul.Radio;
+import org.zkoss.zul.Row;
+import org.zkoss.zul.Rows;
+import org.zkoss.zul.Tab;
+import org.zkoss.zul.Textbox;
+import org.zkoss.zul.Window;
+
+import usrlib.Date;
+import usrlib.DialogHelpers;
+import usrlib.EditHelpers;
+import usrlib.Rec;
+import usrlib.Reca;
+import usrlib.XMLElement;
+import usrlib.ZkTools;
+
+public class CQMWinController extends GenericForwardComposer {
+
+	private Window cqmWin;			// autowired
+	private Listbox lboxYear;
+	private Listbox lboxPeriod;
+	
+	Grid grid;
+	Rows rows;
+	
+	
+	
+	
+	int startRec = 2; //16000;
+
+	
+	
+	class Measure {
+		String name = "";
+		String desc = "";
+		int num = 0;
+		int denom = 0;
+		int exc = 0;
+		
+		Measure( String s, String desc ){ name = s; this.desc = desc; }
+		
+		void incrNum(){ ++num; }
+		void incrDenom(){ ++denom; }
+		void incrExc(){ ++exc; };
+		void setName( String s ){ name = s; }
+		void setDesc( String s ){ desc = s; }
+		
+		int getNum(){ return num; }
+		int getDenom(){ return denom; }
+		int getExc(){ return exc; }
+		String getName(){ return name; }
+		String getDesc(){ return desc; }
+		
+	}
+	
+	
+
+	
+	public void doAfterCompose( Component component ){
+		
+		// Call superclass to do autowiring
+		try {
+			super.doAfterCompose( component );
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		
+		// Get arguments from map
+		//Execution exec = Executions.getCurrent();
+
+		//if ( exec != null ){
+		//	Map myMap = exec.getArg();
+		//	if ( myMap != null ){
+		//		try{ ptRec = (Rec) myMap.get( "ptRec" ); } catch ( Exception e ) { /* ignore */ };
+		//	}
+		//}		
+		
+		
+		// populate listbox
+		for ( int year = Date.today().getYear(); year > 2009; --year ){
+			ZkTools.appendToListbox( lboxYear, "" + year, new Integer( year ));
+		}
+		
+		return;
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	// Open dialog to edit existing problem table entry
+	
+	public void onClick$calculate( Event ev ){
+
+		Date startDate = null;
+		Date endDate = null;
+
+
+		// empty list
+		List list = rows.getChildren();
+		for ( int i = list.size(); i > 0; )
+			((Component)( list).get( --i )).detach();
+		
+		
+		// get selections from year and period listboxes
+		int year = 0;
+		if ( lboxYear.getSelectedCount() > 0 ){
+			year = (Integer) ZkTools.getListboxSelectionValue( lboxYear );
+		}		
+		if (( year < 2009 ) || ( year > Date.today().getYear())) year = Date.today().getYear();
+		
+
+		String period = (String) ZkTools.getListboxSelectionValue( lboxPeriod );
+		if ( period == null ) period="A";
+		
+		if ( period.equals( "Q1" )){
+			startDate = new Date( 1, 1, year );
+			endDate = new Date( 3, 31, year );
+
+		} else if ( period.equals( "Q2" )){
+			startDate = new Date( 4, 1, year );
+			endDate = new Date( 6, 30, year );			
+
+		} else if ( period.equals( "Q3" )){
+			startDate = new Date( 7, 1, year );
+			endDate = new Date( 9, 30, year );			
+
+		} else if ( period.equals( "Q4" )){
+			startDate = new Date( 10, 1, year );
+			endDate = new Date( 12, 31, year );			
+
+		} else if ( period.equals( "S1" )){
+			startDate = new Date( 1, 1, year );
+			endDate = new Date( 6, 30, year );			
+
+		} else if ( period.equals( "S2" )){
+			startDate = new Date( 7, 1, year );
+			endDate = new Date( 12, 31, year );			
+
+		} else if ( period.equals( "A" )){
+			startDate = new Date( 1, 1, year );
+			endDate = new Date( 12, 31, year );			
+		}
+		
+		
+		
+		
+
+		
+		// NQF 0421 - Adult weight and BMI (2 numerators)
+		Measure nqf0421_1 = new Measure( "NQF0421.1", "Adult weight screening and follow up. (65+)" );
+		Measure nqf0421_2 = new Measure( "NQF0421.2", "Adult weight screening and follow up. (adult)" );
+		do0421( nqf0421_1, nqf0421_2, startDate, endDate );
+		
+		//NQF0013 - Blood pressure measurement
+		Measure nqf0013 = new Measure( "NQF0013", "Hypertension Blood Pressure measurement." );
+		do0013( nqf0013, startDate, endDate );
+
+		//NQF0028 - smoking
+		Measure nqf0028a = new Measure( "NQF0028a", "Tobacco use assessment/cessation intervention. (Assessed)" );
+		Measure nqf0028b = new Measure( "NQF0028b", "Tobacco use assessment/cessation intervention. (Intervention)" );
+		do0028( nqf0028a, nqf0028b, startDate, endDate );
+
+		//NQF0041 - flu shot > 65y
+		Measure nqf0041 = new Measure( "NQF0041", "Influenza immunization for patients >= 50 yrs old." );
+		do0041( nqf0041, startDate, endDate );
+
+		//NQF0024 - pediatric weight control (9 numerators)
+		Measure nqf0024_1_1 = new Measure( "NQF0024.1.1", "Weight assessment/counselling for peds (2-16)." );
+		Measure nqf0024_1_2 = new Measure( "NQF0024.1.2", "Weight assessment/counselling for peds (2-16)+Nut." );
+		Measure nqf0024_1_3 = new Measure( "NQF0024.1.3", "Weight assessment/counselling for peds (2-16)+Act." );
+		Measure nqf0024_2_1 = new Measure( "NQF0024.2.1", "Weight assessment/counselling for peds (2-10)." );
+		Measure nqf0024_2_2 = new Measure( "NQF0024.2.2", "Weight assessment/counselling for peds (2-10)+Nut." );
+		Measure nqf0024_2_3 = new Measure( "NQF0024.2.3", "Weight assessment/counselling for peds (2-10)+Act." );
+		Measure nqf0024_3_1 = new Measure( "NQF0024.3.1", "Weight assessment/counselling for peds (11-16)." );
+		Measure nqf0024_3_2 = new Measure( "NQF0024.3.2", "Weight assessment/counselling for peds (11-16)+Nut." );
+		Measure nqf0024_3_3 = new Measure( "NQF0024.3.3", "Weight assessment/counselling for peds (11-16)+Act." );
+		do0024( nqf0024_1_1, nqf0024_1_2, nqf0024_1_3, nqf0024_2_1, nqf0024_2_2, nqf0024_2_3, 
+				nqf0024_3_1, nqf0024_3_2, nqf0024_3_3, startDate, endDate );
+		
+
+		//NQF0038 - Child immunizations (2 numerators)
+		Measure nqf0038_1 = new Measure( "NQF0038.1", "Childhood immunization status (Dtap)." );
+		Measure nqf0038_2 = new Measure( "NQF0038.2", "Childhood immunization status (IPV)." );
+		Measure nqf0038_3 = new Measure( "NQF0038.3", "Childhood immunization status (MMR)." );
+		Measure nqf0038_4 = new Measure( "NQF0038.4", "Childhood immunization status (HIB)." );
+		Measure nqf0038_5 = new Measure( "NQF0038.5", "Childhood immunization status (HepB)." );
+		Measure nqf0038_6 = new Measure( "NQF0038.6", "Childhood immunization status (VZV)." );
+		Measure nqf0038_7 = new Measure( "NQF0038.7", "Childhood immunization status (Pneumo)." );
+		Measure nqf0038_8 = new Measure( "NQF0038.8", "Childhood immunization status (Hep A)." );
+		Measure nqf0038_9 = new Measure( "NQF0038.9", "Childhood immunization status (RotaV)." );
+		Measure nqf0038_10 = new Measure( "NQF0038.10", "Childhood immunization status (Flu)." );
+		Measure nqf0038_11 = new Measure( "NQF0038.11", "Childhood immunization status (Combo 1)." );
+		Measure nqf0038_12 = new Measure( "NQF0038.12", "Childhood immunization status (Combo 2)." );
+		do0038( nqf0038_1, nqf0038_2, nqf0038_3, nqf0038_4, nqf0038_5, nqf0038_6, 
+				nqf0038_7, nqf0038_8, nqf0038_9, nqf0038_10, nqf0038_11, nqf0038_12, startDate, endDate );
+
+		//NQF0059 - Diabetic HgbA1c > 9.0
+		Measure nqf0059 = new Measure( "NQF0059", "Diabetes and Hemoglobin A1c poor control." );
+		do0059( nqf0059, startDate, endDate );
+
+		//NQF0061 - Diabetics with BP check
+		Measure nqf0061 = new Measure( "NQF0061", "Diabetes blood pressure management." );
+		do0061( nqf0061, startDate, endDate );
+
+		//NQF0043 - pneumonia shot > 55
+		Measure nqf0043 = new Measure( "NQF0043", "Pneumonia vaccination status for older adults." );
+		do0043( nqf0043, startDate, endDate );
+
+
+
+
+
+
+		
+		
+
+			
+/*			for ( Reca reca = medpt.getLabResultReca(); Reca.isValid( reca ); ){
+				LabResult p = new LabResult( reca );
+				LabObsTbl obs = new LabObsTbl( p.getLabObsRec());
+				if ( obs.getDesc().indexOf( "HgbA1c" ) >= 0 ){
+					flgHgbA1c = true;
+					hgba1c = EditHelpers.parseDouble( p.getResult());
+				}
+				reca = p.getLLHdr().getLast();
+			}
+
+*/
+			
+		
+		
+		
+
+		
+		
+		// fill out table
+		setTableRows( nqf0421_1 );
+		setTableRows( nqf0421_2 );
+		
+		setTableRows( nqf0013 );
+		
+		setTableRows( nqf0028a );
+		setTableRows( nqf0028b );
+		
+		setTableRows( nqf0041 );
+		
+		setTableRows( nqf0024_1_1 );
+		setTableRows( nqf0024_1_2 );
+		setTableRows( nqf0024_1_3 );
+		
+		setTableRows( nqf0024_2_1 );
+		setTableRows( nqf0024_2_2 );
+		setTableRows( nqf0024_2_3 );
+		
+		setTableRows( nqf0024_3_1 );
+		setTableRows( nqf0024_3_2 );
+		setTableRows( nqf0024_3_3 );
+		
+		
+		
+		
+		setTableRows( nqf0038_1 );
+		setTableRows( nqf0038_2 );
+		setTableRows( nqf0038_3 );
+		setTableRows( nqf0038_4 );
+		setTableRows( nqf0038_5 );
+		setTableRows( nqf0038_6 );
+		setTableRows( nqf0038_7 );
+		setTableRows( nqf0038_8 );
+		setTableRows( nqf0038_9 );
+		setTableRows( nqf0038_10 );
+		setTableRows( nqf0038_11 );
+		setTableRows( nqf0038_12 );
+		
+		
+		
+		setTableRows( nqf0059 );
+		
+		setTableRows( nqf0061 );
+		
+		setTableRows( nqf0043 );
+
+		
+		
+	
+		
+		// get some info
+		Practice pct = new Practice( null );
+		String practiceName = pct.getName();
+		String practiceNPI = pct.getNPI();
+		String practiceTaxID = pct.getTaxID();
+		
+		
+		
+		
+		
+		
+		 
+		 // generate xml
+		XMLElement root = new XMLElement();
+		root.setName( "submission" );
+		root.setAttribute( "xmlns:xsi", "http://www.w3.org/2001/XMLSchema-instance" );
+		root.setAttribute( "type", "PQRI-REGISTRY" );
+		root.setAttribute( "option", "TEST" );
+		root.setAttribute( "version", "2.0" );
+		root.setAttribute( "xsi:noNamespaceSchemaLocation", "Registry_Payment.xsd" );
+		
+		
+		
+		
+		// File Audit Data section
+		{
+		XMLElement c = new XMLElement();
+		c.setName( "file-audit-data" );
+		root.addChild( c );
+
+			XMLElement p = new XMLElement();
+			p.setName( "create-date" );
+			p.setContent( Date.today().getPrintable( 9 ));
+			c.addChild( p );
+
+			p = new XMLElement();
+			p.setName( "create-time" );
+			p.setContent( usrlib.Time.now().getPrintable());
+			c.addChild( p );
+			
+			p = new XMLElement();
+			p.setName( "create-by" );
+			p.setContent( practiceName );
+			c.addChild( p );
+
+			p = new XMLElement();
+			p.setName( "version" );
+			p.setContent( "1.0" );
+			c.addChild( p );
+			
+			p = new XMLElement();
+			p.setName( "file-number" );
+			p.setContent( "1" );
+			c.addChild( p );
+			
+			p = new XMLElement();
+			p.setName( "number-of-files" );
+			p.setContent( "1" );
+			c.addChild( p );
+		}
+		
+		
+		
+		
+		
+		
+		// Registry section
+		{
+		XMLElement c = new XMLElement();
+		c.setName( "registry" );
+		root.addChild( c );
+
+			XMLElement p = new XMLElement();
+			p.setName( "registry-name" );
+			p.setContent( practiceName );
+			c.addChild( p );
+
+			p = new XMLElement();
+			p.setName( "registry-id" );
+			p.setContent( practiceTaxID );
+			c.addChild( p );
+			
+			p = new XMLElement();
+			p.setName( "submission-method" );
+			p.setContent( "A");
+			c.addChild( p );
+		}
+
+			
+			
+			
+			
+			
+			
+		// Measure group section
+		{
+		XMLElement b = new XMLElement();
+		b.setName( "measure-group" );
+		b.setAttribute( "ID", "X" );
+		root.addChild( b );
+
+		
+		
+			// Provider section
+			
+			XMLElement c = new XMLElement();
+			c.setName( "provider" );
+			b.addChild( c );
+			
+				XMLElement p = new XMLElement();
+				p.setName( "npi" );
+				p.setContent( practiceNPI );
+				c.addChild( p );
+	
+				p = new XMLElement();
+				p.setName( "tin" );
+				p.setContent( practiceTaxID );
+				c.addChild( p );
+	
+				p = new XMLElement();
+				p.setName( "waiver-signed" );
+				p.setContent( "Y" );
+				c.addChild( p );
+	
+				p = new XMLElement();
+				p.setName( "encounter-from-date" );
+				p.setContent( startDate.getPrintable(9));
+				c.addChild( p );
+				
+				p = new XMLElement();
+				p.setName( "encounter-to-date" );
+				p.setContent( endDate.getPrintable(9));
+				c.addChild( p );
+			
+			
+			
+/**  Omit this section if measure-group ID="X"			
+			
+				// Measure Group Stat Section
+				{
+				XMLElement d = new XMLElement();
+				d.setName( "measure-group-stat" );
+				c.addChild( d );
+				
+					p = new XMLElement();
+					p.setName( "ffs-patient-count" );
+					p.setContent( String.valueOf( (int) partBpatientCount ));
+					d.addChild( p );
+		
+					p = new XMLElement();
+					p.setName( "group-reporting-rate-numerator" );
+					p.setContent( String.valueOf( (int) numerator ));
+					d.addChild( p );
+		
+					p = new XMLElement();
+					p.setName( "group-eligible-instances" );
+					p.setContent( String.valueOf( (int) denominator ));
+					d.addChild( p );
+		
+					p = new XMLElement();
+					p.setName( "group-reporting-rate" );
+					p.setContent( "100.0" );
+					d.addChild( p );
+				}
+*/
+				
+				// set PQRI measures sections for each measure reported
+				setPQRIMeasure( c, nqf0421_1 );
+				setPQRIMeasure( c, nqf0421_2 );
+				
+				setPQRIMeasure( c, nqf0013 );
+				
+				setPQRIMeasure( c, nqf0028a );
+				setPQRIMeasure( c, nqf0028b );
+				
+				setPQRIMeasure( c, nqf0041 );
+				
+				setPQRIMeasure( c, nqf0024_1_1 );
+				setPQRIMeasure( c, nqf0024_1_2 );
+				setPQRIMeasure( c, nqf0024_1_3 );
+				
+				setPQRIMeasure( c, nqf0024_2_1 );
+				setPQRIMeasure( c, nqf0024_2_2 );
+				setPQRIMeasure( c, nqf0024_2_3 );
+				
+				setPQRIMeasure( c, nqf0024_3_1 );
+				setPQRIMeasure( c, nqf0024_3_2 );
+				setPQRIMeasure( c, nqf0024_3_3 );
+				
+				
+				setPQRIMeasure( c, nqf0038_1 );
+				setPQRIMeasure( c, nqf0038_2 );
+				setPQRIMeasure( c, nqf0038_3 );
+				setPQRIMeasure( c, nqf0038_4 );
+				setPQRIMeasure( c, nqf0038_5 );
+				setPQRIMeasure( c, nqf0038_6 );
+				setPQRIMeasure( c, nqf0038_7 );
+				setPQRIMeasure( c, nqf0038_8 );
+				setPQRIMeasure( c, nqf0038_9 );
+				setPQRIMeasure( c, nqf0038_10 );
+				setPQRIMeasure( c, nqf0038_11 );
+				setPQRIMeasure( c, nqf0038_12 );
+				
+				setPQRIMeasure( c, nqf0059 );
+				setPQRIMeasure( c, nqf0061 );
+				setPQRIMeasure( c, nqf0043 );
+		}
+		// END XML
+				
+				
+
+
+				
+				
+				
+		// Save XML
+		root.toFile( Pm.getMedPath() + File.separator + "pqri.xml" );
+
+		try {
+			if ( Messagebox.show( "Would you like to download the XML?", "Download XML?", Messagebox.YES + Messagebox.NO, Messagebox.QUESTION ) == Messagebox.YES ){
+				String xmlText = root.toString();
+				
+				// download pqri data to client
+			    Filedownload.save( xmlText, "text/xml", "pqri.xml");
+				
+			}
+		} catch (Exception e) {
+			// ignore
+		}
+		
+ 
+		return;
+	}
+	
+	
+	
+	
+	
+	public void setPQRIMeasure( XMLElement parent, Measure measure ){
+		
+		XMLElement p = new XMLElement();
+		p.setName( "pqri-measure" );
+		parent.addChild( p );
+		
+			XMLElement q = new XMLElement();
+			q.setName( "pqri-measure-number" );
+			q.setContent( measure.getName());				
+			p.addChild( q );
+			
+			q = new XMLElement();
+			q.setName( "collection-method" );
+			q.setContent( "A" );					// A = EHR				
+			p.addChild( q );
+			
+			q = new XMLElement();
+			q.setName( "eligible-instances" );
+			q.setContent( String.valueOf( measure.getDenom() ));	
+			p.addChild( q );
+
+			q = new XMLElement();
+			q.setName( "meets-performance-instances" );
+			q.setContent( String.valueOf( measure.getNum()  ));	
+			p.addChild( q );
+
+			q = new XMLElement();
+			q.setName( "performance-exclusion-instances" );
+			q.setContent( String.valueOf( measure.getExc() ));	
+			p.addChild( q );
+
+			q = new XMLElement();
+			q.setName( "performance-not-met-instances" );
+			q.setContent( String.valueOf( measure.getDenom() - measure.getNum() - measure.getExc()));	
+			p.addChild( q );
+
+			q = new XMLElement();
+			q.setName( "reporting-rate" );
+			q.setContent( "100.0" );	
+			p.addChild( q );
+
+			q = new XMLElement();
+			q.setName( "performance-rate" );
+			q.setContent( fmtPercents( measure.getNum(), measure.getDenom(), measure.getExc()));	
+			p.addChild( q );
+
+		return;
+	}
+	
+	
+	
+	
+	String fmtPercents( int num, int denom, int excl ){
+		if (( denom - excl ) <= 0 ) return "";		// no divide by zeroes
+		return String.format( "%.1f", ( 100.0 * ((double) num) / ((double)( denom - excl ))));
+	}
+	
+	
+	
+	public void onClick$print( Event ev ){
+		Clients.print();
+		return;
+	}
+	
+	
+	
+	
+	void setTableRows( Measure m ){
+		
+		Row row = new Row();
+		row.setParent( rows );
+		row.appendChild( new Label( m.getName()));
+		row.appendChild( new Label( m.getDesc()));
+		row.appendChild( new Label( String.valueOf( m.getNum())));
+		row.appendChild( new Label( String.valueOf( m.getDenom())));
+		row.appendChild( new Label( fmtPercents( m.getNum(), m.getDenom(), m.getExc() ) + "%" ));
+		return;
+	}
+	
+	
+	boolean withinDateRange( Date refDate, Date startDate, Date endDate ){
+		return  (( startDate.compare( refDate ) < 0 ) && ( endDate.compare( refDate ) > 0 ));
+
+	}
+	
+	
+	
+
+
+	int numVisits( MedPt medpt, Date startDate, Date endDate ){
+
+		int numVisits = 0;
+		
+		
+		Vitals v = null;
+		
+		for ( Reca reca = medpt.getVitalsReca(); Reca.isValid( reca ); reca = v.getLLHdr().getLast()){				
+			v = new Vitals( reca );				
+			if ( withinDateRange( v.getDate(), startDate, endDate )){					
+				++numVisits;
+			}
+		}
+		
+		
+		// if didn't find a visit - maybe older system - look through soap notes
+		if ( numVisits < 2 ){
+			
+			SoapNote soap = null;			
+			for ( Reca reca = medpt.getSoapReca(); Reca.isValid( reca ); reca = soap.getLLHdr().getLast()){				
+				soap = new SoapNote( reca );				
+				if ( withinDateRange( soap.getDate(), startDate, endDate )){					
+					++numVisits;
+				}
+			}			
+		}
+		
+		return numVisits;
+	}
+	
+	
+	
+
+	
+	
+	
+	
+	
+	/**
+	 * NQF 0421 - BMI and Weight
+	 * 
+	 * (2 numerators/denominators)
+	 * 
+	 * @param nqf0421_1
+	 * @param nqf0421_2
+	 * @param startDate
+	 * @param endDate
+	 */
+	void do0421( Measure nqf0421_1, Measure nqf0421_2, Date startDate, Date endDate ){
+
+
+		DirPt dirPt = DirPt.open();
+		dirPt.setRec( new Rec( startRec ));
+		
+		while( dirPt.getNext()){
+
+			boolean flgInclude = false;
+			boolean flgBMIrecorded = false;
+			boolean flgBMIabnormal = false;
+			boolean flgDoc = false;
+			
+
+			MedPt medpt = new MedPt( dirPt.getMedRec());
+			int ptage = Date.getAgeYears( dirPt.getBirthdate(), startDate );
+			
+			if ( ptage < 18 ) continue;
+				
+			for ( Reca reca = medpt.getVitalsReca(); Reca.isValid( reca ); ){
+				
+				Vitals v = new Vitals( reca );
+
+				// visit with reporting period?
+				if ( withinDateRange( v.getDate(), startDate, endDate )){
+
+					// age 18 or greater on visit date?
+
+					flgInclude = true;
+					if (( v.getWeight() > 0 ) && ( v.getHeight() > 0 )){
+						flgBMIrecorded = true;
+						// this stuff only matters if BMI recorded (not 0)
+						double bmi = ClinicalCalculations.computeBMI( v.getWeight(), v.getHeight());
+						if ( bmi < 18.5 ) flgBMIabnormal = true;
+						if (( ptage > 65 ) && ( bmi < 23 )) flgBMIabnormal = true;
+						if ( bmi > 30 ) flgBMIabnormal = true;
+						if (( ptage < 65) && ( bmi >= 25 )) flgBMIabnormal = true;
+					}
+				}
+				
+				reca = v.getLLHdr().getLast();
+			}
+			
+			// is dietary counseling documented?
+			// TODO - finish
+			
+			for ( Reca reca = medpt.getInterventionsReca(); Reca.isValid( reca ); ){
+				
+				Intervention v = new Intervention( reca );
+				
+				Intervention.Types type = v.getType();
+				if ((( type == Intervention.Types.BMI_HIGH ) || ( type == Intervention.Types.BMI_LOW ) 
+						|| ( type == Intervention.Types.DIETITIAN ) || ( type == Intervention.Types.NUTRITION_COUNSELING ))
+					&& withinDateRange( v.getDate(), startDate, endDate )){
+					flgDoc = true;
+					break;
+				}
+		
+				reca = v.getLLHdr().getLast();
+			}
+		
+		
+			// set numerators, denominators
+			if ( flgInclude ){
+				if ( ptage > 64 ) nqf0421_1.incrDenom(); else nqf0421_2.incrDenom();
+				if ( flgBMIrecorded ){
+					if ( flgBMIabnormal ){
+						if ( flgDoc ){
+							if ( ptage > 64 ) nqf0421_1.incrNum(); else nqf0421_2.incrNum();
+						}
+					} else {
+						if ( ptage > 64 ) nqf0421_1.incrNum(); else nqf0421_2.incrNum();
+					}
+				}
+			}
+		}
+		
+		dirPt.close();
+		
+		return;
+	}
+	
+	
+	
+	
+	
+	
+	/**
+	 * NQF 0013 - HTN with a BP reading
+	 * 
+	 * 
+	 * @param m
+	 * @param startDate
+	 * @param endDate
+	 */
+	void do0013( Measure m, Date startDate, Date endDate ){
+
+
+		DirPt dirPt = DirPt.open();
+		dirPt.setRec( new Rec( startRec ));
+		
+		while( dirPt.getNext()){
+
+			boolean flgHTN = false;
+			boolean flgBPrecorded = false;
+			int numVisits = 0;
+			
+
+			MedPt medpt = new MedPt( dirPt.getMedRec());
+			int ptage = Date.getAgeYears( dirPt.getBirthdate(), startDate );
+			
+			// only patients aged 18 or older
+			if ( ptage < 18 ) continue;
+				
+			
+			// diagnosis of hypertension
+			for ( Reca reca = medpt.getProbReca(); Reca.isValid( reca ); ){
+				Prob p = new Prob( reca );
+				String desc = p.getProbDesc().toLowerCase();
+				if (( desc.indexOf( "hypertension" ) >= 0 ) || ( desc.indexOf( "htn" ) >= 0 ))
+					flgHTN = true;
+				
+				reca = p.getLLHdr().getLast();
+			}
+			
+			
+			
+			// visits and BP checks?
+			Vitals v = null;
+			for ( Reca reca = medpt.getVitalsReca(); Reca.isValid( reca ); reca = v.getLLHdr().getLast()){
+				
+				v = new Vitals( reca );
+
+				// visit with reporting period?
+				if ( withinDateRange( v.getDate(), startDate, endDate )){
+					++numVisits;
+					if ( v.getBP().length() > 0 ) flgBPrecorded = true;
+				}
+			}
+			
+			
+		
+			// set numerators, denominators
+			if ( flgHTN && ( numVisits > 1)){
+				m.incrDenom();
+				if ( flgBPrecorded ) m.incrNum();
+			}
+		}
+		
+		dirPt.close();
+
+		return;
+	}
+	
+	
+	
+	
+	
+	
+	/**
+	 * NQF 0028 - Smoking
+	 * 
+	 * 
+	 * @param m
+	 * @param startDate
+	 * @param endDate
+	 */
+	void do0028( Measure mA, Measure mB, Date startDate, Date endDate ){
+
+
+		DirPt dirPt = DirPt.open();
+		dirPt.setRec( new Rec( startRec ));
+		
+		while( dirPt.getNext()){
+
+			boolean flgDoc = false;
+			boolean flgSmoker = false;
+			boolean flgCessation = false;
+			int numVisits = 0;
+			
+
+			MedPt medpt = new MedPt( dirPt.getMedRec());
+			int ptage = Date.getAgeYears( dirPt.getBirthdate(), startDate );
+			
+			// only patients aged 18 or older
+			if ( ptage < 18 ) continue;
+
+			// at least 2 visits?
+			numVisits = numVisits( medpt, startDate, endDate );
+			if ( numVisits < 2 ) continue;
+			
+
+			// is there a smoking status record?
+			if ( Reca.isValid( medpt.getSmokingReca())){
+				flgDoc = true;
+				Smoking s = new Smoking( medpt.getSmokingReca());
+				if ( s.isSmoker()) flgSmoker = true;
+			}
+
+			// or - look for documentation of tobacco use/non-use in problem list
+			if ( ! flgDoc ){
+				for ( Reca reca = medpt.getProbReca(); Reca.isValid( reca ); ){
+					Prob p = new Prob( reca );
+					String prob = p.getProbDesc().toLowerCase();
+					if (( prob.indexOf( "smok" ) >= 0 ) || ( prob.indexOf( "tobacco" ) >= 0 )){
+						flgDoc = true;
+						if (( prob.indexOf( "non" ) < 0 ) && ( prob.indexOf( "former" ) < 0 ) && ( prob.indexOf( "never" ) < 0 )){
+							flgSmoker = true;
+						}
+						
+						// cessation?
+						if ( prob.indexOf( "cessation" ) >= 0 ){
+							flgCessation = true;
+						}
+					}
+					
+				
+					reca = p.getLLHdr().getLast();
+				}
+			}
+			
+			
+			// is smoking cessation documented?
+			// TODO - finish
+
+			if ( ! flgCessation ){
+				for ( Reca reca = medpt.getInterventionsReca(); Reca.isValid( reca ); ){
+					
+					Intervention v = new Intervention( reca );
+					
+					Intervention.Types type = v.getType();
+					if (( type == Intervention.Types.SMOKING_CESSATION )
+						&& withinDateRange( v.getDate(), startDate, endDate )){
+						flgCessation = true;
+						break;
+					}
+			
+					reca = v.getLLHdr().getLast();
+				}
+			}
+			
+			
+		
+			// set numerators, denominators
+			mA.incrDenom();
+			if ( flgDoc ) mA.incrNum();
+			
+			if ( flgSmoker ){
+				mB.incrDenom();
+				if ( flgCessation ) mB.incrNum();
+			}
+		}
+		
+		dirPt.close();
+
+		return;
+	}
+	
+	
+	
+	
+	
+	
+	/**
+	 * NQF 0041 - Older than 50 influenza vaccine
+	 * 
+	 * 
+	 * @param m
+	 * @param startDate
+	 * @param endDate
+	 */
+	void do0041( Measure m, Date startDate, Date endDate ){
+
+
+		DirPt dirPt = DirPt.open();
+		dirPt.setRec( new Rec( startRec ));
+		
+		while( dirPt.getNext()){
+
+			boolean flgFlu = false;
+			int numVisits = 0;
+			
+
+			MedPt medpt = new MedPt( dirPt.getMedRec());
+			int ptage = Date.getAgeYears( dirPt.getBirthdate(), startDate );
+			
+			// only patients aged 50 or older
+			if ( ptage < 50 ) continue;
+				
+			// at least 2 visits?
+			numVisits = numVisits( medpt, startDate, endDate );
+			if ( numVisits < 2 ) continue;
+			
+
+			
+			
+			// flu vaccine administered?
+			for ( Reca reca = medpt.getImmuneReca(); Reca.isValid( reca ); ){
+				Immunizations p = new Immunizations( reca );
+				
+				// vaccine in flu or influenza but not HIB or h. influenzae
+				if (( p.getDesc().toLowerCase().indexOf( "flu" ) >= 0 ) 
+						&& ( p.getDesc().toLowerCase().indexOf( "influenzae" ) < 0 )){
+					flgFlu = true;
+					break;
+				}
+				
+				reca = p.getLLHdr().getLast();
+			}
+			
+			
+			
+		
+			// set numerators, denominators
+			m.incrDenom();
+			if ( flgFlu ) m.incrNum();
+		}
+		
+		dirPt.close();
+
+		return;
+	}
+	
+	
+	
+	
+
+	/**
+	 * NQF 0024 - Pediatric & Adol BMI and Weight
+	 * 
+	 * (9 numerators/denominators)
+	 * 
+	 * @param startDate
+	 * @param endDate
+	 */
+	void do0024( Measure m1_1, Measure m1_2, Measure m1_3, Measure m2_1, Measure m2_2, Measure m2_3, Measure m3_1, Measure m3_2, Measure m3_3, Date startDate, Date endDate ){
+
+
+		DirPt dirPt = DirPt.open();
+		dirPt.setRec( new Rec( startRec ));
+		
+		while( dirPt.getNext()){
+
+			int group = 0;
+			int numVisits = 0;
+			boolean flgBMI = false;
+			boolean flgNutrition = false;
+			boolean flgActivity = false;
+
+			MedPt medpt = new MedPt( dirPt.getMedRec());
+			int ptage = Date.getAgeYears( dirPt.getBirthdate(), startDate );
+			
+			if (( ptage < 2 ) || ( ptage > 16 )) continue;
+			
+			if (( ptage > 1 ) && ( ptage < 17 )) group = 1;
+			if (( ptage > 1 ) && ( ptage < 11 )) group = 2;
+			if (( ptage > 10 ) && ( ptage < 17)) group = 3;
+				
+			for ( Reca reca = medpt.getVitalsReca(); Reca.isValid( reca ); ){
+				
+				Vitals v = new Vitals( reca );
+
+				// visit with reporting period?, bmi recorded?
+				if ( withinDateRange( v.getDate(), startDate, endDate )){
+						++numVisits;
+						if (( v.getWeight() > 0 ) && ( v.getHeight() > 0 )) flgBMI = true;
+				}
+				
+				reca = v.getLLHdr().getLast();
+			}
+			
+			// is dietary counseling documented?			
+			for ( Reca reca = medpt.getInterventionsReca(); Reca.isValid( reca ); ){
+				
+				Intervention v = new Intervention( reca );				
+				Intervention.Types type = v.getType();
+				if ((( type == Intervention.Types.BMI_HIGH ) || ( type == Intervention.Types.BMI_LOW ) 
+						|| ( type == Intervention.Types.DIETITIAN ) || ( type == Intervention.Types.NUTRITION_COUNSELING ))
+						&& withinDateRange( v.getDate(), startDate, endDate )){
+					flgNutrition = true;
+				}
+				if (( type == Intervention.Types.PHYSICAL_ACTIVITY )
+						&& withinDateRange( v.getDate(), startDate, endDate )){
+					flgActivity = true;
+				}
+		
+				reca = v.getLLHdr().getLast();
+			}
+		
+		
+			// set numerators, denominators
+			if ( numVisits > 0 ){
+				m1_1.incrDenom();
+				m1_2.incrDenom();
+				m1_3.incrDenom();
+				
+				if ( group == 2 ){
+					m2_1.incrDenom();
+					m2_2.incrDenom();
+					m2_3.incrDenom();
+					
+					if ( flgBMI ){
+						m1_1.incrNum();
+						m2_1.incrNum();
+					}
+					if ( flgNutrition ){
+						m1_2.incrNum();
+						m2_2.incrNum();
+					}
+					if ( flgActivity ){
+						m1_3.incrNum();
+						m2_3.incrNum();
+					}
+					
+				} else /* group == 3 */ {
+					m3_1.incrDenom();
+					m3_2.incrDenom();
+					m3_3.incrDenom();
+					
+					if ( flgBMI ){
+						m1_1.incrNum();
+						m3_1.incrNum();
+					}
+					if ( flgNutrition ){
+						m1_2.incrNum();
+						m3_2.incrNum();
+					}
+					if ( flgActivity ){
+						m1_3.incrNum();
+						m3_3.incrNum();
+					}
+				}
+				
+				
+			}
+		}
+		
+		dirPt.close();
+
+		return;
+	}
+	
+	
+	
+	
+	
+	/**
+	 * NQF 0043 - 65 and over evere received pneumococcal vaccine
+	 * 
+	 * 
+	 * @param m
+	 * @param startDate
+	 * @param endDate
+	 */
+	void do0043( Measure m, Date startDate, Date endDate ){
+
+
+		DirPt dirPt = DirPt.open();
+		dirPt.setRec( new Rec( startRec ));
+		
+		while( dirPt.getNext()){
+
+			boolean flgVacc = false;
+			int numVisits = 0;
+			
+
+			MedPt medpt = new MedPt( dirPt.getMedRec());
+			int ptage = Date.getAgeYears( dirPt.getBirthdate(), startDate );
+			
+			// only patients aged 50 or older
+			if ( ptage < 65 ) continue;
+				
+			// at least 1 visit?
+			numVisits = numVisits( medpt, startDate, endDate );
+			if ( numVisits < 1 ) continue;
+			
+			
+			
+			// flu vaccine administered?
+			for ( Reca reca = medpt.getImmuneReca(); Reca.isValid( reca ); ){
+				Immunizations p = new Immunizations( reca );
+				
+				// vaccine is pneumonia or pneumococcal
+				if (( p.getDesc().toLowerCase().indexOf( "pneumo" ) >= 0 ) 
+						|| p.getCVX().equals( "30" ) 
+						|| p.getCVX().equals( "100" ) 
+						|| p.getCVX().equals( "133" )){
+					
+					flgVacc = true;
+					break;
+				}
+				// could also use CVX codes 33, 100, 133
+				reca = p.getLLHdr().getLast();
+			}
+			
+						
+		
+			// set numerators, denominators
+			m.incrDenom();
+			if ( flgVacc ) m.incrNum();
+		}
+		
+		dirPt.close();
+
+		return;
+	}
+	
+	
+	
+	
+	
+	
+
+
+	/**
+	 * NQF 0061 - Diabetes and blood pressure management
+	 * 
+	 * 
+	 * @param m
+	 * @param startDate
+	 * @param endDate
+	 */
+	void do0061( Measure m, Date startDate, Date endDate ){
+
+
+		DirPt dirPt = DirPt.open();
+		dirPt.setRec( new Rec( startRec ));
+		
+		while( dirPt.getNext()){
+
+			boolean flgDM = false;
+			boolean flgBP = false;
+			int numVisits = 0;
+			
+
+			MedPt medpt = new MedPt( dirPt.getMedRec());
+			int ptage = Date.getAgeYears( dirPt.getBirthdate(), startDate );
+			
+			// only patients aged 18 thru 75
+			if (( ptage < 17 ) || ( ptage > 75 )) continue;
+				
+			// at least 1 visit?
+			numVisits = numVisits( medpt, startDate, endDate );
+			if ( numVisits < 1 ) continue;
+
+			
+			// diagnosis of diabetes
+			for ( Reca reca = medpt.getProbReca(); Reca.isValid( reca ); ){
+				Prob p = new Prob( reca );
+				String desc = p.getProbDesc().toLowerCase();
+				if (( desc.indexOf( "diabetes" ) >= 0 ) || ( desc.indexOf( "dm-2") >= 0 )
+						|| ( desc.indexOf( "dm2" ) >= 0 ) || ( desc.indexOf( "iddm" ) >= 0 )
+						|| ( desc.indexOf( "t2dm" ) >= 0 )){
+					flgDM = true;
+					break;
+				}
+				
+				reca = p.getLLHdr().getLast();
+			}
+			
+			if ( ! flgDM ) continue;
+			
+			
+			
+			// visits and BP checks?
+			for ( Reca reca = medpt.getVitalsReca(); Reca.isValid( reca ); ){
+				
+				Vitals v = new Vitals( reca );
+
+				// visit with reporting period?
+				if ( withinDateRange( v.getDate(), startDate, endDate )){
+					if (( v.getSBP() < 140 ) && ( v.getDBP() < 90 )){
+						flgBP = true;
+						break;
+					}
+				}
+				
+				reca = v.getLLHdr().getLast();
+			}
+			
+			
+		
+			// set numerators, denominators
+			m.incrDenom();
+			if ( flgBP ) m.incrNum();
+		}
+		
+		dirPt.close();
+
+		return;
+	}
+	
+	
+	
+	
+	
+	
+
+	/**
+	 * NQF 0059 - Diabetes and HgbA1c
+	 * 
+	 * 
+	 * @param m
+	 * @param startDate
+	 * @param endDate
+	 */
+	void do0059( Measure m, Date startDate, Date endDate ){
+
+
+		DirPt dirPt = DirPt.open();
+		dirPt.setRec( new Rec( startRec ));
+		
+		while( dirPt.getNext()){
+
+			boolean flgDM = false;
+			boolean flg9plus = false;
+			int numVisits = 0;
+			
+
+			MedPt medpt = new MedPt( dirPt.getMedRec());
+			int ptage = Date.getAgeYears( dirPt.getBirthdate(), startDate );
+			
+			// only patients aged 18 thru 75
+			if (( ptage < 17 ) || ( ptage > 75 )) continue;
+				
+			
+			// at least 1 visit?
+			numVisits = numVisits( medpt, startDate, endDate );
+			if ( numVisits < 1 ) continue;
+
+			// diagnosis of diabetes
+			for ( Reca reca = medpt.getProbReca(); Reca.isValid( reca ); ){
+				Prob p = new Prob( reca );
+				String desc = p.getProbDesc().toLowerCase();
+				if (( desc.indexOf( "diabetes" ) >= 0 ) || ( desc.indexOf( "dm-2") >= 0 )
+						|| ( desc.indexOf( "dm2" ) >= 0 ) || ( desc.indexOf( "iddm" ) >= 0 )
+						|| ( desc.indexOf( "t2dm" ) >= 0 )){
+					flgDM = true;
+					break;
+				}
+				
+				reca = p.getLLHdr().getLast();
+			}
+			
+			// only patients with diabetes
+			if ( ! flgDM ) continue;
+			
+			
+			
+			// hgba1c?
+			for ( Reca reca = medpt.getLabResultReca(); Reca.isValid( reca ); ){
+				
+				LabResult v = new LabResult( reca );
+
+				// visit with reporting period?
+				//if ( withinDateRange( v.getDate(), startDate, endDate )){
+				// is value of MOST RECENT HgbA1c > 9??
+				LabObsTbl obs = new LabObsTbl( v.getLabObsRec());
+				String desc = obs.getDesc().toLowerCase();
+				if (( desc.indexOf( "hgba1c" ) >= 0 ) || ( desc.indexOf( "globin a1c" ) >= 0 )){
+					if ( EditHelpers.parseDouble( v.getResult()) > 9.0 ){
+						flg9plus = true;
+						break;
+					}
+				}
+				
+				reca = v.getLLHdr().getLast();
+			}
+			
+			
+			for ( Reca reca = medpt.getLabReca(); Reca.isValid( reca ); ){
+				
+				NotesLab n = new NotesLab( reca );
+				String s = n.getNoteText();
+				
+				// visit with reporting period?
+				//if ( withinDateRange( v.getDate(), startDate, endDate )){
+				// is value of MOST RECENT HgbA1c > 9??
+				if (( s.indexOf( "a1c" ) >= 0 )){
+					int start = s.indexOf( "a1c" ) + 3;
+					int len = s.length() - start;
+					if ( len > 0 ){
+						if ( s.charAt( start ) == ' ' ){ ++start; --len; }
+						if ( len > 4 ) len = 4;
+						//if ( start + len > s.length() ) --len;
+						
+						try {
+							String t = s.substring( start, start + len );					
+							if ( EditHelpers.parseDouble( t ) > 9.0 ){
+								flg9plus = true;
+								break;
+							}
+						} catch (Exception e) {
+							// TODO Auto-generated catch block
+							DialogHelpers.Messagebox( "Error: start=" + start + ", len=" + len + ", s=" + s );
+							e.printStackTrace();
+						}
+					}
+				}
+				
+				reca = n.getLLHdr().getLast();
+			}
+			
+			
+		
+			// set numerators, denominators
+			m.incrDenom();
+			if ( flg9plus ) m.incrNum();
+		}
+		
+		dirPt.close();
+
+		return;
+	}
+	
+	
+	
+	
+	
+	
+	
+	/**
+	 * NQF 0038 - Childrens immunization status
+	 * 
+	 * 
+	 * @param m
+	 * @param startDate
+	 * @param endDate
+	 */
+	void do0038( Measure m1, Measure m2, Measure m3, Measure m4, Measure m5, Measure m6, 
+			Measure m7, Measure m8, Measure m9, Measure m10, Measure m11, Measure m12, Date startDate, Date endDate ){
+
+
+		DirPt dirPt = DirPt.open();
+		dirPt.setRec( new Rec( startRec ));
+		
+		while( dirPt.getNext()){
+
+			boolean flgVacc = false;
+			int numVisits = 0;
+			int numDtap = 0;
+			int numIPV = 0;
+			int numMMR = 0;
+			int numHIB = 0;
+			int numHepB = 0;
+			int numVZV = 0;
+			int numPneumo = 0;
+			int numHepA = 0;
+			int numRotaV = 0;
+			int numFlu = 0;
+			
+
+			MedPt medpt = new MedPt( dirPt.getMedRec());
+			Date birthdate = dirPt.getBirthdate();
+			int ptage = Date.getAgeYears( birthdate, startDate );
+			
+			// only patients who will turn 2 during the measurement period
+			if (( ptage < 1 ) && ( ptage > 2 )) continue;
+				
+			
+			// only if there was a visit within the period
+			numVisits = numVisits( medpt, startDate, endDate );
+			if ( numVisits < 1 ) continue;
+			
+	
+			
+			// flu vaccine administered?
+			for ( Reca reca = medpt.getImmuneReca(); Reca.isValid( reca ); ){
+				Immunizations p = new Immunizations( reca );
+				String desc = p.getDesc().toLowerCase();
+				String cvx = p.getCVX();
+				
+				// Logic based on vaccine type
+				if ( desc.indexOf( "dtap" ) >= 0 ){
+						//|| cvx.equals( "30" ) 
+						//|| cvx.equals( "100" ) 
+						//|| cvx.equals( "133" )){
+
+					if (( Date.getAgeDays( birthdate, p.getDate()) >= 42 )
+						&& ( Date.getAgeYears( birthdate, p.getDate() ) < 2 )){
+						++numDtap;
+					}
+				
+				}
+
+				if ( desc.indexOf( "ipv" ) >= 0 ){
+					if (( Date.getAgeDays( birthdate, p.getDate()) >= 42 )
+							&& ( Date.getAgeYears( birthdate, p.getDate() ) < 2 )){
+							++numIPV;
+					}
+					
+				}
+
+				if ( desc.indexOf( "mmr" ) >= 0 ){
+					if (( Date.getAgeYears( birthdate, p.getDate()) >= 1 )
+							&& ( Date.getAgeYears( birthdate, p.getDate() ) < 2 )){
+							++numMMR;
+					}
+					
+				}
+
+				if (( desc.indexOf( "hib" ) >= 0 ) || ( desc.indexOf( "haemophilus" ) >= 0 )){
+					if (( Date.getAgeDays( birthdate, p.getDate()) >= 42 )
+							&& ( Date.getAgeYears( birthdate, p.getDate() ) < 2 )){
+							++numHIB;
+					}
+					
+				}
+
+				if (( desc.indexOf( "hepatitis b" ) >= 0 ) || ( desc.indexOf( "hep b" ) >= 0 )){
+					if ( Date.getAgeYears( birthdate, p.getDate() ) < 2 ){
+							++numHepB;
+					}
+				
+				}
+
+				if (( desc.indexOf( "varicella" ) >= 0 ) || ( desc.indexOf( "VZV" ) >= 0 )){
+					if ( Date.getAgeYears( birthdate, p.getDate() ) < 2 ){
+							++numVZV;
+					}
+					
+				}
+
+				if ( desc.indexOf( "pneumo" ) >= 0 ){
+					if (( Date.getAgeDays( birthdate, p.getDate()) >= 42 )
+							&& ( Date.getAgeYears( birthdate, p.getDate() ) < 2 )){
+							++numPneumo;
+					}
+					
+				}
+
+				if (( desc.indexOf( "hepatitis a" ) >= 0 ) || ( desc.indexOf( "hep a" ) >= 0 )){
+					if ( Date.getAgeYears( birthdate, p.getDate() ) < 2 ){
+							++numHepA;
+					}
+					
+				}
+
+				if ( desc.indexOf( "rotavirus" ) >= 0 ){
+					if (( Date.getAgeDays( birthdate, p.getDate()) >= 42 )
+							&& ( Date.getAgeYears( birthdate, p.getDate() ) < 2 )){
+							++numRotaV;
+					}
+				}
+
+				if (( desc.indexOf( "flu" ) >= 0 ) && ( desc.indexOf( "influenzae" ) < 0 )){
+					if (( Date.getAgeDays( birthdate, p.getDate()) >= 180 )
+							&& ( Date.getAgeYears( birthdate, p.getDate() ) < 2 )){
+							++numFlu;
+						}
+				}
+				
+				// could also use CVX codes 33, 100, 133
+				reca = p.getLLHdr().getLast();
+			}
+			
+						
+		
+			// set numerators, denominators
+			m1.incrDenom();
+			m2.incrDenom();
+			m3.incrDenom();
+			m4.incrDenom();
+			m5.incrDenom();
+			m6.incrDenom();
+			m7.incrDenom();
+			m8.incrDenom();
+			m9.incrDenom();
+			m10.incrDenom();
+			m11.incrDenom();
+			m12.incrDenom();
+
+			if ( numDtap >= 4 ) m1.incrNum();
+			if ( numIPV >= 3 ) m2.incrNum();
+			if ( numMMR >= 1 ) m3.incrNum();
+			if ( numHIB >= 2 ) m4.incrNum();
+			if ( numHepB >= 3 ) m5.incrNum();
+			if ( numVZV >= 1 ) m6.incrNum();
+			if ( numPneumo >= 4 ) m7.incrNum();
+			if ( numHepA >= 2 ) m8.incrNum();
+			if ( numRotaV >= 2 ) m9.incrNum();
+			if ( numFlu >= 2 ) m10.incrNum();
+			
+			if (( numDtap >= 4 ) && ( numIPV >= 3 ) && ( numMMR >= 1 ) 
+					&& ( numVZV >= 1 ) && ( numHepB >= 3 )) m11.incrNum();
+			
+			if (( numDtap >= 4 ) && ( numIPV >= 3 ) && ( numMMR >= 1 ) 
+					&& ( numVZV >= 1 ) && ( numHepB >= 3 ) && ( numPneumo >= 4 )) m12.incrNum();
+			
+		}
+		
+		dirPt.close();
+
+		return;
+	}
+	
+	
+	
+	
+	
+	
+
+
+
+
+
+}
+
+	/**/
+

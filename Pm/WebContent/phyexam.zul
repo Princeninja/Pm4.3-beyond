@@ -1,0 +1,54 @@
+<?page title="Physical Exam" contentType="text/html;charset=UTF-8"?>
+<zk>
+<!-- Outer window to hide ID space of inner window - so doesn't have to be unique -->
+	<window border="none" vflex="1" hflex="1" >
+
+		<window id="phyexWin"  border="none" mode="embedded" vflex="1" hflex="1" apply="palmed.PhyExamWinController">
+		
+	<borderlayout>
+	
+		<west width="40%" splittable="true" collapsible="true" >
+		
+			<hbox vflex="1" hflex="1" >
+				<vbox>
+					<button id="view" label="View" width="80px" />
+					<button id="newnote" label="New" width="80px" />
+					<button id="edit" label="Edit" width="80px" />
+					<button id="delete" label="Delete" width="80px" />
+					<button id="print" label="Print" width="80px" />
+					
+				</vbox>
+		
+				<listbox id="phyexListbox" vflex="1" hflex="1" >
+					<listhead>
+						<listheader width="80px" label="Date" sort="auto" />
+						<listheader width="200px" label="Description" />
+						<listheader width="80px" label="User" sort="auto" />
+					</listhead>
+				</listbox>
+			</hbox>		
+		</west>
+		
+		
+		<center flex="true" >
+					
+			<window id="phyexHtmlWin" border="none" vflex="1" hflex="1" >
+				
+					<!--  I will make these controls programmatically so that they behave and size properly -->		
+					<!-- <html id="phyexHTML" vflex="1" hflex="1" ></html> -->
+					<!-- <textbox id="phyexTextbox"  rows="2" vflex="1" hflex="1"/> -->
+				
+				
+			</window>
+						
+		</center>
+		
+	
+	
+	</borderlayout>
+		
+<!-- 	<window id="HandP" border="normal"  vflex="1" hflex="1" position="center"  ></window>	-->
+		
+		</window>
+</window>
+</zk>

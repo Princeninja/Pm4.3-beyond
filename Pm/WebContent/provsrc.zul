@@ -1,0 +1,22 @@
+<?page title="Provider Search" contentType="text/html;charset=UTF-8"?>
+<zk>
+<window id="provSrcWin" title="Provider Search" border="normal" width="640px" mode="modal" apply="palmed.ProvSrcWinController" >
+
+	<groupbox mold="3d" open="true" >
+		<caption label="Providers" />
+		<listbox id="provListbox" rows="6">
+			<listhead>
+				<listheader label="Abbr" />
+				<listheader label="Name" />
+			</listhead>
+		</listbox>
+		<button id="selectBtn" label="Select" width="80px" />
+		<button id="exitBtn" label="Exit" width="80px" />
+		
+	</groupbox>
+	
+	<!-- Hidden control used to pass info back to calling class. -->
+	<intbox id="provRec" visible="false" />
+
+</window>
+</zk>

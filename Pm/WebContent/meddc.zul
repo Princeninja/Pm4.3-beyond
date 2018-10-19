@@ -1,0 +1,58 @@
+<?page title="Discontinue Medication" contentType="text/html;charset=UTF-8"?>
+<zk>
+<window id="medDCWin" title="Discontinue Medication" border="normal" width="440px" position="center" apply="palmed.MedDCWinController" > <!-- mode="modal"-->
+	<label id="ptname" />
+	<hbox>
+		<!--  groupbox>-->
+			<grid>
+				<columns>
+					<column label="" width="80px" />
+					<column label="" width="320px" />
+				</columns>
+				<rows>
+					<row>
+						<label value="Start Date" />
+						<label id="lblStart" />
+					</row>
+					<row>
+						<label value="Medication" />
+						<label id="lblMed" />
+					</row>
+					<row>
+						<label value="Info" />
+						<div>
+						<label value="Code:" />
+						<label id="lblCode" value="" />
+						<separator />
+						<label id="lblEtc" value="" />
+						</div>
+					</row>
+					<row>
+						<label value="SIG" />
+						<label id="lblSig" />
+					</row>
+					<row>
+						<label value="DC Date" />
+						<textbox id="txtDate" maxlength="10" width="80px" />
+					</row>
+					<row>
+						<label value="Reason" />
+						<listbox id="lboxReason" mold="select" rows="1" width="200px" />
+					</row>
+
+				</rows>
+			</grid>
+
+		<!--</groupbox>-->
+		
+	</hbox>
+		
+		
+	<hbox>
+		<button id="btnSave" label="Discontinue" width="80px" />
+		<button id="btnCancel" label="Cancel" width="80px" />
+	</hbox>
+
+</window>
+
+</zk>

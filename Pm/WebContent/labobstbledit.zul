@@ -1,0 +1,114 @@
+<?page title="Lab Observations Table Enter/Edit" contentType="text/html;charset=UTF-8"?>
+<zk>
+<window id="labObsTblEditWin" title="Lab Observations Table Enter/Edit" border="normal" width="840px" position="center" mode="modal"  apply="palmed.LabObsTblEditWinController" >
+
+	<hbox  hflex="max" >
+		<!-- groupbox width="510px"> -->
+			<grid hflex="1" span="1" >
+				<columns>
+					<column label="" width="80px" />
+					<column label="" width="320px" />
+				</columns>
+				<rows>
+					<row>
+						<label value="Abbr" />
+						<textbox id="txtAbbr" maxlength="10" width="100px" />
+					</row>
+					<row>
+						<label value="Desc" />
+						<textbox id="txtDesc" maxlength="40" width="300px" />
+					</row>
+					<row>
+						<label value="SNOMED" />
+						<textbox id="txtSNOMED" maxlength="10" width="100px" />
+					</row>
+					<row>
+						<label value="LOINC" />
+						<textbox id="txtLOINC" maxlength="10" width="100px" />
+					</row>
+					<row>
+						<label value="Test Type" />
+						<listbox id="lboxTestType" width="200px" rows="1" mold="select" />
+					</row>
+					<row>
+						<label value="Data Type" />
+						<listbox id="lboxDataType" width="200px" rows="1" mold="select" />
+					</row>
+					<row>
+						<label value="Decimal Places" />
+						<listbox id="lboxDecimalPlaces" width="60px" rows="1" mold="select" />
+					</row>
+					<row>
+						<label value="Units Text" />
+						<textbox id="txtUnitsText" maxlength="16" width="100px" />
+					</row>
+					<row>
+						<label value="Coded Units" />
+						<listbox id="lboxCodedUnits" width="100px" rows="1" mold="select" />
+					</row>
+					<row>
+						<label value="Normal Range Text" />
+						<textbox id="txtNormalRangeText" maxlength="20" width="100px" />
+					</row>
+					<row>
+						<label value="Normal Range" />
+						<hbox>
+						<label value="Low" />
+						<textbox id="txtLow" maxlength="10" width="100px" />
+						<label value="High" />
+						<textbox id="txtHigh" maxlength="10" width="100px" />
+						</hbox>
+					</row>
+					<row>
+						<label value="Absolute Range" />
+						<hbox>
+						<label value="Min" />
+						<textbox id="txtMin" maxlength="10" width="100px" />
+						<label value="Max" />
+						<textbox id="txtMax" maxlength="10" width="100px" />
+						</hbox>
+					</row>
+					<row>
+						<label value="Protocol" />
+						<textbox id="txtProtocol" maxlength="10" width="100px" />
+					</row>
+					<row>
+						<label value="Patient Ed Resource" />
+						<textbox id="txtResource" maxlength="40" width="200px" />
+					</row>
+					<row>
+						<label value="" />
+						<hbox>
+							<radiogroup>
+								<radio id="rbActive" label="Active" />
+								<radio id="rbInactive" label="Inactive" />
+							</radiogroup>
+						</hbox>
+					</row>
+				</rows>
+			</grid>
+
+		<!-- </groupbox> -->
+		
+		<!-- groupbox> -->
+			<vbox vflex="1" hflex="1" >
+			<button id="btnSelect" label="Select" width="80px" />
+			<listbox id="lboxLabObsTbl"  hflex="1" vflex="1" >
+				<listhead>
+					<listheader  label="Desc" sort="auto" />
+					<listheader width="80px" label="Code" sort="auto" />
+				</listhead>
+			</listbox>
+			</vbox>
+		<!-- </groupbox> -->
+	</hbox>
+		
+		
+		<hbox>
+			<button id="btnSave" label="Save" width="80px" />
+			<button id="btnCancel" label="Cancel" width="80px" />
+		</hbox>
+
+
+</window>
+</zk>

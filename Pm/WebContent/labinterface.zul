@@ -1,0 +1,128 @@
+<?page title="new page title" contentType="text/html;charset=UTF-8"?>
+<zk>
+<window id="Labintwin"  border="normal" width="410px" mode="embedded" vflex="1" hflex="1" apply="palmed.LabintController">
+	<hbox>
+	 <groupbox width="460px">
+	   <hbox pack ="start" width="290px">
+	   		<button id="PatientSel" label="Change Patient" width="80px" mold="trendy" ></button>	   
+	   </hbox> 
+	  	  
+	  <grid width="620px">  
+	   <columns>
+	      <column label="" width="80px" />
+		  <column label="" width="380px" />	   
+	   </columns>
+	     <rows>
+	     <row id="row00">
+	     	<label value="Patient Name" ></label>
+	     	<label id="PtName" value="Name"></label>
+	     </row>	     
+	    <row id="row01">
+	     	<label value="Provider" ></label>
+	     	<listbox id="lboxProv" width="130px" rows="1" mold="select" ></listbox>
+	     </row> 
+	     <row id="row02">
+	     	<label value="Labs" ></label>
+	     	<hbox>
+	     	<listbox id="lboxLabs" width="250px" rows="5" mold="select" ></listbox>
+	     	<button id="btndelete" label="Delete Lab" width="100px" ></button>	
+	     	</hbox> 	     	
+	     </row>
+	     <row id="row03"  >
+	     	<label value="Diagnosis Codes" ></label>
+	     	<hbox >
+	     	<div style="overflow:auto">
+	     	<listbox id="lboxDiagnosis" width="280px" rows="5" mold="select" style="overflow:auto"  ></listbox>
+	     	</div>
+	     	<button id="btndelete1" label="Delete Code" width="80px" ></button>	
+	     	</hbox> 	     	
+	     </row>
+	     <row id="row04">
+	     	<label value="Stat" ></label>
+	     	<hbox> <checkbox id="Stat" label="S" /> </hbox>
+	     	</row>
+	    <!--  <row id="row04">
+	     	<label value="Routine" ></label>
+	     	<hbox> <checkbox id="Routine"  label="R" /> </hbox>
+	     	</row> -->
+	   <!--    <row id="row05" >
+	     	<label value="NTE (Notes)" ></label>
+	     	<textbox id="NteNotes" maxlength="64" width="300px" > </textbox>
+	     	</row>  -->    
+	     </rows>
+	  </grid>  
+	</groupbox>
+    	
+	 <groupbox id="gbSrc" >
+			<vlayout height="320px" width="300px" >
+			<hbox>
+				<button id="btnSearch" label="Search" width="80px" />
+				<textbox id="txtSearch" maxlength="40" width="200px" />
+			</hbox>
+			<tabbox id="tbox" height="270px" >
+				<tabs>
+					<tab id="tabPanel" label="Panel" />
+					<tab id="tabTest" label="Test" />
+				</tabs>
+				<tabpanels>
+					<tabpanel id="tpPanel" >
+						<listbox id="lboxPanel" rows="20" hflex="1" vflex="1" >
+							<listhead id="lhPanel" >
+								<listheader id="lhdrPanel" label="Lab Panel" sort="auto" />
+							</listhead>
+						</listbox>
+					</tabpanel>
+					<tabpanel id="tpTest" >
+						<listbox id="lboxTest" rows="20" hflex="1" vflex="1" >
+							<listhead id="lhTest" >
+								<listheader id="lhdrTestType" label="Type" sort="auto" />
+							</listhead>
+						</listbox>
+					</tabpanel>
+				</tabpanels>
+			</tabbox>
+			<hbox><button id="btnSelect" label="Add" width="80px" /> 
+			<button id="btnduplicate" label="Duplicate" width="80px" />
+			</hbox>
+			</vlayout>			
+			</groupbox>
+			<!--  <separator hflex="1" />-->
+	</hbox>
+	
+	<hbox>	
+	<groupbox><vbox >
+		<button id="btnSubmit" label="Save" width="80px" />
+		<button id="btnPrint" label="Print" width="80px"   />
+	</vbox>	
+	</groupbox>
+	
+	<groupbox width= "351px" style="border:0"></groupbox><!-- with button 266.5px -->
+	
+	<groupbox >		
+			<vlayout height="328px" width="300px" >
+			<hbox>
+				<button id="btnSearch1" label="Search" width="80px" />
+				<textbox id="txtSearch1" maxlength="40" width="200px" />
+			</hbox>
+			<tabbox id="tbox1" height="275px" >
+				<tabs>
+					<tab id="tabDiagnosis" label="Diagnosis" />
+				</tabs>
+				<tabpanels>
+					<tabpanel id="tpDiagnosis" >
+						<listbox id="lboxDiag" rows="20" hflex="1" vflex="1" >
+							<listhead id="lhDiag" >
+								<listheader id="lhdrDesc" label="Description" sort="auto" />
+								<!-- <listheader id="lhdrCode" label="Code" sort="auto" />-->
+							</listhead>
+						</listbox>
+					</tabpanel>
+				</tabpanels>
+			</tabbox>
+			<button id="btnSelect1" label="Add" width="80px" />
+			</vlayout>
+		</groupbox>
+	</hbox>
+	
+</window>
+</zk>

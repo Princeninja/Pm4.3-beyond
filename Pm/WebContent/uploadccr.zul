@@ -1,0 +1,10 @@
+<?page title="Upload CCR/CCD" contentType="text/html;charset=UTF-8"?>
+<zk>
+<window title="Upload CCR/CCD" border="normal">
+	<textbox id="txtArea" rows="20" cols="80" />
+
+	<button label="Browse" upload="true" onUpload="txtArea.setValue( event.media.getStringData())"/>
+	
+	
+</window>
+</zk>

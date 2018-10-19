@@ -1,0 +1,29 @@
+<?page title="OB History" contentType="text/html;charset=UTF-8"?>
+
+<zk xmlns:h="http://www.w3.org/1999/xhtml">
+	<vbox>
+		<label>OB History:</label>
+	
+		<hbox widths="50%,50%" >
+		
+
+				<grid fixedLayout="true">
+					<columns>
+						<column width="80px" />
+						<column />
+					</columns>
+					<rows>
+						<row> <label /> <checkbox id="cbObHxUnavailable" label="OB History Unavailable" forward="onChange" /> </row>
+						<row id="rowGravida" > Gravida <textbox id="txtGravida" maxlength="4" width="40px" forward="onChange" /></row>
+						<row id="rowPara" > Para <textbox id="txtPara" maxlength="4" width="40px" forward="onChange" /></row>
+						<row id="rowAborta" > Aborta <textbox id="txtAborta" maxlength="4" width="40px" forward="onChange" /> </row>
+						<row id="rowComplications" > <label /> <checkbox id="cbObComplications" label="Complications with pregnancy" forward="onChange" /> </row>
+						<row id="rowObNotes" > OB History Notes <textbox id="txtObNotes" maxlength="40" width="300px" forward="onChange" /> </row>
+					</rows>
+				</grid>
+			
+		</hbox>
+		
+	</vbox>
+	
+</zk>

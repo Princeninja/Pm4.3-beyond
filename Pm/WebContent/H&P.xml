@@ -1,0 +1,1404 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Physical exam structure file -->
+<EXAM>
+   <PAGE ID="" label="Gen" >
+   		<FINDING ID="Vitals:" Type="text-check/s" >
+   			<TEXT> Vitals:  </TEXT>
+   			<CODE> ..... </CODE>
+   		</FINDING>
+   		<FINDING ID="WNL" Type="checkbox" >
+   			<TEXT> Patient is well developed, well nourished and in no apparent distress. </TEXT>
+   			<CODE> ..... </CODE>
+   		</FINDING>
+   		<FINDING ID="Well Developed" Type="checkbox">
+   			<TEXT> Well developed. </TEXT>
+   			<CODE> ..... </CODE>
+   		</FINDING>
+   		<FINDING ID="Well Nourished" Type="checkbox" >
+   			<TEXT> Well nourished. </TEXT>
+   			<CODE> ..... </CODE>
+   		</FINDING>
+   		<FINDING ID="Cachectic" Type="checkbox" >
+   			<TEXT> Appears Cachectic. </TEXT>
+   			<CODE> ..... </CODE>
+   		</FINDING>
+   		<FINDING ID="Obese" Type="checkbox" >
+   			<TEXT> Obese. </TEXT>
+   			<CODE> ..... </CODE>
+   		</FINDING>
+   		<FINDING ID="Mildly Obese" Type="checkbox" >
+   			<TEXT> Mildly Obese. </TEXT>
+   			<CODE> ..... </CODE>
+   		</FINDING>
+   		<FINDING ID="Morbidly Obese" Type="checkbox" >
+   			<TEXT> Morbidly Obese. </TEXT>
+   			<CODE> ..... </CODE>
+   		</FINDING>
+   		<FINDING ID="Frail" Type="checkbox" >
+   			<TEXT> Appears Frail. </TEXT>
+   			<CODE> ..... </CODE>
+   		</FINDING>
+   		<FINDING ID="Elderly" Type="checkbox" >
+   			<TEXT> Elderly. </TEXT>
+   			<CODE> ..... </CODE>
+   		</FINDING>
+   		<FINDING ID="Well Appearing" Type="checkbox" >
+   			<TEXT> Well Appearing. </TEXT>
+   			<CODE> ..... </CODE>
+   		</FINDING>
+   		<FINDING ID="Ill Appearing" Type="checkbox" >
+   			<TEXT> Appears ill. </TEXT>
+   			<CODE> ..... </CODE>
+   		</FINDING>
+   		<FINDING ID="Mildly Ill Appearing" Type="checkbox" >
+   			<TEXT> Mildly ill appearing. </TEXT>
+   			<CODE> ..... </CODE>
+   		</FINDING>
+   		<FINDING ID="No Apparent Distress" Type="checkbox" >
+   			<TEXT> In no apparent distress. </TEXT>
+   			<CODE> ..... </CODE>
+   		</FINDING>
+   		<FINDING ID="Mild Distress" Type="checkbox" >
+   			<TEXT> In mild distress. </TEXT>
+   			<CODE> ..... </CODE>
+   		</FINDING>
+   		<FINDING ID="Moderate Distress" Type="checkbox" >
+   			<TEXT> In moderate distress. </TEXT>
+   			<CODE> ..... </CODE>
+   		</FINDING>
+   		<FINDING ID="Severe Distress" Type="checkbox" >
+   			<TEXT> In severe distress. </TEXT>
+   			<CODE> ..... </CODE>
+   		</FINDING>
+   		<FINDING ID="Secondary to Pain" Type="checkbox" >
+   			<TEXT> Distress is due to pain. </TEXT>
+   			<CODE> ..... </CODE>
+   		</FINDING>
+   		<FINDING ID="Alert" Type="checkbox" >
+   			<TEXT> Patient is alert. </TEXT>
+   			<CODE> ..... </CODE>
+   		</FINDING>
+   		<FINDING ID="Somnolent" Type="checkbox" >
+   			<TEXT> Patient is somnolent. </TEXT>
+   			<CODE> ..... </CODE>
+   		</FINDING>
+   		<FINDING ID="Obtunded" Type="checkbox" >
+   			<TEXT> Patient is obtunded. </TEXT>
+   			<CODE> ..... </CODE>
+   		</FINDING>
+   		<FINDING ID="Oriented" Type="checkbox" >
+   			<TEXT> Oriented. </TEXT>
+   			<CODE> ..... </CODE>
+   		</FINDING>
+   		<FINDING ID="Oriented x 1" Type="checkbox" >
+   			<TEXT> Oriented to person only. </TEXT>
+   			<CODE> ..... </CODE>
+   		</FINDING>
+   		<FINDING ID="Oriented x 2" Type="checkbox" >
+   			<TEXT> Oriented to person and place. </TEXT>
+   			<CODE> ..... </CODE>
+   		</FINDING>
+   		<FINDING ID="Oriented x 3" Type="checkbox" >
+   			<TEXT> Oriented to person, place and time. </TEXT>
+   			<CODE> ..... </CODE>
+   		</FINDING>
+   		<FINDING ID="Confused" Type="checkbox" >
+   			<TEXT> Patient is Confused. </TEXT>
+   			<CODE> ..... </CODE>
+   		</FINDING>
+   		<FINDING ID="Appears Older Than Stated Age" Type="checkbox" >
+   			<TEXT> Patient appears older than stated age. </TEXT>
+   			<CODE> ..... </CODE>
+   		</FINDING>
+   		<FINDING ID="Using Cane" Type="checkbox" >
+   			<TEXT> Using cane. </TEXT>
+   			<CODE> ..... </CODE>
+   		</FINDING>
+   		<FINDING ID="Using Walker" Type="checkbox" >
+   			<TEXT> Using walker. </TEXT>
+   			<CODE> ..... </CODE>
+   		</FINDING>
+   		<FINDING ID="Using Wheelchair" Type="checkbox" >
+   			<TEXT> Using wheel-chair. </TEXT>
+   			<CODE> ..... </CODE>
+   		</FINDING>
+   		<FINDING ID="Using Portable Oxygen" Type="text-check" >
+   			<TEXT> Wearing portable oxygen. </TEXT>
+   			<CODE> ..... </CODE>
+   		</FINDING>		  
+   </PAGE>
+   <PAGE ID="" label="Head/Neck">
+   	 <SYSTEM ID="Head"  label="Head">
+   	 	<FINDING ID="WNL" Type="checkbox" >
+   			<TEXT> Head is normocephalic, atraumatic. </TEXT>
+   			<CODE> ..... </CODE>
+   		</FINDING>
+   		<FINDING ID="NC" Type="checkbox" >
+   			<TEXT> Head is normocephalic. </TEXT>
+   			<CODE> ..... </CODE>
+   		</FINDING>
+   		<FINDING ID="AT" Type="checkbox" >
+   			<TEXT> Head is atraumatic. </TEXT>
+   			<CODE> ..... </CODE>
+   		</FINDING>
+   		<FINDING ID="Facial Tenderness" Type="lateral" >
+   			<TEXT> There is %s facial tenderness. </TEXT>
+   			<CODE> ..... </CODE>
+   		</FINDING>
+   		<FINDING ID="Maxillary Tenderness" Type="lateral" >
+   			<TEXT> There is %s maxillary tenderness. </TEXT>
+   			<CODE> ..... </CODE>
+   		</FINDING>
+   		<FINDING ID="Frontal Tenderness" Type="lateral" >
+   			<TEXT> There is %s frontal tenderness. </TEXT>
+   			<CODE> ..... </CODE>
+   		</FINDING>
+   		<FINDING ID="Temporal Tenderness" Type="lateral" >
+   			<TEXT> There is %s temporal tenderness. </TEXT>
+   			<CODE> ..... </CODE>
+   		</FINDING>
+   		<FINDING ID="Occipital Tenderness" Type="text-check" >
+   			<TEXT> There is occipital tenderness. </TEXT>
+   			<CODE> ..... </CODE>
+   		</FINDING>        	 
+   	 </SYSTEM>
+   	 <SYSTEM ID="Neck"  label="Neck">
+   	 	<FINDING ID="WNL" Type="checkbox" >
+   			<TEXT> The neck is supple with no JVD, no thyromegaly, no mass, no meningeal signs and midline trachea. </TEXT>
+   			<CODE> ..... </CODE>
+   		</FINDING>
+   		<FINDING ID="Supple" Type="checkbox" >
+   			<TEXT> The neck is supple. </TEXT>
+   			<CODE> ..... </CODE>
+   		</FINDING>
+   		<FINDING ID="Anterior Adenopathy" Type="checkbox" >
+   			<TEXT> Neck has anterior lymphadenopathy. </TEXT>
+   			<CODE> ..... </CODE>
+   		</FINDING>
+   		<FINDING ID="Posterior Adenopathy" Type="checkbox" >
+   			<TEXT> Neck has posterior lymphadenopathy. </TEXT>
+   			<CODE> ..... </CODE>
+   		</FINDING>
+   		<FINDING ID="Thyroid Normal" Type="checkbox" >
+   			<TEXT> The thyroid is normal. </TEXT>
+   			<CODE> ..... </CODE>
+   		</FINDING> 
+   		<FINDING ID="Thyroid Enlarged" Type="checkbox" >
+   			<TEXT> The thyroid is enlarged. </TEXT>
+   			<CODE> ..... </CODE>
+   		</FINDING>
+   		<FINDING ID="Thyroid Nodules" Type="checkbox" >
+   			<TEXT> The thyroid is nodular.  </TEXT>
+   			<CODE> ..... </CODE>
+   		</FINDING>
+   		<FINDING ID="No Mass" Type="checkbox" >
+   			<TEXT> There is no neck mass. </TEXT>
+   			<CODE> ..... </CODE>
+   		</FINDING>
+   		<FINDING ID="No JVD" Type="checkbox" >
+   			<TEXT> There is no JVD. </TEXT>
+   			<CODE> ..... </CODE>
+   		</FINDING>
+   		<FINDING ID="JVD Present" Type="checkbox" >
+   			<TEXT> There is JVD present. </TEXT>
+   			<CODE> ..... </CODE>
+   		</FINDING>
+   		<FINDING ID="No Bruit" Type="checkbox" >
+   			<TEXT> There is no bruit. </TEXT>
+   			<CODE> ..... </CODE>
+   		</FINDING>
+   		<FINDING ID="Bruit" Type="lateral" >
+   			<TEXT> There is a %s bruit. </TEXT>
+   			<CODE> ..... </CODE>
+   		</FINDING>
+   		<FINDING ID="No Nuchal Rigidity" Type="checkbox" >
+   			<TEXT> There is no nuchal rigidity. </TEXT>
+   			<CODE> ..... </CODE>
+   		</FINDING> 
+   		<FINDING ID="Nuchal Rigidity Present" Type="text-check" >
+   			<TEXT> There is nuchal rigidity present. </TEXT>
+   			<CODE> ..... </CODE>
+   		</FINDING>   	 
+   	 </SYSTEM>   
+   </PAGE>
+   <PAGE ID="" label="EENT" >
+   	<SYSTEM ID="Eyes" label="Eyes">
+   	   <FINDING ID="WNL" Type="checkbox" >
+   			<TEXT> Pupils equal, round, reactive to light and accommodation. Conjunctiva clear. Sclera anicteric. Vision grossly normal. </TEXT>
+   			<CODE> ..... </CODE>
+   		</FINDING>
+   		<FINDING ID="PERRLA" Type="checkbox" >
+   			<TEXT> Pupils equal, round, reactive to light and accommodation. </TEXT>
+   			<CODE> ..... </CODE>
+   		</FINDING>
+   		<FINDING ID="Pupils Pinpoint" Type="checkbox" >
+   			<TEXT> Pupils pinpoint. </TEXT>
+   			<CODE> ..... </CODE>
+   		</FINDING>
+   		<FINDING ID="Pupils Dilated" Type="checkbox" >
+   			<TEXT> Pupils dilated. </TEXT>
+   			<CODE> ..... </CODE>
+   		</FINDING>
+   		<FINDING ID="Sclera Anicteric" Type="checkbox" >
+   			<TEXT> Sclera anicteric. </TEXT>
+   			<CODE> ..... </CODE>
+   		</FINDING>
+   		<FINDING ID="Sclera Icteric" Type="checkbox" >
+   			<TEXT> Sclera Icteric. </TEXT>
+   			<CODE> ..... </CODE>
+   		</FINDING>
+   		<FINDING ID="Conjunctiva Clear" Type="checkbox" >
+   			<TEXT> Conjunctiva clear. </TEXT>
+   			<CODE> ..... </CODE>
+   		</FINDING>
+   		<FINDING ID="Conjunctiva Injected" Type="checkbox" >
+   			<TEXT> Conjunctiva injected. </TEXT>
+   			<CODE> ..... </CODE>
+   		</FINDING>
+   		<FINDING ID="Conjunctiva Red" Type="checkbox" >
+   			<TEXT> Conjunctiva red. </TEXT>
+   			<CODE> ..... </CODE>
+   		</FINDING>
+   		<FINDING ID="Fundi Benign" Type="checkbox" >
+   			<TEXT> Fundi are benign without hemorrhages, exudates or papilledema. </TEXT>
+   			<CODE> ..... </CODE>
+   		</FINDING>
+   		<FINDING ID="Vision Grossly Intact" Type="checkbox" >
+   			<TEXT> Vision grossly intact. </TEXT>
+   			<CODE> ..... </CODE>
+   		</FINDING>
+   		<FINDING ID="Visual Field Loss" Type="lateral" >
+   			<TEXT> There is some loss of visual fields: %s. </TEXT>
+   			<CODE> ..... </CODE>
+   		</FINDING>
+   		<FINDING ID="Contact Lenses" Type="checkbox" >
+   			<TEXT> Wearing contact lenses. </TEXT>
+   			<CODE> ..... </CODE>
+   		</FINDING>
+   		<FINDING ID="Glasses" Type="text-check" >
+   			<TEXT> Wearing glasses. </TEXT>
+   			<CODE> ..... </CODE>
+   		</FINDING>
+   </SYSTEM>
+    <SYSTEM ID="Ears" label="Ears">
+   		<FINDING ID="WNL" Type="checkbox" >
+   			<TEXT> The external ear is normal. EACs are clear. Little or no cerumen. Tms clear without erythema or effusion. Hearing grossly intact.  </TEXT>
+   			<CODE> ..... </CODE>
+   		</FINDING>
+   		<FINDING ID="EACs Clear" Type="checkbox" >
+   			<TEXT> EACs are clear. </TEXT>
+   			<CODE> ..... </CODE>
+   		</FINDING>
+   		<FINDING ID="Cerumen " Type="lateral" >
+   			<TEXT> There is some cerumen: %s. </TEXT>
+   			<CODE> ..... </CODE>
+   		</FINDING>
+   		<FINDING ID="Cerumen Impaction" Type="lateral" >
+   			<TEXT> There is %s cerumen impaction. </TEXT>
+   			<CODE> ..... </CODE>
+   		</FINDING>
+   		<FINDING ID="TMs Clear" Type="checkbox" >
+   			<TEXT> The TMs are clear bilaterally. </TEXT>
+   			<CODE> ..... </CODE>
+   		</FINDING>
+   		<FINDING ID="TM Effusion" Type="lateral" >
+   			<TEXT> There is some %s effusion. </TEXT>
+   			<CODE> ..... </CODE>
+   		</FINDING>
+   		<FINDING ID="TM Erythema" Type="lateral" >
+   			<TEXT> There is some %s TM erythema. </TEXT>
+   			<CODE> ..... </CODE>
+   		</FINDING>
+   		<FINDING ID="TM Retracted" Type="lateral" >
+   			<TEXT> There is some %s TM retraction. </TEXT>
+   			<CODE> ..... </CODE>
+   		</FINDING>
+   		<FINDING ID="TM Bulging" Type="lateral" >
+   			<TEXT> There is some %s TM bulging. </TEXT>
+   			<CODE> ..... </CODE>
+   		</FINDING>
+   		<FINDING ID="Hearing Grossly Intact" Type="checkbox" >
+   			<TEXT> Hearing is grossly intact. </TEXT>
+   			<CODE> ..... </CODE>
+   		</FINDING>
+   		<FINDING ID="Hard of Hearing" Type="checkbox" >
+   			<TEXT> Patient is hard of hearing. </TEXT>
+   			<CODE> ..... </CODE>
+   		</FINDING>
+   		<FINDING ID="Hearing Aids" Type="lateral" >
+   			<TEXT> Patient is wearing %s hearing aids. </TEXT>
+   			<CODE> ..... </CODE>
+   		</FINDING>
+   		<FINDING ID="Hearing Loss" Type="lateral-text" >
+   			<TEXT> Patient has %s hearing loss. </TEXT>
+   			<CODE> ..... </CODE>
+   		</FINDING>  		
+   </SYSTEM>
+    <SYSTEM ID="Nose" label="Nose">
+   	   <FINDING ID="WNL" Type="checkbox" >
+   			<TEXT> Nose is normal without inflammation or rhinorrhea. </TEXT>
+   			<CODE> ..... </CODE>
+   		</FINDING>
+   		<FINDING ID="No Rhinorrhea" Type="checkbox" >
+   			<TEXT> There is no rhinorrhea. </TEXT>
+   			<CODE> ..... </CODE>
+   		</FINDING>
+   		<FINDING ID="Clear Rhinorrhea" Type="checkbox" >
+   			<TEXT> There is clear rhinorrhea. </TEXT>
+   			<CODE> ..... </CODE>
+   		</FINDING>
+   		<FINDING ID="Purulent Rhinorrhea" Type="checkbox" >
+   			<TEXT> There is purulent rhinorrhea. </TEXT>
+   			<CODE> ..... </CODE>
+   		</FINDING>
+   		<FINDING ID="Membranes Non-inflamed" Type="checkbox" >
+   			<TEXT> Membranes are non-inflamed. </TEXT>
+   			<CODE> ..... </CODE>
+   		</FINDING>
+   		<FINDING ID="Membranes Inflamed" Type="checkbox" >
+   			<TEXT> Membranes are inflamed. </TEXT>
+   			<CODE> ..... </CODE>
+   		</FINDING>
+   		<FINDING ID="Epistaxis" Type="lateral-text" >
+   			<TEXT> There is %s epistaxis. </TEXT>
+   			<CODE> ..... </CODE>
+   		</FINDING>
+   </SYSTEM>   
+    <SYSTEM ID="Mouth/Throat" label="Mouth/Throat">
+   	<FINDING ID="WNL" Type="checkbox" >
+   			<TEXT> Mouth and oropharynx are grossly normal. </TEXT>
+   			<CODE> ..... </CODE>
+   		</FINDING>
+   		<FINDING ID="Oropharynx Clear" Type="checkbox" >
+   			<TEXT> Oropharynx is clear. </TEXT>
+   			<CODE> ..... </CODE>
+   		</FINDING>
+   		<FINDING ID="Membranes Moist" Type="checkbox" >
+   			<TEXT> Mucous membranes are moist. </TEXT>
+   			<CODE> ..... </CODE>
+   		</FINDING>
+   		<FINDING ID="Membranes Dry" Type="checkbox" >
+   			<TEXT> Mucous membranes are dry. </TEXT>
+   			<CODE> ..... </CODE>
+   		</FINDING>
+   		<FINDING ID="Membrances Inflamed" Type="checkbox" >
+   			<TEXT> Mucous membranes are inflamed. </TEXT>
+   			<CODE> ..... </CODE>
+   		</FINDING>
+   		<FINDING ID="Tonsils WNL" Type="checkbox" >
+   			<TEXT> Tonsils are not enlarged or not present. </TEXT>
+   			<CODE> ..... </CODE>
+   		</FINDING>
+   		<FINDING ID="Tonsils Enlarged" Type="lateral" >
+   			<TEXT> Tonsils are enlarged: %s. </TEXT>
+   			<CODE> ..... </CODE>
+   		</FINDING>
+   		<FINDING ID="Oropharynx Inflamed" Type="checkbox" >
+   			<TEXT> Oropharynx is inflamed. </TEXT>
+   			<CODE> ..... </CODE>
+   		</FINDING>
+   		<FINDING ID="Exudate Present" Type="checkbox" >
+   			<TEXT> Exudate present. </TEXT>
+   			<CODE> ..... </CODE>
+   		</FINDING>
+   		<FINDING ID="Edentulous" Type="checkbox" >
+   			<TEXT> Edentulous. </TEXT>
+   			<CODE> ..... </CODE>
+   		</FINDING>
+   		<FINDING ID="Teeth Carious" Type="checkbox" >
+   			<TEXT> Teeth carious. </TEXT>
+   			<CODE> ..... </CODE>
+   		</FINDING>
+   		<FINDING ID="Many Teeth Missing" Type="checkbox" >
+   			<TEXT> Many teeth missing. </TEXT>
+   			<CODE> ..... </CODE>
+   		</FINDING>
+   		<FINDING ID="Dentures" Type="lateral" Misc="U/L" >
+   			<TEXT> Patient wearing dentures: %s. </TEXT>
+   			<CODE> ..... </CODE>
+   		</FINDING>
+   		<FINDING ID="Normal Voice" Type="checkbox" >
+   			<TEXT> Voice grossly normal. </TEXT>
+   			<CODE> ..... </CODE>
+   		</FINDING>
+   		<FINDING ID="Hoarse" Type="text-check" >
+   			<TEXT> Voice hoarse. </TEXT>
+   			<CODE> ..... </CODE>
+   		</FINDING>
+   </SYSTEM>
+  </PAGE>
+  <PAGE ID="" label="Heart">
+    <SYSTEM ID="Heart" label="Heart">
+    	<FINDING ID="WNL" Type="checkbox" >
+   			<TEXT> Heart has regular rate and rhythm without murmur. </TEXT>
+   			<CODE> ..... </CODE>
+   		</FINDING>
+   		<FINDING ID="RRR" Type="checkbox" >
+   			<TEXT> Heart has regular rate and rhythm. </TEXT>
+   			<CODE> ..... </CODE>
+   		</FINDING>
+   		<FINDING ID="Irregularly Irregular" Type="checkbox" >
+   			<TEXT> Heart rhythm is irregularly irregular. </TEXT>
+   			<CODE> ..... </CODE>
+   		</FINDING>
+   		<FINDING ID="Tachycardic" Type="checkbox" >
+   			<TEXT> Heart rate is tachycardic. </TEXT>
+   			<CODE> ..... </CODE>
+   		</FINDING>
+   		<FINDING ID="Bradycardic" Type="checkbox" >
+   			<TEXT> Heart rate is bradycardic. </TEXT>
+   			<CODE> ..... </CODE>
+   		</FINDING>
+   		<FINDING ID="No Murmur" Type="checkbox" >
+   			<TEXT> No murmur. </TEXT>
+   			<CODE> ..... </CODE>
+   		</FINDING>
+   		<FINDING ID="SEM" Type="checkbox" Misc="textbox/r/s/'/6'" >
+   			<TEXT> Systolic ejection murmur </TEXT>
+   			<CODE> ..... </CODE>
+   		</FINDING>
+   		<FINDING ID="Holosystolic Murmur" Type="checkbox" >
+   			<TEXT> Holosystolic murmur. </TEXT>
+   			<CODE> ..... </CODE>
+   		</FINDING>
+   		<FINDING ID="Gallop" Type="checkbox" >
+   			<TEXT> Gallop heard. </TEXT>
+   			<CODE> ..... </CODE>
+   		</FINDING>
+   		<FINDING ID="Rub" Type="checkbox" >
+   			<TEXT> Rub heard. </TEXT>
+   			<CODE> ..... </CODE>
+   		</FINDING>
+   		<FINDING ID="Frequent Premature Beats" Type="text-check" >
+   			<TEXT> Frequent premature beats. </TEXT>
+   			<CODE> ..... </CODE>
+   		</FINDING>
+    </SYSTEM>
+    <SYSTEM ID="Lungs" label="Lungs">
+    	<FINDING ID="WNL" Type="checkbox" >
+   			<TEXT> Lungs are clear to auscultation bilaterally with normal respiratory effort. </TEXT>
+   			<CODE> ..... </CODE>
+   		</FINDING>
+   		<FINDING ID="CTA" Type="checkbox" >
+   			<TEXT> Lungs are clear to auscultation bilaterally. </TEXT>
+   			<CODE> ..... </CODE>
+   		</FINDING>
+   		<FINDING ID="Coarse" Type="checkbox" >
+   			<TEXT> Lungs are coarse. </TEXT>
+   			<CODE> ..... </CODE>
+   		</FINDING>
+   		<FINDING ID="Decreased Breath Sounds" Type="lateral" >
+   			<TEXT> Decreased breath sounds: %s. </TEXT>
+   			<CODE> ..... </CODE>
+   		</FINDING>
+   		<FINDING ID="Wheezes" Type="lateral" >
+   			<TEXT> Wheezes heard: %s. </TEXT>
+   			<CODE> ..... </CODE>
+   		</FINDING>
+   		<FINDING ID="Ronchii" Type="lateral" >
+   			<TEXT> Ronchii heard: %s. </TEXT>
+   			<CODE> ..... </CODE>
+   		</FINDING>
+   		<FINDING ID="Rales" Type="lateral" >
+   			<TEXT> Rales heard: %s. </TEXT>
+   			<CODE> ..... </CODE>
+   		</FINDING>
+   		<FINDING ID="Crackles" Type="lateral" >
+   			<TEXT> Crackles heard: %s. </TEXT>
+   			<CODE> ..... </CODE>
+   		</FINDING>
+   		<FINDING ID="Normal Respiratory Effort" Type="checkbox" >
+   			<TEXT> Normal respiratory effort. </TEXT>
+   			<CODE> ..... </CODE>
+   		</FINDING>
+   		<FINDING ID="Dyspneic" Type="checkbox" >
+   			<TEXT> There is some dyspnea. </TEXT>
+   			<CODE> ..... </CODE>
+   		</FINDING>
+   		<FINDING ID="Tachypneic" Type="checkbox" >
+   			<TEXT> Respiration is tachypneic. </TEXT>
+   			<CODE> ..... </CODE>
+   		</FINDING>
+   		<FINDING ID="Nasal Flaring" Type="checkbox" >
+   			<TEXT> There is some nasal flaring. </TEXT>
+   			<CODE> ..... </CODE>
+   		</FINDING>
+   		<FINDING ID="Retractions" Type="text-check" >
+   			<TEXT> There are intercostal retractions with respiration. </TEXT>
+   			<CODE> ..... </CODE>
+   		 </FINDING>
+   		 <!-- <FINDING ID="Frequent Premature Beats" Type="text-check">
+   			<TEXT> ..... </TEXT>
+   			<CODE> ..... </CODE>
+   		</FINDING>  -->
+    </SYSTEM>
+    <SYSTEM ID="Chest" label="Chest">
+    	<FINDING ID="WNL" Type="checkbox" >
+   			<TEXT> Chest wall is normal and non-tender. </TEXT>
+   			<CODE> ..... </CODE>
+   		</FINDING>
+   		<FINDING ID="Non-Tender" Type="checkbox" >
+   			<TEXT> Chest wall is non-tender. </TEXT>
+   			<CODE> ..... </CODE>
+   		</FINDING>
+   		<FINDING ID="Sternal Tenderness" Type="checkbox" >
+   			<TEXT> There is sternal tenderness. </TEXT>
+   			<CODE> ..... </CODE>
+   		</FINDING>
+   		<FINDING ID="Chest Wall Tenderness" Type="lateral" >
+   			<TEXT> There is %s chest wall tenderness. </TEXT>
+   			<CODE> ..... </CODE>
+   		</FINDING>
+   		<FINDING ID="Normal AP Diameter" Type="checkbox" >
+   			<TEXT> Chest AP diameter is normal. </TEXT>
+   			<CODE> ..... </CODE>
+   		</FINDING>
+   		<FINDING ID="Pectus Excavatum" Type="text-check" >
+   			<TEXT> Chest exhibits pectus excavatum. </TEXT>
+   			<CODE> ..... </CODE>
+   		</FINDING>
+      </SYSTEM>
+  </PAGE>
+  <PAGE ID="" label="Abdomen">
+  	<SYSTEM ID="Abdomen" label="Abdomen">
+  		<FINDING ID="WNL" Type="checkbox" >
+   			<TEXT> Abdomen is soft, non-tender and non distended. No rebound or guarding. No mass appreciated. Bowel sounds are normal.  </TEXT>
+   			<CODE> ..... </CODE>
+   		</FINDING>
+   		<FINDING ID="Soft" Type="checkbox" >
+   			<TEXT> Abdomen is soft. </TEXT>
+   			<CODE> ..... </CODE>
+   		</FINDING>
+   		<FINDING ID="Rigid" Type="checkbox" >
+   			<TEXT> Abdomen is rigid, </TEXT>
+   			<CODE> ..... </CODE>
+   		</FINDING>
+   		<FINDING ID="Non-Distended" Type="checkbox" >
+   			<TEXT> non-distended, </TEXT>
+   			<CODE> ..... </CODE>
+   		</FINDING>
+   		<FINDING ID="Distended" Type="checkbox" >
+   			<TEXT> distended, </TEXT>
+   			<CODE> ..... </CODE>
+   		</FINDING>
+   		<FINDING ID="Tympanic" Type="checkbox" >
+   			<TEXT> tympanic, </TEXT>
+   			<CODE> ..... </CODE>
+   		</FINDING>
+   		<FINDING ID="Non-tender" Type="checkbox" >
+   			<TEXT> non-tender. </TEXT>
+   			<CODE> ..... </CODE>
+   		</FINDING>
+   		<FINDING ID="Lower Quadrant Tenderness" Type="lateral" >
+   			<TEXT> with %s lower quadrant tenderness. </TEXT>
+   			<CODE> ..... </CODE>
+   		</FINDING>
+   		<FINDING ID="Upper Quadrant Tenderness" Type="lateral" >
+   			<TEXT> with %s upper quadrant tenderness. </TEXT>
+   			<CODE> ..... </CODE>
+   		</FINDING>
+   		<FINDING ID="Epigastric Tenderness" Type="checkbox" >
+   			<TEXT> with epigastric tenderness. </TEXT>
+   			<CODE> ..... </CODE>
+   		</FINDING>
+   		<FINDING ID="Periumbilical Tenderness" Type="checkbox" >
+   			<TEXT> with periumbilical tenderness. </TEXT>
+   			<CODE> ..... </CODE>
+   		</FINDING>
+   		<FINDING ID="Suprapubic Tenderness" Type="checkbox" >
+   			<TEXT> with suprapubic tenderness. </TEXT>
+   			<CODE> ..... </CODE>
+   		</FINDING>
+   		<FINDING ID="No Rebound or Guarding" Type="checkbox" >
+   			<TEXT> No rebound or guarding. </TEXT>
+   			<CODE> ..... </CODE>
+   		</FINDING>
+   		<FINDING ID="Rebound" Type="checkbox" >
+   			<TEXT> There is rebound tenderness. </TEXT>
+   			<CODE> ..... </CODE>
+   		</FINDING>
+   		<FINDING ID="Guarding" Type="checkbox" >
+   			<TEXT> There is guarding. </TEXT>
+   			<CODE> ..... </CODE>
+   		</FINDING>
+   		<FINDING ID="Normal Bowel Sounds" Type="checkbox" >
+   			<TEXT> Bowel sounds are normal. </TEXT>
+   			<CODE> ..... </CODE>
+   		</FINDING>
+   		<FINDING ID="Hyperactive Bowel Sounds" Type="checkbox" >
+   			<TEXT> Bowel sounds are hyperactive. </TEXT>
+   			<CODE> ..... </CODE>
+   		</FINDING>
+   		<FINDING ID="Hypoactive Bowel Sounds" Type="checkbox" >
+   			<TEXT> Bowel sounds are hypoactive. </TEXT>
+   			<CODE> ..... </CODE>
+   		</FINDING>
+   		<FINDING ID="Rare Bowel Sounds" Type="checkbox" >
+   			<TEXT> Bowel sounds are rare. </TEXT>
+   			<CODE> ..... </CODE>
+   		</FINDING>
+   		<FINDING ID="High Pitched Bowel Sounds" Type="checkbox" >
+   			<TEXT> Bowel sounds are high pitched. </TEXT>
+   			<CODE> ..... </CODE>
+   		</FINDING>
+   		<FINDING ID="No Mass" Type="checkbox" >
+   			<TEXT> No mass appreciated. </TEXT>
+   			<CODE> ..... </CODE>
+   		</FINDING>
+   		<FINDING ID="Mass Palpated" Type="checkbox" >
+   			<TEXT> mass palpated. </TEXT>
+   			<CODE> ..... </CODE>
+   		</FINDING>
+   		<FINDING ID="No HSM" Type="checkbox" >
+   			<TEXT> No hepatosplenomegaly. </TEXT>
+   			<CODE> ..... </CODE>
+   		</FINDING>
+   		<FINDING ID="Hepatomegaly" Type="checkbox" >
+   			<TEXT> There is hepatomegaly. </TEXT>
+   			<CODE> ..... </CODE>
+   		</FINDING>
+   		<FINDING ID="Splenomegaly" Type="checkbox" >
+   			<TEXT> There is splenomegaly. </TEXT>
+   			<CODE> ..... </CODE>
+   		</FINDING>
+   		<FINDING ID="No CVA Tenderness" Type="checkbox" >
+   			<TEXT> There is no CVA tenderness. </TEXT>
+   			<CODE> ..... </CODE>
+   		</FINDING>
+   		<FINDING ID="CVA Tenderness" Type="lateral-text" >
+   			<TEXT> There is %s CVA tenderness. </TEXT>
+   			<CODE> ..... </CODE>
+   		</FINDING>  	
+  	</SYSTEM>
+  </PAGE>
+  <PAGE ID="" label="Extremeties">
+  	<SYSTEM ID="Extremeties" label="Extremeties">
+  		<FINDING ID="WNL" Type="checkbox" >
+   			<TEXT> Extremities are normal without clubbing, cyanosis or edema. </TEXT>
+   			<CODE> ..... </CODE>
+   		</FINDING>
+   		<FINDING ID="No Deformity" Type="checkbox" >
+   			<TEXT> There is no deformity. </TEXT>
+   			<CODE> ..... </CODE>
+   		</FINDING>
+   		<FINDING ID="No Amputations" Type="checkbox" >
+   			<TEXT> There are no amputations. </TEXT>
+   			<CODE> ..... </CODE>
+   		</FINDING>
+   		<FINDING ID="Upper Extremity Amputation" Type="lateral" >
+   			<TEXT> There is a %s upper extremity amputation. </TEXT>
+   			<CODE> ..... </CODE>
+   		</FINDING>
+   		<FINDING ID="Above Knee Amputation" Type="lateral" >
+   			<TEXT> There is a %s above knee amputation. </TEXT>
+   			<CODE> ..... </CODE>
+   		</FINDING>
+   		<FINDING ID="Below Knee Amputation" Type="lateral" >
+   			<TEXT> There is a %s below the knee amputation. </TEXT>
+   			<CODE> ..... </CODE>
+   		</FINDING>
+   		<FINDING ID="Total Foot Amputation" Type="lateral" >
+   			<TEXT> There is a %s foot amputation. </TEXT>
+   			<CODE> ..... </CODE>
+   		</FINDING>
+   		<FINDING ID="Partial Amputation" Type="lateral" >
+   			<TEXT> There is a %s partial foot amputation. </TEXT>
+   			<CODE> ..... </CODE>
+   		</FINDING>
+   		<FINDING ID="No Clubbing" Type="checkbox" >
+   			<TEXT> There is no clubbing. </TEXT>
+   			<CODE> ..... </CODE>
+   		</FINDING>
+   		<FINDING ID="No Cyanosis" Type="checkbox" >
+   			<TEXT> There is no cyanosis. </TEXT>
+   			<CODE> ..... </CODE>
+   		</FINDING>
+   		<FINDING ID="Cyanosis Present" Type="checkbox" >
+   			<TEXT> Cyanosis is present. </TEXT>
+   			<CODE> ..... </CODE>
+   		</FINDING>
+   		<FINDING ID="Acrocyanosis" Type="checkbox"  >
+   			<TEXT> There is acrocyanosis. </TEXT>
+   			<CODE> ..... </CODE>
+   		</FINDING>
+   		<FINDING ID="No Edema" Type="checkbox" >
+   			<TEXT> There is no edema. </TEXT>
+   			<CODE> ..... </CODE>
+   		</FINDING>
+   		<FINDING ID="Upper Extremity Edema" Type="lateral" Misc="textbox/r/s" >
+   			<TEXT> There is %s upper extremity edema. </TEXT>
+   			<CODE> ..... </CODE>
+   		</FINDING>
+   		<FINDING ID="Lower Extremity Edema" Type="lateral" Misc="textbox/r/s" >
+   			<TEXT> There is %s lower extremity edema. </TEXT>
+   			<CODE> ..... </CODE>
+   		</FINDING>
+   		<FINDING ID="No Pitting" Type="checkbox" >
+   			<TEXT> There is no pitting. </TEXT>
+   			<CODE> ..... </CODE>
+   		</FINDING>
+   		<FINDING ID="With Pitting" Type="checkbox" >
+   			<TEXT> There is pitting. </TEXT>
+   			<CODE> ..... </CODE>
+   		</FINDING>
+   		<FINDING ID="Good Capillary Refill" Type="checkbox" >
+   			<TEXT> Good capillary refill. </TEXT>
+   			<CODE> ..... </CODE>
+   		</FINDING>
+   		<FINDING ID="Slow Capillary Refill" Type="checkbox" >
+   			<TEXT> Slow capillary refill. </TEXT>
+   			<CODE> ..... </CODE>
+   		</FINDING>
+   		<FINDING ID="Poor Capillary Refill" Type="checkbox" >
+   			<TEXT> Poor capillary refill. </TEXT>
+   			<CODE> ..... </CODE>
+   		</FINDING>
+   		<FINDING ID="Normal Radial Pulses" Type="checkbox" >
+   			<TEXT> Radial pulses are normal. </TEXT>
+   			<CODE> ..... </CODE>
+   		</FINDING>
+   		<FINDING ID="Radial Pulses" Type="checkbox" Misc="textbox/r/s" >
+   			<TEXT> Radial pulses are:  </TEXT>
+   			<CODE> ..... </CODE>
+   		</FINDING>
+   		<FINDING ID="Normal Pedal Pulses" Type="checkbox" >
+   			<TEXT> Normal pedal pulses. </TEXT>
+   			<CODE> ..... </CODE>
+   		</FINDING>
+   		<FINDING ID="Pedal Pulses" Type="checkbox" Misc="textbox/r/s" >
+   			<TEXT> Pedal pulses are: </TEXT>
+   			<CODE> ..... </CODE>
+   		</FINDING>
+   		<FINDING ID="Weak Pedal Pulses" Type="checkbox" >
+   			<TEXT> Weak pedal pulses. </TEXT>
+   			<CODE> ..... </CODE>
+   		</FINDING>
+   		<FINDING ID="Absent Pedal Pulses" Type="text-check" >
+   			<TEXT> Absent pedal pulses. </TEXT>
+   			<CODE> ..... </CODE>
+   		</FINDING>   		
+  	</SYSTEM>
+  </PAGE>
+  <PAGE ID="" label="Skin">
+  <SYSTEM ID="Skin" label="Skin">
+  	   <FINDING ID="WNL" Type="checkbox" >
+   			<TEXT> Skin is soft, warm and dry with good color. </TEXT>
+   			<CODE> ..... </CODE>
+   		</FINDING>
+   		<FINDING ID="Soft" Type="checkbox" >
+   			<TEXT> Skin is soft. </TEXT>
+   			<CODE> ..... </CODE>
+   		</FINDING>
+   		<FINDING ID="Warm" Type="checkbox" >
+   			<TEXT> warm, </TEXT>
+   			<CODE> ..... </CODE>
+   		</FINDING>
+   		<FINDING ID="Cool" Type="checkbox" >
+   			<TEXT> cool, </TEXT>
+   			<CODE> ..... </CODE>
+   		</FINDING>
+   		<FINDING ID="Dry" Type="checkbox" >
+   			<TEXT> dry, </TEXT>
+   			<CODE> ..... </CODE>
+   		</FINDING>
+   		<FINDING ID="Diaphoretic" Type="checkbox" >
+   			<TEXT> diaphoretic, </TEXT>
+   			<CODE> ..... </CODE>
+   		</FINDING>
+   		<FINDING ID="No Cyanosis" Type="checkbox" >
+   			<TEXT> non-cyanotic,  </TEXT>
+   			<CODE> ..... </CODE>
+   		</FINDING>
+   		<FINDING ID="Cyanosis" Type="checkbox" >
+   			<TEXT> cyanotic, </TEXT>
+   			<CODE> ..... </CODE>
+   		</FINDING>
+   		<FINDING ID="No Rash" Type="checkbox" >
+   			<TEXT> No rash present.  </TEXT>
+   			<CODE> ..... </CODE>
+   		</FINDING>
+   		<FINDING ID="Rash Present" Type="checkbox" >
+   			<TEXT> Rash present. </TEXT>
+   			<CODE> ..... </CODE>
+   		</FINDING>
+   		<FINDING ID="No Lesion" Type="text-check" >
+   			<TEXT> No obvious suspicious lesion. </TEXT>
+   			<CODE> ..... </CODE>
+   		</FINDING>		
+  </SYSTEM>
+  </PAGE>
+  <PAGE ID="" label="GU">
+  <SYSTEM ID="GU" label="GU">
+  	    <FINDING ID="WNL" Type="checkbox" >
+   			<TEXT> Genitalia normal for age. </TEXT>
+   			<CODE> ..... </CODE>
+   		</FINDING>
+   		<!-- <FINDING ID="Soft" Type="checkbox" >
+   			<TEXT> ..... </TEXT>
+   			<CODE> ..... </CODE>
+   		</FINDING>
+   		<FINDING ID="Warm" Type="checkbox" >
+   			<TEXT> ..... </TEXT>
+   			<CODE> ..... </CODE>
+   		</FINDING>
+   		<FINDING ID="Cool" Type="checkbox" >
+   			<TEXT> ..... </TEXT>
+   			<CODE> ..... </CODE>
+   		</FINDING>
+   		<FINDING ID="Dry" Type="checkbox" >
+   			<TEXT> ..... </TEXT>
+   			<CODE> ..... </CODE>
+   		</FINDING>
+   		<FINDING ID="Diaphoretic" Type="checkbox" >
+   			<TEXT> ..... </TEXT>
+   			<CODE> ..... </CODE>
+   		</FINDING>
+   		<FINDING ID="No Cyanosis" Type="checkbox" >
+   			<TEXT> ..... </TEXT>
+   			<CODE> ..... </CODE>
+   		</FINDING>
+   		<FINDING ID="Cyanosis" Type="checkbox" >
+   			<TEXT> ..... </TEXT>
+   			<CODE> ..... </CODE>
+   		</FINDING>
+   		<FINDING ID="No Rash" Type="checkbox" >
+   			<TEXT> ..... </TEXT>
+   			<CODE> ..... </CODE>
+   		</FINDING>
+   		<FINDING ID="Rash Present" Type="checkbox" >
+   			<TEXT> ..... </TEXT>
+   			<CODE> ..... </CODE>
+   		</FINDING>
+   		<FINDING ID="No Lesion" Type="text-check" >
+   			<TEXT> ..... </TEXT>
+   			<CODE> ..... </CODE>
+   		</FINDING>	-->	
+  </SYSTEM>
+  </PAGE>
+  <PAGE ID="" label="GYN">
+  <SYSTEM ID="Gyn/Pelvic" label="Gyn/Pelvic">
+  	   <FINDING ID="Pelvic Exam WNL" Type="checkbox" >
+   			<TEXT> Pelvic exam within normal limits. </TEXT>
+   			<CODE> ..... </CODE>
+   		</FINDING>
+   		<FINDING ID="Normal Female Escutcheon" Type="checkbox" >
+   			<TEXT> Normal female escutcheon. </TEXT>
+   			<CODE> ..... </CODE>
+   		</FINDING>
+   		<FINDING ID="Male Pattern Escutcheon" Type="checkbox" >
+   			<TEXT> Male pattern escutcheon. </TEXT>
+   			<CODE> ..... </CODE>
+   		</FINDING>
+   		<FINDING ID="Vulva Without Lesions" Type="checkbox" >
+   			<TEXT> Vulva is without lesions. </TEXT>
+   			<CODE> ..... </CODE>
+   		</FINDING>
+   		<FINDING ID="EGBUS Normal" Type="checkbox" >
+   			<TEXT> EGBUS normal. </TEXT>
+   			<CODE> ..... </CODE>
+   		</FINDING>
+   		<FINDING ID="No Discharge" Type="checkbox" >
+   			<TEXT> No vaginal discharge. </TEXT>
+   			<CODE> ..... </CODE>
+   		</FINDING>
+   		<!-- <FINDING ID="Cyanosis" Type="checkbox" >
+   			<TEXT> ..... </TEXT>
+   			<CODE> ..... </CODE>
+   		</FINDING>  -->
+   		<FINDING ID="Introitus Well Supported" Type="checkbox" >
+   			<TEXT> Introitus well supported. </TEXT>
+   			<CODE> ..... </CODE>
+   		</FINDING>
+   		<FINDING ID="No Cystocele" Type="checkbox" >
+   			<TEXT> No cystocele. </TEXT>
+   			<CODE> ..... </CODE>
+   		</FINDING>
+   		<FINDING ID="Cystocele Present" Type="checkbox" >
+   			<TEXT> Cystocele is present. </TEXT>
+   			<CODE> ..... </CODE>
+   		</FINDING>
+   		<!--<FINDING ID="No Urethrocele" Type="checkbox" >
+   			<TEXT> ..... </TEXT>
+   			<CODE> ..... </CODE>
+   		</FINDING>
+   		<FINDING ID="Urethrocele Present" Type="checkbox" >
+   			<TEXT> ..... </TEXT>
+   			<CODE> ..... </CODE>
+   		</FINDING> -->
+   		<FINDING ID="No Enterocele" Type="checkbox" >
+   			<TEXT> No enterocele. </TEXT>
+   			<CODE> ..... </CODE>
+   		</FINDING>
+   		<FINDING ID="Enterocele Present" Type="checkbox" >
+   			<TEXT> Enterocele is present. </TEXT>
+   			<CODE> ..... </CODE>
+   		</FINDING>
+   		<FINDING ID="No Hemorrhoids" Type="checkbox" >
+   			<TEXT> No visible hemorrhoids. </TEXT>
+   			<CODE> ..... </CODE>
+   		</FINDING>
+   		<FINDING ID="Hemorrhoids Present" Type="checkbox" >
+   			<TEXT> Hemorrhoids visible. </TEXT>
+   			<CODE> ..... </CODE>
+   		</FINDING>
+   		<FINDING ID="Vagina Pink Rugae" Type="checkbox" >
+   			<TEXT> Vagina with pink rugae. </TEXT>
+   			<CODE> ..... </CODE>
+   		</FINDING>
+   		<FINDING ID="Mucosa Not Atrophic" Type="checkbox" >
+   			<TEXT> Vaginal mucosa not atrophic. </TEXT>
+   			<CODE> ..... </CODE>
+   		</FINDING>
+   		<FINDING ID="Mucosa Atrophic" Type="checkbox" >
+   			<TEXT> Vaginal mucosa is atrophic. </TEXT>
+   			<CODE> ..... </CODE>
+   		</FINDING>
+   		<FINDING ID="No Discharge" Type="checkbox" >
+   			<TEXT> No vaginal discharge. </TEXT>
+   			<CODE> ..... </CODE>
+   		</FINDING>
+   		<FINDING ID="Slight White Discharge" Type="checkbox" >
+   			<TEXT> Slight white vaginal discharge. </TEXT>
+   			<CODE> ..... </CODE>
+   		</FINDING>
+   		<FINDING ID="Thick White Discharge" Type="checkbox" >
+   			<TEXT> Thick white vaginal discharge. </TEXT>
+   			<CODE> ..... </CODE>
+   		</FINDING>
+   		<FINDING ID="Yellow White Discharge" Type="checkbox" >
+   			<TEXT> Yellow/White vaginal discharge. </TEXT>
+   			<CODE> ..... </CODE>
+   		</FINDING>
+   		<FINDING ID="Greenish White Discharge" Type="checkbox" >
+   			<TEXT> Greenish white vaginal discharge. </TEXT>
+   			<CODE> ..... </CODE>
+   		</FINDING>
+   		<FINDING ID="Bloody Discharge" Type="checkbox" >
+   			<TEXT> Bloody vaginal discharge. </TEXT>
+   			<CODE> ..... </CODE>
+   		</FINDING>
+   		<FINDING ID="Cervix Normal Diameter" Type="checkbox" >
+   			<TEXT> Cervix of normal diameter. </TEXT>
+   			<CODE> ..... </CODE>
+   		</FINDING>
+   		<FINDING ID="Cervix Not Present" Type="checkbox" >
+   			<TEXT> Cervix not present. </TEXT>
+   			<CODE> ..... </CODE>
+   		</FINDING>
+   		<FINDING ID="OS Small and Round" Type="checkbox" >
+   			<TEXT> Cervical OS small and round. </TEXT>
+   			<CODE> ..... </CODE>
+   		</FINDING>
+   		<FINDING ID="No Lesions" Type="checkbox" >
+   			<TEXT> No cervical lesions. </TEXT>
+   			<CODE> ..... </CODE>
+   		</FINDING>
+   		<FINDING ID="No Ectropion" Type="checkbox" >
+   			<TEXT> No ectropion. </TEXT>
+   			<CODE> ..... </CODE>
+   		</FINDING>
+   		<FINDING ID="No Discharge" Type="checkbox" >
+   			<TEXT> No cervical discharge. </TEXT>
+   			<CODE> ..... </CODE>
+   		</FINDING>
+   		<FINDING ID="Clear Cervical Mucous Present" Type="checkbox" >
+   			<TEXT> Clear cervical mucous present. </TEXT>
+   			<CODE> ..... </CODE>
+   		</FINDING>
+   		<FINDING ID="No Cervical Motion Tenderness" Type="checkbox" >
+   			<TEXT> No cervical motion tenderness. </TEXT>
+   			<CODE> ..... </CODE>
+   		</FINDING>
+   		<FINDING ID="Cervical Motion Tenderness Present" Type="checkbox" >
+   			<TEXT> Cervical motion tenderness present. </TEXT>
+   			<CODE> ..... </CODE>
+   		</FINDING>
+   		<FINDING ID="Uterus Small" Type="checkbox" >
+   			<TEXT> Uterus small by palpation. </TEXT>
+   			<CODE> ..... </CODE>
+   		</FINDING>
+   		<FINDING ID="Large Uterus" Type="checkbox" >
+   			<TEXT> Uterus loose by palpation. </TEXT>
+   			<CODE> ..... </CODE>
+   		</FINDING>
+   		<FINDING ID="No Uterine Tenderness" Type="checkbox" >
+   			<TEXT> No uterine tenderness. </TEXT>
+   			<CODE> ..... </CODE>
+   		</FINDING>
+   		<FINDING ID="Uterine Tenderness Present" Type="checkbox" >
+   			<TEXT> Uterine tender. </TEXT>
+   			<CODE> ..... </CODE>
+   		</FINDING>
+   		<FINDING ID="Uterus Firm" Type="checkbox" >
+   			<TEXT> Uterus firm. </TEXT>
+   			<CODE> ..... </CODE>
+   		</FINDING>
+   		<FINDING ID="Uterus Soft" Type="checkbox" >
+   			<TEXT> Uterus soft. </TEXT>
+   			<CODE> ..... </CODE>
+   		</FINDING>
+   		<FINDING ID="Ovaries Palpable and Appropriate" Type="checkbox" >
+   			<TEXT> Ovaries palpable and appropriately small. </TEXT>
+   			<CODE> ..... </CODE>
+   		</FINDING>
+   		<FINDING ID="Ovaries Not Palpable" Type="checkbox" >
+   			<TEXT> Ovaries not palpable. </TEXT>
+   			<CODE> ..... </CODE>
+   		</FINDING>
+   		<FINDING ID="No Masses Palpated" Type="checkbox" >
+   			<TEXT> No masses palpated. </TEXT>
+   			<CODE> ..... </CODE>
+   		</FINDING>
+   		<FINDING ID="Pelvic Mass Palpated" Type="checkbox" >
+   			<TEXT> Pelvic mass palpated. </TEXT>
+   			<CODE> ..... </CODE>
+   		</FINDING>
+   		<FINDING ID="No Pelvic Tenderness" Type="checkbox" >
+   			<TEXT> No pelvic tenderness. </TEXT>
+   			<CODE> ..... </CODE>
+   		</FINDING>
+   		<FINDING ID="Suprapubic Tenderness" Type="checkbox" >
+   			<TEXT> There is suprapubic tenderness. </TEXT>
+   			<CODE> ..... </CODE>
+   		</FINDING>
+   		<FINDING ID="RLQ Pelvic Tenderness" Type="checkbox" >
+   			<TEXT> There is RLQ pelvic tenderness. </TEXT>
+   			<CODE> ..... </CODE>
+   		</FINDING>
+   		<FINDING ID="LLQ Pelvic Tenderness" Type="text-check" >
+   			<TEXT> There is LLQ pelvic tenderness. </TEXT>
+   			<CODE> ..... </CODE>
+   		</FINDING>
+  </SYSTEM>
+  <SYSTEM ID="Breasts" label="Breasts">
+  	  <FINDING ID="WNL" Type="checkbox" >
+   			<TEXT> Breasts are within normal limits without suspicious nodules or masses.Nipples were normal. </TEXT>
+   			<CODE> ..... </CODE>
+   	  </FINDING>
+   	  <FINDING ID="No mass" Type="checkbox" >
+   			<TEXT> There were no breast masses on palpation. </TEXT>
+   			<CODE> ..... </CODE>
+   		</FINDING>
+   	  <FINDING ID="Breast mass palpated" Type="lateral" >
+   			<TEXT> A mass was palpated in %s breast. </TEXT>
+   			<CODE> ..... </CODE>
+   		</FINDING>
+   		<FINDING ID="Nipple retraction" Type="lateral" >
+   			<TEXT> There was %s nipple retraction. </TEXT>
+   			<CODE> ..... </CODE>
+   		</FINDING>
+   		<FINDING ID="Erythema" Type="lateral" >
+   			<TEXT> There was %s breast erythema. </TEXT>
+   			<CODE> ..... </CODE>
+   		</FINDING>   		
+   		<FINDING ID="Nipple Discharge" Type="lateral" >
+   			<TEXT> There was a %s nipple discharge. </TEXT>
+   			<CODE> ..... </CODE>
+   		</FINDING>
+   		<!-- <FINDING ID="No Cyanosis" Type="checkbox" >
+   			<TEXT> ..... </TEXT>
+   			<CODE> ..... </CODE>
+   		</FINDING>
+   		<FINDING ID="Cyanosis" Type="checkbox" >
+   			<TEXT> ..... </TEXT>
+   			<CODE> ..... </CODE>
+   		</FINDING>
+   		<FINDING ID="No Rash" Type="checkbox" >
+   			<TEXT> ..... </TEXT>
+   			<CODE> ..... </CODE>
+   		</FINDING>
+   		<FINDING ID="Rash Present" Type="checkbox" >
+   			<TEXT> ..... </TEXT>
+   			<CODE> ..... </CODE>
+   		</FINDING>
+   		<FINDING ID="No Lesion" Type="text-check" >
+   			<TEXT> ..... </TEXT>
+   			<CODE> ..... </CODE>
+   		</FINDING> -->
+  </SYSTEM>
+  </PAGE>
+  <PAGE ID="" label="ORTHO">
+  <SYSTEM ID="C-Spine" label="C-Spine">
+  	  <FINDING ID="WNL" Type="checkbox" >
+   			<TEXT> C-spine is grossly normal without deformity, tenderness or muscle spasm. </TEXT>
+   			<CODE> ..... </CODE>
+   		</FINDING>
+   		<FINDING ID="No Cervical Tenderness" Type="checkbox" >
+   			<TEXT> There is no cervical tenderness. </TEXT>
+   			<CODE> ..... </CODE>
+   		</FINDING>
+   		<FINDING ID="Cervical Tenderness" Type="checkbox" >
+   			<TEXT> There is cervical spine tenderness. </TEXT>
+   			<CODE> ..... </CODE>
+   		</FINDING>
+   		<FINDING ID="Paracervical Tenderness" Type="lateral" >
+   			<TEXT> There is cervical paraspinal tenderness. </TEXT>
+   			<CODE> ..... </CODE>
+   		</FINDING>
+   		<FINDING ID="No Spasm" Type="checkbox" >
+   			<TEXT> No spasm. </TEXT>
+   			<CODE> ..... </CODE>
+   		</FINDING>
+   		<FINDING ID="Spasm Present" Type="checkbox" >
+   			<TEXT> There is muscle spasm. </TEXT>
+   			<CODE> ..... </CODE>
+   		</FINDING>
+   		<FINDING ID="Normal ROM" Type="checkbox" >
+   			<TEXT> Normal range of motion. </TEXT>
+   			<CODE> ..... </CODE>
+   		</FINDING>
+   		<FINDING ID="Limited ROM" Type="checkbox" >
+   			<TEXT> Limited range of motion. </TEXT>
+   			<CODE> ..... </CODE>
+   		</FINDING>
+   		<FINDING ID="No Deformity" Type="text-check" >
+   			<TEXT> No deformity. </TEXT>
+   			<CODE> ..... </CODE>
+   		</FINDING>
+  </SYSTEM>
+  <SYSTEM ID="Low Back" label="Low back">
+  	  <FINDING ID="WNL" Type="checkbox" >
+   			<TEXT> Low back normal to exam. No tenderness or spasm. </TEXT>
+   			<CODE> ..... </CODE>
+   		</FINDING>
+   		<FINDING ID="No Spinal Tenderness" Type="checkbox" >
+   			<TEXT> No tenderness of LS-spine.. </TEXT>
+   			<CODE> ..... </CODE>
+   		</FINDING>
+   		<FINDING ID="Spinal Tenderness" Type="checkbox" >
+   			<TEXT> There is tenderness of the LS spine. </TEXT>
+   			<CODE> ..... </CODE>
+   		</FINDING>
+   		<FINDING ID="Paraspinal Tenderness" Type="lateral" >
+   			<TEXT> There is %s LS paraspinal tenderness. </TEXT>
+   			<CODE> ..... </CODE>
+   		</FINDING>
+   		<FINDING ID="No Spasm" Type="checkbox" >
+   			<TEXT> No muscle spasm. </TEXT>
+   			<CODE> ..... </CODE>
+   		</FINDING>
+   		<FINDING ID="Spasm Present" Type="checkbox" >
+   			<TEXT> There is muscle spasm present. </TEXT>
+   			<CODE> ..... </CODE>
+   		</FINDING>
+   		<FINDING ID="Normal ROM" Type="checkbox" >
+   			<TEXT> Normal range of motion. </TEXT>
+   			<CODE> ..... </CODE>
+   		</FINDING>
+   		<FINDING ID="Limited ROM" Type="checkbox" >
+   			<TEXT> Limited low back range of motion. </TEXT>
+   			<CODE> ..... </CODE>
+   		</FINDING>
+   		<FINDING ID="No Deformity" Type="checkbox" >
+   			<TEXT> No deformity of low back. </TEXT>
+   			<CODE> ..... </CODE>
+   		</FINDING>
+   		<FINDING ID="Neg SLR" Type="checkbox" >
+   			<TEXT> Negative straight leg raise. </TEXT>
+   			<CODE> ..... </CODE>
+   		</FINDING>
+   		<FINDING ID="Pos SLR" Type="lateral" >
+   			<TEXT> Positive %s straight leg raise. </TEXT>
+   			<CODE> ..... </CODE>
+   		</FINDING>
+   		<!-- <FINDING ID="Lesion" Type="text-check" >
+   			<TEXT> ..... </TEXT>
+   			<CODE> ..... </CODE>
+   		</FINDING> -->
+  </SYSTEM>
+  <SYSTEM ID="Knees" label="Knees">
+  	  <FINDING ID="WNL" Type="checkbox" >
+   			<TEXT> The knees are normal to exam bilaterally. </TEXT>
+   			<CODE> ..... </CODE>
+   		</FINDING>
+   		<!-- <FINDING ID="Soft" Type="checkbox" >
+   			<TEXT> ..... </TEXT>
+   			<CODE> ..... </CODE>
+   		</FINDING> -->
+   		<FINDING ID="Neg Anterior" Type="lateral" >
+   			<TEXT> Negative anterior drawer sign: %s. </TEXT>
+   			<CODE> ..... </CODE>
+   		</FINDING>
+   		<FINDING ID="Pos Anterior Drawer" Type="lateral" >
+   			<TEXT> Positive anterior drawer sign:%s. </TEXT>
+   			<CODE> ..... </CODE>
+   		</FINDING>
+   		<FINDING ID="Neg McMurray" Type="lateral" >
+   			<TEXT> Negative McMurray:%s. </TEXT>
+   			<CODE> ..... </CODE>
+   		</FINDING>
+   		<FINDING ID="Pos McMurray" Type="lateral" >
+   			<TEXT> McMurray is positive:%s. </TEXT>
+   			<CODE> ..... </CODE>
+   		</FINDING>
+   		<FINDING ID="No Patellar Grind" Type="checkbox" >
+   			<TEXT> No patellar grind bilaterally. </TEXT>
+   			<CODE> ..... </CODE>
+   		</FINDING>
+   		<FINDING ID="Patellar Grind" Type="lateral" >
+   			<TEXT> Patellar grind:%s. </TEXT>
+   			<CODE> ..... </CODE>
+   		</FINDING>
+   		<FINDING ID="Normal ROM" Type="lateral" >
+   			<TEXT> The %s knee has normal range of motion. </TEXT>
+   			<CODE> ..... </CODE>
+   		</FINDING>
+   		<FINDING ID="Limited ROM" Type="lateral" >
+   			<TEXT> The %s knee has limited range of motion. </TEXT>
+   			<CODE> ..... </CODE>
+   		</FINDING>
+   		<!-- <FINDING ID="No Lesion" Type="text-check" >
+   			<TEXT> ..... </TEXT>
+   			<CODE> ..... </CODE>
+   		</FINDING> -->
+  </SYSTEM>
+  </PAGE>
+  <PAGE ID="" label="Neuro">
+  <SYSTEM ID="Neuro" label="Neuro">
+  	  <FINDING ID="WNL" Type="checkbox" >
+   			<TEXT> Neurological exam is grossly normal.Cranial nerves 2-12 intact.Strength and sensation equal and intact bilaterally.Deep tendon reflexes normal. </TEXT>
+   			<CODE> ..... </CODE>
+   		</FINDING>
+   		<FINDING ID="No Focal Neurologic Defecit" Type="checkbox" >
+   			<TEXT> No focal neurologic deficit. </TEXT>
+   			<CODE> ..... </CODE>
+   		</FINDING>
+   		<FINDING ID="CN 2-12 Intact" Type="checkbox" >
+   			<TEXT> Cranial nerves 2-12 intact. </TEXT>
+   			<CODE> ..... </CODE>
+   		</FINDING>
+   		<FINDING ID="Cerebellar Function Intact" Type="checkbox" >
+   			<TEXT> Cerebellar function intact. </TEXT>
+   			<CODE> ..... </CODE>
+   		</FINDING>
+   		<FINDING ID="Strength Equal and Intact Bilaterally" Type="checkbox" >
+   			<TEXT> Strength equal and intact bilaterally. </TEXT>
+   			<CODE> ..... </CODE>
+   		</FINDING>
+   		<FINDING ID="Hemiparesis" Type="lateral" Misc="textbox/r/s/'/5'" >
+   			<TEXT> %s hemiparesis </TEXT>
+   			<CODE> ..... </CODE>
+   		</FINDING>
+   		<FINDING ID="Upper Extremity Paresis" Type="lateral" Misc="textbox/r/s/'/5'" >
+   			<TEXT> %s upper extremity paresis </TEXT>
+   			<CODE> ..... </CODE>
+   		</FINDING>
+   		<FINDING ID="Lower Extremity Paresis" Type="lateral" Misc="textbox/r/s/'/5'" >
+   			<TEXT> %s lower extremity paresis </TEXT>
+   			<CODE> ..... </CODE>
+   		</FINDING>
+   		<FINDING ID="Sensation Equal and Intact Bilaterally" Type="checkbox" >
+   			<TEXT> Sensation equal and intact bilaterally. </TEXT>
+   			<CODE> ..... </CODE>
+   		</FINDING>
+   		<FINDING ID="Paresthesia" Type="lateral" Misc="textbox/r/s/'/5'" >
+   			<TEXT> %s paresthesia  </TEXT>
+   			<CODE> ..... </CODE>
+   		</FINDING>
+   		<FINDING ID="Upper Extremity Paresthesia" Type="lateral" Misc="textbox/r/s/'/5'" >
+   			<TEXT> %s upper extremity paresthesia  </TEXT>
+   			<CODE> ..... </CODE>
+   		</FINDING>
+   		<FINDING ID="Lower Extremity Paresthesia" Type="lateral" Misc="textbox/r/s/'/5'" >
+   			<TEXT> %s lower extremity paresthesia </TEXT>
+   			<CODE> ..... </CODE>
+   		</FINDING>
+   		<FINDING ID="Deep Tendon Reflexes Normal" Type="checkbox" >
+   			<TEXT> Deep tendon reflexes normal. </TEXT>
+   			<CODE> ..... </CODE>
+   		</FINDING>
+   		<FINDING ID="DTRs Brisk" Type="checkbox" >
+   			<TEXT> Deep tendon reflexes brisk. </TEXT>
+   			<CODE> ..... </CODE>
+   		</FINDING>
+   		<FINDING ID="DTRs Slow" Type="checkbox" >
+   			<TEXT> Deep tendon reflexes slow. </TEXT>
+   			<CODE> ..... </CODE>
+   		</FINDING>
+   		<FINDING ID="DTRs Absent" Type="checkbox" >
+   			<TEXT> Deep tendon reflexes absent. </TEXT>
+   			<CODE> ..... </CODE>
+   		</FINDING>
+   		<FINDING ID="Romberg's" Type="lateral" Misc="+/-" >
+   			<TEXT> %s Romberg's sign is  </TEXT>
+   			<CODE> ..... </CODE>
+   		</FINDING>
+   		<FINDING ID="Babinski" Type="lateral-text" Misc="+/-" >
+   			<TEXT> %s Babinski sign is  </TEXT>
+   			<CODE> ..... </CODE>
+   		</FINDING>
+  </SYSTEM>
+  </PAGE>
+  <PAGE ID="" label="Psych">
+  <SYSTEM ID="Psych" label="Psych">
+  	  <FINDING ID="WNL" Type="checkbox" >
+   			<TEXT> Patient is oriented, appropriate affect with good memory, judgement and insight. </TEXT>
+   			<CODE> ..... </CODE>
+   		</FINDING>
+   		<FINDING ID="Appropriate Affect" Type="checkbox" >
+   			<TEXT> Affect is appropriate. </TEXT>
+   			<CODE> ..... </CODE>
+   		</FINDING>
+   		<FINDING ID="Depressed Affect" Type="checkbox" >
+   			<TEXT> Affect is depressed. </TEXT>
+   			<CODE> ..... </CODE>
+   		</FINDING>
+   		<FINDING ID="Elevated Mood" Type="checkbox" >
+   			<TEXT> Mood is elevated. </TEXT>
+   			<CODE> ..... </CODE>
+   		</FINDING>
+   		<FINDING ID="Cooperative" Type="checkbox" >
+   			<TEXT> Patient is cooperative to exam. </TEXT>
+   			<CODE> ..... </CODE>
+   		</FINDING>
+   		<FINDING ID="Uncooperative" Type="checkbox" >
+   			<TEXT> Patient is uncooperative. </TEXT>
+   			<CODE> ..... </CODE>
+   		</FINDING>
+   		<FINDING ID="Irritable" Type="checkbox" >
+   			<TEXT> Patient is irritable. </TEXT>
+   			<CODE> ..... </CODE>
+   		</FINDING>
+   		<FINDING ID="Anxious" Type="checkbox" >
+   			<TEXT> Patient is anxious. </TEXT>
+   			<CODE> ..... </CODE>
+   		</FINDING>
+   		<FINDING ID="Combative" Type="checkbox" >
+   			<TEXT> Patient is combative. </TEXT>
+   			<CODE> ..... </CODE>
+   		</FINDING>
+   		<FINDING ID="Normal Memory" Type="checkbox" >
+   			<TEXT> Memory normal. </TEXT>
+   			<CODE> ..... </CODE>
+   		</FINDING>
+   		<FINDING ID="Impaired Memory" Type="checkbox" >
+   			<TEXT> Memory is impaired. </TEXT>
+   			<CODE> ..... </CODE>
+   		</FINDING>
+   		<FINDING ID="Normal Judgement" Type="checkbox" >
+   			<TEXT> Judgement is normal. </TEXT>
+   			<CODE> ..... </CODE>
+   		</FINDING>
+   		<FINDING ID="Impaired Judgement" Type="checkbox" >
+   			<TEXT> Judgement is impaired. </TEXT>
+   			<CODE> ..... </CODE>
+   		</FINDING>
+   		<FINDING ID="Normal Insight" Type="checkbox" >
+   			<TEXT> Normal insight. </TEXT>
+   			<CODE> ..... </CODE>
+   		</FINDING>
+   		<FINDING ID="Poor Insight" Type="checkbox" >
+   			<TEXT> Poor insight. </TEXT>
+   			<CODE> ..... </CODE>
+   		</FINDING>
+   		<FINDING ID="Oriented" Type="checkbox" >
+   			<TEXT> Patient is oriented. </TEXT>
+   			<CODE> ..... </CODE>
+   		</FINDING>
+   		<FINDING ID="Confused" Type="text-check" >
+   			<TEXT> Patient is confused. </TEXT>
+   			<CODE> ..... </CODE>
+   		</FINDING>
+  </SYSTEM>
+  </PAGE>  
+</EXAM>

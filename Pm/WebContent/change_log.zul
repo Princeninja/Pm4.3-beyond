@@ -1,0 +1,78 @@
+<?page title="The Change_log" contentType="text/html;charset=UTF-8"?>
+<zk>
+<window id="changelogWin" title="Whats new?!" mode="modal" border="normal" vflex="1" hflex="1" position="center">
+
+<vbox height="100%" width="100%"  align="center" pack="center" >
+
+<label value="PAL/MED" style="font-size:36px" />
+<space />
+<label value=" Pm 4 Notes" style="font-size:20px" />
+<space />
+<hbox pack="stretch" width="100%"> 
+			<vbox>
+			<tabbox id="tabbox" width="950px" > <!-- orient="vertical",mold="accordion"  --> 
+			<tabs hflex="min">
+				<tab label="4.2"  />
+				<tab label="4.29"  />
+				<tab label="4.3"  /> 
+			</tabs>
+			<tabpanels>
+				<tabpanel >
+				<hbox> Release date : 05/10/18 </hbox>
+				<hbox> Detailed List: </hbox>
+				<hbox> ** Main Menu now has a scrollbar** </hbox>
+				<hbox> ** All new Lab interface Creates a lab request to (C:\Lab\Outgoing) </hbox>
+					  <hbox>  -Make sure all fields/text boxes have contents in them before submitting. The check box is for stat lab routine </hbox>
+				     <hbox>   -To switch patients click on change patients </hbox>
+				     <hbox>   -To add/edit test or panels go to observations </hbox>
+					  <hbox>  -Go to Edit/Add dgn codes to modify diagnosis codes**  </hbox>
+			 	<hbox> ** Patient Chart now shows the first 2 insurances for each patient if they exist. ** </hbox>
+		  	    <hbox> ** Index and Compile for ECS should now use the latest NPI numbers ** </hbox>
+			    <hbox> ** H and P will not longer display two physical exams if the phrase "Physical Exam" is used elsewhere. </hbox>
+					<hbox>   -No other similar texts should cause a repeat in the physical exam. ** </hbox> 
+				<hbox> ** New/Edit Patient Insurance tab is fully functional.  </hbox>
+					<hbox>   - The Choose Insurance button lets you search for Insurances in the database.  </hbox> 
+					<hbox>   - A user can also enter and independent Carrier by entering text and selecting Misc. </hbox>
+					<hbox>   - To remove all entered information set all the text to blank and set the dollar amounts to 0. </hbox>
+					<hbox>   - To add more insurances to the database open insurance tab in Admin. ** </hbox>    
+			 		 </tabpanel>
+			   <tabpanel >
+				<hbox> Release date : 09/28/18 </hbox>
+				<hbox> Detailed List: </hbox>
+				<hbox> ** Introducing Double-Clicking for PtSearch, InsuranceSearch and Medication Search (PtChart>Meds>Add) ** </hbox>
+				<hbox> ** Lab Interface is completed and Lab Imports works on Text files** </hbox>
+				<hbox> ** All new Lab interface Creates a lab request to (C:\Lab\Outgoing) </hbox>
+					  <hbox>  -Lab Interface can handle all variations and n number of tests/panels. </hbox>
+				     <hbox>   -Lab Requests now include the Insurance abbreviation not the Neic code.  </hbox>
+				     <hbox>   -Lab Interface produces a requisition file when the request is saved. </hbox>
+				     <hbox>   -Lab Interface produces and extra pipe in IN with the priority number. </hbox>
+					  <hbox>  -A print protocol is shown after saving and clicking on the print button recreates the print protocol.**  </hbox>
+			 	<hbox> ** Lab import handles more complex OBR's and also quits after failed attemps or resets if an error is made. </hbox>
+			 	<hbox> ** Meds Tab was revamped it includes a Choose Provider button. ** </hbox>
+		  	    <hbox> ** A new verification module was added to verify which user is on the program removing the need to login every time. ** </hbox>
+			    <hbox> ** After choosing a provider the "Newrx" button is displayed allowing a prescription to be created . </hbox>
+					<hbox>   -The verification process has to be done each time. ** </hbox> 
+				<hbox> ** Rx Status has the same Choose provider protocol.  </hbox>
+					<hbox>   - After a provider is chosen, clicking on "Newcrop" lets you see pending prescriptions.  </hbox> 
+					<hbox>   - The prescriptions displayed are for the provider selected previously. </hbox>
+				 </tabpanel>		
+			 <tabpanel >
+				<hbox> Release date : 11/01/18 </hbox>
+				<hbox> Detailed List: </hbox>
+				<hbox> ** Office Visits** </hbox>
+				<hbox> **Rest  Coming Soon** </hbox>
+				</tabpanel>			 
+		</tabpanels>
+		</tabbox>
+			 </vbox>
+</hbox>
+<space />
+<label value="Copyright (c) 2011 by PAL/MED Development Corporation" style="font-size:normal" />
+<space />
+<button id="close" label="Close" onClick="changelogWin.detach();" />
+
+</vbox>
+<!-- <hbox> **  ** </hbox>  <hbox>   - </hbox> -->
+
+</window>
+</zk>

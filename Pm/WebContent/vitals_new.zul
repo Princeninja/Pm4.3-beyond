@@ -1,0 +1,135 @@
+<?page title="Enter/Edit Vitals" contentType="text/html;charset=UTF-8"?>
+<zk>
+<?component name="tenkey" macroURI="tenkey.zul"?>
+		
+<window id="vitalsEditWin" title="Enter/Edit Vitals" border="normal" width="550px" position="center" mode="modal" apply="palmed.VitalsEditWinController">
+	<label id="ptname" />
+	<hbox>
+		<groupbox>
+			<grid>
+				<columns>
+					<column label="" width="80px" />
+					<column label="" width="160px" />
+					<column label="" width="80px" />
+				</columns>
+				<rows>
+					<row>
+						<label value="Date"></label>
+						<textbox id="date" ></textbox>
+					</row>
+					<row>
+						<label value="Temp"></label>
+						<textbox id="temp" ></textbox>
+						<listbox id="temp_units" mold="select" >
+							<listitem label="F" value="F" />
+							<listitem label="C" value="C" />
+						</listbox>
+					</row>
+					
+					<row>
+						<label value="Pulse"></label>
+						<textbox id="pulse" ></textbox>
+						<label value="beats/min" />
+					</row>
+					<row>
+						<label value="Resp"></label>
+						<textbox id="resp" ></textbox>
+						<label value="resp/min" />
+					</row>
+					<row>
+						<label value="BP"></label>
+						<hbox>
+							<textbox id="sbp" width="60px" />/<textbox id="dbp" width="60px" />
+						</hbox>
+						<label value="mm/Hg" />
+					</row>
+					
+					
+					
+
+					<row>
+						<label value="Ht"></label>
+						<textbox id="height" ></textbox>
+						<listbox id="ht_units" mold="select" >
+							<listitem label="in" value="in" />
+							<listitem label="cm" value="cm" />
+						</listbox>
+					</row>
+					<row>
+						<label value="Wt"></label>
+						<textbox id="weight" ></textbox>
+						<listbox id="wt_units" mold="select" >
+							<listitem label="lbs" value="lbs" />
+							<listitem label="kg" value="kg" />
+						</listbox>
+					</row>
+					
+					<row>
+						<label value="BMI"></label>
+						<label id="bmi" value="[bmi]" />
+						<label value="(calculated)" />
+					</row>
+					<row>
+						<label value="Head"></label>
+						<textbox id="head" ></textbox>
+						<listbox id="head_units" mold="select" >
+							<listitem label="in" value="in" />
+							<listitem label="cm" value="cm" />
+						</listbox>
+					</row>
+					<row>
+						<label value="pO2"></label>
+						<textbox id="pO2" ></textbox>
+						<label value="% O2 saturation"></label>
+					</row>
+
+				</rows>
+			</grid>
+
+		</groupbox>
+		
+		<tenkey/>
+		
+<!-- 		<groupbox>
+			<grid>
+				<columns>
+					<column label="" width="60px" />
+					<column label="" width="60px" />
+					<column label="" width="60px" />
+				</columns>
+				<rows height="60px" >
+					<row>
+						<button label="1" hflex="1" vflex="1" />
+						<button label="2" hflex="1" vflex="1" />
+						<button label="3" hflex="1" vflex="1" />
+					</row>
+					<row>
+						<button label="4" hflex="1" vflex="1" />
+						<button label="5" hflex="1" vflex="1" />
+						<button label="6" hflex="1" vflex="1" />
+					</row>
+					<row>
+						<button label="7" hflex="1" vflex="1" />
+						<button label="8" hflex="1" vflex="1" />
+						<button label="9" hflex="1" vflex="1" />
+					</row>
+					<row>
+						<button label="." hflex="1" vflex="1" />
+						<button label="0" hflex="1" vflex="1" />
+						<button label="Enter" hflex="1" vflex="1" />
+					</row>
+				</rows>
+			</grid>
+		</groupbox>
+-->
+	</hbox>
+		
+		
+		<hbox>
+					<button id="save" label="Save" width="80px" />
+					<button id="cancel" label="Cancel" width="80px" />
+		</hbox>
+
+
+</window>
+</zk>

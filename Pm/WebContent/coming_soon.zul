@@ -1,0 +1,29 @@
+<?page title="Coming Soon" contentType="text/html;charset=UTF-8"?>
+<zk>
+<window id="comingsWin" title="Coming Soon" mode="modal" border="normal" width="500px" height="400px" position="center">
+
+<vbox height="100%" width="100%"  align="center" pack="center" >
+
+<label value="PAL/MED" style="font-size:36px" />
+<space />
+<label value=" Next Version is 5.1 ( Pm 4.3)" style="font-size:20px" />
+<space />
+<hbox pack="stretch" width="100%"> 
+			<vbox>
+				<hbox> Expected date : 10/12/18 </hbox>
+				<hbox> Update List: </hbox>
+				<hbox> 1.Office Visits ( Interactive Soap Sheets) </hbox>
+				<hbox> 2.Complete Patient Creating/Editing  </hbox>
+				<hbox> 3.Swap and Delete Insurance under Edit Pt </hbox>
+				<hbox> 4.??? </hbox>
+			 </vbox>
+</hbox>
+<space />
+<label value="Copyright (c) 2011 by PAL/MED Development Corporation" style="font-size:normal" />
+<space />
+<button id="close" label="Close" onClick="comingsWin.detach();" />
+
+</vbox>
+
+</window>
+</zk>

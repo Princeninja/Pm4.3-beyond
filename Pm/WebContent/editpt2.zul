@@ -1,0 +1,92 @@
+<?page title="Edit Pt2" contentType="text/html;charset=UTF-8"?>
+
+<!-- Next of Kin -->
+
+<zk xmlns:h="http://www.w3.org/1999/xhtml">
+	<div>
+	<h:h3>Next of Kin:</h:h3>
+	
+	<grid align="start">
+		<columns>
+			<column width="30%" />
+			<column width="30%" />
+			<column width="30%" />
+		</columns>
+		<rows>
+			<row>
+	
+	<vbox>
+	<grid>
+		<columns>
+			<column width="80px" />
+			<column />
+		</columns>
+		<rows>
+			<row> First <textbox id="nokFirst" maxlength="10" /> </row>
+			<row> Middle <textbox id="nokMiddle" maxlength="10" /> </row>
+			<row> Last <textbox id="nokLast" maxlength="15" /> </row>
+			<row> Suffix <textbox id="nokSuffix" maxlength="8" /> </row>
+		</rows>
+	</grid>
+	<grid>
+		<columns>
+			<column width="80px" />
+			<column />
+		</columns>
+		<rows>
+
+			<row> Birthdate <textbox id="nokDOB" maxlength="10" /> </row>
+			<row> Social Security Number <textbox id="nokSSN" maxlength="11" /> </row>
+
+		</rows>
+	</grid>
+
+	</vbox>
+	
+
+	<vbox>
+	<grid>
+		<columns>
+			<column width="80px" />
+			<column />
+		</columns>
+		<rows>
+			<row> Sex <listbox id="nokSex" mold="select" rows="1" >
+								<listitem label="" />
+								<listitem label="Male" />
+								<listitem label="Female" />
+								</listbox>
+			</row>
+		</rows>
+	</grid>
+	
+	
+	<grid>
+		<columns>
+			<column width="80px" />
+			<column />
+		</columns>
+		<rows>
+			<row> Street <textbox id="nokStreet" maxlength="24" /> </row>
+			<row> Line 2 <textbox id="nokLine2" maxlength="24" /> </row>
+			<row> City <textbox id="nokCity" maxlength="20" /> </row>
+			<row> State <textbox id="nokState" maxlength="2" /> </row>
+			<row> Zip <textbox id="nokZip" maxlength="10" /> </row>
+			<row> Home Phone <textbox id="nokHome" maxlength="12" /> </row>
+			<row> Work Phone <textbox id="nokWork" maxlength="12" /> </row>
+			<row> Cell Phone <textbox id="nokCell" maxlength="12" /> </row>
+			<row> E-mail Address <textbox id="nokEmail" maxlength="40" /> </row>									
+		</rows>							
+	</grid>
+	</vbox>	
+	
+	
+						
+	
+			</row>
+		</rows>
+	</grid>
+	</div>
+
+
+</zk>

@@ -1,0 +1,67 @@
+<?page title="Enter/Edit Lab Battery" contentType="text/html;charset=UTF-8"?>
+<zk>
+<window id="labBatEditWin" title="Lab Battery Table Enter/Edit" border="normal" width="840px" position="center" mode="modal"  apply="palmed.LabBatEditWinController" >
+	<hbox  hflex="max" >
+		<!-- groupbox width="510px"> -->
+			<grid hflex="1" span="1" >
+				<columns>
+					<column label="" width="80px" />
+					<column label="" width="320px" />
+				</columns>
+				<rows>
+					<row>
+						<label value="Abbr" />
+						<textbox id="txtAbbr" maxlength="10" width="100px" />
+					</row>
+					<row>
+						<label value="Desc" />
+						<textbox id="txtDesc" maxlength="40" width="300px" />
+					</row>
+					<row>
+						<label value="SNOMED" />
+						<textbox id="txtSNOMED" maxlength="10" width="100px" />
+					</row>
+					<row>
+						<label value="LOINC" />
+						<textbox id="txtLOINC" maxlength="10" width="100px" />
+					</row>
+					<row>
+						<label value="Included Lab Obs" />
+						<listbox id="lboxSelected" width="200px" rows="12"  />
+					</row>
+					<row>
+						<label value="" />
+						<hbox>
+							<radiogroup>
+								<radio id="rbActive" label="Active" />
+								<radio id="rbInactive" label="Inactive" />
+							</radiogroup>
+						</hbox>
+					</row>
+				</rows>
+			</grid>
+
+		<!-- </groupbox> -->
+		
+		<!-- groupbox> -->
+			<vbox vflex="1" hflex="1" >
+			<button id="btnSelect" label="Select" width="80px" />
+			<listbox id="lboxLabObsTbl"  hflex="1" vflex="1" >
+				<listhead>
+					<listheader  label="Desc" sort="auto" />
+					<listheader width="80px" label="Code" sort="auto" />
+				</listhead>
+			</listbox>
+			</vbox>
+		<!-- </groupbox> -->
+	</hbox>
+		
+		
+		<hbox>
+			<button id="btnSave" label="Save" width="80px" />
+			<button id="btnCancel" label="Cancel" width="80px" />
+		</hbox>
+
+
+</window>
+</zk>

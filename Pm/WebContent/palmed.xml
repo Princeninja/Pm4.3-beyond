@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- PAL/MED Configuration file -->
+
+<palmed>
+	<practice>
+		<paths>
+			<medPath>/u/med</medPath>
+			<ovdPath>/u/med</ovdPath>
+			<schPath>/u/med</schPath>
+		</paths>
+	</practice>
+</palmed>

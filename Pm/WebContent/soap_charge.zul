@@ -1,0 +1,51 @@
+<?page title="SOAP Charge" contentType="text/html;charset=UTF-8"?>
+<zk>
+<window id="SoapShtChargeWin"  border="none" mode="embedded" vflex="1" hflex="1" > <!-- apply="palmed.SoapShtChargeWinController" > -->
+
+	<groupbox >
+		<caption label="E/M Codes" />
+		<hbox>
+			<radiogroup >
+				<vbox>
+					<radio label="New" />
+					<radio label="Established" />
+				</vbox>
+			</radiogroup>
+			<radiogroup >
+				<vbox>
+					<radio label="Level 2" />
+					<radio label="Level 3" />
+					<radio label="Level 4" />
+					<radio label="Level 5" />
+				</vbox>
+			</radiogroup>
+		</hbox>
+	</groupbox>
+	
+	
+	<groupbox >
+		<caption label="Procedures" />
+		<vbox>
+			<checkbox label="EKG" />
+			<checkbox label="CD" />
+			<checkbox label="NCS" />
+			<checkbox label="PFS" />
+			<checkbox label="Holter" />
+			<checkbox label="Overnight Oximetery" />
+		</vbox>
+	</groupbox>	
+
+	<groupbox>	
+		<caption label="Lab Billed by Us" />
+		<vbox>
+			<checkbox label="UA" />
+			<checkbox label="CBC" />
+			<checkbox label="CMP" />
+			<checkbox label="TP" />
+			<checkbox label="FLP" />
+			<checkbox label="PSA" />
+		</vbox>
+	</groupbox>	
+
+</window>
+</zk>

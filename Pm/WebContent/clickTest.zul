@@ -1,0 +1,30 @@
+<?page title="Click Test" contentType="text/html;charset=UTF-8"?>
+<zk>
+<window title="Click Test" border="normal">
+New Content Here!
+	<button id="Click" label="Click" >
+	<attribute name="onClick">
+		<![CDATA[
+		palmed.NCScript n = new palmed.NCScript();
+
+		
+		// Credentials
+		n.setCredentials( "demo", "demo", "demo", "PAL/MED", "V5.0" );		
+		n.setUserRole("demo", "doctor");
+		n.setDestination("ws-rx-send");
+		n.setAccount("demo", "Cust Account Name", "demo", "address1", "address2", "city", "state", "zip", "zip4", "US", "5555551212", "5555551313");
+		n.setLocation("DEMOLOC1", "Family Practice Center", "address1", "address2", "city", "state", "zip", "zip4", "US", "5555551212", "5555551313", "contact");
+		n.setPrescriber("DEMOLP1", "Smith", "Doctor", "J", "Dr.", "Jr", "DEA20", "12345678", "tx", "12345678" );		
+		n.setPatient("DEMOPT900800400", "Thomas", "Frank", null, null, null, "123456", "555443333", "Picks up meds at VA.", "address1", "address2", "city", "state", "zip", "zip4", "US", "phone", "19700115", "M" );
+
+		n.addOutsideRx("2001cd", "20070215", "Dr. Bob", "Crestor 5mg tab", "30", "1 daily", "0", "reconcile" );
+		n.addOutsideRx("78883", "20101205", "Dr. Rick", "Voltaren gel", "5", "Rub 4g into a.a. 2-4x/day", "3", null);
+
+		
+		// print out XML file
+		System.out.println(n.toString());
+		]]>
+	</attribute>
+	</button>
+</window>
+</zk>

@@ -1,0 +1,109 @@
+<?page title="Edit Prov 3" contentType="text/html;charset=UTF-8"?>
+
+<!-- Edit Provider's Information - pg 3 -->
+
+<zk xmlns:h="http://www.w3.org/1999/xhtml">
+	<div>
+	
+	<h:h3>Provider Information:</h:h3>
+	
+	<grid align="start">
+		<columns>
+			<column width="40%" />
+			<column width="30%" />
+			<column width="30%" />
+		</columns>
+		<rows>
+			<row>
+				
+				<vbox>
+				Electronic Claims
+				<grid>
+					<columns>
+						<column width="80px" />
+						<column />
+					</columns>
+					<rows>
+						<row> Ets Prov ID <textbox id="etsProvID" maxlength="16" /> </row>
+						<row> Ets Sub ID <textbox id="etsSubID" maxlength="4" /> </row>
+					</rows>
+				</grid>
+				Tax ID Numbers
+				<grid>
+					<columns>
+						<column width="80px" />
+						<column />
+					</columns>
+					<rows>
+						<row> Fed Tax ID <textbox id="fedTaxID" maxlength="16" /> </row>
+						<row> State Tax ID <textbox id="stateTaxID" maxlength="16" /> </row>
+						<row> Local Tax ID <textbox id="localTaxID" maxlength="16" /> </row>
+					</rows>
+				</grid>
+				Other Federal Numbers
+				<grid>
+					<columns>
+						<column width="80px" />
+						<column />
+					</columns>
+					<rows>
+						<row> DEA Number <textbox id="provDEA" maxlength="16" /> </row>
+						<row> FAA Number <textbox id="provFAA" maxlength="16" /> </row>
+						<row> CLIA Number <textbox id="provCLIA" maxlength="16" /> </row>
+						<row> Provider NPI <textbox id="provNPI" maxlength="12" /> </row>
+						
+					</rows>
+				</grid>
+				
+				</vbox>
+				<vbox>
+				Medicare
+				<grid>
+					<columns>
+						<column width="80px" />
+						<column />
+					</columns>
+					<rows>
+						<row> Medicare PTAN <textbox id="mcareProv" maxlength="16" /> </row>
+						<row> Medicare Group PTAN <textbox id="mcareGroup" maxlength="16" /> </row>
+						<row> Effective Date <textbox id="mcareEff" maxlength="10" /> </row>
+						<row> Applied Date <textbox id="mcareApp" maxlength="10" /> </row>
+						<row> PAR Provider <listbox id="mcarePar"  mold="select" maxlength="1" rows="1" width="40px" /></row>
+					</rows>
+				</grid>
+				Medicaid
+				<grid>
+					<columns>
+						<column width="80px" />
+						<column />
+					</columns>
+					<rows>
+						<row> Medicaid Prov # <textbox id="mcaidProv" maxlength="16" /> </row>
+						<row> Effective Date <textbox id="mcaidEff" maxlength="10" /> </row>
+						<row> Applied Date <textbox id="mcaidApp" maxlength="10" /> </row>
+						<row> PAR Provider <listbox id="mcaidPar"  mold="select" maxlength="1" rows="1" width="40px" /></row>
+					</rows>
+				</grid>
+				Blue Cross / Blue Shield
+				<grid>
+					<columns>
+						<column width="80px" />
+						<column />
+					</columns>
+					<rows>
+						<row> Blue Cross # <textbox id="provBC" maxlength="16" /> </row>
+						<row> Blue Shield # <textbox id="provBS" maxlength="16" /> </row>
+						<row> BCBS PAR <listbox id="bcbsPar"  mold="select" maxlength="1" rows="1" width="40px" /></row>
+					</rows>
+				</grid>
+				
+				</vbox>
+			</row>
+			
+		</rows>
+	</grid>
+
+
+	</div>
+
+</zk>

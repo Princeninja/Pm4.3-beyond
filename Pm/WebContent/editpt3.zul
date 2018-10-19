@@ -1,0 +1,237 @@
+<?page title="Edit Pt3" contentType="text/html;charset=UTF-8"?>
+
+<!-- Edit Patient's Insurance Info -->
+
+
+<zk xmlns:h="http://www.w3.org/1999/xhtml">
+
+	<div>
+	
+	<h:h3>Primary Insurance:</h:h3>
+	
+	<hbox pack ="start" width="290px">
+	   		<button id="InsSel" label="Choose Insurance" width="100px" mold="trendy" ></button>	   
+	   		</hbox> 
+	
+	<grid align="start">
+		<columns>
+			<column width="30%" />
+			<column width="30%" />
+			<column width="30%" />
+		</columns>
+		<rows>
+			<row>
+				<grid>
+					<columns>
+						<column width="120px" />
+						<column />
+					</columns>
+					<rows>
+						<row> Carrier
+							<hbox>
+							<textbox id="insCmp1" maxlength="20" />
+							Misc
+							<listbox id="insMisc1" mold="select" rows="1" >
+								<listitem label="" />
+								<listitem label="Yes" />
+								<listitem label="No" />
+							</listbox>
+							</hbox>
+						</row>
+						<row> Policy # <textbox id="insNum1" maxlength="25" /> </row>
+						<row> Group # <textbox id="insGrp1" maxlength="25" /> </row>
+						<row> Effective Date (MM-DD-YYYY) <textbox id="insEffDate1" maxlength="10" /> </row> <!-- format="MM/dd/yyyy"  -->
+					</rows>
+				</grid>
+				<grid>
+					<columns>
+						<column width="80px" />
+						<column />
+					</columns>
+					<rows>
+						<row> Deductible <textbox id="insDeduct1" maxlength="10" constraint="no empty: Sorry, no empty allowed(0.00)" /> </row>
+						<row> Copay $ <textbox id="insCopayAmt1" maxlength="10"  constraint="no empty: Sorry, no empty allowed(0.00)" /> </row>
+						<row> Copay % <textbox id="insCopayPct1" maxlength="10"  constraint="no empty: Sorry, no empty allowed(0)" /> </row>
+					</rows>
+				</grid>
+				<grid>
+					<columns>
+						<column width="80px" />
+						<column />
+					</columns>
+					<rows>
+						<row> Insured <listbox id="insPRN1" mold="select" rows="1" >
+											<listitem label="" value="32" />
+											<listitem label="Patient" value="80"/>
+											<listitem label="Resp Party" value="82" />
+											<listitem label="Next of Kin" value="78" />
+											</listbox> </row>
+						<row> Accept Assignment <listbox id="insAA1" mold="select" rows="1" >
+											<listitem label="" value ="32" />
+											<listitem label="Yes" value ="89"/>
+											<listitem label="No" value="78"/>
+											</listbox> </row>
+						<row> Signature <listbox id="insSOF1" mold="select" rows="1" >
+											<listitem label="" value ="32" />
+											<listitem label="Yes" value ="89"/>
+											<listitem label="No" value="78"/>
+											</listbox> </row>
+					</rows>
+				</grid>
+			</row>
+		</rows>
+	</grid>
+
+	<h:h3>Secondary Insurance:</h:h3>
+	
+	<hbox pack ="start" width="290px">
+	   		<button id="InsSel1" label="Choose Insurance" width="100px" mold="trendy" ></button>	   
+	   		</hbox> 	
+	   		
+	<grid align="start">
+		<columns>
+			<column width="30%" />
+			<column width="30%" />
+			<column width="30%" />
+		</columns>
+		<rows>
+			<row>
+				<grid>
+					<columns>
+						<column width="120px" />
+						<column />
+					</columns>
+					<rows>
+						<row> Carrier
+							<hbox>
+							<textbox id="insCmp2" maxlength="30" />
+							Misc
+							<listbox id="insMisc2" mold="select" rows="1" >
+								<listitem label="" />
+								<listitem label="Yes" />
+								<listitem label="No" />
+							</listbox>
+							</hbox>
+						</row>
+						<row> Policy # <textbox id="insNum2" maxlength="25" /> </row>
+						<row> Group # <textbox id="insGrp2" maxlength="25" /> </row>
+						<row> Effective Date (MM-DD-YYYY) <textbox id="insEffDate2" maxlength="10" /> </row>
+					</rows>
+				</grid>
+				<grid>
+					<columns>
+						<column width="80px" />
+						<column />
+					</columns>
+					<rows>
+						<row> Deductible <textbox id="insDeduct2" maxlength="10" constraint="no empty: Sorry, no empty allowed(0.00)" /> </row>
+						<row> Copay $ <textbox id="insCopayAmt2" maxlength="10" constraint="no empty: Sorry, no empty allowed(0.00)" /> </row>
+						<row> Copay % <textbox id="insCopayPct2" maxlength="10" constraint="no empty: Sorry, no empty allowed(0)"/> </row>
+					</rows>
+				</grid>
+				<grid>
+					<columns>
+						<column width="80px" />
+						<column />
+					</columns>
+					<rows>
+						<row> Insured <listbox id="insPRN2" mold="select" rows="1" >
+											<listitem label="" value="32" />
+											<listitem label="Patient" value="80"/>
+											<listitem label="Resp Party" value="82" />
+											<listitem label="Next of Kin" value="78" />
+											</listbox> </row>
+						<row> Accept Assignment <listbox id="insAA2" mold="select" rows="1" >
+											<listitem label="" value ="32" />
+											<listitem label="Yes" value ="89"/>
+											<listitem label="No" value="78"/>
+											</listbox> </row>
+						<row> Signature <listbox id="insSOF2" mold="select" rows="1" >
+											<listitem label="" value ="32" />
+											<listitem label="Yes" value ="89"/>
+											<listitem label="No" value="78"/>
+											</listbox> </row>
+					</rows>
+				</grid>
+			</row>
+		</rows>
+	</grid>
+
+	<h:h3>Third Insurance:</h:h3>
+	
+	<hbox pack ="start" width="290px">
+	   		<button id="InsSel2" label="Choose Insurance" width="100px" mold="trendy" ></button>	   
+	   		</hbox> 
+	
+	<grid align="start">
+		<columns>
+			<column width="30%" />
+			<column width="30%" />
+			<column width="30%" />
+		</columns>
+		<rows>
+			<row>
+				<grid>
+					<columns>
+						<column width="120px" />
+						<column />
+					</columns>
+					<rows>
+						<row> Carrier
+							<hbox>
+							<textbox id="insCmp3" maxlength="30" />
+							Misc
+							<listbox id="insMisc3" mold="select" rows="1" >
+								<listitem label="" />
+								<listitem label="Yes" />
+								<listitem label="No" />
+							</listbox>
+							</hbox>
+						</row>
+						<row> Policy # <textbox id="insNum3" maxlength="25" /> </row>
+						<row> Group # <textbox id="insGrp3" maxlength="25" /> </row>
+						<row> Effective Date (MM-DD-YYYY) <textbox id="insEffDate3" maxlength="10" /> </row>
+					</rows>
+				</grid>
+				<grid>
+					<columns>
+						<column width="80px" />
+						<column />
+					</columns>
+					<rows>
+						<row> Deductible <textbox id="insDeduct3" maxlength="10" constraint="no empty: Sorry, no empty allowed(0.00)" /> </row>
+						<row> Copay $ <textbox id="insCopayAmt3" maxlength="10" constraint="no empty: Sorry, no empty allowed(0.00)"/> </row>
+						<row> Copay % <textbox id="insCopayPct3" maxlength="10" constraint="no empty: Sorry, no empty allowed(0)" /> </row>
+					</rows>
+				</grid>
+				<grid>
+					<columns>
+						<column width="80px" />
+						<column />
+					</columns>
+					<rows>
+						<row> Insured <listbox id="insPRN3" mold="select" rows="1" >
+											<listitem label="" value="32" />
+											<listitem label="Patient" value="80"/>
+											<listitem label="Resp Party" value="82" />
+											<listitem label="Next of Kin" value="78" />
+											</listbox> </row>
+						<row> Accept Assignment <listbox id="insAA3" mold="select" rows="1" >
+											<listitem label="" value ="32" />
+											<listitem label="Yes" value ="89"/>
+											<listitem label="No" value="78"/>
+											</listbox> </row>
+						<row> Signature <listbox id="insSOF3" mold="select" rows="1" >
+											<listitem label="" value ="32" />
+											<listitem label="Yes" value ="89"/>
+											<listitem label="No" value="78"/>
+											</listbox> </row>
+					</rows>
+				</grid>
+			</row>
+		</rows>
+	</grid>
+
+	</div>
+
+</zk>

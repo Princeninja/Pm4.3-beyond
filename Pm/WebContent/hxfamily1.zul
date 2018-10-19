@@ -1,0 +1,86 @@
+<?page title="Family History" contentType="text/html;charset=UTF-8"?>
+
+
+<zk xmlns:h="http://www.w3.org/1999/xhtml">
+	<vbox>
+		<label>Family History:</label>
+	
+		<hbox widths="50%,50%" >
+		
+			<vbox>
+					
+				<grid fixedLayout="true">
+					<columns>
+						<column width="80px" />
+						<column />
+					</columns>
+					<rows>
+						<row> Father 
+							<hbox>
+								<radiogroup>
+									<radio id="rbFatherAlive" label="Alive" forward="onChange"/>
+									<radio id="rbFatherDeceased" label="Deceased" forward="onChange"/>
+									<radio id="rbFatherUnknown" label="Unknown" forward="onChange"/>
+								</radiogroup>								
+							</hbox>
+						</row>
+						<row> Year Born <textbox id="txtFatherYearBorn" maxlength="4" width="40px" forward="onChange"/></row>
+						<row> Year Deceased <textbox id="txtFatherYearDeceased" maxlength="4" width="40px" forward="onChange"/></row>
+						<row> Cause of Death <textbox id="txtFatherCauseOfDeath" maxlength="40" width="300px" forward="onChange"/> </row>
+						<row> "" <checkbox id="cbPaternalHxUnavailable" label="Paternal Family History Unavailable" forward="onChange"/> </row>
+					</rows>
+				</grid>
+				<grid fixedLayout="true">
+					<columns>
+						<column width="80px" />
+						<column />
+					</columns>
+					<rows>
+						<row> Mother 
+							<hbox>
+								<radiogroup>
+									<radio id="rbMotherAlive" label="Alive" forward="onChange"/>
+									<radio id="rbMotherDeceased" label="Deceased" forward="onChange"/>
+									<radio id="rbMotherUnknown" label="Unknown" forward="onChange"/>
+								</radiogroup>								
+							</hbox>
+						</row>
+						<row> Year Born <textbox id="txtMotherYearBorn" maxlength="4" width="40px" forward="onChange"/></row>
+						<row> Year Deceased <textbox id="txtMotherYearDeceased" maxlength="4" width="40px" forward="onChange"/></row>
+						<row> Cause of Death <textbox id="txtMotherCauseOfDeath" maxlength="40" width="300px" forward="onChange"/> </row>
+						<row> "" <checkbox id="cbMaternalHxUnavailable" label="Maternal Family History Unavailable" forward="onChange"/> </row>
+					</rows>
+				</grid>
+			</vbox>
+			
+			<vbox>
+				<grid fixedLayout="true">
+					<columns>
+						<column width="80px" />
+						<column />
+					</columns>
+					<rows>
+						<row> Brothers <textbox id="txtNumBrothers" maxlength="4" width="40px" forward="onChange"/></row>
+						<row> Sisters <textbox id="txtNumSisters" maxlength="4" width="40px" forward="onChange"/></row>
+					</rows>
+				</grid>
+				<grid fixedLayout="true">
+					<columns>
+						<column width="80px" />
+						<column />
+					</columns>
+					<rows>
+						<row> Sons <textbox id="txtNumSons" maxlength="4" width="40px" forward="onChange"/> </row>
+						<row> Daughters <textbox id="txtNumDaughters" maxlength="4" width="40px" forward="onChange"/> </row>
+						<row id="rowKidsAgeYoungest"> Age Youngest <textbox id="txtKidsAgeYoungest" maxlength="4" width="40px" forward="onChange"/> </row>
+						<row id="rowKidsAgeOldest"> Age Oldest <textbox id="txtKidsAgeOldest" maxlength="4" width="40px" forward="onChange"/> </row>
+
+					</rows>
+				</grid>
+			
+			</vbox>							
+		</hbox>
+		
+	</vbox>
+	
+</zk>

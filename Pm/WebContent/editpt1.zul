@@ -1,0 +1,127 @@
+<?page title="Edit Pt1" contentType="text/html;charset=UTF-8"?>
+
+<!-- Edit Patient's Information -->
+
+
+<zk xmlns:h="http://www.w3.org/1999/xhtml">
+	<div>
+	<h:h3>Edit Patient Info:</h:h3>
+	
+	<grid align="start">
+		<columns>
+			<column width="30%" />
+			<column width="30%" />
+			<column width="30%" />
+		</columns>
+		<rows>
+			<row>
+	
+	<vbox>
+	<grid>
+		<columns>
+			<column width="80px" />
+			<column />
+		</columns>
+		<rows>
+			<row> First <textbox id="ptFirst" maxlength="30" /> </row>
+			<row> Middle <textbox id="ptMiddle" maxlength="30" /> </row>
+			<row> Last <textbox id="ptLast" maxlength="30" /> </row>
+			<row> Suffix <textbox id="ptSuffix" maxlength="15" /> </row>
+		</rows>
+	</grid>
+	<grid>
+		<columns>
+			<column width="80px" />
+			<column />
+		</columns>
+		<rows>
+
+			<row> Birthdate <textbox id="ptDOB" maxlength="10" /> </row>  <!-- format="MM/dd/yyyy" constraint="no future"  -->
+			<row> Social Security Number <textbox id="ptSSN" maxlength="11" /> </row>
+
+			<row> Patient Num #1 <textbox id="ptNum1" maxlength="12" /> </row>
+			<row> Patient Num #2 <textbox id="ptNum2" maxlength="12" /> </row>
+			<row> Patient Num #3 <textbox id="ptNum3" maxlength="12" /> </row>
+		</rows>
+	</grid>
+
+	</vbox>
+	
+
+	<vbox>
+	<grid>
+		<columns>
+			<column width="80px" />
+			<column />
+		</columns>
+		<rows>
+			<row> Sex <listbox id="ptSex" mold="select" rows="1" />
+			</row>
+			<row> Marital Status <listbox id="ptMarital" mold="select" rows="1" >
+								<listitem label="" value="" />
+								<listitem label="Single" value="S" />
+								<listitem label="Married" value="M" />
+								<listitem label="Divorced" value="D" />
+								<listitem label="Separated" value="X" />
+								<listitem label="Widowed" value="W" />
+								</listbox> </row>
+		</rows>
+	</grid>
+	
+	<grid>
+		<columns>
+			<column width="80px" />
+			<column />
+		</columns>
+		<rows>
+			<row> Race <listbox id="ptRace" mold="select" rows="1" /></row>
+			<row> Ethnicity <listbox id="ptEthnicity" mold="select" rows="1" /></row>
+			<row> Language <listbox id="ptLanguage" mold="select" rows="1" /></row>
+		</rows>
+	</grid>
+	
+	
+	<grid>
+		<columns>
+			<column width="80px" />
+			<column />
+		</columns>
+		<rows>
+			<row> Street <textbox id="ptStreet" maxlength="24" /> </row>
+			<row> Line 2 <textbox id="ptLine2" maxlength="24" /> </row>
+			<row> City <textbox id="ptCity" maxlength="20" /> </row>
+			<row> State <textbox id="ptState" maxlength="2" /> </row>
+			<row> Zip <textbox id="ptZip" maxlength="10" /> </row>
+			<row> Home Phone <textbox id="ptHome" maxlength="12" /> </row>
+			<row> Work Phone <textbox id="ptWork" maxlength="12" /> </row>
+			<row> Cell Phone <textbox id="ptCell" maxlength="12" /> </row>
+			<row> E-mail Address <textbox id="ptEmail" maxlength="40" /> </row>									
+		</rows>							
+	</grid>
+	</vbox>	
+	
+	
+		<grid>
+		<columns>
+			<column width="80px" />
+			<column />
+		</columns>
+		<rows>
+			<row> Occupation <textbox id="ptOccupation" maxlength="20" /> </row>
+			<row> Primary Provider <textbox id="ptProv" maxlength="10" /> </row>									
+			<row> Ref/Cons Physician <textbox id="ptRdoc" maxlength="10" /> </row>
+			<row> Employee Group <textbox id="ptEmpGroup" maxlength="10" /> </row>
+			<row> Physical Defaults <textbox id="ptPhydef" maxlength="10" /> </row>
+			<row> Nursing Home <textbox id="ptNH" maxlength="10" /> </row>									
+		</rows>							
+		</grid>
+						
+	
+			</row>
+		</rows>
+	</grid>
+	
+	
+	</div>
+
+</zk>

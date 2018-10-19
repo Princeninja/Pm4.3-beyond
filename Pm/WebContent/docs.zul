@@ -1,0 +1,38 @@
+<?page title="Documents" contentType="text/html;charset=UTF-8"?>
+<zk>
+<window id="docsWin"  border="none" mode="embedded" vflex="1" hflex="1" apply="palmed.DocsWinController">
+
+	<borderlayout>
+	
+		<west width="40%" splittable="true" collapsible="true" >
+			<hbox vflex="1" hflex="1" >
+				<vbox>
+					<button id="view" label="View" width="80px" />
+					<button id="scan" label="Scan" width="80px" />
+					<button id="importfile" label="Import" width="80px" />
+					<button id="edit" label="Edit" width="80px" />
+					<button id="delete" label="Delete" width="80px" />
+					<button id="print" label="Print" width="80px" />					
+				</vbox>
+	
+				<listbox id="docsListbox"  vflex="1" hflex="1" >
+					<listhead>
+						<listheader width="80px" label="Date" sort="auto" />
+						<listheader width="200px" label="Description" />
+						<listheader width="80px" label="Type" sort="auto" />
+					</listhead>
+				</listbox>
+			</hbox>		
+		</west>
+		
+		
+		<center flex="true" >
+			<iframe id="docsIframe" width="100%" height="100%"/>		
+		</center>
+		
+
+	</borderlayout>
+
+
+</window>
+</zk>

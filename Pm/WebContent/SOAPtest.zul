@@ -1,0 +1,38 @@
+<?page title="SOAP XML Test Page" contentType="text/html;charset=UTF-8"?>
+<zk>
+<window title="SOAP XML Test Page" border="normal">
+
+<vbox>
+URL
+<textbox id="url" width="400px" />
+SOAP Action
+<textbox id="action" width="400px" />
+<hbox>Send XML Textbox<button label="Clear" onClick='sendxml.setValue("")' /></hbox>
+<textbox id="sendxml" rows="12" width="600px" />
+<button label="Send" id="send" onClick="recxml.setValue(usrlib.SOAPClient4XG.send( url.getValue(), action.getValue(),  sendxml.getValue()));"/>
+<hbox>Received XML<button label="Clear" onClick='recxml.setValue("")' /></hbox>
+<textbox id="recxml" rows="12" width="600px" />
+<button id="decode" label="Decode" onClick="decodebase64(recxml.getValue())" />
+<hbox>Translated from Base64<button label="Clear" onClick='trans.setValue("")' /></hbox>
+<textbox id="trans" rows="12" width="600px" />
+</vbox>
+	<zscript>
+		void decodebase64( String s ) {
+
+			int i;
+			i = s.indexOf( "XmlResponse" );
+			if ( i == -1 ) return;
+			
+			int j;
+			j = s.indexOf( "XmlResponse", i + 1 );
+			if ( j == -1 ) return;
+			
+			trans.setValue( new String( usrlib.Base64.decode( s.substring( i + 12, j - 2 ))));
+		}
+	</zscript>
+
+</window>
+
+
+
+</zk>

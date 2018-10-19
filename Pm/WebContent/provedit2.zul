@@ -1,0 +1,136 @@
+<?page title="Edit Prov 2" contentType="text/html;charset=UTF-8"?>
+
+<!-- Edit Provider's Information - pg 2 -->
+
+
+<zk xmlns:h="http://www.w3.org/1999/xhtml">
+	<div>
+	
+	<h:h3>Provider Information:</h:h3>
+	
+	<grid align="start">
+		<columns>
+			<column width="40%" />
+			<column width="30%" />
+			<column width="30%" />
+		</columns>
+		<rows>
+			<row>
+				<vbox>
+				State License #1
+				<grid>
+					<columns>
+						<column width="80px" />
+						<column />
+					</columns>
+					<rows>
+						<row> State	<textbox id="licState1" maxlength="2" /> </row>
+						<row>
+							License # <hbox><textbox id="licNum1" maxlength="14" />
+							Exp <textbox id="licExp1" maxlength="10" /> 
+							</hbox></row>
+						
+						<row>
+							BNDD # <hbox><textbox id="bnddNum1" maxlength="16" />
+							Exp <textbox id="bnddExp1" maxlength="10" /> 
+							</hbox></row>
+					</rows>
+				</grid>
+				State License #2
+				<grid>
+					<columns>
+						<column width="80px" />
+						<column />
+					</columns>
+					<rows>
+						<row> State	<textbox id="licState2" maxlength="2" /> </row>					
+						<row>
+							License # <hbox><textbox id="licNum2" maxlength="14" />
+							Exp <textbox id="licExp2" maxlength="10" /> 
+							</hbox></row>
+						
+						<row>
+							BNDD # <hbox><textbox id="bnddNum2" maxlength="16" />
+							Exp <textbox id="bnddExp2" maxlength="10" /> 
+							</hbox></row>
+					</rows>
+				</grid>
+				State License #3
+				<grid>
+					<columns>
+						<column width="80px" />
+						<column />
+					</columns>
+					<rows>
+						<row> State	<textbox id="licState3" maxlength="2" /> </row>
+						<row>
+							License # <hbox><textbox id="licNum3" maxlength="14" />
+							Exp <textbox id="licExp3" maxlength="10" /> 
+							</hbox></row>
+						
+						<row>
+							BNDD # <hbox><textbox id="bnddNum3" maxlength="16" />
+							Exp <textbox id="bnddExp3" maxlength="10" /> 
+							</hbox></row>
+					</rows>
+				</grid>
+				State License #4
+				<grid>
+					<columns>
+						<column width="80px" />
+						<column />
+					</columns>
+					<rows>
+						<row> State	<textbox id="licState4" maxlength="2" /> </row>
+						<row>
+							License # <hbox><textbox id="licNum4" maxlength="14" />
+							Exp <textbox id="licExp4" maxlength="10" /> 
+							</hbox></row>
+						
+						<row>
+							BNDD # <hbox><textbox id="bnddNum4" maxlength="16" />
+							Exp <textbox id="bnddExp4" maxlength="10" /> 
+							</hbox></row>
+					</rows>
+				</grid>
+				
+				</vbox>
+				
+				<vbox>
+				Medical Education
+				<grid>
+					<columns>
+						<column width="80px" />
+						<column />
+					</columns>
+					<rows>
+						<row> Medical School <textbox id="school" maxlength="16" /> </row>
+						<row> Year Graduated <textbox id="yearGrad" maxlength="4" /> </row>
+						<row> Med Education # <textbox id="medEd" maxlength="16" /> </row>
+						<row> UPIN Number (obsolete) <textbox id="provUPIN" maxlength="16" /> </row>
+					</rows>
+				</grid>
+				Specialties
+				<grid>
+					<columns>
+						<column width="80px" />
+						<column />
+					</columns>
+					<rows>
+						<row> Specialty 1<textbox id="specialty1" maxlength="32" /> </row>
+						<row> Specialty 2<textbox id="specialty2" maxlength="32" /> </row>
+						<row> Specialty 3<textbox id="specialty3" maxlength="32" /> </row>
+						<row> Specialty 4<textbox id="specialty4" maxlength="32" /> </row>
+					</rows>
+				</grid>
+				
+				</vbox>
+			</row>
+			
+		</rows>
+	</grid>
+
+
+	</div>
+
+</zk>

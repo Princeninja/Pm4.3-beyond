@@ -1,0 +1,23 @@
+<?page title="Remove Notes" contentType="text/html;charset=UTF-8"?>
+<zk>
+<window id="notesRemoveWin" title="Delete Notes" width="740px" border="normal" apply="palmed.NotesRemoveWinController">
+	<vbox>
+		<grid>
+			<columns>
+				<column width="100px" />
+				<column />
+			</columns>
+			<rows>
+				<row><label value="Patient" /><label id="lblPtName" /></row>
+				<row><label value="Date" /><label id="lblDate" /></row>
+				<row><label value="Desc" /><label id="lblDesc" /></row>
+				<row><label value="Note" /><label id="lblNote" /></row>
+			</rows>
+		</grid>
+		<hbox>
+			<button id="btnDelete" label="Delete" width="80px" />
+			<button id="btnCancel" label="Cancel" width="80px" />
+		</hbox>
+	</vbox>
+</window>
+</zk>

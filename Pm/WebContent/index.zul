@@ -1,0 +1,8 @@
+<?page id=pmIndexPage title="PAL/MED Index Page"?>
+<zk>
+	<window id="pmAppWin" title="PAL/MED Main Window" border="normal" width="95%" height="95%" apply="palmed.PmAppController">
+
+		<image src="palmed.png" style="center" />
+
+	</window>
+</zk>

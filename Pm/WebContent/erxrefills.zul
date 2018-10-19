@@ -1,0 +1,49 @@
+<?page title="Refills" contentType="text/html;charset=UTF-8"?>
+<zk>
+<window id="erxWin" border="none" mode="embedded" vflex="1" hflex="1" apply="palmed.ERxRefillsWinController" >
+
+	<tabbox id="tabbox" width="100%" height="100%" >
+		<tabs id="tabs" >
+			<tab id="tabStatus" label="Status" />
+		</tabs>
+		<tabpanels id="tps" hflex="1" vflex="1" style="overflow:auto" >
+		
+		
+			<tabpanel id="tpStatus" height="100%" >
+				<hbox vflex="1" >
+					<vbox width="120px" >
+						<button id="btnProcess" label="Process" width="80px" />
+						<button id="btnNewcrop" label="Newcrop" width="80px" />
+						<button id="btnProv" label="Choose Provider" width="80px" />
+						
+						<groupbox>
+							<caption label="View" />
+							<radiogroup>
+								<vbox>
+									<radio id="rbProv" label="This Provider" checked="true" />
+									<radio id="rbAllProv" label="All Providers" />
+									<radio id="rbStaff" label="Staff" />
+									<radio id="rbAll" label="All" />
+								</vbox>
+							</radiogroup>
+						</groupbox>
+					</vbox>
+					
+					<listbox id="lbox" vflex="1" hflex="1" >
+						<listhead>
+							<listheader label="Patient" width="200px" sort="auto" />
+							<listheader label="Date" width="80px" sort="auto" />
+							<listheader label="Drug Info" width="200px" sort="auto" />
+							<listheader label="Provider" width="100px" sort="auto" />
+							<listheader label="Status" width="80px" sort="auto" />				
+							<listheader label="SubStatus" width="100px" sort="auto" />				
+						</listhead>
+					</listbox>
+				</hbox>			
+			</tabpanel>
+			
+		</tabpanels>
+	</tabbox>
+
+</window>
+</zk>

@@ -1,0 +1,105 @@
+<?page title="The Office Visit" contentType="text/html;charset=UTF-8"?>
+<zk>
+<window title="The Office Visit Hub" border="normal" apply="palmed.OfficeVisitWinController" 
+
+ id="officevWin"  mode="embedded" vflex="1" hflex="1" >
+
+		<borderlayout>
+		<east width="20%" border="none" flex="true" splittable="true" collapsible="true" >
+			<vbox>							
+			
+				<groupbox mold="3d"  >
+					<caption label="ToDO">
+					<menubar orient="vertical"  width="80">
+			        <menu label="Menu" > <!--  image="/widgets/menu/pull-down_menu/img/luggage.png"--> 
+						<menupopup>
+							<menuitem id="btnCurrentT" label="Current Tasks" />
+							<menuitem id="btnCompletedT" label="Completed Tasks" />
+							<menuitem id="btnCreateT" label="Create Tasks" />
+							<menuitem id="btnNotes" label="Notes" />
+						</menupopup>
+					</menu> 
+				</menubar>
+					
+				</caption>	
+					 
+					<listbox id="todo"  rows="6" ></listbox>
+				</groupbox>
+							
+			</vbox>
+			
+		</east>
+
+
+		<center border="none" flex="true" >
+		<borderlayout>
+		<north id="dashboard" height="100px" border="none" flex="false" collapsible="true" splittable="true"  >
+		
+		</north>
+	
+		<center id="center" border="none" margins="0,0,0,0"
+				flex="true" autoscroll="false" style="background-color: #D6DCDE; padding: 5px" vflex="1" >
+	
+		<div>	
+		<hbox vflex="1" >
+		<vbox>
+			<button id="newvst" label="New Vist" width="80px" />
+			<button id="edit" label="Update Status" width="80px" />
+			<button id="view" label="View Patient" width="80px" />
+			
+			<groupbox width="98px" >
+				<caption label="View:" />
+				<radiogroup>
+					<radio id="r_new" label="New" checked="true" />
+					<separator />
+					<radio id="r_triage" label="Triage" />
+					<separator />
+					<radio id="r_examrm" label="Exam Room" />
+					<separator />
+					<radio id="r_end" label="Post Visit" />
+					<separator />
+					<radio id="r_done" label="End" />
+					<separator />
+					<radio id="r_all" label="All" />					
+				</radiogroup>
+			</groupbox>
+		
+		</vbox>
+		<vbox vflex="1" >
+			<hbox>
+				<button id="search" label="Search" width="80px" />
+				<textbox id="srcstr" maxlength="40" width="200px" />
+			</hbox>
+			<listbox id="officevListbox" vflex="1" >
+				<listhead>
+					<listheader width="150px" label="Name" sort="auto" />
+					<listheader label="Current Status" sort="auto" />
+					<listheader label="Visit Type" width="100px" sort="auto" />
+					<listheader label="Provider" width="80px" sort="auto" />
+					<listheader label="Duration" width="80px" sort="auto" />
+					<listheader label="Priority"  width="100px" sort="auto" />
+				</listhead>
+			</listbox>
+	<!--  <hbox>
+	
+	</hbox> -->
+		</vbox>
+	
+	</hbox>
+	
+	</div>
+	
+	</center>	
+	</borderlayout>
+  
+  
+   </center>
+  
+  </borderlayout>
+  
+	
+	
+</window>
+
+
+</zk>

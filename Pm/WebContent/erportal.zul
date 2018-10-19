@@ -1,0 +1,10 @@
+<?page title="ER Access Portal" contentType="text/html;charset=UTF-8"?>
+<zk xmlns:h="http://www.w3.org/1999/xhtml">
+	<window id="ERPortalWin" title="ER Access Portal" border="normal" apply="palmed.ERPortalWinController" >
+		<h:center><h:h1>Riverside Family Practice</h:h1></h:center>
+		<h:center><h:h2>James E. Palen, MD  --  J. Richard Palen, MD</h:h2></h:center>
+		<h:center><h:h3>3129 Blattner Drive</h:h3></h:center>
+		<h:center><h:h3>Cape Girardeau, MO  63703</h:h3></h:center>
+		<h:center><h:h3>573-335-0166  --  fax: 573-335-7942</h:h3></h:center>
+	</window>
+</zk>

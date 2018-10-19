@@ -1,0 +1,46 @@
+<?page title="Vaccine CVX" contentType="text/html;charset=UTF-8"?>
+<zk>
+<window id="cvxWin" border="none" mode="embedded" vflex="1" hflex="1" apply="palmed.VaccineCVXWinController" >
+
+	<borderlayout vflex="1" >
+		<west width="100px" >
+		<vbox>
+			<button id="btnNew" label="New" width="80px" />
+			<button id="btnEdit" label="Edit" width="80px" />
+			<button id="btnDelete" label="Delete" width="80px" />
+			<button id="btnImport" label="Import" width="80px" />
+			<button id="btnPrint" label="Print" width="80px" />
+			
+			<groupbox>
+				<caption label="View" />
+				<radiogroup>
+					<vbox>
+					<radio id="r_active" label="Active" checked="true" />
+					<radio id="r_all" label="All" />
+					</vbox>
+				</radiogroup>
+			</groupbox>
+		</vbox>
+		</west>
+		<center vflex="1" >
+		<vbox vflex="1" >
+			<hbox>
+				<button id="btnSearch" label="Search" width="80px" />
+				<textbox id="srcstr" maxlength="40" width="200px" />
+			</hbox>
+			<listbox id="lboxVaccineCVX"  vflex="1" >
+				<listhead>
+					<listheader id="lhdrAbbr" width="80px" label="Abbr" />
+					<listheader id="lhdrCVX" width="60px" label="CVX" />
+					<listheader id="lhdrStatus" label="Status" width="60px" />
+					<listheader id="lhdrShortDesc" label="Short Description" width="300px" />
+					<listheader id="lhdrNote" label="Note" width="60px" />
+					<listheader id="lhdrFullDesc" label="Full Description" />
+				</listhead>
+			</listbox>
+		</vbox>
+		</center>		
+	</borderlayout>
+
+</window>
+</zk>

@@ -1,0 +1,67 @@
+<?page title="PAL/MED Login" contentType="text/html;charset=UTF-8"?>
+<zk>
+	<window id="pmLoginWin" title="PAL/MED Login" border="normal" width="500px" position="center" mode="modal" apply="palmed.PmLogin.PmLoginController"  >
+		<intbox id="uuserRec" visible="false" value="0" />
+		<groupbox>
+			<grid>
+				<columns>
+					<column label="" />
+					<column label="" />
+				</columns>
+				<rows>
+					<row>
+						<label value="Username" />
+						<textbox id="username" />
+					</row>
+					<row>
+
+						<label value="Password" />
+						<textbox id="password" type="password"></textbox>
+					</row>
+
+				</rows>
+			</grid>
+
+		</groupbox>
+		<groupbox id="gbLoggedIn" visible="false" >
+			<grid>
+				<columns>
+					<column label="Logged In" />
+					<column label="" />
+				</columns>
+				<rows>
+					<row>
+						<label value="User" />
+						<label id="lblUser" />
+					</row>
+					<row>
+						<label value="Last Login" />
+						<label id="lblDate" />
+					</row>
+					<row>
+
+						<label value="" />
+						<label id="lblTime" />
+					</row>
+
+				</rows>
+			</grid>
+
+		</groupbox>
+		<hbox>
+			<label id="loggedIn" value="Please enter your username and password above and then press 'Login'." />
+		</hbox>
+		<hbox>
+					<button id="logon" label="Login" width="80px" />
+					<button id="exit" label="Exit" width="80px" />
+					<button id="btnContinue" label="Continue" width="80px" visible="false" />
+					<button id="btnVerify" label="Verify" width="80px" visible="false" />
+					
+					
+		</hbox>
+
+		<timer id="loginTimer" delay="0" />
+		<!-- Hidden control used to pass info back to calling class. -->
+		
+	</window>
+</zk>

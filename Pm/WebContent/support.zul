@@ -1,0 +1,18 @@
+<?page title="Support Info" contentType="text/html;charset=UTF-8"?>
+<zk>
+<window title="Support Info" border="normal">
+
+	<grid>
+		<columns>
+			<column />
+			<column />
+		</columns>
+		<rows>
+			<row><label value="ZK Version" />  <label value="${zk.version}" /> </row>
+			<row><label value="ZK Version" />  <label value="${desktop.webApp.version}" /> </row>
+			<row><label value="Browser Info" />  <label value="${zk.browser.name}" /> </row>
+			<row if="${zk.ie}"> <label value="Internet Explorer" /> <label value="${zk.ie}"/></row>
+		</rows>
+	</grid>
+</window>
+</zk>

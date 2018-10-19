@@ -1,0 +1,56 @@
+<?page title="Edit Standard Dictation" contentType="text/html;charset=UTF-8"?>
+
+<zk>
+	<window id="editStdDict" title="Emter/Edit Standard Dictation"
+		mode="modal" border="normal"
+		apply="palmed.StdDictEditWinController">
+
+		<grid>
+			<columns>
+				<column width="80px" />
+				<column width="800px" />
+			</columns>
+			<rows>
+				<row>
+					Abbreviation
+					<textbox id="stdDictAbbr" width="300px" />
+				</row>
+				<row if="${arg.flgPerms}">
+					<label value="Status" />
+					<hbox>
+						<radiogroup>
+							<radio id="rbActive" label="Active" selected="false"/>
+							<radio id="rbInactive" label="Inactive" selected="false"/>
+						</radiogroup>
+					</hbox>
+				</row>
+
+
+				<row>
+					Subjective
+					<textbox id="stdDictSubjective" width="100%" />
+				</row>
+				<row>
+					Objective
+					<textbox id="stdDictObjective" width="100%" />
+				</row>
+				<row>
+					Assessment
+					<textbox id="stdDictAssessment" width="100%" />
+				</row>
+				<row>
+					Plan
+					<textbox id="stdDictPlan" width="100%" />
+				</row>
+
+			</rows>
+		</grid>
+		<hbox>
+			<button id="save" label="Save" width="80px" />
+			<button id="cancel" label="Cancel" width="80px" />
+		</hbox>
+	</window>
+
+
+
+</zk>

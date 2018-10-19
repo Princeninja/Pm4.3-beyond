@@ -1,0 +1,116 @@
+<?page title="Add/Edit Orders" contentType="text/html;charset=UTF-8"?>
+<zk>
+<window id="ordersAddWin" title="Enter/Edit Orders" border="normal" width="800px" position="center"  mode="modal" apply="palmed.OrdersAddWinController" > <!-- mode="modal"-->
+	<label id="ptname" />
+	<hbox>
+		<!--  groupbox>-->
+			<grid>
+				<columns>
+					<column label="" width="80px" />
+					<column label="" width="320px" />
+				</columns>
+				<rows>
+					<row>
+						<label value="Date" />
+						<textbox id="txtDate" maxlength="10" width="80px" />
+					</row>
+					<!-- row>
+						<label value="Misc" />
+						<div>
+						<checkbox id="cbMisc" onCheck="setMisc(cbMisc.isChecked())"/>
+						<textbox id="txtMiscMed" maxlength="40" width="280px" disabled="true" />
+						</div>
+					</row>
+					<row id="rowMed1" >
+						<label value="Medication" />
+						<label id="lblMed" value="(select on right)"/>
+					</row>
+					<row id="rowMed2">
+						<label value="Info" />
+						<div>
+						<label value="Code:" />
+						<label id="lblCode" value="" />
+						<separator />
+						<label id="lblEtc" value="" />
+						</div>
+					</row>
+					 -->
+					<row >
+						<label value="Order" />
+						<textbox id="txtDesc" maxlength="40" />
+					</row>
+					<row >
+						<label value="Instructions" />
+						<textbox id="txtNote" maxlength="40" />
+					</row>
+					<row>
+						<label value="Priority" />
+						<radiogroup>
+							<radio id="rbRoutine" label="Routine" />
+							<radio id="rbASAP" label="ASAP" />
+							<radio id="rbSTAT" label="STAT" />
+						</radiogroup>
+					</row>
+					<row>
+						<label value="Provider" />
+						<listbox id="lboxProvider" mold="select" rows="1" />
+					</row>
+					<row >
+						<label value="Indications" />
+						<textbox id="txtIndications" maxlength="40" />
+					</row>
+					<row>
+						<label value="Status" />
+						<listbox id="lboxStatus" mold="select" rows="1" />
+					</row>
+
+				</rows>
+			</grid>
+
+		<!--</groupbox>
+		
+		<groupbox hflex="1">
+			<vbox vflex="1" hflex="1" >
+			<hbox>
+				<button id="btnSearch" label="Search" width="80px" />
+				<textbox id="txtSearch" maxlength="40" width="200px" />
+			</hbox>
+			<listbox id="parListbox" rows="20" hflex="1" vflex="1" >
+				<listhead id="lhMedListbox" >
+					<listheader id="name" label="Medication/Allergen" sort="auto" />
+				</listhead>
+			</listbox>
+			<button id="btnSelect" label="Select" width="80px" />
+			</vbox>
+		</groupbox>
+		-->
+
+	</hbox>
+		
+	<hbox>
+		<button id="btnSave" label="Save" width="80px" />
+		<button id="btnCancel" label="Cancel" width="80px" />
+	</hbox>
+
+<!--  zscript>
+
+	void setMisc( boolean flg ){
+	
+		rowMed1.setVisible( ! flg );
+		rowMed2.setVisible( ! flg );
+		btnSelect.setDisabled( flg );
+		btnSearch.setDisabled( flg );
+		parListbox.setDisabled( flg );
+		name.setVisible( ! flg );
+		txtMiscMed.setDisabled( ! flg );
+		txtSearch.setDisabled( flg );		
+		return;
+	}
+	
+</zscript>
+-->
+
+</window>
+
+
+</zk>

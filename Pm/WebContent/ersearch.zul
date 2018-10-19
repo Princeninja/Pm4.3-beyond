@@ -1,0 +1,68 @@
+<?page title="ER Access Search" contentType="text/html;charset=UTF-8"?>
+<zk xmlns:h="http://www.w3.org/1999/xhtml">
+<window id="ERSearchWin" title="ER Access Search" border="normal" apply="palmed.ERSearchWinController" >
+
+	<vbox>
+		<h:h2>Riverside Family Practice</h:h2>
+		<h:p>3129 Blattner Dr</h:p>
+		<h:p>Cape Girardeau, MO  63703</h:p>
+		<h:p>573-335-0166</h:p>
+		<h:p>573-445-7942 fax</h:p>
+		<groupbox width="400px" mold="3d" >
+			<caption label="Disclaimer" />
+			<vbox>
+				<h:p>This Emergency Access facility is intended for use by Emergency Physicians and other healthcare providers
+				to enable them to treat patients under emergency conditions or after hours.  Any other use is prohibited
+				and may be a violation of the patient's confidentiality and the law.</h:p>
+				<h:p>Note: This access will be date/time stamped and logged.</h:p>
+				<checkbox id="agree" label="I Agree" />
+			</vbox>
+			
+		</groupbox>
+		
+		
+		<groupbox width="400px" mold="3d" >
+			<caption label="Find Patient" />
+			<grid>
+				<columns>
+					<column label="" />
+					<column label="" />
+				</columns>
+				<rows>
+					<row>
+						<label value="First Name" />
+						<textbox id="firstname" cols="10" />
+					</row>
+					<row>
+						<label value="Middle Name" />
+						<textbox id="middlename" cols="10" />
+					</row>
+					<row>
+						<label value="Last Name" />
+						<textbox id="lastname" cols="15" />
+					</row>
+					<row>
+						-AND-
+					</row>
+					<row>
+						<label value="Birthdate" />
+						<textbox id="birthdate" cols="10" constraint="no future: Please enter a valid date"/>
+					</row>
+					<row>
+						-OR-
+					</row>
+					<row>
+						<label value="SSN" />
+						<textbox id="ssn" cols="11" />
+					</row>	
+				</rows>
+			</grid>
+			<hbox>
+				<button id="searchBtn" label="Search" width="80px"  />
+				<button id="exitBtn" label="Exit" width="80px" />
+			</hbox>		
+		</groupbox>
+	</vbox>
+
+</window>
+</zk>

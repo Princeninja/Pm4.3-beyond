@@ -1,0 +1,346 @@
+<?page title="Enter/Edit CDS Rules" contentType="text/html;charset=UTF-8"?>
+<zk>
+<window id="cdsRulesEditWin" title="Enter/Edit CDS Rules" border="normal" width="900px" position="center"  mode="modal" apply="palmed.CDSRulesEditWinController" > 
+<vbox>
+	<label id="ptname" />
+	<hbox>
+		<label value="Description" />
+		<textbox id="txtDesc" maxlength="80" width="300px" />
+	</hbox>
+	
+			
+			<tabbox id="tbox" >
+				<tabs>
+					<tab id="tabProblems" label="Problems" />
+					<tab id="tabLab" label="Lab" />
+					<tab id="tabMeds" label="Meds" />
+					<tab id="tabDemo" label="Demographics" />
+					<tab id="tabNotify" label="Notifications" />
+				</tabs>
+				
+				
+				<tabpanels>
+					<tabpanel id="tpProblems" >
+						<hbox>
+					
+							<grid>
+								<columns>
+									<column label="" width="100px" />
+									<column label="" width="320px" />
+								</columns>
+								<rows>
+								<row>
+									<label value="Problem List" />
+									<checkbox id="cbProbs" label="Use problem/diagnosis based rule" />
+								</row>
+									<row>
+										<label value="Problems" />
+										<listbox id="lboxProbSel" width="300px" rows="4" />
+									</row>
+									<row>
+										<label value="Diagnosed?" />
+										<vbox>
+										<hbox>
+											<radiogroup>
+												<radio id="rbHasDx" label="has diagnosis" />
+												<radio id="rbNoDx" label="no diagnosis" />
+											</radiogroup>
+										</hbox>
+										<hbox>
+											<radiogroup>
+												<radio label="one of these" />
+												<radio label="all of these" />
+											</radiogroup>
+										</hbox>
+										</vbox>
+									</row>
+								</rows>
+							</grid>
+
+							<groupbox id="gbSearchProb" hflex="1">
+								<vbox vflex="1" hflex="1" >
+									<hbox>
+										<button id="btnSearchProb" label="Search" width="80px" />
+										<textbox id="txtSearchProb" maxlength="20" width="200px" />
+									</hbox>
+									<listbox id="lboxProb" rows="20" hflex="1" vflex="1" >
+										<listhead id="lhProblems" >
+											<listheader id="lhdrProblems" label="Problems" sort="auto" />
+										</listhead>
+									</listbox>
+										<button id="btnSelectProb" label="Select" width="80px" />
+									</vbox>
+							</groupbox>
+						</hbox>
+						
+					</tabpanel>
+					
+					
+					
+					<tabpanel id="tpLab" >
+						<hbox>
+						<grid>
+							<columns>
+								<column label="" width="100px" />
+								<column label="" width="320px" />
+							</columns>
+							<rows>
+								<row>
+									<label value="Lab" />
+									<checkbox id="cbLabs" label="Use lab based rule" />
+								</row>
+								<row>
+									<label value="Lab" />
+									<listbox id="lboxLabSel" width="300px" rows="4" />
+								</row>
+								<row>
+									<label value="Result" />
+										<vbox>
+											<hbox>
+											<radiogroup>
+												<radio id="rbLabLess" label="less than" />
+												<radio id="rbLabGreater" label="greater than or equal" />
+											</radiogroup>
+											</hbox>
+										<textbox id="txtResult" value="" />
+										</vbox>
+								</row>
+								<row>
+									<label value="Timing" />
+									<vbox >
+										<hbox>
+										<radiogroup>
+										<radio id="rbNoneWithin" label="none within" />
+										<radio label="none outside of" />
+										</radiogroup>
+										</hbox>
+										<hbox>
+										<textbox id="txtPeriod" value="" />
+										<label value="days" />
+										</hbox>
+									</vbox>
+								</row>
+			
+							</rows>
+						</grid>
+					
+					
+					
+					
+						<groupbox id="gbSearchLabs" hflex="1">
+							<vbox vflex="1" hflex="1" >
+								<hbox>
+									<button id="btnSearchLab" label="Search" width="80px" />
+									<textbox id="txtSearchLab" maxlength="20" width="200px" />
+								</hbox>
+								<listbox id="lboxLab" rows="20" hflex="1" vflex="1" >
+									<listhead id="lhLab" >
+										<listheader id="lhdrLab" label="Lab"  sort="auto" />
+									</listhead>
+								</listbox>
+								<button id="btnSelectLab" label="Select" width="80px" />
+							</vbox>
+						</groupbox>
+						</hbox>
+						
+					</tabpanel>
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					<tabpanel id="tpMeds" >
+						<hbox>
+						<grid>
+							<columns>
+								<column label="" width="100px" />
+								<column label="" width="320px" />
+							</columns>
+							<rows>
+								<row>
+									<label value="Meds" />
+									<checkbox id="cbMeds" label="Use medication based rule" />
+								</row>
+								<row>
+									<label value="Meds" />
+									<listbox id="lboxMedSel" width="300px" rows="4" />
+								</row>
+								<row>
+									<label value="Taking?" />
+									<vbox>
+									<hbox>
+										<radiogroup>
+											<radio id="rbMedOn" label="currently on" />
+											<radio id="rbMedNoRx" label="not prescribed" />
+										</radiogroup>
+									</hbox>
+									<hbox>
+										<radiogroup>
+											<radio label="one of these" />
+											<radio label="all of these" />
+										</radiogroup>
+									</hbox>
+									</vbox>
+								</row>
+			
+							</rows>
+						</grid>
+					
+					
+					
+					
+					
+					
+						<groupbox id="gbSearchMeds" hflex="1">
+							<vbox vflex="1" hflex="1" >
+								<hbox>
+									<button id="btnSearchMed" label="Search" width="80px" />
+									<textbox id="txtSearchMed" maxlength="20" width="200px" />
+								</hbox>
+								<listbox id="lboxMed" rows="20" hflex="1" vflex="1" >
+									<listhead id="lhMVX" >
+										<listheader id="lhdrMeds" label="Meds" sort="auto" />
+									</listhead>
+								</listbox>
+								<button id="btnSelectMed" label="Select" width="80px" />
+							</vbox>
+						</groupbox>
+						</hbox>
+					</tabpanel>
+
+
+
+
+
+					<tabpanel id="tpDemo" >
+					
+						<grid>
+							<columns>
+								<column label="" width="100px" />
+								<column label="" width="320px" />
+							</columns>
+							<rows>
+								<row>
+									<label value="Sex" />
+									<vbox >
+										<checkbox label="Use sex/gender rule" />
+										<hbox>
+										<radio label="Male" />
+										<radio label="Female" />
+										</hbox>
+								</vbox>
+								</row>
+								<row>
+									<label value="Age" />
+									<vbox >
+										<checkbox label="Use age rule" />
+										<hbox>
+										<radio label="less than" />
+										<radio label="greater than or equal" />
+										</hbox>
+										<textbox id="txtAge" value="" />
+								</vbox>
+								</row>
+								<row>
+									<label value="BMI" />
+									<vbox >
+										<checkbox id="cbBMI" label="Use BMI rule" />
+										<hbox>
+										<radio id="rbBMIless" label="less than" />
+										<radio id="rbBMIgreater" label="greater than or equal" />
+										</hbox>
+										<hbox>
+										<textbox id="txtBMI" value="" />
+										<label value="kg/m2" />
+										</hbox>
+									</vbox>
+								</row>
+								<row>
+									<label value="Race" />
+									<vbox >
+										<checkbox label="Use Race rule" />
+										<hbox>
+										<radio label="is race" />
+										<radio label="is not race" />
+										</hbox>
+										<hbox>
+										<listbox id="lboxRace" width="200px" rows="1" mold="select" />
+										</hbox>
+									</vbox>
+								</row>
+								<row>
+									<label value="Ethnicity" />
+									<vbox >
+										<checkbox label="Use Ethnicity rule" />
+										<hbox>
+										<radio label="is Ethnicity" />
+										<radio label="is not Ethnicity" />
+										</hbox>
+										<hbox>
+										<listbox id="lboxEthnicity" width="200px" rows="1" mold="select" />
+										</hbox>
+									</vbox>
+								</row>
+			
+							</rows>
+						</grid>
+					</tabpanel>
+
+
+					<tabpanel>
+						<grid>
+							<columns>
+								<column label="" width="100px" />
+								<column label="" width="320px" />
+							</columns>
+							<rows>
+								<row>
+									<label value="Message" />
+									<vbox >
+										<checkbox id="cbMsg" label="Use notification message." />
+										<hbox>
+										<textbox id="txtMsg" value="" width="200px" rows="3" />
+										</hbox>
+								</vbox>
+								</row>
+								<row>
+									<label value="Where" />
+									<vbox >
+										<radio id="rbSOAP" label="SOAP Sheet (Encounter)" />
+										<radio label="Appointment Schedule" />
+									</vbox>
+								</row>
+			
+							</rows>
+						</grid>
+					
+					
+					
+					
+					
+					</tabpanel>
+
+
+
+				</tabpanels>
+
+			</tabbox>
+			
+			
+		
+		
+	<hbox>
+		<button id="btnSave" label="Save" width="80px" />
+		<button id="btnCancel" label="Cancel" width="80px" />
+	</hbox>
+</vbox>
+
+</window>
+</zk>

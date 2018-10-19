@@ -1,0 +1,371 @@
+<?page title="SOAP ROS" contentType="text/html;charset=UTF-8"?>
+<zk>
+	<window id="soapShtROSWin"  border="none" mode="embedded" vflex="1" hflex="1" apply="palmed.SoapShtROSWinController" >
+			<vbox vflex="1" hflex="1" >
+				
+				<hbox>
+					<vbox>
+						<checkbox label="Complete ROS taken" />
+						<checkbox label="See HPI above" />
+						<checkbox label="All other systems negative" />
+					</vbox>
+					<vbox>
+						<checkbox label="ROS difficult" />
+						<checkbox label="ROS impossible" />
+					</vbox>
+				</hbox>
+				<tabbox vflex="1" hflex="1" orient="vertical" >
+					<tabs>
+						<tab label="Gen" />
+						<tab label="HEENT" />
+						<tab label="Cardiac" />
+						<tab label="Resp" />
+						<tab label="Abd/GI" />
+						<tab label="GU" />
+						<tab label="Gyn" />
+						<tab label="Ortho" />
+						<tab label="Neuro" />
+						<tab label="Heme" />
+						<tab label="Psych" />
+					</tabs>
+					<tabpanels>
+					
+						<!-- General -->
+						<tabpanel vflex="1" hflex="1" style="overflow:auto">
+							<hbox><checkbox label="" /> <checkbox label="Fever" /></hbox>
+							<hbox><checkbox label="" /> <checkbox label="Chills" /></hbox>
+							<hbox><checkbox label="" /> <checkbox label="Diaphoresis" /></hbox>
+							<hbox><checkbox label="" /> <checkbox label="Night Sweats" /></hbox>
+							<hbox><checkbox label="" /> <checkbox label="Fatigue" /></hbox>
+							<hbox><checkbox label="" /> <checkbox label="General Weakness" /></hbox>
+							<hbox><checkbox label="" /> <checkbox label="Weight Loss" /></hbox>
+							<hbox><checkbox label="" /> <checkbox label="Weight Gain" /></hbox>
+							<hbox><checkbox label="" /> <checkbox label="Anorexia" /></hbox>
+							<hbox><checkbox label="" /> <checkbox label="Insomnia" /></hbox>
+						</tabpanel>
+						
+						
+						<!-- HEENT -->
+						<tabpanel vflex="1" hflex="1" style="overflow:auto">
+							<hbox><checkbox label="" /> <label /> <label value="HEENT negative" /></hbox>
+							<space />
+							<hbox>
+								<groupbox>
+									<caption label="Head / Neck" />
+									<hbox><checkbox label="+" /> <checkbox label="-" /> <label value="Head Trauma" /></hbox>
+									<hbox><checkbox label="+" /> <checkbox label="-" /> <label value="Headache" /></hbox>
+									<hbox><checkbox label="+" /> <checkbox label="-" /> <label value="Aura" /></hbox>
+									<hbox><checkbox label="+" /> <checkbox label="-" /> <label value="Facial Pain" /></hbox>
+									<separator />
+									<hbox><checkbox label="+" /> <checkbox label="-" /> <label value="Neck Lumps/Nodules" /></hbox>
+									<hbox><checkbox label="+" /> <checkbox label="-" /> <label value="Swollen Glands" /></hbox>
+									<hbox><checkbox label="+" /> <checkbox label="-" /> <label value="Neck Pain" /></hbox>
+									<hbox><checkbox label="+" /> <checkbox label="-" /> <label value="Neck Stiffness" /></hbox>
+									
+								</groupbox>
+								<groupbox>
+									<caption label="Eyes" />
+									<hbox><checkbox label="+" /> <checkbox label="-" /> <label value="Visual Changes" /></hbox>
+									<hbox><checkbox label="+" /> <checkbox label="-" /> <label value="Blurred Vision" /></hbox>
+									<hbox><checkbox label="+" /> <checkbox label="-" /> <label value="Double Vision" /></hbox>
+									<hbox><checkbox label="+" /> <checkbox label="-" /> <label value="Vision Loss" /></hbox>
+									<hbox><checkbox label="+" /> <checkbox label="-" /> <label value="Contact Lenses" /></hbox>
+									<hbox><checkbox label="+" /> <checkbox label="-" /> <label value="Glasses" /></hbox>
+									<hbox><checkbox label="+" /> <checkbox label="-" /> <label value="Eye Pain" /></hbox>
+									<hbox><checkbox label="+" /> <checkbox label="-" /> <label value="Redness" /></hbox>
+									<hbox><checkbox label="+" /> <checkbox label="-" /> <label value="Photophobia" /></hbox>
+									<hbox><checkbox label="+" /> <checkbox label="-" /> <label value="Flashing Lights" /></hbox>
+									<hbox><checkbox label="+" /> <checkbox label="-" /> <label value="Floaters" /></hbox>
+									<hbox><checkbox label="+" /> <checkbox label="-" /> <label value="Cataracts" /></hbox>
+									<hbox><checkbox label="+" /> <checkbox label="-" /> <label value="Glaucoma" /></hbox>
+								</groupbox>
+								<groupbox>
+									<caption label="Ears" />
+									<hbox><checkbox label="+" /> <checkbox label="-" /> <label value="Hearing Loss" /></hbox>
+									<hbox><checkbox label="+" /> <checkbox label="-" /> <label value="Hard of Hearing" /></hbox>
+									<hbox><checkbox label="+" /> <checkbox label="-" /> <label value="Ringing in Ears" /></hbox>
+									<hbox><checkbox label="+" /> <checkbox label="-" /> <label value="Earache / Ear Pain" /></hbox>
+									<hbox><checkbox label="+" /> <checkbox label="-" /> <label value="Ear Discharge" /></hbox>
+									<hbox><checkbox label="+" /> <checkbox label="-" /> <label value="Vertigo" /></hbox>
+									<hbox><checkbox label="+" /> <checkbox label="-" /> <label value="Loss of Balance" /></hbox>
+								</groupbox>
+								<groupbox>
+									<caption label="Nose" />
+									<hbox><checkbox label="+" /> <checkbox label="-" /> <label value="Runny Nose" /></hbox>
+									<hbox><checkbox label="+" /> <checkbox label="-" /> <label value="Stuffy Nose" /></hbox>
+									<hbox><checkbox label="+" /> <checkbox label="-" /> <label value="Sneezing" /></hbox>
+									<hbox><checkbox label="+" /> <checkbox label="-" /> <label value="Itching" /></hbox>
+									<hbox><checkbox label="+" /> <checkbox label="-" /> <label value="Nosebleed" /></hbox>
+								</groupbox>
+								<groupbox>
+									<caption label="Mouth / Throat" />
+									<hbox><checkbox label="+" /> <checkbox label="-" /> <label value="Mouth Pain" /></hbox>
+									<hbox><checkbox label="+" /> <checkbox label="-" /> <label value="Sore Throat" /></hbox>
+									<hbox><checkbox label="+" /> <checkbox label="-" /> <label value="Sore Tongue" /></hbox>
+									<hbox><checkbox label="+" /> <checkbox label="-" /> <label value="Hoarseness" /></hbox>
+									<hbox><checkbox label="+" /> <checkbox label="-" /> <label value="Dry Mouth" /></hbox>
+									<hbox><checkbox label="+" /> <checkbox label="-" /> <label value="Mouth Sores" /></hbox>
+									<hbox><checkbox label="+" /> <checkbox label="-" /> <label value="Dental Pain" /></hbox>
+									<hbox><checkbox label="+" /> <checkbox label="-" /> <label value="Dentures" /></hbox>
+									<hbox><checkbox label="+" /> <checkbox label="-" /> <label value="Bleeding" /></hbox>
+								</groupbox>
+							</hbox>
+						</tabpanel>
+						
+						
+						<!-- Cardiac -->
+						<tabpanel vflex="1" hflex="1" style="overflow:auto">
+							<hbox><checkbox label="" /> <label /> <label value="Cardiac negative" /></hbox>
+							<space />
+							<hbox>
+								<groupbox>
+									<caption label="Cardiac" />
+									<hbox><checkbox label="+" /> <checkbox label="- " /> <label value="Chest Pain" /></hbox>
+									<hbox><checkbox label="+" /> <checkbox label="- " /> <label value="Chest Pressure" /></hbox>
+									<hbox><checkbox label="+" /> <checkbox label="- " /> <label value="Chest Tightness" /></hbox>
+									<hbox><checkbox label="+" /> <checkbox label="- " /> <label value="Angina" /></hbox>
+									<hbox><checkbox label="+" /> <checkbox label="- " /> <label value="Palpitations" /></hbox>
+									<hbox><checkbox label="+" /> <checkbox label="- " /> <label value="Murmurs" /></hbox>
+									<hbox><checkbox label="+" /> <checkbox label="- " /> <label value="Dyspnea on Exertion" /></hbox>
+									<hbox><checkbox label="+" /> <checkbox label="- " /> <label value="Paroxysmal Nocturnal Dyspnea" /></hbox>
+									<hbox><checkbox label="+" /> <checkbox label="- " /> <label value="Orthopnea" /></hbox>
+									<hbox><checkbox label="+" /> <checkbox label="- " /> <label value="Edema" /></hbox>
+								</groupbox>
+							</hbox>
+						</tabpanel>
+						
+						
+						
+						<!-- Resp -->
+						<tabpanel vflex="1" hflex="1" style="overflow:auto">
+							<hbox><checkbox label="" /> <label /> <label value="Resp negative" /></hbox>
+							<space />
+							<hbox>
+								<groupbox>
+									<caption label="Resp" />
+									<hbox><checkbox label="+" /> <checkbox label="- " /> <label value="Shortness of Breath" /></hbox>
+									<hbox><checkbox label="+" /> <checkbox label="- " /> <label value="Wheezing" /></hbox>
+									<hbox><checkbox label="+" /> <checkbox label="- " /> <label value="Cough" /></hbox>
+									<hbox><checkbox label="+" /> <checkbox label="- " /> <label value="Productive Cough" /></hbox>
+									<hbox><checkbox label="+" /> <checkbox label="- " /> <label value="Hemoptysis" /></hbox>
+									<hbox><checkbox label="+" /> <checkbox label="- " /> <label value="Asthma" /></hbox>
+									<hbox><checkbox label="+" /> <checkbox label="- " /> <label value="Bronchitis" /></hbox>
+									<hbox><checkbox label="+" /> <checkbox label="- " /> <label value="Pain With Breathing" /></hbox>
+								</groupbox>
+							</hbox>
+						</tabpanel>
+						
+						
+						<!-- Abd/GI -->
+						<tabpanel vflex="1" hflex="1" style="overflow:auto">
+							<hbox><checkbox label="" /> <label /> <label value="Abdomen/GI negative" /></hbox>
+							<space />
+							<hbox>
+								<groupbox>
+									<caption label="Abdomen" />
+									<hbox><checkbox label="+" /> <checkbox label="- " /> <label value="Abdominal Pain" /></hbox>
+									<hbox><checkbox label="+" /> <checkbox label="- " /> <label value="Abdominal Distension" /></hbox>
+								</groupbox>
+								<groupbox>
+									<caption label="Upper GI" />
+									<hbox><checkbox label="+" /> <checkbox label="- " /> <label value="Nausea" /></hbox>
+									<hbox><checkbox label="+" /> <checkbox label="- " /> <label value="Vomiting" /></hbox>
+									<hbox><checkbox label="+" /> <checkbox label="- " /> <label value="Reflux" /></hbox>
+									<hbox><checkbox label="+" /> <checkbox label="- " /> <label value="Dysphagia" /></hbox>
+									<hbox><checkbox label="+" /> <checkbox label="- " /> <label value="Anorexia" /></hbox>
+									<hbox><checkbox label="+" /> <checkbox label="- " /> <label value="Hematemesis" /></hbox>
+									<hbox><checkbox label="+" /> <checkbox label="- " /> <label value="Coffee Ground Emesis" /></hbox>
+								</groupbox>
+								<groupbox>
+									<caption label="Lower GI" />
+									<hbox><checkbox label="+" /> <checkbox label="- " /> <label value="Change in Bowel Habits" /></hbox>
+									<hbox><checkbox label="+" /> <checkbox label="- " /> <label value="Constipation" /></hbox>
+									<hbox><checkbox label="+" /> <checkbox label="- " /> <label value="Diarrhea" /></hbox>
+									<hbox><checkbox label="+" /> <checkbox label="- " /> <label value="Melena" /></hbox>
+									<hbox><checkbox label="+" /> <checkbox label="- " /> <label value="Hematachezia" /></hbox>
+								</groupbox>
+							</hbox>
+						</tabpanel>
+						
+						
+						<!-- GU -->
+						<tabpanel vflex="1" hflex="1" style="overflow:auto">
+							<hbox><checkbox label="" /> <label /> <label value="Abdomen/GI negative" /></hbox>
+							<space />
+							<hbox>
+								<groupbox>
+									<caption label="Urinary" />
+									<hbox><checkbox label="+" /> <checkbox label="- " /> <label value="Change in Bladder Habits" /></hbox>
+									<hbox><checkbox label="+" /> <checkbox label="- " /> <label value="Frequency" /></hbox>
+									<hbox><checkbox label="+" /> <checkbox label="- " /> <label value="Urgency" /></hbox>
+									<hbox><checkbox label="+" /> <checkbox label="- " /> <label value="Hesitancy" /></hbox>
+									<hbox><checkbox label="+" /> <checkbox label="- " /> <label value="Decrease in Stream" /></hbox>
+									<hbox><checkbox label="+" /> <checkbox label="- " /> <label value="Hematuria" /></hbox>
+									<hbox><checkbox label="+" /> <checkbox label="- " /> <label value="Nocturia" /></hbox>
+									<hbox><checkbox label="+" /> <checkbox label="- " /> <label value="Dysuria" /></hbox>
+									<hbox><checkbox label="+" /> <checkbox label="- " /> <label value="Incontinence" /></hbox>
+									<hbox><checkbox label="+" /> <checkbox label="- " /> <label value="Frequent UTIs" /></hbox>
+									<hbox><checkbox label="+" /> <checkbox label="- " /> <label value="Suprapubic Pain" /></hbox>
+									<hbox><checkbox label="+" /> <checkbox label="- " /> <label value="Decreased Urine Output" /></hbox>
+								</groupbox>
+							</hbox>
+						</tabpanel>
+						
+						<!-- MALE -->
+						<tabpanel vflex="1" hflex="1" style="overflow:auto">
+							<hbox><checkbox label="" /> <label /> <label value="Abdomen/GI negative" /></hbox>
+							<space />
+							<hbox>
+								<groupbox>
+									<caption label="Male" />
+									<hbox><checkbox label="+" /> <checkbox label="- " /> <label value="Hernia" /></hbox>
+									<hbox><checkbox label="+" /> <checkbox label="- " /> <label value="Penile Pain" /></hbox>
+									<hbox><checkbox label="+" /> <checkbox label="- " /> <label value="Penile Discharge" /></hbox>
+									<hbox><checkbox label="+" /> <checkbox label="- " /> <label value="Sores" /></hbox>
+									<hbox><checkbox label="+" /> <checkbox label="- " /> <label value="Masses, Lumps, or Nodules" /></hbox>
+									<hbox><checkbox label="+" /> <checkbox label="- " /> <label value="Pain With Sex" /></hbox>
+									<hbox><checkbox label="+" /> <checkbox label="- " /> <label value="Erectile Dysfunction" /></hbox>
+									<hbox><checkbox label="+" /> <checkbox label="- " /> <label value="Decreased Libido" /></hbox>
+									<hbox><checkbox label="+" /> <checkbox label="- " /> <label value="STDs" /></hbox>
+								</groupbox>
+							</hbox>
+						</tabpanel>
+						
+						
+						<!-- SKIN -->
+						<tabpanel vflex="1" hflex="1" style="overflow:auto">
+							<hbox><checkbox label="" /> <label /> <label value="Abdomen/GI negative" /></hbox>
+							<space />
+							<hbox>
+								<groupbox>
+									<caption label="Skin" />
+									<hbox><checkbox label="+" /> <checkbox label="- " /> <label value="Rashes" /></hbox>
+									<hbox><checkbox label="+" /> <checkbox label="- " /> <label value="Lumps or Nodules" /></hbox>
+									<hbox><checkbox label="+" /> <checkbox label="- " /> <label value="Itching" /></hbox>
+									<hbox><checkbox label="+" /> <checkbox label="- " /> <label value="Dryness" /></hbox>
+									<hbox><checkbox label="+" /> <checkbox label="- " /> <label value="Loss of Hair" /></hbox>
+									<hbox><checkbox label="+" /> <checkbox label="- " /> <label value="Nail Changes" /></hbox>
+								</groupbox>
+							</hbox>
+						</tabpanel>
+						
+						
+						<!-- GYN -->
+						<tabpanel vflex="1" hflex="1" style="overflow:auto">
+							<hbox>
+								<groupbox>
+									<caption label="Gyn" />
+									<hbox><checkbox label="" /> <label /> <label value="Gyn negative" /></hbox>
+									<separator />
+									<hbox><checkbox label="+" /> <checkbox label="- " /> <label value="Vaginal Discharge" /></hbox>
+									<hbox><checkbox label="+" /> <checkbox label="- " /> <label value="Vaginal Dryness" /></hbox>
+									<hbox><checkbox label="+" /> <checkbox label="- " /> <label value="Vaginal Pain" /></hbox>
+									<hbox><checkbox label="+" /> <checkbox label="- " /> <label value="Pain With Sex" /></hbox>
+									<hbox><checkbox label="+" /> <checkbox label="- " /> <label value="Itching" /></hbox>
+									<hbox><checkbox label="+" /> <checkbox label="- " /> <label value="Rash" /></hbox>
+									<hbox><checkbox label="+" /> <checkbox label="- " /> <label value="Hot Flashes" /></hbox>
+									<hbox><checkbox label="+" /> <checkbox label="- " /> <label value="Decreased Libido" /></hbox>
+									<hbox><checkbox label="+" /> <checkbox label="- " /> <label value="STDs" /></hbox>
+								</groupbox>
+								<groupbox>
+									<caption label="Breasts" />
+									<hbox><checkbox label="" /> <label /> <label value="Breasts negative" /></hbox>
+									<separator />
+									<hbox><checkbox label="+" /> <checkbox label="- " /> <label value="Lumps or Nodules" /></hbox>
+									<hbox><checkbox label="+" /> <checkbox label="- " /> <label value="Pain" /></hbox>
+									<hbox><checkbox label="+" /> <checkbox label="- " /> <label value="Discharge" /></hbox>
+									<hbox><checkbox label="+" /> <checkbox label="- " /> <label value="Breast Feeding" /></hbox>
+									<hbox><checkbox label="+" /> <checkbox label="- " /> <label value="Skin Changes" /></hbox>
+								</groupbox>
+							</hbox>
+						</tabpanel>
+						
+						<!-- MUSCULOSKELETAL -->
+						<tabpanel vflex="1" hflex="1" style="overflow:auto">
+								<groupbox>
+									<caption label="Musculoskeletal" />
+									<hbox><checkbox label="" /> <label /> <label value="Musculoskeletal negative" /></hbox>
+									<separator />
+									<hbox><checkbox label="+" /> <checkbox label="- " /> <label value="Muscle Pain" /></hbox>
+									<hbox><checkbox label="+" /> <checkbox label="- " /> <label value="Joint Pain" /></hbox>
+									<hbox><checkbox label="+" /> <checkbox label="- " /> <label value="Joint Stiffness" /></hbox>
+									<hbox><checkbox label="+" /> <checkbox label="- " /> <label value="Back Pain" /></hbox>
+									<hbox><checkbox label="+" /> <checkbox label="- " /> <label value="Joint Redness" /></hbox>
+									<hbox><checkbox label="+" /> <checkbox label="- " /> <label value="Joint Swelling" /></hbox>
+									<hbox><checkbox label="+" /> <checkbox label="- " /> <label value="Trauma" /></hbox>
+								</groupbox>
+								
+								<groupbox>
+									<caption label="Vascular" />
+									<hbox><checkbox label="" /> <label /> <label value="Vascular negative" /></hbox>
+									<separator />
+									<hbox><checkbox label="+" /> <checkbox label="- " /> <label value="Calf Pain With Walking" /></hbox>
+								</groupbox>
+								
+						</tabpanel>
+						
+						
+						<!-- ENDO/HEME -->
+						<tabpanel vflex="1" hflex="1" style="overflow:auto">
+							<hbox>
+								<groupbox>
+									<caption label="Endocrinology" />
+									<hbox><checkbox label="" /> <label /> <label value="Endo negative" /></hbox>
+									<separator />
+									<hbox><checkbox label="+" /> <checkbox label="- " /> <label value="Heat Intolerance" /></hbox>
+									<hbox><checkbox label="+" /> <checkbox label="- " /> <label value="Cold Intolerance" /></hbox>
+									<hbox><checkbox label="+" /> <checkbox label="- " /> <label value="Sweating" /></hbox>
+									<hbox><checkbox label="+" /> <checkbox label="- " /> <label value="Increased Urination (Polyuria)" /></hbox>
+									<hbox><checkbox label="+" /> <checkbox label="- " /> <label value="Increased Thirst (Polydypsia)" /></hbox>
+									<hbox><checkbox label="+" /> <checkbox label="- " /> <label value="Increased Appetite (Polyphagia)" /></hbox>
+								</groupbox>
+								<groupbox>
+									<caption label="Hematology" />
+									<hbox><checkbox label="" /> <label /> <label value="Heme negative" /></hbox>
+									<separator />
+									<hbox><checkbox label="+" /> <checkbox label="- " /> <label value="Easy Bruising" /></hbox>
+									<hbox><checkbox label="+" /> <checkbox label="- " /> <label value="Easy Bleeding" /></hbox>
+								</groupbox>
+							</hbox>
+						</tabpanel>
+						
+						
+						
+						<!-- NEURO/PSYCH -->
+						<tabpanel vflex="1" hflex="1" style="overflow:auto">
+							<hbox>
+								<groupbox>
+									<caption label="Neuro/Psych" />
+									<hbox><checkbox label="" /> <label /> <label value="Neuro negative" /></hbox>
+									<separator />
+									<hbox><checkbox label="+" /> <checkbox label="- " /> <label value="Dizziness" /></hbox>
+									<hbox><checkbox label="+" /> <checkbox label="- " /> <label value="Fainting" /></hbox>
+									<hbox><checkbox label="+" /> <checkbox label="- " /> <label value="Siezures" /></hbox>
+									<hbox><checkbox label="+" /> <checkbox label="- " /> <label value="Weakness" /></hbox>
+									<hbox><checkbox label="+" /> <checkbox label="- " /> <label value="Numbness" /></hbox>
+									<hbox><checkbox label="+" /> <checkbox label="- " /> <label value="Tingling" /></hbox>
+									<hbox><checkbox label="+" /> <checkbox label="- " /> <label value="Tremor" /></hbox>
+									<hbox><checkbox label="+" /> <checkbox label="- " /> <label value="Loss of Bowel Control" /></hbox>
+									<hbox><checkbox label="+" /> <checkbox label="- " /> <label value="Loss of Bladder Control" /></hbox>
+								</groupbox>
+								<groupbox>
+									<caption label="Psych" />
+									<hbox><checkbox label="" /> <label /> <label value="Psych negative" /></hbox>
+									<separator />
+									<hbox><checkbox label="+" /> <checkbox label="- " /> <label value="Nervousness, Anxiety" /></hbox>
+									<hbox><checkbox label="+" /> <checkbox label="- " /> <label value="Depressed Mood" /></hbox>
+									<hbox><checkbox label="+" /> <checkbox label="- " /> <label value="Stress" /></hbox>
+									<hbox><checkbox label="+" /> <checkbox label="- " /> <label value="Memory Loss" /></hbox>
+									<hbox><checkbox label="+" /> <checkbox label="- " /> <label value="Mania" /></hbox>
+									<hbox><checkbox label="+" /> <checkbox label="- " /> <label value="Difficulty Sleeping" /></hbox>
+								</groupbox>
+							</hbox>
+						</tabpanel>
+						
+						
+					</tabpanels>
+				</tabbox>
+				
+			</vbox>
+	</window>
+</zk>

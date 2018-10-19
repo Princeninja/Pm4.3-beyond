@@ -1,0 +1,37 @@
+<?page title="Numeric Keypad Macro Component" contentType="text/html;charset=UTF-8"?>
+<zk>
+	<window  id="tenkeyWin" border="none" mode="embedded" apply="palmed.TenkeyComponentWinController" >
+		<groupbox>
+			<grid>
+				<columns>
+					<column label="" width="60px" />
+					<column label="" width="60px" />
+					<column label="" width="60px" />
+				</columns>
+				<rows height="60px" >
+					<row>
+						<button id="b1" label="1" hflex="1" vflex="1" />
+						<button id="b2" label="2" hflex="1" vflex="1" />
+						<button id="b3" label="3" hflex="1" vflex="1" />
+					</row>
+					<row>
+						<button id="b4" label="4" hflex="1" vflex="1" />
+						<button id="b5" label="5" hflex="1" vflex="1" />
+						<button id="b6" label="6" hflex="1" vflex="1" />
+					</row>
+					<row>
+						<button id="b7" label="7" hflex="1" vflex="1" />
+						<button id="b8" label="8" hflex="1" vflex="1" />
+						<button id="b9" label="9" hflex="1" vflex="1" />
+					</row>
+					<row>
+						<button id="bd" label="." hflex="1" vflex="1" />
+						<button id="b0" label="0" hflex="1" vflex="1" />
+						<button id="be" label="Enter" hflex="1" vflex="1" />
+					</row>
+				</rows>
+			</grid>
+		</groupbox>
+
+	</window>
+</zk>

@@ -1,0 +1,134 @@
+<?page title="Edit Prov 1" contentType="text/html;charset=UTF-8"?>
+
+<!-- Edit Provider's Information - pg 1 -->
+
+
+<zk xmlns:h="http://www.w3.org/1999/xhtml">
+	<div>
+	<h:h3>Edit Provider Info:</h:h3>
+	
+	<grid align="start">
+		<columns>
+			<column width="30%" />
+			<column width="30%" />
+			<column width="30%" />
+		</columns>
+		<rows>
+			<row>
+	
+	<vbox>
+	<grid>
+		<columns>
+			<column width="80px" />
+			<column />
+		</columns>
+		<rows>
+			<row> Abbr <textbox id="provAbbr" maxlength="10" /> </row>
+			<row> Name <textbox id="provName" maxlength="40" /> </row>
+			<row> First <textbox id="provFirst" maxlength="16" /> </row>
+			<row> Middle <textbox id="provMiddle" maxlength="1" /> </row>
+			<row> Last <textbox id="provLast" maxlength="20" /> </row>
+			<row> Suffix <textbox id="provSuffix" maxlength="6" /> </row>
+			
+		</rows>
+	</grid>
+	<grid>
+		<columns>
+			<column width="80px" />
+			<column />
+		</columns>
+		<rows>
+
+			<row> Birthdate <textbox id="provDOB" maxlength="10" /> </row>  <!-- format="MM/dd/yyyy" constraint="no future"  -->
+			<row> Social Security Number <textbox id="provSSN" maxlength="11" /> </row>
+		
+		</rows>
+	</grid>
+
+	</vbox>
+	
+
+	<vbox>
+				Home Address:
+<!--	<grid>
+		<columns>
+			<column width="80px" />
+			<column />
+		</columns>
+		<rows>
+  			<row> Sex <listbox id="ptSex" mold="select" rows="1" >
+								<listitem label="" value="" />
+								<listitem label="Male" value="M" />
+								<listitem label="Female" value="F" />
+								</listbox> </row>
+			<row> Race <listbox id="ptRace" mold="select" rows="1" >
+								<listitem label="" value="" />
+								<listitem label="Caucasian" value="C" />
+								<listitem label="African American" value="B" />
+								<listitem label="Hispanic" value="H" />
+								<listitem label="Asian" value="A" />
+								<listitem label="Native American" value="N" />
+								<listitem label="Other" value="O" />
+								</listbox> </row>
+			<row> Marital Status <listbox id="ptMarital" mold="select" rows="1" >
+								<listitem label="" value="" />
+								<listitem label="Single" value="S" />
+								<listitem label="Married" value="M" />
+								<listitem label="Divorced" value="D" />
+								<listitem label="Separated" value="X" />
+								<listitem label="Widowed" value="W" />
+								</listbox> </row>
+		</rows>
+
+
+	</grid>
+-->	
+
+	
+	<grid>
+		<columns>
+			<column width="80px" />
+			<column />
+		</columns>
+		<rows>
+			<row> Street <textbox id="homeStreet" maxlength="20" /> </row>
+			<row> Line 2 <textbox id="homeLine2" maxlength="20" /> </row>
+			<row> City <textbox id="homeCity" maxlength="15" /> </row>
+			<row> State <textbox id="homeState" maxlength="2" /> </row>
+			<row> Zip <textbox id="homeZip" maxlength="10" /> </row>
+			<row> Home Phone <textbox id="homeHome" maxlength="12" /> </row>
+			<row> Work Phone <textbox id="homeWork" maxlength="12" /> </row>
+			<row> Cell Phone <textbox id="provCell" maxlength="12" /> </row>
+			<row> E-mail Address <textbox id="provEmail" maxlength="40" /> </row>									
+		</rows>							
+	</grid>
+	</vbox>	
+	
+	<vbox>
+			Office Address:
+	
+		<grid>
+		<columns>
+			<column width="80px" />
+			<column />
+		</columns>
+		<rows>
+			<row> Street <textbox id="officeStreet" maxlength="20" /> </row>
+			<row> Line 2 <textbox id="officeLine2" maxlength="20" /> </row>
+			<row> City <textbox id="officeCity" maxlength="15" /> </row>
+			<row> State <textbox id="officeState" maxlength="2" /> </row>
+			<row> Zip <textbox id="officeZip" maxlength="10" /> </row>
+			<row> Home Phone <textbox id="officeHome" maxlength="12" /> </row>
+			<row> Work Phone <textbox id="officeWork" maxlength="12" /> </row>
+		</rows>							
+		</grid>
+	</vbox>		
+	
+			</row>
+		</rows>
+	</grid>
+
+	
+	</div>
+
+</zk>

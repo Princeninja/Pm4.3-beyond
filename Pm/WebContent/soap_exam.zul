@@ -1,0 +1,707 @@
+<?page title="SOAP Exam" contentType="text/html;charset=UTF-8"?>
+<zk>
+
+<window id="soapShtExamWin"  border="none" mode="embedded" vflex="1" hflex="1" apply="palmed.SoapShtExamWinController" >
+				<vbox vflex="1" hflex="1" >
+				
+				<tabbox vflex="1" hflex="1" orient="vertical" >
+					<tabs>
+						<tab label="Gen" />
+						<tab label="Head/Neck" />
+						<tab label="EENT" />
+						<tab label="Heart Lungs" />
+						<tab label="Abdomen" />
+						<tab label="Ext" />
+						<tab label="Skin" />
+						<tab label="GU" />
+						<tab label="Gyn / Breasts" />
+						<tab label="Ortho" />
+						<tab label="Neuro" />
+						<tab label="Psych" />
+					</tabs>
+					<tabpanels style="overflow:auto">
+					
+						<!-- GENERAL -->
+						<tabpanel vflex="1" hflex="1" >
+							<groupbox>
+							<hbox>
+							<div>
+								<hbox><checkbox label="WNL" /></hbox>
+								<space />
+								<hbox><checkbox label="Well Developed" /></hbox>
+								<hbox><checkbox label="Well Nourished" /></hbox>
+								<hbox><checkbox label="Cachectic" /></hbox>
+								<hbox><checkbox label="Obese" /></hbox>
+								<hbox><checkbox label="Mildly Obese" /></hbox>
+								<hbox><checkbox label="Morbidly Obese" /></hbox>
+								<separator />
+								<hbox><checkbox label="Frail" /></hbox>
+								<hbox><checkbox label="Elderly" /></hbox>
+								<separator />
+								<hbox><checkbox label="Well Appearing" /></hbox>
+								<hbox><checkbox label="Ill Appearing" /></hbox>
+								<hbox><checkbox label="Mildly Ill Appearing" /></hbox>
+							</div>
+							<div>
+								<hbox><checkbox label="No Apparent Distress" /></hbox>
+								<hbox><checkbox label="Mild Distress" /></hbox>
+								<hbox><checkbox label="Moderate Distress" /></hbox>
+								<hbox><checkbox label="Severe Distress" /></hbox>
+								<hbox><checkbox label="Secondary to Pain" /></hbox>
+								<separator />
+								<hbox><checkbox label="Alert" /></hbox>
+								<hbox><checkbox label="Somnolent" /></hbox>
+								<hbox><checkbox label="Obtunded" /></hbox>
+								<hbox><checkbox label="Oriented" /></hbox>
+								<hbox><checkbox label="Oriented x 1" /></hbox>
+								<hbox><checkbox label="Oriented x 2" /></hbox>
+								<hbox><checkbox label="Oriented x 3" /></hbox>
+								<hbox><checkbox label="Confused" /></hbox>
+							</div>
+							<div>
+								<hbox><checkbox label="Appears Older Than Stated Age" /></hbox>
+								<separator />
+								<hbox><checkbox label="Using Cane" /></hbox>
+								<hbox><checkbox label="Using Walker" /></hbox>
+								<hbox><checkbox label="Using Wheelchair" /></hbox>
+								<hbox><checkbox label="Using Portable Oxygen" /></hbox>
+							</div>
+							</hbox>
+							<textbox id="genTextbox" rows="4" cols="80" />
+							</groupbox>
+						</tabpanel>
+						
+						
+						<!-- HEAD / NECK -->
+						<tabpanel vflex="1" hflex="1" >
+							<hbox>
+								<groupbox>
+									<caption label="Head" />
+									<hbox><checkbox label="WNL" /></hbox>
+									<separator />
+									<hbox><checkbox label="NC" /></hbox>
+									<hbox><checkbox label="AT" /></hbox>
+									<separator />
+									<hbox><checkbox label="R" /><checkbox label="L" /><checkbox label="Facial Tenderness" /></hbox>
+									<hbox><checkbox label="R" /><checkbox label="L" /><checkbox label="Maxillary Tenderness" /></hbox>
+									<hbox><checkbox label="R" /><checkbox label="L" /><checkbox label="Frontal Tenderness" /></hbox>
+									<hbox><checkbox label="R" /><checkbox label="L" /><checkbox label="Temporal Tenderness" /></hbox>
+									<hbox><checkbox label="Occipital Tenderness" /></hbox>
+									<separator />
+									<textbox cols="40" rows="3" />
+								</groupbox>
+
+								<groupbox>
+									<caption label="Neck" />
+									<hbox><checkbox label="WNL" /></hbox>
+									<separator />
+									<hbox><checkbox label="Supple" /></hbox>
+									<separator />
+									<hbox><checkbox label="Anterior Adenopathy" /></hbox>
+									<hbox><checkbox label="Posterior Adenopathy" /></hbox>
+									<separator />
+									<hbox><checkbox label="Thyroid Normal" /></hbox>
+									<hbox><checkbox label="Thyroid Enlarged" /></hbox>
+									<hbox><checkbox label="Thyroid Nodules" /></hbox>
+									<separator />
+									<hbox><checkbox label="No Mass" /></hbox>
+									<separator />
+									<hbox><checkbox label="No JVD" /></hbox>
+									<hbox><checkbox label="JVD Present" /></hbox>
+									<separator />
+									<hbox><checkbox label="No Bruit" /></hbox>
+									<hbox><checkbox label="R" /><checkbox label="L" /><checkbox label="Bruit" /></hbox>
+									<separator />
+									<hbox><checkbox label="No Nuchal Rigidity" /></hbox>
+									<hbox><checkbox label="Nuchal Rigidity Present" /></hbox>
+									<separator />
+									<textbox cols="40" rows="3" />
+								</groupbox>
+							</hbox>
+						</tabpanel>
+							
+							
+							
+							
+						<!-- EENT -->
+						<tabpanel vflex="1" hflex="1" >
+							<hbox>
+								<groupbox>
+									<caption label="Eyes" />
+									<hbox><checkbox label="WNL" /></hbox>
+									<separator />
+									<hbox><checkbox label="PERRLA" /></hbox>
+									<separator />
+									<hbox><checkbox label="Pupils Pinpoint" /></hbox>
+									<hbox><checkbox label="Pupils Dilated" /></hbox>
+									<separator />
+									<hbox><checkbox label="Sclera Anicteric" /></hbox>
+									<hbox><checkbox label="Sclera Icteric" /></hbox>
+									<separator />
+									<hbox><checkbox label="Conjunctiva Clear" /></hbox>
+									<hbox><checkbox label="Conjunctiva Injected" /></hbox>
+									<hbox><checkbox label="Conjunctiva Red" /></hbox>
+									<separator />
+									<hbox><checkbox label="Fundi Benign" /></hbox>
+									<space />
+									<hbox><checkbox label="Vision Grossly Intact" /></hbox>
+									<hbox><checkbox label="R" /><checkbox label="L" /><checkbox label="Visual Field Loss" /></hbox>
+									<separator />
+									<hbox><checkbox label="Contact Lenses" /></hbox>
+									<hbox><checkbox label="Glasses" /></hbox>
+									<separator />
+									<textbox cols="40" rows="3" />
+								</groupbox>
+
+								<groupbox>
+									<caption label="Ears" />
+									<hbox><checkbox label="WNL" /></hbox>
+									<separator />
+									<hbox><checkbox label="EACs Clear" /></hbox>
+									<hbox><checkbox label="R" /><checkbox label="L" /><checkbox label="Cerumen" /></hbox>
+									<hbox><checkbox label="R" /><checkbox label="L" /><checkbox label="Cerumen Impaction" /></hbox>
+									<separator />
+									<hbox><checkbox label="TMs Clear" /></hbox>
+									<hbox><checkbox label="R" /><checkbox label="L" /><checkbox label="TM Effusion" /></hbox>
+									<hbox><checkbox label="R" /><checkbox label="L" /><checkbox label="TM Erythema" /></hbox>
+									<hbox><checkbox label="R" /><checkbox label="L" /><checkbox label="TM Retracted" /></hbox>
+									<hbox><checkbox label="R" /><checkbox label="L" /><checkbox label="TM Bulging" /></hbox>
+									<separator />
+									<hbox><checkbox label="Hearing Grossly Intact" /></hbox>
+									<hbox><checkbox label="Hard of Hearing" /></hbox>
+									<hbox><checkbox label="R" /><checkbox label="L" /><checkbox label="Hearing Aids" /></hbox>
+									<hbox><checkbox label="R" /><checkbox label="L" /><checkbox label="Hearing Loss" /></hbox>
+									<separator />
+									<textbox cols="40" rows="3" />
+								</groupbox>
+
+								<groupbox>
+									<caption label="Nose" />
+									<hbox><checkbox label="WNL" /></hbox>
+									<separator />
+									<hbox><checkbox label="No Rhinorrhea" /></hbox>
+									<hbox><checkbox label="Clear Rhinorrhea" /></hbox>
+									<hbox><checkbox label="Purulent Rhinorrhea" /></hbox>
+									<separator />
+									<hbox><checkbox label="Membranes Non-inflamed" /></hbox>
+									<hbox><checkbox label="Membranes Inflamed" /></hbox>
+									<separator />
+									<hbox><checkbox label="R" /><checkbox label="L" /><checkbox label="Epistaxis" /></hbox>
+									<separator />
+									<textbox cols="40" rows="3" />
+								</groupbox>
+							
+								<groupbox>
+									<caption label="Mouth / Throat" />
+									<hbox><checkbox label="WNL" /></hbox>
+									<separator />
+									<hbox><checkbox label="Oropharynx Clear" /></hbox>
+									<separator />
+									<hbox><checkbox label="Membranes Moist" /></hbox>
+									<hbox><checkbox label="Membranes Dry" /></hbox>
+									<separator />
+									<hbox><checkbox label="Membranes Inflamed" /></hbox>
+									<separator />
+									<hbox><checkbox label="Tonsils WNL" /></hbox>
+									<hbox><checkbox label="R" /><checkbox label="L" /><checkbox label="Tonsils Enlarged" /></hbox>
+									<hbox><checkbox label="Oropharynx Inflamed" /></hbox>
+									<hbox><checkbox label="Exudate Present" /></hbox>
+									<separator />
+									<hbox><checkbox label="Edentulous" /></hbox>
+									<hbox><checkbox label="Teeth Carious" /></hbox>
+									<hbox><checkbox label="Many Teeth Missing" /></hbox>
+									<hbox><checkbox label="U" /><checkbox label="L" /><checkbox label="Dentures" /></hbox>
+									<separator />
+									<hbox><checkbox label="Normal Voice" /></hbox>
+									<hbox><checkbox label="Hoarse Voice" /></hbox>
+									<separator />
+									<textbox cols="40" rows="3" />
+								</groupbox>
+							</hbox>
+						</tabpanel>
+						
+												
+						
+						<!-- HEART -->
+						<tabpanel vflex="1" hflex="1" >
+							<hbox>
+								<groupbox>
+									<caption label="Heart" />
+									<hbox><checkbox label="WNL" /></hbox>
+									<separator />
+									<hbox><checkbox label="RRR" /></hbox>
+									<hbox><checkbox label="Irregularly Irregular" /></hbox>
+									<separator />
+									<hbox><checkbox label="Tachycardic" /></hbox>
+									<hbox><checkbox label="Bradycardic" /></hbox>
+									<separator />
+									<hbox><checkbox label="No Murmur" /></hbox>
+									<hbox><checkbox label="SEM" /><textbox cols="4" />/6</hbox>
+									<hbox><checkbox label="Holosystolic Murmur" /></hbox>
+									<separator />
+									<hbox><checkbox label="Gallop" /></hbox>
+									<hbox><checkbox label="Rub" /></hbox>
+									<separator />
+									<hbox><checkbox label="Frequent Premature Beats" /></hbox>
+									<separator />
+									<textbox cols="40" rows="3" />
+								</groupbox>
+								<groupbox>
+									<caption label="Lungs" />
+									<hbox><checkbox label="WNL" /></hbox>
+									<separator />
+									<hbox><checkbox label="CTA" /></hbox>
+									<hbox><checkbox label="Coarse" /></hbox>
+									<hbox><checkbox label="R" /><checkbox label="L" /><checkbox label="Decreased Breath Sounds" /></hbox>
+									<separator />
+									<hbox><checkbox label="R" /><checkbox label="L" /><checkbox label="Wheezes" /></hbox>
+									<hbox><checkbox label="R" /><checkbox label="L" /><checkbox label="Ronchii" /></hbox>
+									<hbox><checkbox label="R" /><checkbox label="L" /><checkbox label="Rales" /></hbox>
+									<hbox><checkbox label="R" /><checkbox label="L" /><checkbox label="Crackles" /></hbox>
+									<separator />
+									<hbox><checkbox label="Normal Respiratory Effor" /></hbox>
+									<hbox><checkbox label="Dyspneic" /></hbox>
+									<hbox><checkbox label="Tachypneic" /></hbox>
+									<separator />
+									<hbox><checkbox label="Nasal Flaring" /></hbox>
+									<hbox><checkbox label="Retractions" /></hbox>
+									<separator />
+									<hbox><checkbox label="Frequent Premature Beats" /></hbox>
+									<separator />
+									<textbox cols="40" rows="3" />
+								</groupbox>
+								<groupbox>
+									<caption label="Chest" />
+									<hbox><checkbox label="WNL" /></hbox>
+									<separator />
+									<hbox><checkbox label="Non-Tender" /></hbox>
+									<hbox><checkbox label="Sternal Tenderness" /></hbox>
+									<hbox><checkbox label="R" /><checkbox label="L" /><checkbox label="Chest Wall Tenderness" /></hbox>
+									<separator />
+									<hbox><checkbox label="Normal AP Diameter" /></hbox>
+									<hbox><checkbox label="Pectus Excavatum" /></hbox>
+									<separator />
+									<textbox cols="40" rows="3" />
+								</groupbox>
+							</hbox>
+						</tabpanel>
+						
+						
+						<!-- ABDOMEN -->
+						<tabpanel vflex="1" hflex="1" >
+							<vbox>
+								<groupbox>
+									<caption label="Abdomen" />
+									<hbox>
+									<div>
+									<hbox><checkbox label="WNL" /></hbox>
+									<separator />
+									<hbox><checkbox label="Soft" /></hbox>
+									<hbox><checkbox label="Rigid" /></hbox>
+									<separator />
+									<hbox><checkbox label="Non-Distended" /></hbox>
+									<hbox><checkbox label="Distended" /></hbox>
+									<hbox><checkbox label="Tympanic" /></hbox>
+									<separator />
+									<hbox><checkbox label="Non-tender" /></hbox>
+									<hbox><checkbox label="R" /><checkbox label="L" /><checkbox label="Lower Quadrant Tenderness" /></hbox>
+									<hbox><checkbox label="R" /><checkbox label="L" /><checkbox label="Upper Quadrant Tenderness" /></hbox>
+									<hbox><checkbox label="R" /><checkbox label="L" /><checkbox label="Epigastric Tenderness" /></hbox>
+									<hbox><checkbox label="R" /><checkbox label="L" /><checkbox label="Periumbilical Tenderness" /></hbox>
+									<hbox><checkbox label="R" /><checkbox label="L" /><checkbox label="Suprapubic Tenderness" /></hbox>
+									<separator />
+									<hbox><checkbox label="No Rebound or Guarding" /></hbox>
+									<hbox><checkbox label="Rebound" /></hbox>
+									<hbox><checkbox label="Guarding" /></hbox>
+									<separator />
+									</div>
+									<div>
+									<hbox><checkbox label="Normal Bowel Sounds" /></hbox>
+									<hbox><checkbox label="Hyperactive Bowel Sounds" /></hbox>
+									<hbox><checkbox label="Hypoactive Bowel Sounds" /></hbox>
+									<hbox><checkbox label="Rare Bowel Sounds" /></hbox>
+									<hbox><checkbox label="High Pitched Bowel Sounds" /></hbox>
+									<separator />
+									<hbox><checkbox label="No Mass" /></hbox>
+									<hbox><checkbox label="Mass Palpated" /></hbox>
+									<separator />
+									<hbox><checkbox label="No HSM" /></hbox>
+									<hbox><checkbox label="Hepatomegaly" /></hbox>
+									<hbox><checkbox label="Splenomegaly" /></hbox>
+									<separator />
+									<hbox><checkbox label="No CVA Tenderness" /></hbox>
+									<hbox><checkbox label="R" /><checkbox label="L" /><checkbox label="CVA Tenderness" /></hbox>
+									<separator />
+									<textbox cols="40" rows="3" />
+									</div>
+									</hbox>
+								</groupbox>
+							</vbox>
+						</tabpanel>
+						
+						
+						
+						
+						<!-- EXTREMETIES -->
+						<tabpanel vflex="1" hflex="1" >
+							<groupbox>
+								<caption label="Extremeties" />
+								<hbox>
+								<div>
+								<hbox><checkbox label="WNL" /></hbox>
+								<separator />
+								<hbox><checkbox label="No Deformity" /></hbox>
+								<separator />
+								<hbox><checkbox label="No Amputations" /></hbox>
+								<hbox><checkbox label="R" /><checkbox label="L" /><checkbox label="Upper Extremity Amputation" /></hbox>
+								<hbox><checkbox label="R" /><checkbox label="L" /><checkbox label="Above Knee Amputation" /></hbox>
+								<hbox><checkbox label="R" /><checkbox label="L" /><checkbox label="Below Knee Amputation" /></hbox>
+								<hbox><checkbox label="R" /><checkbox label="L" /><checkbox label="Total Foot Amputation" /></hbox>
+								<hbox><checkbox label="R" /><checkbox label="L" /><checkbox label="Partial Amputation" /></hbox>
+								<separator />
+								<hbox><checkbox label="No Clubbing" /></hbox>
+								<separator />
+								<hbox><checkbox label="No Cyanosis" /></hbox>
+								<hbox><checkbox label="Cyanosis Present" /></hbox>
+								<hbox><checkbox label="Acrocyanosis" /></hbox>
+								</div>
+								<div>
+								<hbox><checkbox label="No Edema" /></hbox>
+								<hbox><checkbox label="R" /><checkbox label="L" /><checkbox label="Upper Extremity Edema" /><textbox cols="2" /></hbox>
+								<hbox><checkbox label="R" /><checkbox label="L" /><checkbox label="Lower Extremity Edema" /><textbox cols="2" /></hbox>
+								<hbox><checkbox label="No Pitting" /></hbox>
+								<hbox><checkbox label="With Pitting" /></hbox>
+								<separator />
+								<hbox><checkbox label="Good Capillary Refill" /></hbox>
+								<hbox><checkbox label="Slow Capillary Refill" /></hbox>
+								<hbox><checkbox label="Poor Capillary Refill" /></hbox>
+								<separator />
+								<hbox><checkbox label="Normal Radial Pulses" /></hbox>
+								<hbox><checkbox label="Radial Pulses" /><textbox cols="2" /></hbox>
+								<hbox><checkbox label="Normal Pedal Pulses" /></hbox>
+								<hbox><checkbox label="Pedal Pulses" /><textbox cols="2" /></hbox>
+								<hbox><checkbox label="Weak Pedal Pulses" /></hbox>
+								<hbox><checkbox label="Absent Pedal Pulses" /></hbox>
+								<separator />
+								<textbox cols="40" rows="3" />
+								</div>
+								</hbox>
+							</groupbox>
+						</tabpanel>
+						
+						
+						<!-- SKIN -->
+						<tabpanel vflex="1" hflex="1" >
+							<groupbox>
+								<caption label="Skin" />
+								<hbox><checkbox label="WNL" /></hbox>
+								<separator />
+								<hbox><checkbox label="Soft" /></hbox>
+								<separator />
+								<hbox><checkbox label="Warm" /></hbox>
+								<hbox><checkbox label="Cool" /></hbox>
+								<separator />
+								<hbox><checkbox label="Dry" /></hbox>
+								<hbox><checkbox label="Diaphoretic" /></hbox>
+								<separator />
+								<hbox><checkbox label="No Cyanosis" /></hbox>
+								<hbox><checkbox label="Cyanosis" /></hbox>
+								<separator />
+								<hbox><checkbox label="No Rash" /></hbox>
+								<hbox><checkbox label="Rash Present" /></hbox>
+								<separator />
+								<hbox><checkbox label="No Lesion" /></hbox>
+								<separator />
+								<textbox cols="40" rows="3" />
+							</groupbox>
+						</tabpanel>
+						
+						
+						<!-- GU -->
+						<tabpanel vflex="1" hflex="1" >
+							<groupbox>
+								<caption label="GU" />
+								<hbox><checkbox label="WNL" /></hbox>
+								<separator />
+								<hbox><checkbox label="Soft" /></hbox>
+								<separator />
+								<hbox><checkbox label="Warm" /></hbox>
+								<hbox><checkbox label="Cool" /></hbox>
+								<separator />
+								<hbox><checkbox label="Dry" /></hbox>
+								<hbox><checkbox label="Diaphoretic" /></hbox>
+								<separator />
+								<hbox><checkbox label="No Cyanosis" /></hbox>
+								<hbox><checkbox label="Cyanosis" /></hbox>
+								<separator />
+								<hbox><checkbox label="No Rash" /></hbox>
+								<hbox><checkbox label="Rash Present" /></hbox>
+								<separator />
+								<hbox><checkbox label="No Lesion" /></hbox>
+								<separator />
+								<textbox cols="40" rows="3" />
+							</groupbox>
+						</tabpanel>
+						
+						
+						<!-- GYN -->
+						<tabpanel vflex="1" hflex="1" >
+							<hbox>
+								<groupbox>
+									<caption label="Gyn/Pelvic" />
+									
+									<hbox>
+									<div>
+									<hbox><checkbox label="Pelvic Exam WNL" /></hbox>
+									<separator />
+									<hbox><checkbox label="Normal Female Escutcheon" /></hbox>
+									<hbox><checkbox label="Male Pattern Escutcheon" /></hbox>
+									<separator />
+									<hbox><checkbox label="Vulva Without Lesions" /></hbox>
+									<separator />
+									<hbox><checkbox label="EGBUS Normal" /></hbox>
+									<separator />
+									<hbox><checkbox label="No Discharge" /></hbox>
+									<hbox><checkbox label="Cyanosis" /></hbox>
+									<separator />
+									<hbox><checkbox label="Introitus Well Supported" /></hbox>
+									<separator />
+									<hbox><checkbox label="No Cystocele" /></hbox>
+									<hbox><checkbox label="Cystocele Present" /></hbox>
+									<separator />
+									<hbox><checkbox label="No Urethrocele" /></hbox>
+									<hbox><checkbox label="Urethrocele Present" /></hbox>
+									<separator />
+									<hbox><checkbox label="No Enterocele" /></hbox>
+									<hbox><checkbox label="Enterocele Present" /></hbox>
+									<separator />
+									<hbox><checkbox label="No Hemorrhoids" /></hbox>
+									<hbox><checkbox label="Hemorrhoids Present" /></hbox>
+									</div>
+									
+									<div>
+									<hbox><checkbox label="Vagina Pink Rugae" /></hbox>
+									<separator />
+									<hbox><checkbox label="Mucosa Not Atrophic" /></hbox>
+									<hbox><checkbox label="Mucosa Atrophic" /></hbox>
+									<separator />
+									<hbox><checkbox label="No Discharge" /></hbox>
+									<hbox><checkbox label="Slight White Discharge" /></hbox>
+									<hbox><checkbox label="Thick White Discharge" /></hbox>
+									<hbox><checkbox label="Yellow White Discharge" /></hbox>
+									<hbox><checkbox label="Greenish White Discharge" /></hbox>
+									<hbox><checkbox label="Bloody Discharge" /></hbox>
+									<separator />
+									<hbox><checkbox label="Cervix Normal Diameter" /></hbox>
+									<hbox><checkbox label="OS Small and Round" /></hbox>
+									<hbox><checkbox label="No Lesions" /></hbox>
+									<hbox><checkbox label="No Ectropion" /></hbox>
+									<hbox><checkbox label="No Discharge" /></hbox>
+									<hbox><checkbox label="Clear Cervical Mucous Present" /></hbox>
+									<separator />
+									</div>
+									<div>
+									<separator />
+									<hbox><checkbox label="No Cervical Motion Tenderness" /></hbox>
+									<hbox><checkbox label="Cervical Motion Tenderness Present" /></hbox>
+									<separator />
+									<hbox><checkbox label="Uterus Small" /></hbox>
+									<hbox><checkbox label="Large Uterus" /></hbox>
+									<separator />
+									<hbox><checkbox label="No Uterine Tenderness" /></hbox>
+									<hbox><checkbox label="Uterine Tenderness Present" /></hbox>
+									<separator />
+									<hbox><checkbox label="No Uterine Tenderness" /></hbox>
+									<hbox><checkbox label="Uterine Tenderness Present" /></hbox>
+									<separator />
+									<hbox><checkbox label="Uterus Firm" /></hbox>
+									<hbox><checkbox label="Uterus Soft" /></hbox>
+									<separator />
+									<hbox><checkbox label="Ovaries Palpable and Appropriate" /></hbox>
+									<hbox><checkbox label="Ovaries Not Palpable" /></hbox>
+									<separator />
+									<hbox><checkbox label="No Masses Palpated" /></hbox>
+									<hbox><checkbox label="Pelvic Mass Palpated" /></hbox>
+									<separator />
+									<hbox><checkbox label="No Pelvic Tenderness" /></hbox>
+									<hbox><checkbox label="Suprapubic Tenderness" /></hbox>
+									<hbox><checkbox label="RLQ Pelvic Tenderness" /></hbox>
+									<hbox><checkbox label="LLQ Pelvic Tenderness" /></hbox>
+									<separator />
+									<textbox cols="40" rows="3" />
+									</div>
+									</hbox>
+
+								</groupbox>
+
+								<groupbox>
+									<caption label="Breasts" />
+									<hbox><checkbox label="WNL" /></hbox>
+									<separator />
+									<hbox><checkbox label="Soft" /></hbox>
+									<separator />
+									<hbox><checkbox label="Warm" /></hbox>
+									<hbox><checkbox label="Cool" /></hbox>
+									<separator />
+									<hbox><checkbox label="Dry" /></hbox>
+									<hbox><checkbox label="Diaphoretic" /></hbox>
+									<separator />
+									<hbox><checkbox label="No Cyanosis" /></hbox>
+									<hbox><checkbox label="Cyanosis" /></hbox>
+									<separator />
+									<hbox><checkbox label="No Rash" /></hbox>
+									<hbox><checkbox label="Rash Present" /></hbox>
+									<separator />
+									<hbox><checkbox label="No Lesion" /></hbox>
+									<separator />
+									<textbox cols="40" rows="3" />
+								</groupbox>
+							</hbox>
+						</tabpanel>
+	
+						
+						<!-- ORTHO -->
+						<tabpanel vflex="1" hflex="1" >
+							<hbox>
+								<groupbox>
+									<caption label="C-Spine" />
+									<hbox><checkbox label="WNL" /></hbox>
+									<separator />
+									<hbox><checkbox label="No Cervical Tenderness" /></hbox>
+									<hbox><checkbox label="Cervical Tenderness" /></hbox>
+									<hbox><checkbox label="R" /><checkbox label="L" /><checkbox label="Paracervical Tenderness" /></hbox>
+									<separator />
+									<hbox><checkbox label="No Spasm" /></hbox>
+									<hbox><checkbox label="Spasm Present" /></hbox>
+									<separator />
+									<hbox><checkbox label="Normal ROM" /></hbox>
+									<hbox><checkbox label="Limited ROM" /></hbox>
+									<separator />
+									<hbox><checkbox label="No Deformity" /></hbox>
+									<separator />
+									<textbox cols="40" rows="3" />
+								</groupbox>
+								<groupbox>
+									<caption label="Low Back" />
+									<hbox><checkbox label="WNL" /></hbox>
+									<separator />
+									<hbox><checkbox label="No Spinal Tenderness" /></hbox>
+									<hbox><checkbox label="Spinal Tenderness" /></hbox>
+									<hbox><checkbox label="R" /><checkbox label="L" /><checkbox label="Paraspinal Tenderness" /></hbox>
+									<separator />
+									<hbox><checkbox label="No Spasm" /></hbox>
+									<hbox><checkbox label="Spasm Present" /></hbox>
+									<separator />
+									<hbox><checkbox label="Normal ROM" /></hbox>
+									<hbox><checkbox label="Limited ROM" /></hbox>
+									<separator />
+									<hbox><checkbox label="No Deformity" /></hbox>
+									<separator />
+									<hbox><checkbox label="Neg SLR" /></hbox>
+									<hbox><checkbox label="Pos SLR" /></hbox>
+									<separator />
+									<hbox><checkbox label="No Lesion" /></hbox>
+									<separator />
+									<textbox cols="40" rows="3" />
+								</groupbox>
+								<groupbox>
+									<caption label="Knees" />
+									<hbox><checkbox label="WNL" /></hbox>
+									<separator />
+									<hbox><checkbox label="Soft" /></hbox>
+									<separator />
+									<hbox><checkbox label="Neg Anterior Drawer" /></hbox>
+									<hbox><checkbox label="R" /><checkbox label="L" /><checkbox label="Pos Anterior Drawer" /></hbox>
+									<separator />
+									<hbox><checkbox label="Neg McMurray" /></hbox>
+									<hbox><checkbox label="R" /><checkbox label="L" /><checkbox label="Pos McMurray" /></hbox>
+									<separator />
+									<hbox><checkbox label="No Patellar Grind" /></hbox>
+									<hbox><checkbox label="R" /><checkbox label="L" /><checkbox label="Patellar Grind" /></hbox>
+									<separator />
+									<hbox><checkbox label="Normal ROM" /></hbox>
+									<hbox><checkbox label="R" /><checkbox label="L" /><checkbox label="Limited ROM" /></hbox>
+									<separator />
+									<hbox><checkbox label="No Lesion" /></hbox>
+									<separator />
+									<textbox cols="40" rows="3" />
+								</groupbox>
+							</hbox>
+						</tabpanel>
+						
+						
+						<!-- NEURO -->
+						<tabpanel vflex="1" hflex="1" >
+							<groupbox>
+								<caption label="Neuro" />
+								<hbox><checkbox label="WNL" /></hbox>
+								<separator />
+								<hbox><checkbox label="No Focal Neurologic Defecit" /></hbox>
+								<separator />
+								<hbox><checkbox label="CN 2-12 Intact" /></hbox>
+								<separator />
+								<hbox><checkbox label="Cerebellar Function Intact" /></hbox>
+								<separator />
+								<hbox><checkbox label="Strength Equal and Intact Bilaterally" /></hbox>
+								<hbox><checkbox label="R" /><checkbox label="L" /><checkbox label="Hemiparesis" /><textbox cols="2" />/5</hbox>
+								<hbox><checkbox label="R" /><checkbox label="L" /><checkbox label="Upper Extremity Paresis" /><textbox cols="2" />/5</hbox>
+								<hbox><checkbox label="R" /><checkbox label="L" /><checkbox label="Lower Extremity Paresis" /><textbox cols="2" />/5</hbox>
+								<separator />
+								<hbox><checkbox label="Sensation Equal and Intact Bilaterally" /></hbox>
+								<hbox><checkbox label="R" /><checkbox label="L" /><checkbox label="Paresthesia" /><textbox cols="2" />/5</hbox>
+								<hbox><checkbox label="R" /><checkbox label="L" /><checkbox label="Upper Extremity Paresthesia" /><textbox cols="2" />/5</hbox>
+								<hbox><checkbox label="R" /><checkbox label="L" /><checkbox label="Lower Extremity Paresthesia" /><textbox cols="2" />/5</hbox>
+								<separator />
+								<hbox><checkbox label="Deep Tendon Reflexes Normal" /></hbox>
+								<hbox><checkbox label="DTRs Brisk" /></hbox>
+								<hbox><checkbox label="DTRs Slow" /></hbox>
+								<hbox><checkbox label="DTRs Absent" /></hbox>
+								<separator />
+								<hbox><checkbox label="+" /><checkbox label="-" /><checkbox label="Romberg's" /></hbox>
+								<hbox><checkbox label="+" /><checkbox label="-" /><checkbox label="Babinski" /></hbox>
+								<separator />
+								<textbox cols="40" rows="3" />
+							</groupbox>
+						</tabpanel>
+						
+						
+						<!-- PSYCH -->
+						<tabpanel vflex="1" hflex="1" >
+								<groupbox>
+									<caption label="Psych" />
+									<hbox><checkbox label="WNL" /></hbox>
+									<separator />
+									<hbox><checkbox label="Appropriate Affect" /></hbox>
+									<hbox><checkbox label="Depressed Affect" /></hbox>
+									<hbox><checkbox label="Elevated Mood" /></hbox>
+									<separator />
+									<hbox><checkbox label="Cooperative" /></hbox>
+									<hbox><checkbox label="Uncooperative" /></hbox>
+									<separator />
+									<hbox><checkbox label="Irritable" /></hbox>
+									<hbox><checkbox label="Anxious" /></hbox>
+									<hbox><checkbox label="Combative" /></hbox>
+									<separator />
+									<hbox><checkbox label="Normal Memory" /></hbox>
+									<hbox><checkbox label="Impaired Memore" /></hbox>
+									<separator />
+									<hbox><checkbox label="Normal Judgement" /></hbox>
+									<hbox><checkbox label="Impaired Judgement" /></hbox>
+									<separator />
+									<hbox><checkbox label="Normal Insight" /></hbox>
+									<hbox><checkbox label="Poor Insight" /></hbox>
+									<separator />
+									<hbox><checkbox label="Oriented" /></hbox>
+									<hbox><checkbox label="Confused" /></hbox>
+									<separator />
+									<textbox cols="40" rows="3" />
+								</groupbox>
+						</tabpanel>
+						
+						
+					</tabpanels>
+				</tabbox>
+				
+				</vbox>
+	</window>				
+</zk>

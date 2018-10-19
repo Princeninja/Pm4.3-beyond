@@ -1,0 +1,205 @@
+<?page id="pmMainPage" title="PAL/MED Main Win" cacheable="false" 	language="xul/html" zscriptLanguage="Java"?>
+<?meta content="text/html; charset=UTF-8" 	pageEncoding="UTF-8"?>
+<?taglib uri="http://www.zkoss.org/dsp/web/core" prefix="c"?>
+
+
+<zk xmlns="http://www.zkoss.org/2005/zul"
+	xmlns:h="http://www.w3.org/1999/xhtml"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.zkoss.org/2005/zul http://www.zkoss.org/2005/zul/zul.xsd">
+
+	<window id="pmMainWin" apply="palmed.PmMainController" 
+		mode="embedded" border="none" vflex="1" hflex="1" >
+
+		<style>
+			body { padding: 0 0; /* 0 padding on top and bottom and 0
+			padding on right and left */ }
+
+			.z-loading { top: 50% !important; left: 45% !important;
+			align: center; vertical-align: middle; }
+
+			<!-- groupbox inner content area, NO padding -->
+			.myGroupBoxContentArea .z-groupbox-cnt{ background-color:
+			white; padding: 0px }
+		</style>
+
+		<!-- HIDDEN fields for storing the current desktop height and width -->
+		<intbox id="currentDesktopHeight" visible="false" />
+		<intbox id="currentDesktopWidth" visible="false" />
+		<!-- HIDDEN field for storing the initial menu type -->
+		<checkbox id="CBtreeMenu" checked="true" visible="false" />
+
+		<borderlayout id="borderlayoutMain" vflex="1" > 
+			<north id="borderlayoutMainNorth" border="none" height="38px" splittable="false" >
+
+				<!-- <div id="div1" style="background-color:silver;"> -->
+				
+				<div id="div1" 
+					style="background-color:silver; background-image:url(${c:encodeURL('/images/ZKHeader_2x38.png')});  background-repeat: repeat-x; border: 'none';">
+
+
+					<hbox pack="stretch" width="100%">
+
+						<div id="divNo" align="left" style="padding: 2px; ">
+							<hbox>
+							<image src="newpalmed_small.png" />
+							<!-- h:H3>PAL/MED The Compleat Medical Office System  v5.0</h:H3> -->
+							</hbox>
+						</div>
+
+
+						<div align="left" style="padding: 0px;">
+							<image src="/images/ZKHeader2_176x38.jpg" />
+<!--   							<label id="userName" value="${session.user}" /> -->
+						</div>
+
+
+						<!--
+							<div
+							style="background-color:silver; background-image:url(${c:encodeURL('/images/ZKHeader_2x38.png')});  background-repeat:repeat-x; float:left; border: 'none';  padding-left: 5px; padding-bottom: 4px;"
+							align="left">
+							<label id="label_AppName"
+							style="font-size:24px; font-weight:bold; color: #D70303" />
+							</div>
+						-->
+						<!-- <div align="right" style="float: right"> -->
+
+							<!-- Monitor Background pic -->
+						<!-- 	<div
+								style="background-color:silver; background-image:url(${c:encodeURL('/images/ZKHeaderMonitorOnly_70x38.png')}); background-repeat:no-repeat; float:left; border: 'none'; width:70px;height:38px; "
+								align="right">
+							</div>
+
+
+							<div align="right" style="float: right">
+								<vbox>
+
+									<div align="right" style="float: right">-->
+										<!-- USER-BAR. Comps are created in the Controller -->
+									<!-- <window id="winUserBar" border="none" width="100%" height="100%" />-->
+											<!-- /*apply="${userBarCtrl}"*/ -->
+									<!-- </div>
+
+									<div align="right" style="float: right; padding-bottom: 3px;">
+										<hbox pack="end">
+											<toolbarbutton
+												id="btnIndexMySettings" label="${c:l('common.MySettings')}"
+												style="text-decoration: underline; color: white;" />
+											<toolbarbutton
+												id="btnIndexUserAppConfiguration"
+												label="${c:l('common.Configuration')}"
+												style="text-decoration: underline; color: white;" />
+											<button id="btnLogout"
+												height="20px" label="${c:l('btnLogout.label')}"
+												tooltiptext="${c:l('btnLogout.tooltiptext')}" />
+										</hbox>
+									</div>
+
+								</vbox>
+							</div>
+
+						</div>
+						 -->
+					</hbox>
+
+					<div id="divDropDownMenu" width="100%">
+						<menubar id="mainMenuBar" height="25px"></menubar>
+					</div>
+				</div>
+			</north>
+
+
+
+
+
+			<!-- MAIN MENU AREA -->
+			<west id="west" border="none" margins="0,0,0,0" size="180px"
+				collapsible="true" style="background-color: #D6DCDE; padding: 5px"
+				flex="true" minsize="100" splittable="true" autoscroll="false">
+				
+				<div id="divWest"></div>
+				
+			</west>
+
+
+
+
+			<!-- MODULE CONTENT AREA -->
+			<center id="center" border="none" margins="0,0,0,0" vflex="1" hflex="1"
+				style="background-color: #D6DCDE; padding: 5px">
+				
+				<div id="divCenter" vflex="1" hflex="1" >
+
+					<!--  groupbox id="groupbox_menu" mold="3d" sclass="myGroupBoxContentArea" width="100%" height="100%"-->
+						<!-- caption style="color: #000000; font-weight: bold;" label="${c:l('workplace')}" / -->
+						<tabbox id="tabBoxIndexCenter" vflex="1" hflex="1" style="padding: 0px" >
+							<tabs id="tabsIndexCenter"  ></tabs>
+							<tabpanels id="tabpanelsBoxIndexCenter" vflex="1" hflex="1"  ></tabpanels>
+						</tabbox>
+					<!-- /groupbox-->
+				</div>
+			</center>
+			
+			
+			
+
+			<east border="none" margins="0,0,0,0" size="0%">
+				<div id="divEast">EAST</div>
+			</east>
+
+
+
+
+
+			<!-- STATUS BAR AREA -->
+			<south id="south" border="none" height="22px" splittable="false">
+
+				<div id="divSouth" align="left" style="float: left; padding: 0px" width="100%">
+
+					<borderlayout width="100%" height="22px">
+
+						<west border="none" width="50px">
+							<!-- The MessageBar. Comps are created in the Controller -->
+							<window id="winMessageBar" border="none" width="50px" height="22px" >
+							</window>
+								<!-- /*apply="${messageBarCtrl}"*/ -->
+						</west>
+
+						<center border="none">
+							<!-- The StatusBar. Comps are created in the Controller -->
+							<window id="statusBarWin" border="none" width="100%" height="22px" apply="palmed.StatusBarWinController"/>
+								<!-- /*apply="${statusBarCtrl}"*/ -->
+						</center>
+						
+						<east border="none" width="80px" >
+							<hbox>
+								<label value="User:" />
+								<label id="lblUserName" value="${username}" />
+							</hbox>
+						</east>
+
+					</borderlayout>
+				</div>
+			</south>
+		</borderlayout>
+	</window>
+
+</zk>
+
+
+<!-- old Top Background-color style="background-color:#4944F9" -->
+<!-- 	<image src="/images/zkoss3.gif" /> -->
+
+<!-- 	<style>.z-groupbox-cnt {border: 0px;}</style> -->
+<!--  <style>.z-tabs-scroll {border: 0px;}</style> -->
+<!-- 
+	<label id="lbl2" width="33%" />
+	<timer id="timer2" delay="1000" repeats="true">
+	<attribute name="onTimer">
+	Locale locale = org.zkoss.util.Locales.getCurrent();
+	java.text.DateFormat dateFormat = java.text.DateFormat.getDateTimeInstance(java.text.DateFormat.MEDIUM, java.text.DateFormat.MEDIUM, locale);
+	String strTime = dateFormat.format(java.util.Calendar.getInstance(locale).getTime());
+	colDate.setLabel(strTime);
+	</attribute>
+	</timer>
+-->

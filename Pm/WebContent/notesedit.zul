@@ -1,0 +1,35 @@
+<?page title="Enter/Edit Notes" contentType="text/html;charset=UTF-8"?>
+<zk>
+<window id="notesEditWin" title="Enter/Edit Notes" width="740px" border="normal" apply="palmed.NotesEditWinController">
+	<vbox>
+	<grid>
+		<columns>
+			<column width="100px"/>
+			<column />
+		</columns>
+		<rows>
+			<row>
+				<label value="Patient" />
+				<label id="lblPtName" />
+			</row>
+			<row>
+				<label value="Date" />
+				<textbox id="txtDate" maxlength="10" width="80px" />
+			</row>
+			<row>
+				<label value="Description" />
+				<textbox id="txtDesc" maxlength="40" width="200px" />
+			</row>
+			<row>
+				<label value="Note" />
+				<textbox id="txtNote" rows="4" width="600px" />
+			</row>
+		</rows>		
+	</grid>
+	<hbox>
+		<button id="btnSave" label="Save" width="80px" />
+		<button id="btnCancel" label="Cancel" width="80px" />
+	</hbox>
+	</vbox>
+</window>
+</zk>

@@ -1,0 +1,48 @@
+<?page title="Enter New SOAP Note" contentType="text/html;charset=UTF-8"?>
+<zk>
+<window title="Enter New SOAP Note"  id="soapEditWin" border="normal" width="1000px" height="600px" apply="palmed.SoapEditWinController">
+<!-- border="none" mode="embedded" vflex="1" hflex="1" -->
+	<hbox hflex="1" vflex="1" >
+		<vbox hflex="2" vflex="1" >
+			<hbox>Date <textbox id="txtDate" cols="10" forward="onChange" /> Provider <listbox id="lbProvider" mold="select" width="300px" /></hbox>
+			<hbox>Desc <textbox id="txtDesc" cols="40" forward="onChange" /></hbox>
+			Subjective:
+			<textbox id="txtSubj" rows="5" hflex="1" forward="onChange" />
+			Objective:
+			<hbox> 
+				Temp <textbox id="txtTemp" cols="3" forward="onChange" />
+				Pulse <textbox id="txtHR" cols="3" forward="onChange" />
+				Resp <textbox id="txtResp" cols="3" forward="onChange" />
+				BP <textbox id="txtSystolic" cols="3" forward="onChange" /> / <textbox id="txtDiastolic" cols="3" forward="onChange" />
+				Ht <textbox id="txtHeight" cols="3" forward="onChange" />
+				Wt <textbox id="txtWeight" cols="3" forward="onChange" />
+				PO2 <textbox id="txtPO2" cols="3" forward="onChange" />
+				Head <textbox id="txtHead" cols="3" forward="onChange" />
+			</hbox>
+			<textbox id="txtObj" rows="5" hflex="1" forward="onChange" />
+			Assessment:
+			<textbox id="txtAss" rows="5" hflex="1" forward="onChange" />
+			Plan:
+			<textbox id="txtPlan" rows="5" hflex="1" forward="onChange" />
+	
+			<hbox>
+				<button id="btnSave" label="Save" width="80px" />
+				<button id="btnCancel" label="Cancel" width="80px" />
+			</hbox>		
+			
+		</vbox>
+	
+		<vbox width="300px" vflex="1" >		
+			<listbox id="stdDictListbox" rows="15" vflex="1" hflex="1" multiple="true">
+			 <listhead >
+			 
+            		<listheader label="Standard Dictations" sort="auto" sortDirection="ascending"/>
+			</listhead>            		
+			</listbox>
+			<button id="btnApply" label="Apply" width="80px" />
+		</vbox>
+	
+	</hbox>
+	
+</window>
+</zk>

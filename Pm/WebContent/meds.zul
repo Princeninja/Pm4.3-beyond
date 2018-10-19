@@ -1,0 +1,52 @@
+<?page title="Medications" contentType="text/html;charset=UTF-8"?>
+<zk>
+<window id="medsWin" mode="embedded" border="none" vflex="1" apply="palmed.MedsWinController">
+	<vbox vflex="1" hflex="1" >
+		<groupbox id="gbNoMeds">
+			<caption label="Medications" />
+			<checkbox id="cbNoMeds" label="No Current Medications" checked="false" />
+		</groupbox>
+
+		<hbox vflex="1" hflex="1" >
+			<vbox>
+				<button id="newrx" label="NewRx" width="80px" />
+				<!-- button id="refill" label="Refill" width="80px" unless="${NewcropManagedMeds}" /> -->
+				<button id="btnAdd" label="Add" width="80px" unless="${NewcropManagedMeds}" />
+				<button id="pending" label="Pending" Width="80px" />
+				<!-- button id="edit" label="Edit" width="80px" unless="${NewcropManagedMeds}" /> -->
+				<!-- button id="dc" label="DC" width="80px" unless="${NewcropManagedMeds}" /> -->
+				<button id="btnDC" label="Discontinue" width="80px" />
+				<button id="btnPrint" label="Print" width="80px" unless="${NewcropManagedMeds}" />
+				<button id="newprov" label="Choose Provider" width="80px" />
+				<groupbox >
+					<caption label="View" />
+					<radiogroup>
+						<vbox>
+						<radio id="r_current" label="Current" checked="true" />
+						<radio id="r_past" label="Past" />
+						<radio id="r_history" label="History" />
+						</vbox>
+					</radiogroup>
+				</groupbox>
+			</vbox>
+			
+			<listbox id="medsListbox"  vflex="1" hflex="1" >
+				<listhead>
+					<listheader width="80px" label="Date" sort="auto" />
+					<listheader id="stop" width="80px" label="Stop" sort="auto" />
+					<listheader width="200px" label="Medication" sort="auto" />
+					<listheader width="80px" label="Dosage" />
+					<listheader width="80px" label="Route" />
+					<listheader width="80px" label="Sched" />
+					<listheader width="35px" label="PRN" />		
+					<listheader id="status" width="20px" label="Status" />		
+					<listheader width="80px" label="FDB Code" />		
+					<listheader width="20px" label="Chk" />		
+					<listheader width="80px" label="Addl Sig" />		
+				</listhead>
+			</listbox>
+		</hbox>
+	</vbox>
+	
+</window>
+</zk>

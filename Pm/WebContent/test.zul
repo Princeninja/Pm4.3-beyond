@@ -1,0 +1,63 @@
+<?page title="Test Page" contentType="text/html;charset=UTF-8"?>
+<zk xmlns="http://www.zkoss.org/2005/zul"
+	xmlns:h="http://www.w3.org/1999/xhtml">
+<window title="Test Page" border="normal">
+
+	<vbox>
+	<label id="label" value="" ></label>
+	Pattern <textbox id="txtPattern" width="200px" maxlength="100" value="\\b[Hh][Rr][: ]*\\d+" />
+	Search <textbox id="txtSearch" width="400px" maxlength="200" value="this is a soap note.  vital signs are HR156 RR 20 BP 190/107 Ht 67 Wt 195 pulse ox 98 " />
+	<button label="Press Me" onClick="compute();" />
+	</vbox>
+	
+	<listbox id="medListbox" rows="10" >
+		<listhead id="listHead" >
+			<listheader id="name" label="Drug Name" sort="auto" />
+		</listhead>
+	</listbox>
+	
+	<window id="testwin"  border="none" >
+
+
+
+	</window>
+	
+	<zscript>
+	void compute()  {
+	
+		String text = txtSearch.getValue().toLowerCase();
+		
+		//int[] bps = palmed.TransferVitals.getBP( text );
+		double ht = palmed.TransferVitals.getHt( text );
+		
+		System.out.println( "Ht " + ht );
+		
+	
+<!-- 		String text = txtSearch.getValue();
+		String pattern = txtPattern.getValue();
+					System.out.println( "Text=" + text );
+					System.out.println( "Pattern=" + pattern );
+		
+		java.util.regex.Pattern p = java.util.regex.Pattern.compile( pattern );
+		java.util.regex.Pattern p2 = java.util.regex.Pattern.compile( "\\d+/" );
+		
+		java.util.regex.Matcher m = p.matcher (text);
+		
+		if ( m.find()){
+		
+			System.out.println( m.group());
+			
+			java.util.regex.Matcher m2 = p2.matcher( m.group());
+			if ( m2.find()){
+			
+				System.out.println( m2.group());
+			}
+		}
+		
+ -->		
+	}
+	</zscript>
+
+
+</window>
+</zk>

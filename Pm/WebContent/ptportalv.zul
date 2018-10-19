@@ -1,0 +1,77 @@
+<?page title="Pt Portal Viewer" contentType="text/html;charset=UTF-8"?>
+<zk>
+<window id="ptPortalViewWin" title="ER Portal Viewer" border="normal" apply="palmed.PtPortalViewWinController">
+
+	<hbox>
+		<button id="btnClose" width="80px" label="Close" />
+		<button id="btnPrint" width="80px" label="Print" />
+		<button id="btnCCR" width="80px" label="Download CCR" />
+	</hbox>
+	
+		
+	<!-- PATIENT DEMOGRAPHICS -->
+		<div>
+		<hbox pack="stretch" width="100%">
+			<vbox>
+				<label id="address1" />
+				<label id="address2" />
+				<label id="address3" />
+				<hbox> Home: <label id="home_ph" /> </hbox>
+				<hbox> Work: <label id="work_ph" /> </hbox>
+	
+			</vbox>
+			<vbox>
+				<hbox> Age: <label id="ptage" /> Sex: <label id="ptsex" /> </hbox>
+				
+			
+				<hbox> DOB: <label id="ptdob" /> </hbox>
+				<hbox> SSN: <label id="ptssn" /> </hbox>
+				<hbox> PtNum: <label id="ptnum" /> </hbox>	
+				<hbox> Ptrec: <label id="ptrec" /> </hbox>			
+			</vbox>
+			
+			<vbox>
+				<hbox> Ins1: <label id="ins1cmp" value="CompanyName1" /> </hbox>
+				<hbox> <label id="ins1id" value="idnumxxxxx" />,  <label id="ins1grp" value="grpnumxxx" /></hbox>
+
+				<hbox> Ins2: <label id="ins2cmp" value="CompanyName2" /> </hbox>
+				<hbox> <label id="ins2id" value="idnumxxxxx" />,  <label id="ins2grp" value="grpnumxxx" /></hbox>
+			</vbox>
+			
+			<groupbox height="150px" width="120px" >
+				<image id="ptImage" />
+			</groupbox>
+			
+		</hbox>
+		</div>
+
+
+
+	<!-- Allergies, Meds, Problems -->
+		<div>
+		<hbox widths="340px,340px" >
+			<groupbox mold="3d"  hflex="1" >
+				<caption label="Medications" />
+				<listbox id="meds"  vflex="1" ></listbox>
+			</groupbox>
+			<groupbox mold="3d"  hflex="1" >
+				<caption label="Allergies/PARs" />
+				<listbox id="pars"  vflex="1" ></listbox>
+			</groupbox>			
+		</hbox>
+		<hbox widths="340px,340px" >
+			<groupbox mold="3d"  >
+				<caption label="Current Problems" />
+				<listbox id="problems"  vflex="1" ></listbox>
+			</groupbox>
+			<groupbox mold="3d"  >
+				<caption label="Labs" />
+				<listbox id="labs"  vflex="1" ></listbox>
+			</groupbox>
+		</hbox>
+		</div>
+
+
+</window>
+
+</zk>

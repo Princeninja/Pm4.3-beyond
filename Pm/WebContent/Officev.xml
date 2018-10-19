@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--  Office Visit -->
+<VISIT>
+   <INFO>
+	<Name> QnameQ </Name>
+	<PtRec> QPtRecQ </PtRec>
+	<Start> QStartQ </Start>
+	<Provider> QProviderQ </Provider>
+	<ProviderName> QProviderNameQ </ProviderName>
+	<Status> QStatusQ </Status>
+	<Type> QTypeQ </Type>
+	<Priority> QPriQ </Priority>
+	<CC> QCCQ </CC>
+	<HPI> QHPIQ </HPI>
+	<ROS> QROSQ </ROS>
+	<Hx> QHxQ </Hx>
+	<Vitals> QVitalsQ </Vitals>
+	<Exam> QExamQ </Exam>
+	<Assesment> QAssessQ </Assesment>
+	<FreeText> QFreeQ </FreeText>
+	<Orders> QOrdersQ </Orders>
+	<RX> QRXQ </RX>
+	<FU> QFUQ </FU>
+	<Charge> QChargeQ </Charge>
+	<Summary> QSummaryQ </Summary>
+    <EndTime> QEndQ </EndTime>
+   </INFO>
+   <TODO>
+    <CurrentTasks></CurrentTasks>
+    <CompletedTasks></CompletedTasks>
+    <CreateTasks></CreateTasks>
+    <Notes></Notes>
+   </TODO>
+</VISIT>
+

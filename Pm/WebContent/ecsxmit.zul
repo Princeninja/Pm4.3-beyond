@@ -1,0 +1,14 @@
+<?page title="ECS Transmit" contentType="text/html;charset=UTF-8"?>
+<zk>
+<window title="ECS Transmit" border="normal" apply="palmed.EcsTransmitWinController" >
+
+	<vbox>
+	<hbox>
+	<button id="transmit" label="Transmit" width="80px" />
+	<button id="close" label="Close" width="80px" />
+	</hbox>
+	<listbox id="textarea" rows="15" width="600px" />
+	</vbox>
+
+</window>
+</zk>

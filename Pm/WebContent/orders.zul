@@ -1,0 +1,35 @@
+<?page title="Patient Orders" contentType="text/html;charset=UTF-8"?>
+<zk>
+<window id="ordersWin" border="none" mode="embedded" apply="palmed.OrdersWinController">
+
+	<hbox>
+		<vbox>
+			<button id="btnAdd" label="New" width="80px" />
+			<button id="btnEdit" label="Edit" width="80px" />
+			<button id="btnRemove" label="Remove" width="80px" />
+			<button id="btnPrint" label="Print" width="80px" />
+			
+			<groupbox>
+				<caption label="View" />
+				<radiogroup>
+					<radio id="rbActive" label="Active" />
+					<radio id="rbAll" label="All" />
+				</radiogroup>
+			</groupbox>
+		</vbox>
+
+		<listbox id="lboxOrders" >
+			<listhead>
+				<listheader width="80px" label="Date" sort="auto" />
+				<listheader label="Order" sort="auto" />
+				<listheader label="Provider" sort="auto" />
+				<listheader width="80px" label="Priority" sort="auto" />
+				<listheader width="80px" label="Status" sort="auto" />
+				<listheader label="Indications" sort="auto" />
+			</listhead>
+		</listbox>
+	</hbox>
+
+
+</window>
+</zk>

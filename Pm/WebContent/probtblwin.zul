@@ -1,0 +1,42 @@
+<?page title="Problem Table Window" contentType="text/html;charset=UTF-8"?>
+<zk>
+<window id="probTblWin" border="none" mode="embedded" vflex="1" hflex="1" apply="palmed.ProbTblWinController" >
+
+	<hbox vflex="1" >
+		<vbox>
+			<button id="newprob" label="New" width="80px" />
+			<button id="edit" label="Edit" width="80px" />
+			<button id="delete" label="Delete" width="80px" />
+			<button id="btnImport" label="Import" width="80px" />
+			<button id="print" label="Print" width="80px" />
+			
+			<groupbox>
+				<caption label="View" />
+				<radiogroup>
+					<radio id="r_active" label="Active" checked="true" />
+					<radio id="r_inactive" label="Inactive" />
+					<radio id="r_all" label="All" />
+				</radiogroup>
+			</groupbox>
+		</vbox>
+		
+		<vbox vflex="1" >
+			<hbox>
+				<button id="search" label="Search" width="80px" />
+				<textbox id="srcstr" maxlength="40" width="200px" />
+			</hbox>
+			<listbox id="probTblListbox" vflex="1" >
+				<listhead>
+					<listheader width="80px" label="Abbr" sort="auto" />
+					<listheader label="Description" sort="auto" />
+					<listheader label="SNOMED-CT" width="120px" sort="auto" />
+					<listheader label="ICD-9" width="80px" sort="auto" />
+					<listheader label="ICD-10" width="80px" sort="auto" />
+					<listheader label="Dgn" width="80px" sort="auto" />
+				</listhead>
+			</listbox>
+		</vbox>
+	</hbox>
+
+</window>
+</zk>

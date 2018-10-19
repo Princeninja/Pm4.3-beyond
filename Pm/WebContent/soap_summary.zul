@@ -1,0 +1,29 @@
+<?page title="Visit Summary" contentType="text/html;charset=UTF-8"?>
+<zk>
+<window id="soapShtSummaryWin" border="none" mode="embedded" apply="palmed.SoapShtSummaryWinController" >
+
+	<hbox widths="340px,340px" >
+		<groupbox hflex="1" >
+			<caption label="Visit Summary" />
+			<vbox>
+				<button id="btnCCR" label="Export CCR" width="80px" />
+				<button id="btnPrintSummary" label="Print" width="80px" />
+			</vbox>
+		</groupbox>
+		
+		<groupbox hflex="1" >
+			<caption label="Patient Education" />
+			<vbox>
+				<listbox id="lboxPtEd" rows="6" width="300px" />
+				<hbox>
+					<button id="btnPrintPtEd" label="Print" width="80px" />
+					<button id="btnRefresh" label="Refresh" width="80px" />
+				</hbox>
+			</vbox>
+			
+		</groupbox>
+	</hbox>
+	
+
+</window>
+</zk>

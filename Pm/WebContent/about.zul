@@ -1,0 +1,21 @@
+<?page title="About PAL/MED" contentType="text/html;charset=UTF-8"?>
+<zk>
+
+<window id="aboutWin" title="About PAL/MED" mode="modal" border="normal" width="500px" height="400px" position="center" >
+
+<vbox height="100%" width="100%"  align="center" pack="center" >
+
+<label value="PAL/MED" style="font-size:36px" />
+<space />
+<hbox><label value="The " style="font-size:26px" /><label value="Compleat" style="font-size:26px;font-style:italic" /><label value=" Medical Office System" style="font-size:26px" /></hbox>
+<space />
+<label value="Version 5.0" style="font-size:30px" />
+<space />
+<label value="Copyright (c) 2011 by PAL/MED Development Corporation" style="font-size:normal" />
+<space />
+<button id="close" label="Close" onClick="aboutWin.detach();" />
+
+</vbox>
+
+</window>
+</zk>

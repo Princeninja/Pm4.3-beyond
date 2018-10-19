@@ -1,0 +1,178 @@
+<?page title="PtChart" contentType="text/html;charset=UTF-8"?>
+
+<zk>
+<!-- Outer window to hide ID space of inner window - so doesn't have to be unique -->
+	<window border="none" vflex="1" hflex="1" >
+	
+		<window  id="ptChartWin"  title="PtChart" border="normal" apply="palmed.PtChartController" vflex="1" hflex="1">
+		<style>
+		li.z-drag-over{
+			border-left:2px dotted #BD3C3C; <!-- solid -->
+		}
+		/* dropEffect_ */
+		</style>
+			<caption>
+				<menubar orient="vertical"  width="80">
+			        <menu label="Menu" image="/widgets/menu/pull-down_menu/img/luggage.png">
+						<menupopup>
+							<menuitem id="btnExportCCR" label="Export CCR" />
+							<menuitem id="btnImportCCR" label="View CCR/CCD" />
+							<menuitem id="btnMedReconciliation" label="Med Reconciliation" />
+							<menuitem id="btnImportEncCCR" label="View Encrypted CCR/CCD" />
+						</menupopup>
+					</menu> 
+				</menubar>
+			</caption>
+
+		<borderlayout>
+		<east width="20%" border="none" flex="true" splittable="true" collapsible="true" >
+			<vbox>
+				<groupbox height="150px" width="120px" style="center" >
+					<image id="ptImage" />
+				</groupbox>
+				
+				<groupbox mold="3d" unless="${NewcropManagedMeds}" >
+					<caption label="Allergies/PARs" />
+					<listbox id="pars"  rows="6" ></listbox>
+				</groupbox>
+				
+				<groupbox mold="3d" unless="${NewcropManagedMeds}" >
+					<caption label="Medications" />
+					<listbox id="meds"  rows="12" ></listbox>
+				</groupbox>
+				
+				<groupbox mold="3d" unless="${NewcropManagedMeds}" >
+					<caption label="Current Problems" />
+					<listbox id="problems"  rows="6" ></listbox>
+				</groupbox>
+				
+			</vbox>
+			
+		</east>
+
+
+		<center border="none" flex="true" >
+		<borderlayout>
+		<north height="120px" border="none" flex="false" collapsible="true" splittable="true" >
+		<div>
+		<hbox pack="stretch" width="100%">
+			<vbox>
+				<label id="address1" />
+				<label id="address2" />
+				<label id="address3" />
+				<hbox> Home: <label id="home_ph" /> </hbox>
+				<hbox> Work: <label id="work_ph" /> </hbox>
+	
+			</vbox>
+			<vbox>
+				<hbox> Age: <label id="ptage" /> Sex: <label id="ptsex" /> </hbox>
+				
+			
+				<hbox> DOB: <label id="ptdob" /> </hbox>
+				<hbox> SSN: <label id="ptssn" /> </hbox>
+				<hbox> PtNum: <label id="ptnum" /> </hbox>	
+				<hbox> Ptrec: <label id="ptrec" /> </hbox>			
+			</vbox>
+			
+			<vbox>
+				<hbox> Race: <label id="ptRace" /> Ethnic: <label id="ptEthnicity" /> </hbox>
+				
+			
+				<hbox> Lang: <label id="ptLanguage" /> </hbox>
+			</vbox>
+			<vbox>
+				<hbox> Ins1: <label id="ins1cmp" value="CompanyName1" /> </hbox>
+				<hbox> <label id="ins1id" value="idnumxxxxx" />,  <label id="ins1grp" value="grpnumxxx" /></hbox>
+
+				<hbox> Ins2: <label id="ins2cmp" value="CompanyName2" /> </hbox>
+				<hbox> <label id="ins2id" value="idnumxxxxx" />,  <label id="ins2grp" value="grpnumxxx" /></hbox>
+			</vbox>
+			
+			
+		</hbox>
+		
+
+
+		
+		
+		
+		</div>
+		</north>
+		
+		
+		
+			<!-- MODULE CONTENT AREA -->
+			<center id="center" border="none" margins="0,0,0,0"
+				flex="true" autoscroll="false" style="background-color: #D6DCDE; padding: 5px" vflex="1" >
+				<!-- autoscroll="true" -->
+				
+				<div id="divCenter" vflex="1" >
+
+					<tabbox id="ptchart_tabbox"  vflex="1" hflex="1" style="padding: 0px"  >
+						<tabs id="ptchart_tabs">
+							<tab id="t_carelog" label="Carelog" draggable="true" droppable="true" onDrop="move(event.dragged)" />
+							<tab id="t_orders" label="Orders" draggable="true" droppable="true" onDrop="move(event.dragged)"/>
+							<tab id="t_problems" label="Problems" />
+							<tab id="t_meds" label="Meds" />
+							<tab id="t_soap" label="SOAP" />
+							<tab id="t_nurse" label="Nurse" />
+							<tab id="t_treat" label="Treat" />
+							<tab id="t_lab" label="Lab" />
+							<tab id="t_labnotes" label="Lab Notes" />
+							<tab id="t_image" label="Image" />
+							<tab id="t_docs" label="Docs" />
+							<tab id="t_pars" label="Allergies" />
+							<tab id="t_immune" label="Imm" />
+							<tab id="t_exam" label="H+P" />
+							<tab id="t_follow" label="Follow" />
+							<tab id="t_history" label="Hx" />
+							<tab id="t_vitals" label="Vitals" />
+							<tab id="t_interv" label="Interventions" />
+						</tabs>
+						<tabpanels id="ptchart_tabpanels" vflex="1" hflex="1" style="overflow:auto">
+						
+							<tabpanel id="tp_carelog" vflex="1" hflex="1" >
+								<listbox id="mrlog_listbox" vflex="1" >
+									<listhead>
+										<listheader width="80px" label="Date" sort="auto" />
+										<listheader label="Item" />
+									</listhead>
+								</listbox>
+							</tabpanel>
+							
+							<tabpanel id="tp_orders" vflex="1" hflex="1" />
+							<!--  style="overflow:auto" -->
+							<tabpanel id="tp_problems" vflex="1" hflex="1" />
+							<tabpanel id="tp_meds" vflex="1" hflex="1" />
+							<tabpanel id="tp_soap" vflex="1" hflex="1" />
+							<tabpanel id="tp_nurse" vflex="1" hflex="1" />
+							<tabpanel id="tp_treat" vflex="1" hflex="1" />
+							<tabpanel id="tp_lab" vflex="1" hflex="1" />
+							<tabpanel id="tp_labnotes" vflex="1" hflex="1" />
+							<tabpanel id="tp_image" vflex="1" hflex="1" />
+							<tabpanel id="tp_docs" vflex="1" hflex="1" />
+							<tabpanel id="tp_pars" vflex="1" hflex="1" />
+							<tabpanel id="tp_immune" vflex="1" hflex="1" />
+							<tabpanel id="tp_exam" vflex="1" hflex="1" />
+							<tabpanel id="tp_follow" vflex="1" hflex="1" />
+							<tabpanel id="tp_history" vflex="1" hflex="1" />
+							<tabpanel id="tp_vitals" vflex="1" hflex="1" />
+							<tabpanel id="tp_interv" vflex="1" hflex="1" />
+						
+						</tabpanels>
+					</tabbox>
+				</div>
+			</center>
+			</borderlayout>
+			
+		</center>
+		
+		</borderlayout>
+		</window>
+	</window>
+	<zscript>
+        void move(Component dragged) {
+           self.parent.insertBefore(dragged, self);
+        }
+    </zscript>
+</zk>

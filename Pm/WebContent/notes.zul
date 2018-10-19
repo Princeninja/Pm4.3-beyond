@@ -1,0 +1,40 @@
+<?page title="Notes" contentType="text/html;charset=UTF-8"?>
+<zk>
+<!-- Outer window to hide ID space of inner window - so doesn't have to be unique -->
+	<window border="none" vflex="1" hflex="1" >
+
+		<window id="notesWin"  border="none" mode="embedded" vflex="1" hflex="1" apply="palmed.NotesWinController">
+			<borderlayout>
+			
+				<west width="40%" splittable="true" collapsible="true" >
+		
+					<hbox vflex="1" hflex="1" >
+						<vbox>
+							<button id="btnAdd" label="New" width="80px" />
+							<button id="btnEdit" label="Edit" width="80px" />
+							<button id="btnDelete" label="Delete" width="80px" />
+							<button id="btnPrint" label="Print" width="80px" />
+							
+						</vbox>
+				
+						<listbox id="notesListbox" vflex="1" hflex="1" >
+							<listhead>
+								<listheader width="80px" label="Date" sort="auto" />
+								<listheader width="200px" label="Description" />
+								<listheader width="80px" label="User" sort="auto" />
+							</listhead>
+						</listbox>
+					</hbox>
+				</west>
+				
+				
+				<center flex="true" >
+						
+					<textbox id="noteTextbox"  rows="2" vflex="1" hflex="2" />
+						
+				</center>
+			</borderlayout>
+		
+		</window>
+</window>
+</zk>
