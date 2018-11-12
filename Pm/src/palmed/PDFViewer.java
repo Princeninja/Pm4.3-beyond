@@ -60,7 +60,7 @@ public class PDFViewer {
 		if ( media == null ){
 		
 			try {
-				media = new AMedia( new File( "/u/med/" + filename ), "application/pdf", null );
+				media = new AMedia( new File( "/u/med/resource/" + filename ), "application/pdf", null );
 			} catch (FileNotFoundException e) {
 				DialogHelpers.Messagebox( "PDF file not found: " + filename );
 				return;

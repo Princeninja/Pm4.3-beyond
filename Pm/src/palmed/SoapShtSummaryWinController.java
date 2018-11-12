@@ -12,6 +12,7 @@ import org.zkoss.zk.ui.util.GenericForwardComposer;
 import org.zkoss.zul.Filedownload;
 import org.zkoss.zul.Listbox;
 import org.zkoss.zul.Listitem;
+import org.zkoss.zul.Messagebox;
 import org.zkoss.zul.Window;
 
 import usrlib.Date;
@@ -86,8 +87,7 @@ public class SoapShtSummaryWinController extends GenericForwardComposer {
 			
 			Rec pRec = prob.getProbTblRec();
 			ProbTbl p = new ProbTbl( pRec );
-			System.out.println("edrec is: "+p.getedRec());
-			System.out.println("problem is: "+ProbTbl.getResource( pRec ));
+			//System.out.println("problem is: "+ProbTbl.getResource( pRec ));
 			
 			if ( Rec.isValid( pRec )){
 				String resource = ProbTbl.getResource( pRec );
@@ -178,7 +178,11 @@ public class SoapShtSummaryWinController extends GenericForwardComposer {
 	
 	public void onClick$btnPrintPtEd( Event ev ){
 		
-		if ( lboxPtEd.getSelectedCount() < 1 ) return;
+		if ( lboxPtEd.getSelectedCount() < 1 ) {
+			try {Messagebox.show( "No Problem is currently selected. ");  } catch  (InterruptedException e) { /*ignore*/ }
+			return;
+	     }		
+ 
 		
 		String resource = (String) ZkTools.getListboxSelectionValue( lboxPtEd );
 		if ( resource.length() > 0 ){

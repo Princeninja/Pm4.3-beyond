@@ -3,10 +3,14 @@ package palmed;
 import java.io.BufferedReader;
 import java.io.ByteArrayInputStream;
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.IOException;
 import java.io.Reader;
 import java.io.StringReader;
 import java.io.StringWriter;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Vector;
 
 import javax.xml.transform.Transformer;
@@ -29,11 +33,14 @@ import usrlib.DialogHelpers;
 import usrlib.Name;
 import usrlib.Rec;
 import usrlib.Validity;
+import usrlib.XMLElement;
+import usrlib.XMLParseException;
 
 public class LabImport {
 	
 	
 	public static final String version = "2.3.1";
+	private final static String fn_config1 = "Compendium0.xml";
 	
 	
 	class Patient {
@@ -81,6 +88,7 @@ public class LabImport {
 		Rec provRec = null;
 		Rec batRec = null;
 		Rec facRec = null;
+		String batdesc;
 		LabResult.ResultStatus resultStatus;
 		LabResult.SpecimenCondition condition;
 		LabResult.SpecimenSource source;
@@ -95,10 +103,11 @@ public class LabImport {
 		int resultCnt;
 		Vector<Result> results = null;
 		
-		void entry( Date date, Rec batRec, LabResult.ResultStatus resultStatus, String orderID, 
+		void entry( Date date, Rec batRec,String batdesc, LabResult.ResultStatus resultStatus, String orderID, 
 				String specID, LabResult.SpecimenSource source, String txtSource, LabResult.SpecimenCondition condition, String txtCondition,
 				Rec provRec, Rec facRec ){
 			this.date = date;
+			this.batdesc = batdesc;
 			this.batRec = batRec;
 			this.resultStatus = resultStatus;
 			this.orderID = orderID;
@@ -248,6 +257,8 @@ public class LabImport {
 		
 		DialogHelpers.Messagebox( "Lab Import done. " + lab.posted + " results posted." );
 		
+		//TODO error reporting made EZ yaya
+		
 		try {
 			r.close();
 			br.close();
@@ -269,17 +280,8 @@ public class LabImport {
 		
 		return;
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+	int numchck = 1; 
+    List<String> NotesList = new ArrayList<String>();
 	
 	StringBuilder Notess = new StringBuilder();
 	
@@ -292,7 +294,10 @@ public class LabImport {
 
 		try {
 			while (( line = br.readLine()) != null ){
-
+				
+				//obr and obx counter
+				int obrc = 0, obxc = 0;
+				
 				// skip blank lines
 				if ( line.trim().length() < 1 ) continue;
 
@@ -325,18 +330,21 @@ public class LabImport {
 					if ( level > 1 ) processOrder();
 					
 					order = new Order();
+					++obrc;
 					parseOBR( line );
 					level = 2;
 					
 				} else if ( line.startsWith( "OBX" ) || line.startsWith( "OBS" )){
 					//System.out.println("pre OBX level: "+level);
+					
+					++obxc;
 					parseOBX( line );
 					level = 3;
 					
 				} else if ( line.startsWith( "NTE")){
 					
 					//System.out.println("pre NTE level: "+level);				
-					parseNTE( line );
+					parseNTE( line, obxc );
 					level = 4;
 				
 			    } else {
@@ -493,6 +501,8 @@ public class LabImport {
 	
 	public void parseOBR( String line ){
 		
+		boolean BATstat = false;
+		
 		if ( ! line.startsWith( "OBR")) return;
 		System.out.println( "in parseOBR()" );
 		
@@ -540,16 +550,61 @@ public class LabImport {
 		
 		if ( !(type=="") ) { System.out.println( "too few battery fields found" );}
 		
-		String loinc = token[0]	;
+		String Abbr = token[0]	;
 		String batDesc = token[1];
 
 		if ( ! type.equals( "LN" )) System.out.println( "not loinc code?" );
 		
 		
+		//TODO look into compendium for Is Panel aka Panel or not?
+		XMLElement xml = new XMLElement();
+		FileReader reader = null;
+			
+		try {
+			reader = new FileReader( Pm.getOvdPath() + File.separator + fn_config1 );
+	    } catch (FileNotFoundException e) {
+	    	System.out.println( "the.." + File.separator + fn_config1 + "file was not found:" );
+	    	
+	    }
+		
+		try {
+			xml.parseFromReader(reader);
+		} catch (XMLParseException e ) {
+			//TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	    
+		final XMLElement e;
+				
+		 String Name = xml.getName();
+		 //System.out.println(Name+" Name is config1");
+		 final int NosChildren = xml.countChildren();
+		 
+		 e = xml.getElementByPathName(Name);
+		
+		for ( int i = 0; i < NosChildren; i++){
+		
+		  if ( e.getChildByNumber(i).getChildByNumber(0).getContent().equalsIgnoreCase(Abbr) ){
+			  
+		 if ( e.getChildByNumber(i).getChildByName("IS_PANEL").getContent().equalsIgnoreCase("TRUE") ){
+			 
+			 BATstat = true;
+		 }}}
+		
+		if (BATstat) {}
+		
+		
+		
+		
 		// look up lab batch by loinc code
-		if ( loinc.length() > 1 ){			
-			batRec = LabBat.searchLoinc( loinc );
-			if ( batRec == null ) System.out.println( "loinc code " + loinc + " not found." );
+		if ( Abbr.length() > 1 ){			
+			batRec = LabBat.searchAbbr( Abbr); 
+			//TODO create Bat on the go or find using other method?
+	
+			if ( batRec == null ) System.out.println( "loinc code " + Abbr + " not found." );
 		}
 		
 		//TODO - specimen ID
@@ -593,13 +648,20 @@ public class LabImport {
 		
 		
 		order = new Order();
-		order.entry( date1, batRec, resultStatus, orderID, specID, source, txtSource, condition, txtCondition, provRec, facRec );
+		order.entry( date1, batRec, batDesc, resultStatus, orderID, specID, source, txtSource, condition, txtCondition, provRec, facRec );
 		
 	}
 	
+
 	
-	
-	public void parseNTE( String line ){
+	public void parseNTE( String line, int obxc ){
+		
+		if ( !(obxc == numchck) ){ 
+			
+			NotesList.add(Notess.toString());
+			Notess.setLength(0);
+			
+		}
 		
 		if ( ! line.startsWith( "NTE")) return;
 		System.out.println( "in parseNTE()" );
@@ -616,6 +678,7 @@ public class LabImport {
 		
 									Notess.append(System.getProperty("line.separator"));}
 		
+		numchck = obxc ;
 	}
 	
 	
@@ -675,9 +738,9 @@ public class LabImport {
 		if ( strStatus.startsWith( "I" )) resultStatus = LabResult.ResultStatus.IN_PROGRESS;
 
 		
-		//TODO units
+		//TODO units - check whats wrong 
 		String txtUnits = "";
-		LabObsTbl.Units units = LabObsTbl.Units.get( strUnits );
+		LabObsTbl.Units units = LabObsTbl.Units.get( strUnits.trim() );
 		if (( units == LabObsTbl.Units.NONE ) || ( units == LabObsTbl.Units.UNSPECIFIED )){
 			units = LabObsTbl.Units.NONE;
 			txtUnits = strUnits;
@@ -730,6 +793,7 @@ public class LabImport {
 			
 			lab.setDate( order.date );
 			if ( Rec.isValid( order.batRec )) lab.setLabBatRec( order.batRec );
+			
 			lab.setSpecimenSource( order.source );
 			lab.setSourceText( order.txtSource );
 			lab.setSpecimenCondition( order.condition );
@@ -758,17 +822,17 @@ public class LabImport {
 				note.setNumEdits( 0 );
 				
 				note.setDate( Date.today() );
-				note.setNoteText( Notess.toString().trim());
+				note.setNoteText( NotesList.get(i));
 				
 				lab.setResultNoteReca(note.postNew(patient.ptRec));
 				
 				// post to MrLog
-			    MrLog.postNew( patient.ptRec, Date.today(), "", Notes.getMrLogTypes( noteClass ), lab.getResultNoteReca() );
+			    //MrLog.postNew( patient.ptRec, Date.today(), "", Notes.getMrLogTypes( noteClass ), lab.getResultNoteReca() );
 				// log the action
 				AuditLogger.recordEntry( Notes.getAuditLogActionNew( noteClass ), patient.ptRec, Pm.getUserRec(), lab.getResultNoteReca(), null );
-				
+				 
 				//lab.setResultNoteText(Notes.toString()); 
-				System.out.println(Notess.toString());}
+				System.out.println(NotesList.get(i));}
 			
 			lab.setStatus( LabResult.Status.ACTIVE );
 			lab.setValid( Validity.VALID );

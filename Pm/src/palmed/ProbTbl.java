@@ -27,7 +27,7 @@
 // 134		RECORD	dgnRec;			// Dgn code record
 // 138		RECORD	protocol;		// follow list protocol
 // 142		RECORD	edRec;			// educational link
-// 146		char	resource[40];	// unused
+// 146		char	resource[40];	// The actual file name(String)_(10/22/18)
 // 186		char	unused[69];		// unused
 
 // 255		byte	status;			/*  status byte: 'A' - active, 'I' - inactive, 'R' - removed */

@@ -18,8 +18,8 @@
 
 							<treechildren>
 							
-								<!-- --> <treeitem id="testbtn" label="Testremoteok" /> 
-								<treeitem id="ofvisit" label="Office Visits" />
+								<!--  <treeitem id="testbtn" label="Test" /> 
+								<treeitem id="ofvisit" label="Office Visits" />  -->
 							  	<treeitem id="ptchart" label="PtChart" />
 								<!--<treeitem id="soapsht" label="Soap Sheet" />-->
 								<treeitem id="ptledger" label="PtLedger" />
@@ -108,7 +108,6 @@
 										<treeitem id="stdDict" label="Standard Dictations" />
 										<treeitem label="Lab Setups" open="false" >
 											<treechildren>
-												<treeitem id="labimport" label="Import HL7 Lab" />
 												<treeitem id="labobstbl" label="Lab Observations" />
 												<treeitem id="labbat" label="Lab Battery" />
 												<treeitem id="labfac" label="Lab Facilities" />
@@ -130,9 +129,15 @@
 										
 									</treechildren>
 								</treeitem>
-								<treeitem id="labint" label="Lab Interface" />	
+								 <treeitem  label="Lab" open="true" >
+										 <treechildren>
+												<treeitem id="labint" label="Lab Interface" />
+												<treeitem id="labimport" label="Import HL7 Lab" />
+												<treeitem id="laberr" label="Import Reports" />
+										</treechildren>	
+								</treeitem>
 								<treeitem id="pmimport" label="Import Documents" />
-								<treeitem id="about" label="About PAL/MED" open="true" >
+								<treeitem id="about" label="About PAL/MED" open="false" >
 									<treechildren>
 												<treeitem id="changelog" label="Change-log" />
 												<treeitem id="comings" label="Coming Soon!" />

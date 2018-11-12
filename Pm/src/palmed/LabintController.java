@@ -542,7 +542,9 @@ public class LabintController extends GenericForwardComposer {
 		
 		for ( int i = 0; i < NosChildren; i++){
 		
-		 if ( e.getChildByNumber(i).getChildByNumber(0).getContent().contains(Abbrev) ){
+		 // 11/6 contains versus equals
+		 //if ( e.getChildByNumber(i).getChildByNumber(0).getContent().contains(Abbrev) ){
+		  if ( e.getChildByNumber(i).getChildByNumber(0).getContent().equalsIgnoreCase(Abbrev) ){
 			  
 		 if ( e.getChildByNumber(i).getChildByName("HAS_AOE").getContent().equalsIgnoreCase("TRUE") ){
 			 
@@ -620,7 +622,10 @@ public class LabintController extends GenericForwardComposer {
 		
 		 for ( int i = 0; i < NosChildren; i++){
 			 
-			 if ( e.getChildByNumber(i).getChildByNumber(0).getContent().contains(Abbrev) ){
+			 //11/6 Contains vs equals
+			 // if ( e.getChildByNumber(i).getChildByNumber(0).getContent().contains(Abbrev) ){
+			 if ( e.getChildByNumber(i).getChildByNumber(0).getContent().equalsIgnoreCase(Abbrev) ){
+				 
 				 //System.out.println("rescode alpha: "+ e.getChildByNumber(i).getChildByNumber(1).getContent());
 				 	Caption = e.getChildByNumber(i).getChildByNumber(0).getContent();
 				 	Res_Code = e.getChildByNumber(i).getChildByNumber(1).getContent();
@@ -1376,7 +1381,7 @@ public class LabintController extends GenericForwardComposer {
 		
 		StringBuilder IN = new StringBuilder();
 		
-		IN.append(in+Integer.toString(n)+pipe+Integer.toString(n)+pipe+pipe+abbr+pipe+coname+pipe+address+pipe+pipe+insnum+StringUtils.repeat(pipe,8)+name+pipe+
+		IN.append(in+Integer.toString(n)+pipe+Integer.toString(n)+pipe+pipe+abbr+pipe+coname+pipe+address+pipe+pipe+pipe+insnum+StringUtils.repeat(pipe,8)+name+pipe+
 				i17+pipe+ptdob+pipe+dirPt.getAddress().getPrintableAddress(4)+StringUtils.repeat(pipe,3)+Integer.toString(n)+StringUtils.repeat(pipe,14)+policynum+System.getProperty("line.separator"));
 		
 		StringBuilder INtxt = new StringBuilder();
@@ -1562,8 +1567,9 @@ public class LabintController extends GenericForwardComposer {
 			 Li01.setParent(row);
 			 
 			 for ( int i =0; i < NosChildren; i++ ){ 
-				 
-			  if ( e.getChildByNumber(i).getChildByNumber(0).getContent().contains( Abbrev ) && e.getChildByNumber(i).getChildByNumber(1).getContent().contains( Res_Code ) ) {
+				
+				 // Contains vs equals
+			  if ( e.getChildByNumber(i).getChildByNumber(0).getContent().equalsIgnoreCase( Abbrev ) && e.getChildByNumber(i).getChildByNumber(1).getContent().contains( Res_Code ) ) {
 				  
 				  XMLElement Item = new XMLElement();
 				  Item = e.getChildByNumber(i);

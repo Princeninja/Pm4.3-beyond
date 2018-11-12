@@ -10,10 +10,10 @@
 <space /> -->
 <hbox><label value="To" style="font-size:20px" /><label value="Palmed the" style="font-size:20px" /><label value="Compleat" style="font-size:20px;font-style:italic" /><label value="Medical Office System" style="font-size:20px" /></hbox>
 <space />
-<label value="Pm 4.3 (See Change-log)" style="font-size:normal" />
+<label value="Pm 4.29 (See Change-log)" style="font-size:normal" />
 <label value="Copyright (c) 2011 by PAL/MED Development Corporation" style="font-size:normal" />
 <space />
-<timer id="welcometimer" delay="750" onTimer="WelcomeWin.detach();" />
+<timer id="welcometimer" delay="450" onTimer="WelcomeWin.detach();" />
 <button id="close" label="Thank You." onClick="WelcomeWin.detach();" />
 </vbox>
 </window>
