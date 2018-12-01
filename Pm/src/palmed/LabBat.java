@@ -33,6 +33,7 @@ import usrlib.ZkTools;
 // 86	RECORD	obsRecs[32];		/*  records of observations  */
 //
 // 214	char	unused[40];			/*  unused for now  */
+// 
 //
 // 254	byte	Status;				// status flag
 // 255	byte	Valid;				/* validity byte  */
@@ -392,11 +393,6 @@ public class LabBat {
      	rec.toInt( dataStruct, 86 + (i * 4));
     	return ;
     }
-
-
-    
-    
-    
 
 
 

@@ -57,7 +57,8 @@ import usrlib.ZkTools;
 // 98	Reca	conditionTextReca;
 // 102	Rec		labFacilityRec;		// lab facility test was done at
 //
-// 106	char	unused[20];			/*  unused for now  */
+// 106	char	unused[5];			/*  unused for now  */
+// 111  char    miscabbr[15]        /* abbr for a non-panel Battery */    
 //
 // 126	byte	Status;				// status flag
 // 127	byte	Valid;				/* validity byte  */
@@ -771,7 +772,32 @@ public class LabResult implements LLItem {
     }
 
 
+// char	miscabbr[15];		// misc abbreviation, offset 111
     
+    /**
+     * getmiscAbbr()
+     * 
+     * Get misc abbreviation from dataStruct.
+     * 
+     * @param none
+     * @return String
+     */
+    public String getmiscAbbr(){
+    	return StructHelpers.getString( dataStruct, 111, 15 ).trim();
+    }
+
+    /**
+     * setmiscAbbr()
+     * 
+     * Set misc  abbreviation in dataStruct.
+     * 
+     * @param String
+     * @return void
+     */
+    public void setmiscAbbr( String s ){
+    	StructHelpers.setStringPadded( s, dataStruct, 111, 15 );
+    	return ;
+    }
     
     
 

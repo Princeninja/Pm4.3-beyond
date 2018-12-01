@@ -19,6 +19,9 @@
 package palmed;
 
 
+import java.io.File;
+import java.io.FilenameFilter;
+import java.io.IOException;
 import java.math.BigDecimal;
 import java.util.Arrays;
 import java.util.Collection;
@@ -29,6 +32,8 @@ import java.util.Set;
 
 import javax.mail.Flags;
 
+import org.apache.commons.io.FileUtils;
+import org.zkoss.util.media.AMedia;
 import org.zkoss.util.resource.Labels;
 
 import org.zkoss.zk.ui.Component;
@@ -49,6 +54,7 @@ import org.zkoss.zul.Checkbox;
 import org.zkoss.zul.Div;
 import org.zkoss.zul.Groupbox;
 import org.zkoss.zul.Hbox;
+import org.zkoss.zul.Iframe;
 import org.zkoss.zul.Menubar;
 import org.zkoss.zul.Menuitem;
 import org.zkoss.zul.Messagebox;
@@ -423,7 +429,11 @@ public class MainMenuController extends GenericForwardComposer  {
 			
 			createFAQWin();
 			
-		} else {
+		}else if ( itemID.equals( "laberr" )){
+			
+			createlaberrWin();
+			
+		}else {
 			
 			// if empty, assume category - toggle open state
 			if ( ! i.isEmpty()){
@@ -1252,7 +1262,80 @@ public class MainMenuController extends GenericForwardComposer  {
 			return;
 	}
 
+	/**
+	 * Print Most Recent Lab(Error) Report
+	 */
+
+	public void createlaberrWin(){
+		showlaberrWin();
+	}
 	
+	public void showlaberrWin(){
+		StringBuilder sb = new StringBuilder();
+		
+		File errrpt = new File( Pm.getOvdPath() + File.separator + "LabErr");
+		
+		File[] matchingfiles = errrpt.listFiles(new FilenameFilter() { 
+			
+			public boolean accept(File visits, String name){
+				return name.startsWith("lab")&& name.endsWith(".html");
+			}
+			
+		});
+		
+		int mflength = matchingfiles.length;
+		System.out.println("number of files : " + mflength  );
+		
+		if ( mflength > 0 ) { 
+			
+			String errr = matchingfiles[ mflength-1 ].getPath();
+			String putData = "";
+			
+			File errfile = new File(errr);
+			
+			try {
+				 putData = FileUtils.readFileToString( errfile );
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		
+		
+		//String toperrhtml = putData.toString();
+		//sb.append( toperrhtml );
+		
+		/*sb.append(System.getProperty("line.separator"));
+		sb.append("</body>");
+		sb.append(System.getProperty("line.separator"));
+		sb.append("</HTML>");*/
+		
+		sb.append("<!-- <p>ZCC</p> -->");
+		// javascript to print the report
+		sb.append( "<script type='text/javascript' defer='true' >" );
+		sb.append( "window.focus();window.print();window.close();" );
+		sb.append( "</script>" );
+
+		/*sb.append( "</BODY>" );
+		sb.append( "</HTML>" );*/
+		
+		//String html = sb.toString();
+		System.out.println("sb String is: "+sb.toString());
+		putData = putData.replace("<p>ZCC</p>", sb.toString());
+		
+		// Wrap HTML in AMedia object
+		AMedia amedia = new AMedia( "print.html", "html", "text/html;charset=UTF-8", putData );
+		
+		// Create Iframe and pass it amedia object (HTML report)
+		Iframe iframe = new Iframe();
+		iframe.setHeight( "1px" );
+		iframe.setWidth( "1px" );
+		iframe.setContent( amedia );
+		iframe.setParent( mainMenuWindow );
+		
+	}
+		
+			return;
+	}
 	
 	/**
 	 * Create Browser Window

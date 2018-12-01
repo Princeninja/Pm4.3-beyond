@@ -159,7 +159,7 @@ public class LabintController extends GenericForwardComposer {
 		//NteNotes.setValue("");
 		ZkTools.setListboxSelectionByLabel(lboxProv, null);
 		Stat.setChecked(false);
-		
+		ReqStr = "";
 		
 		refreshTestList( null );
 		refreshPanelList( null );

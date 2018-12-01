@@ -111,6 +111,7 @@
 												<treeitem id="labobstbl" label="Lab Observations" />
 												<treeitem id="labbat" label="Lab Battery" />
 												<treeitem id="labfac" label="Lab Facilities" />
+												<treeitem id="laberr" label="Lab Import Reports" />
 											</treechildren>
 										</treeitem>
 										
@@ -133,7 +134,6 @@
 										 <treechildren>
 												<treeitem id="labint" label="Lab Interface" />
 												<treeitem id="labimport" label="Import HL7 Lab" />
-												<treeitem id="laberr" label="Import Reports" />
 										</treechildren>	
 								</treeitem>
 								<treeitem id="pmimport" label="Import Documents" />

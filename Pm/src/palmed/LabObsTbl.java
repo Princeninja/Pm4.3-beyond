@@ -915,7 +915,17 @@ public class LabObsTbl {
     	dataStruct[255] = (byte)( valid.getCode() & 0xff );
     }
 
-
+    /**
+     * setHidden()
+     * 
+     */
+    public void setHidden(){ dataStruct[255] = (byte)( Validity.HIDDEN.getCode() & 0xff );}
+    
+    /**
+     * isHidden()
+     */
+    public boolean isHidden() { return ( Validity.get( (int) dataStruct[255] ) == Validity.HIDDEN ); }
+    
     
     
     
@@ -1162,6 +1172,8 @@ public class LabObsTbl {
 		
 		return obsRec;
     }
+
+	
     
     
     

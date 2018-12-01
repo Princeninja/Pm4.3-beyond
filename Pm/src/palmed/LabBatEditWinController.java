@@ -217,6 +217,7 @@ public class LabBatEditWinController extends GenericForwardComposer {
 		if ( operation == EditPt.Operation.NEWPT ){
 
 			// new probTbl entry
+	
 			labBatRec = p.writeNew();
 			System.out.println( "new LabBat entry created rec=" + labBatRec.toString());
 						
