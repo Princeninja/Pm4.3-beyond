@@ -506,7 +506,7 @@ public class PtChartController extends GenericForwardComposer {
 		// pass parameters to new window
 		Map<String, Object> myMap = new HashMap<String, Object>();
 		myMap.put( "ptRec", (Rec)(ptRec ));
-		return (Window) Executions.createComponents("labs.zul", tp_lab, myMap );
+		return (Window) Executions.createComponents("labsn.zul", tp_lab, myMap );
 	}
 	
 	

@@ -12,13 +12,13 @@
 
 		<listbox id="listbox" >
 			<listhead>
-				<listheader width="80px" label="Date" sort="auto" />
-				<listheader width="120px" label="Battery" sort="auto" />
+		<!-- 	<listheader width="80px" label="Date" sort="auto" />
+				<listheader width="120px" label="Battery" sort="auto" /> -->
 				<listheader width="120px" label="Observation" sort="auto" />
 				<listheader label="Result" sort="auto" />
 				<listheader width="60px" label="Flag" />
 				<listheader width="60px" label="Status" />
-				<listheader width="80px" label="Condition" />
+		  <!--  <listheader width="80px" label="Condition" />  -->
 			</listhead>
 		</listbox>
 	</hbox>

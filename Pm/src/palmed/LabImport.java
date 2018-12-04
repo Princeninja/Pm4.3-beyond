@@ -681,7 +681,11 @@ public class LabImport {
 		String name[] = strprovider.split( "\\^", prh-1 );
 		
 		errpt.append(System.getProperty("line.separator"));
-		errpt.append("<td><b>Provider:</b> "+name[2]+","+name[3]+","+name[1]+" </td></tr>");
+		String namee ="";
+		if ( name[3].length() == 0 || name[3] == null ){
+			namee = name[2]+","+name[1];			
+		}else { namee = name[2]+","+name[3]+","+name[1]; }		
+		errpt.append("<td><b>Provider:</b> "+ namee +" </td></tr>");
 		errpt.append(System.getProperty("line.separator"));
 		errpt.append("</table> ");
 		errpt.append(System.getProperty("line.separator"));
@@ -825,6 +829,8 @@ public class LabImport {
 		
 		order = new Order();
 		order.entry( date1, batRec, miscabbr, resultStatus, orderID, specID, source, txtSource, condition, txtCondition, provRec, facRec );
+		System.out.println("batrec, miscabbr: "+batRec+","+miscabbr);
+		MrLog.postNew( patient.ptRec, Date.today(), "", MrLog.Types.LAB_NOTE, null );
 		
 	}
 	

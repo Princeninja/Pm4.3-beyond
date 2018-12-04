@@ -1,0 +1,45 @@
+<?page title="Labsn" contentType="text/html;charset=UTF-8"?>
+<zk>
+<window border="none" vflex="1" hflex="1" >
+	<window id="labsnWin" border="none" mode="embedded" vflex="1" hflex="1" apply="palmed.LabsWinController">
+	
+	<borderlayout>			
+		<west width="40%" splittable="true" collapsible="true" >
+		
+	
+	<hbox>
+		<vbox>
+			<button id="btnView" label="View Panel" width="80px" />
+			
+		</vbox>
+
+		<listbox id="listboxn" >
+			<listhead>
+				<listheader width="85px" label="Date uploaded" sort="auto" />
+				<listheader width="120px" label="Battery" sort="auto" />
+				<listheader width="120px" label="Number of Tests" sort="auto" />
+			<!-- 	<listheader label="Result" sort="auto" />
+				<listheader width="60px" label="Flag" /> -->
+				<listheader width="60px" label="Final(s)" />
+				<!--  <listheader width="80px" label="Condition" /> -->
+			</listhead>
+		</listbox>
+	</hbox>
+  		</west>
+				
+				
+	<center flex="true" >
+		
+		<vbox>				
+		<!-- <textbox id="noteTextbox"  rows="2"  width="900px" height="625px" />-->
+		<groupbox id="gbObs" mold="default" vflex="1" hflex="2" style="overflow:auto">
+			<caption label="Obs-Window" />
+						
+		</groupbox>
+		</vbox>
+						
+	</center>
+	</borderlayout>
+	</window>
+</window>
+</zk>

@@ -22,7 +22,7 @@ import usrlib.Rec;
 import usrlib.Reca;
 import usrlib.ZkTools;
 
-public class LabsWinController extends GenericForwardComposer {
+public class labsnWinController extends GenericForwardComposer {
 
 	Window labsWin;					// autowired
 	Window labsnWin;					// autowired
@@ -45,7 +45,7 @@ public class LabsWinController extends GenericForwardComposer {
 
 	
 	public void doAfterCompose( Component component ){
-		
+		System.out.println("here?");
 		// Call superclass to do autowiring
 		try {
 			super.doAfterCompose( component );
@@ -76,25 +76,20 @@ public class LabsWinController extends GenericForwardComposer {
 
 		refreshListn();
 		
-		
-		// register callback with Notifier
+		/*// register callback with Notifier
 		Notifier.registerCallback( new NotifierCallback (){
 				public boolean callback( Rec ptRec, Notifier.Event event ){
 					refreshListn();
 					return false;
-				}}, ptRec, Notifier.Event.LAB );
+				}}, ptRec, Notifier.Event.LAB );*/
 		return;
 	}
 	
 	
 	public void refreshListn(){
 		
-		// clear listbox and Lists
+		// clear listbox
 		ZkTools.listboxClear( listboxn );
-		Flags.clear();
-		NumTsts.clear();
-		BatList.clear();
-		obsstrList.clear();
 		
 		// populate list
 		DirPt dirPt = new DirPt( ptRec );
@@ -118,23 +113,14 @@ public class LabsWinController extends GenericForwardComposer {
 				if ( Rec.isValid( batRec )){
 					LabBat bat = new LabBat( batRec );
 					strBat = bat.getDesc();
-					if ( BatList.size() == 0) {
-						
-						BatList.add(strBat);
-						
-					}
-					
-					else {for ( int i = 0; i < BatList.size(); i++ ){
-						System.out.println("size of BL is: "+BatList.size());
-						if ((BatList.size()== 0)||!( strBat.equals(BatList.get(i))) ){
-						System.out.println("new bat");
+					for ( int i = 0; i < BatList.size(); i++ ){
+						if (! strBat.equals(BatList.get(i)) ){
 						NumTsts.add(NumTst);
 						Flags.add(Flag);
 						BatList.add(strBat);
 						NumTst = 0; Flag = 0;
 					  }
 					}
-				  }
 				}
 				
 				
@@ -167,17 +153,14 @@ public class LabsWinController extends GenericForwardComposer {
 				obzlist[4] = reca.toString();
 				obzlist[5] = strBat;
 				obsstrList.add(obzlist);
-				System.out.println("end of for loop");
 			}
 			
-			System.out.println("reca end");
+			
 			// get next reca in list	
 			reca = lab.getLLHdr().getLast();
 		}
-		
-		
 		for ( int j=0; j<BatList.size(); j++ ){
-		System.out.println("lisboxn");
+		
 		// create new Listitem and add cells to it
 		Listitem i;
 		(i = new Listitem()).setParent( listboxn );
@@ -186,13 +169,12 @@ public class LabsWinController extends GenericForwardComposer {
 		new Listcell( Tdate.getPrintable()).setParent( i );
 		
 		new Listcell( BatList.get(j) ).setParent( i );
-		new Listcell( Integer.toString(NumTsts.get(j)) ).setParent( i );
-		new Listcell( Integer.toString(Flags.get(j)) + "/" + Integer.toString(NumTsts.get(j)) ).setParent( i );
+		new Listcell( Integer.toString(NumTsts.get(j+1)) ).setParent( i );
+		new Listcell( Integer.toString(Flags.get(j+1)) + "/" + Integer.toString(NumTsts.get(j+1)) ).setParent( i );
 		
 		i.setValue(BatList.get(j));
 		
 		}
-		System.out.println("skip?");
 		return;
 	}
 	
@@ -240,14 +222,13 @@ public class LabsWinController extends GenericForwardComposer {
 	
 	public void onClick$btnView() {
 		
-		if ( listboxn.getSelectedCount() < 1 ){
+		if ( listbox.getSelectedCount() < 1 ){
 			DialogHelpers.Messagebox( "No item selected. Please select A panel." );
 			return;
 		}
 		
 		String BatStr = (String)listboxn.getSelectedItem().getValue();
 		if (BatStr.length() >0 ) {
-			System.out.println("BatStr is: "+BatStr+","+labsWin);
 			
 			labsWin.setParent( gbObs );
 			labsWin.doOverlapped();
@@ -396,69 +377,15 @@ public class LabsWinController extends GenericForwardComposer {
 
 }
 
-
-/* vintage Refresh List 
-public void refreshList(){
-
-// clear listbox
-ZkTools.listboxClear( listbox );
-
-// populate list
-DirPt dirPt = new DirPt( ptRec );
-MedPt medPt = new MedPt( dirPt.getMedRec());
-Reca reca = medPt.getLabResultReca();
-
-// finished if there are no entries to read
-if ( ! Reca.isValid( reca )) return;
-
-for ( ; reca.getRec() != 0; ){
-	
-	LabResult lab = new LabResult( reca );
-	
-	// display this one?
-	if ( lab.getStatus() == LabResult.Status.ACTIVE ){
-	
-		String strBat = "";
-		Rec batRec = lab.getLabBatRec();
-		if ( Rec.isValid( batRec )){
-			LabBat bat = new LabBat( batRec );
-			strBat = bat.getDesc();
-		}
-		
-		String strObs = "";
-		LabObsTbl obs = new LabObsTbl( lab.getLabObsRec());
-		strObs = obs.getDesc();
-		
-		String strResult = lab.getResult();
-		String strUnits = obs.getCodedUnits().getLabel();
-		if (( strUnits == null ) || ( strUnits.length() < 1 )) strUnits = obs.getUnitsText();
-		
-		// create new Listitem and add cells to it
-		Listitem i;
-		(i = new Listitem()).setParent( listbox );
-		new Listcell( lab.getDate().getPrintable(9)).setParent( i );
-		
-		new Listcell( strBat ).setParent( i );
-		new Listcell( strObs ).setParent( i );
-		new Listcell( strResult + " " + strUnits ).setParent( i );
-		
-		new Listcell( lab.getAbnormalFlag().getLabel()).setParent( i );
-		new Listcell( lab.getResultStatus().getLabel()).setParent( i );
-		
-		String strCondition = lab.getSpecimenCondition().getLabel();
-		if ( strCondition.length() < 1 ) strCondition = lab.getConditionText();
-		new Listcell( strCondition ).setParent( i );
-		
-		// store PAR reca in listitem's value
-		i.setValue( reca );
-	}
 	
 	
-	// get next reca in list	
-	reca = lab.getLLHdr().getLast();
-}
+	
+	
+	
+	
+	
+	
+	
+	
+	
 
-
-return;
-}
-*/
