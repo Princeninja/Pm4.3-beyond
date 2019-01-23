@@ -13,7 +13,7 @@
 			<rows>
 				<row>
 					Abbreviation
-					<textbox id="stdDictAbbr" width="300px" />
+					<textbox id="stdDictAbbr" width="300px" rows="2" />
 				</row>
 				<row if="${arg.flgPerms}">
 					<label value="Status" />
@@ -28,19 +28,19 @@
 
 				<row>
 					Subjective
-					<textbox id="stdDictSubjective" width="100%" />
+					<textbox id="stdDictSubjective" width="100%" rows="5" />
 				</row>
 				<row>
 					Objective
-					<textbox id="stdDictObjective" width="100%" />
+					<textbox id="stdDictObjective" width="100%" rows="5" />
 				</row>
 				<row>
 					Assessment
-					<textbox id="stdDictAssessment" width="100%" />
+					<textbox id="stdDictAssessment" width="100%" rows="5" />
 				</row>
 				<row>
 					Plan
-					<textbox id="stdDictPlan" width="100%" />
+					<textbox id="stdDictPlan" width="100%" rows="5"/>
 				</row>
 
 			</rows>

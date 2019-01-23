@@ -8,12 +8,14 @@ import org.zkoss.util.media.AMedia;
 import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.Execution;
 import org.zkoss.zk.ui.Executions;
+import org.zkoss.zk.ui.event.Event;
 import org.zkoss.zk.ui.util.GenericForwardComposer;
 import org.zkoss.zul.Groupbox;
 import org.zkoss.zul.Iframe;
 import org.zkoss.zul.Listbox;
 import org.zkoss.zul.Listcell;
 import org.zkoss.zul.Listitem;
+import org.zkoss.zul.Messagebox;
 import org.zkoss.zul.Window;
 
 import usrlib.Date;
@@ -32,24 +34,21 @@ public class labsnWinController extends GenericForwardComposer {
 	
 	
 	private Rec	ptRec;		// patient record number
-
+	private List<String[]> obsstrList; 
+	private String BatStr;
 
 	
-	List<String> BatList = new ArrayList<String>();
-	//final List<String[]> batstrList = new ArrayList<String[]>();
-	final List<String[]> obsstrList = new ArrayList<String[]>();
-	///Integer NumTsts,Flags = 0;
-	final List<Integer> NumTsts = new ArrayList<Integer>();
-	final List<Integer> Flags = new ArrayList<Integer>();
+	
 	
 
 	
+	@SuppressWarnings("unchecked")
 	public void doAfterCompose( Component component ){
-		System.out.println("here?");
+		//System.out.println("here?");
 		// Call superclass to do autowiring
 		try {
 			super.doAfterCompose( component );
-			System.out.println("here with component:"+component);
+			//System.out.println("here with component:"+component);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -63,6 +62,8 @@ public class labsnWinController extends GenericForwardComposer {
 			Map myMap = exec.getArg();
 			if ( myMap != null ){
 				try{ ptRec = (Rec) myMap.get( "ptRec" ); } catch ( Exception e ) { /* ignore */ };
+				try{ obsstrList = (List<String[]>) myMap.get( "obsstrList" ); } catch ( Exception e ) { /* ignore */ };
+				try{ BatStr = (String) myMap.get( "BatStr" ); } catch ( Exception e ) { /* ignore */ };
 			}
 		}
 		
@@ -74,111 +75,16 @@ public class labsnWinController extends GenericForwardComposer {
 			ptRec = new Rec( 2 );		// default for testing
 		}
 
-		refreshListn();
+		refreshList(BatStr);
 		
-		/*// register callback with Notifier
+		// register callback with Notifier
 		Notifier.registerCallback( new NotifierCallback (){
 				public boolean callback( Rec ptRec, Notifier.Event event ){
-					refreshListn();
+					refreshList(BatStr);
 					return false;
-				}}, ptRec, Notifier.Event.LAB );*/
+				}}, ptRec, Notifier.Event.LAB );
 		return;
 	}
-	
-	
-	public void refreshListn(){
-		
-		// clear listbox
-		ZkTools.listboxClear( listboxn );
-		
-		// populate list
-		DirPt dirPt = new DirPt( ptRec );
-		MedPt medPt = new MedPt( dirPt.getMedRec());
-		Reca reca = medPt.getLabResultReca();
-
-		// finished if there are no entries to read
-		if ( ! Reca.isValid( reca )) return;
-		
-		Integer NumTst = 0,Flag = 0;
-		
-		for ( ; reca.getRec() != 0; ){
-			
-			LabResult lab = new LabResult( reca );
-			
-			// display this one?
-			if ( lab.getStatus() == LabResult.Status.ACTIVE ){
-			
-				String strBat = "";
-				Rec batRec = lab.getLabBatRec();
-				if ( Rec.isValid( batRec )){
-					LabBat bat = new LabBat( batRec );
-					strBat = bat.getDesc();
-					for ( int i = 0; i < BatList.size(); i++ ){
-						if (! strBat.equals(BatList.get(i)) ){
-						NumTsts.add(NumTst);
-						Flags.add(Flag);
-						BatList.add(strBat);
-						NumTst = 0; Flag = 0;
-					  }
-					}
-				}
-				
-				
-				String[] obzlist = new String[] {"","","","","",""};
-				
-				String strObs = "";
-				LabObsTbl obs = new LabObsTbl( lab.getLabObsRec());
-				NumTst = NumTst + 1;
-				strObs = obs.getDesc();
-				obzlist[0] = strObs;
-				String strResult = lab.getResult();
-				
-				String strUnits = obs.getCodedUnits().getLabel();
-				obzlist[1] = strResult + " " + strUnits;
-				if (( strUnits == null ) || ( strUnits.length() < 1 )) strUnits = obs.getUnitsText();
-				
-				
-				
-				//new Listcell( lab.getAbnormalFlag().getLabel()).setParent( i );
-				obzlist[2] = lab.getAbnormalFlag().getLabel();
-				//new Listcell( lab.getResultStatus().getLabel()).setParent( i );
-				obzlist[3] = lab.getResultStatus().getLabel();
-				if ( obzlist[3].contains("Final") ) { ++Flag; }
-				String strCondition = lab.getSpecimenCondition().getLabel();
-				//if ( strCondition.length() < 1 ) strCondition = lab.getConditionText();
-				//new Listcell( strCondition ).setParent( i );
-				
-				// store PAR reca in listitem's value
-				//i.setValue( reca );
-				obzlist[4] = reca.toString();
-				obzlist[5] = strBat;
-				obsstrList.add(obzlist);
-			}
-			
-			
-			// get next reca in list	
-			reca = lab.getLLHdr().getLast();
-		}
-		for ( int j=0; j<BatList.size(); j++ ){
-		
-		// create new Listitem and add cells to it
-		Listitem i;
-		(i = new Listitem()).setParent( listboxn );
-		Date Tdate = usrlib.Date.today();
-		
-		new Listcell( Tdate.getPrintable()).setParent( i );
-		
-		new Listcell( BatList.get(j) ).setParent( i );
-		new Listcell( Integer.toString(NumTsts.get(j+1)) ).setParent( i );
-		new Listcell( Integer.toString(Flags.get(j+1)) + "/" + Integer.toString(NumTsts.get(j+1)) ).setParent( i );
-		
-		i.setValue(BatList.get(j));
-		
-		}
-		return;
-	}
-	
-	
 	
 	
 	
@@ -198,12 +104,30 @@ public class labsnWinController extends GenericForwardComposer {
 				// create new Listitem and add cells to it
 				Listitem i;
 				(i = new Listitem()).setParent( listbox );
+				if ( obs[2].contains("Abnormal") || obs[2].contains("High") || obs[2].contains("Low")  ){
+					//System.out.println("AB here:");
+									
+					Listcell Date = new Listcell( obs[0] );
+					//Date.setStyle("color:red;");
+					Date.setParent( i );
+					
+					new Listcell( obs[1] ).setParent( i );
+					new Listcell( obs[7] ).setParent( i );
+					new Listcell( obs[2] ).setParent( i );
+					new Listcell( obs[3] ).setParent( i );
+					
+					i.setStyle("color:red");
+				}
+				else {
 				new Listcell( obs[0] ).setParent( i );
-				
 				new Listcell( obs[1] ).setParent( i );
+				new Listcell( obs[7] ).setParent( i );
 				new Listcell( obs[2] ).setParent( i );
-				new Listcell( obs[3] ).setParent( i );
+				new Listcell( obs[3] ).setParent( i ); 
+				//i.setStyle("color:blue;");
+				}
 				
+			
 				Reca obsreca = new Reca(); 
 				obsreca = Reca.fromString(obs[4]);
 				// store PAR reca in listitem's value
@@ -220,23 +144,6 @@ public class labsnWinController extends GenericForwardComposer {
 	}
 	
 	
-	public void onClick$btnView() {
-		
-		if ( listbox.getSelectedCount() < 1 ){
-			DialogHelpers.Messagebox( "No item selected. Please select A panel." );
-			return;
-		}
-		
-		String BatStr = (String)listboxn.getSelectedItem().getValue();
-		if (BatStr.length() >0 ) {
-			
-			labsWin.setParent( gbObs );
-			labsWin.doOverlapped();
-			refreshList( BatStr );
-		}
-		
-		
-	}
 	
 	public void onClick$btnAdd(){
 		
@@ -245,6 +152,8 @@ public class labsnWinController extends GenericForwardComposer {
 		//refreshList();
 		return;
 	}
+	
+	public void onDoubleClick( Event ev ){  onClick$btnEdit(); }
 	
 	public void onClick$btnEdit(){
 		
@@ -266,10 +175,23 @@ public class labsnWinController extends GenericForwardComposer {
 	}
 	
 	
-	
-	
-	
-	
+	public void onClick$btnCancel( Event e ) throws InterruptedException{
+		
+		if ( Messagebox.show( "Leave this Battery View ?", "Leave?", Messagebox.YES | Messagebox.NO, Messagebox.QUESTION ) == Messagebox.YES ){			
+			closeWin();
+		}		
+		return;
+	}
+		
+	private void closeWin(){		
+		// close Win
+		
+		//LabsWinController lwc = new LabsWinController();
+		//lwc.onnull(labsnWin);
+		labsnWin.detach();
+		
+		return;
+	}
 	
 	public void onClick$btnRemove(){
 		

@@ -1,6 +1,7 @@
 package palmed;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -8,11 +9,13 @@ import org.zkoss.util.media.AMedia;
 import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.Execution;
 import org.zkoss.zk.ui.Executions;
+import org.zkoss.zk.ui.event.Event;
 import org.zkoss.zk.ui.util.GenericForwardComposer;
 import org.zkoss.zul.Groupbox;
 import org.zkoss.zul.Iframe;
 import org.zkoss.zul.Listbox;
 import org.zkoss.zul.Listcell;
+import org.zkoss.zul.Listheader;
 import org.zkoss.zul.Listitem;
 import org.zkoss.zul.Window;
 
@@ -29,13 +32,13 @@ public class LabsWinController extends GenericForwardComposer {
 	private Listbox listbox;		// autowired - pars listbox
 	private Listbox listboxn;		// autowired - pars listbox
 	private Groupbox gbObs;         // autowired -Groupbox
-	
+	private Listheader Orddate;         // autowired -Groupbox
 	
 	private Rec	ptRec;		// patient record number
 
 
 	
-	List<String> BatList = new ArrayList<String>();
+	final List<String[]> BatList = new ArrayList<String[]>();
 	//final List<String[]> batstrList = new ArrayList<String[]>();
 	final List<String[]> obsstrList = new ArrayList<String[]>();
 	///Integer NumTsts,Flags = 0;
@@ -49,7 +52,7 @@ public class LabsWinController extends GenericForwardComposer {
 		// Call superclass to do autowiring
 		try {
 			super.doAfterCompose( component );
-			System.out.println("here with component:"+component);
+			//System.out.println("here with component:"+component);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -104,12 +107,14 @@ public class LabsWinController extends GenericForwardComposer {
 		// finished if there are no entries to read
 		if ( ! Reca.isValid( reca )) return;
 		
-		Integer NumTst = 0,Flag = 0;
+		Integer NumTst = 0,Flag = 0, Dupat = 0, numobxs = 0;
+		//String[] batlist = new String[] {"",""};
 		
 		for ( ; reca.getRec() != 0; ){
 			
 			LabResult lab = new LabResult( reca );
-			
+			boolean Duplicate  = false;
+			++numobxs;
 			// display this one?
 			if ( lab.getStatus() == LabResult.Status.ACTIVE ){
 			
@@ -118,47 +123,85 @@ public class LabsWinController extends GenericForwardComposer {
 				if ( Rec.isValid( batRec )){
 					LabBat bat = new LabBat( batRec );
 					strBat = bat.getDesc();
-					if ( BatList.size() == 0) {
-						
-						BatList.add(strBat);
-						
-					}
-					
-					else {for ( int i = 0; i < BatList.size(); i++ ){
-						System.out.println("size of BL is: "+BatList.size());
-						if ((BatList.size()== 0)||!( strBat.equals(BatList.get(i))) ){
-						System.out.println("new bat");
-						NumTsts.add(NumTst);
-						Flags.add(Flag);
-						BatList.add(strBat);
-						NumTst = 0; Flag = 0;
-					  }
-					}
-				  }
+					//System.out.println("strbat Alpha: "+ strBat);
+				}else{
+					//System.out.println("here cos not valid batRec");
+					strBat = lab.getmiscAbbr();
+					//System.out.println("Misc is now?: "+ strBat+","+ strBat.length());
 				}
 				
 				
-				String[] obzlist = new String[] {"","","","","",""};
+				if (strBat.length() < 1 || strBat == null ) { strBat = "Misc"; }	
+				
+				if ( BatList.size() == 0) {
+						String[] battlist = new String[] {"","",};
+						
+						battlist[0] = lab.getDate().getPrintable();
+						//System.out.println("strBat is: "+strBat);
+						battlist[1] =(strBat);
+						BatList.add(battlist);
+						
+				}else {						
+						
+						for ( int i = 0; i < BatList.size(); i++ ){
+							
+						if (  (lab.getDate().getPrintable().equals(BatList.get(i)[0])) && (strBat.equals(BatList.get(i)[1]))  ) {  
+							
+							//System.out.println("Bat i is: "+ BatList.get(i));
+							Dupat = i ;
+							Duplicate = true;
+						}
+							
+						}
+						
+						//System.out.println("size of BL is: "+BatList.size());
+						
+						if (!Duplicate) {
+							
+						//System.out.println("new bat, NumTst, Flag: "+NumTst+","+Flag);
+						NumTsts.add(1);
+						Flags.add(1);
+						
+						String[] battlist = new String[] {"","",};
+						
+						//System.out.println("strBat 2: "+strBat);
+						battlist[0] = lab.getDate().getPrintable();
+						battlist[1] =(strBat);
+						BatList.add(battlist);
+						
+						NumTst = 0; Flag = 0;
+						
+					}
+					
+				  }
+				
+				
+				
+				String[] obzlist = new String[] {"","","","","","","","",};
 				
 				String strObs = "";
 				LabObsTbl obs = new LabObsTbl( lab.getLabObsRec());
 				NumTst = NumTst + 1;
 				strObs = obs.getDesc();
+				//System.out.println("obs stuff:"+obs.getDesc()+","+ obs.getAbbr()+","+obs.getLOINC()+","+obs.getRec());
 				obzlist[0] = strObs;
 				String strResult = lab.getResult();
 				
-				String strUnits = obs.getCodedUnits().getLabel();
+				String strUnits = lab.getUnitsText();
+				
+				//if (( strUnits == null ) || ( strUnits.length() < 1 )){ 
+				//obs.getCodedUnits().getLabel();
+				//strUnits = lab.getUnitsText();}
+				
+				//System.out.println("strunits are: "+ lab.getTime()+","+ lab.getUnitsText());
+				
 				obzlist[1] = strResult + " " + strUnits;
-				if (( strUnits == null ) || ( strUnits.length() < 1 )) strUnits = obs.getUnitsText();
-				
-				
-				
 				//new Listcell( lab.getAbnormalFlag().getLabel()).setParent( i );
 				obzlist[2] = lab.getAbnormalFlag().getLabel();
 				//new Listcell( lab.getResultStatus().getLabel()).setParent( i );
 				obzlist[3] = lab.getResultStatus().getLabel();
 				if ( obzlist[3].contains("Final") ) { ++Flag; }
-				String strCondition = lab.getSpecimenCondition().getLabel();
+				//String strCondition = lab.getSpecimenCondition().getLabel();
 				//if ( strCondition.length() < 1 ) strCondition = lab.getConditionText();
 				//new Listcell( strCondition ).setParent( i );
 				
@@ -166,94 +209,103 @@ public class LabsWinController extends GenericForwardComposer {
 				//i.setValue( reca );
 				obzlist[4] = reca.toString();
 				obzlist[5] = strBat;
+				obzlist[6] = lab.getDate().getPrintable();
+				obzlist[7] = lab.getnormalRange();
 				obsstrList.add(obzlist);
-				System.out.println("end of for loop");
+				//System.out.println("end of for loop");
+				
+				if ( Duplicate ){ 
+					   //System.out.println("in duplicate");
+					   NumTsts.set(Dupat, NumTsts.get(Dupat)+1);
+					   Flags.set(Dupat, Flags.get(Dupat)+1);
+				   }
+				  else  if ( BatList.size() < 2 ) {	
+						
+						NumTsts.add(NumTst);
+						Flags.add(Flag);
+						NumTst = 0; Flag = 0;
+					
+				   }
+				
+				
 			}
 			
-			System.out.println("reca end");
+			//System.out.println("number of obx's were:"+ numobxs);
 			// get next reca in list	
 			reca = lab.getLLHdr().getLast();
 		}
 		
 		
 		for ( int j=0; j<BatList.size(); j++ ){
-		System.out.println("lisboxn");
+		//System.out.println("BatList 1 str bat "+ BatList.get(0)[1] );
+		//System.out.println("BatList 15 str bat"+ BatList.get(14)[1] );
+		
 		// create new Listitem and add cells to it
 		Listitem i;
 		(i = new Listitem()).setParent( listboxn );
 		Date Tdate = usrlib.Date.today();
 		
-		new Listcell( Tdate.getPrintable()).setParent( i );
+		//new Listcell( Tdate.getPrintable()).setParent( i );
 		
-		new Listcell( BatList.get(j) ).setParent( i );
+		new Listcell( BatList.get(j)[0] ).setParent( i );
+		 
+		new Listcell( BatList.get(j)[1] ).setParent( i );
 		new Listcell( Integer.toString(NumTsts.get(j)) ).setParent( i );
-		new Listcell( Integer.toString(Flags.get(j)) + "/" + Integer.toString(NumTsts.get(j)) ).setParent( i );
+		//new Listcell( Integer.toString(Flags.get(j)) + "/" + Integer.toString(NumTsts.get(j)) ).setParent( i );
 		
-		i.setValue(BatList.get(j));
+		i.setValue(BatList.get(j)[1]);
 		
 		}
-		System.out.println("skip?");
+		Orddate.sort(false);
+		
+		//System.out.println("skip?");
 		return;
 	}
 	
-	
-	
-	
-	
-	
-	public void refreshList( String BatStr ){
-		
-		// clear listbox
-		ZkTools.listboxClear( listbox );
-		
-		
-		
-		for ( int j=0; j< obsstrList.size(); j++ ){
-			
-				if ( obsstrList.get(j)[5].equals(BatStr)){				
-				
-				String [] obs = obsstrList.get(j);
-				// create new Listitem and add cells to it
-				Listitem i;
-				(i = new Listitem()).setParent( listbox );
-				new Listcell( obs[0] ).setParent( i );
-				
-				new Listcell( obs[1] ).setParent( i );
-				new Listcell( obs[2] ).setParent( i );
-				new Listcell( obs[3] ).setParent( i );
-				
-				Reca obsreca = new Reca(); 
-				obsreca = Reca.fromString(obs[4]);
-				// store PAR reca in listitem's value
-				i.setValue( obsreca );
-				
-			}
-			
-			
-		}
-		
 
-
-		return;
-	}
-	
-	
+	public void onDoubleClick( Event ev ){  onClick$btnView(); }
+		
 	public void onClick$btnView() {
 		
 		if ( listboxn.getSelectedCount() < 1 ){
 			DialogHelpers.Messagebox( "No item selected. Please select A panel." );
 			return;
 		}
-		
+		//System.out.println("labsnWin is???: "+labsnWin+","+ gbObs.getChildren().toString());
+		if (  gbObs.getChildren().size() >= 1  ){ 
+			
+			for ( int i=0; i<gbObs.getChildren().size(); i++ ) { 
+				
+				Object gbobschild;
+				gbobschild = gbObs.getChildren().get(i);
+				gbObs.removeChild((Component) gbobschild);
+				
+			}
+			
+		}	
 		String BatStr = (String)listboxn.getSelectedItem().getValue();
 		if (BatStr.length() >0 ) {
-			System.out.println("BatStr is: "+BatStr+","+labsWin);
+			//System.out.println("BatStr is: "+BatStr+","+labsnWin);
 			
-			labsWin.setParent( gbObs );
-			labsWin.doOverlapped();
-			refreshList( BatStr );
+			
+			//refreshList( BatStr );
+			
+			// pass parameters to new window
+			Map<String, Object> myMap = new HashMap<String, Object>();
+			myMap.put( "ptRec", (Rec)(ptRec ));
+			myMap.put("obsstrList", (List<String[]>)(obsstrList));
+			myMap.put("BatStr", (String)(BatStr));
+			
+			labsnWin =(Window) Executions.createComponents("labsn.zul", gbObs, myMap );
+			labsnWin = null;
+			//gbObs.setStyle("overflow:auto;position:relative");
 		}
-		
+	 
+		 
+		 //DialogHelpers.Messagebox( "Please close the currently open Battery window." );
+			//return;
+		 
+	 
 		
 	}
 	

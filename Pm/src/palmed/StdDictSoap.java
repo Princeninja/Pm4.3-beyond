@@ -337,7 +337,7 @@ public class StdDictSoap {
 				i.setValue(mapRecord);
 				new Listcell(abbr).setParent(i);
 				if (file.getRecord(stdDict.dataStruct, mapRecord.getRec())) {
-					for (int txtRec = 0; txtRec < 4; txtRec++) {
+					for (int txtRec = 1; txtRec <= 4; txtRec++) {
 						String text = stdDict.getText(txtRec).trim();
 						if (text.length() > 24) {
 							text = text.substring(0, 24) + "...";

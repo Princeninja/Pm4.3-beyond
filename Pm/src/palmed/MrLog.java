@@ -33,6 +33,7 @@ public class MrLog implements LLItem {
 		DOCUMENT( 8, "Document" ),
 		MISSED_APPOINTMENT( 9, "Missed Appointment" ),
 		XRAY_REPORT( 10, "Xray Report" ),
+		LAB_POST(11, "Lab Posting"),
 		
 		UNSPECIFIED( 10000, "Unspecified" );
 

@@ -96,7 +96,7 @@
 	</vbox>	
 	</groupbox>
 	
-	<groupbox width= "351px" style="border:0"></groupbox><!-- with button 266.5px -->
+	<groupbox width= "348px" style="border:0"></groupbox><!-- with button 266.5px -->
 	
 	<groupbox >		
 			<vlayout height="328px" width="300px" >

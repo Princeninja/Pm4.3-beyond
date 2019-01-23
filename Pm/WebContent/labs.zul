@@ -1,28 +1,55 @@
 <?page title="Labs" contentType="text/html;charset=UTF-8"?>
 <zk>
-<window id="labsWin" border="none" mode="embedded" apply="palmed.LabsWinController">
-
+<window border="none" vflex="1" hflex="1" >
+	<window id="labsWin" border="none" mode="embedded" vflex="1" hflex="1" apply="palmed.LabsWinController">
+	
+	<borderlayout>			
+		<west width="36%" splittable="true" collapsible="true" >
+		
+	
 	<hbox>
-		<vbox>
-			<button id="btnAdd" label="New" width="80px" />
-			<button id="btnEdit" label="Edit" width="80px" />
-			<button id="btnRemove" label="Remove" width="80px" />
-			<button id="btnPrint" label="Print" width="80px" />
-		</vbox>
-
-		<listbox id="listbox" >
-			<listhead>
-		<!-- 	<listheader width="80px" label="Date" sort="auto" />
-				<listheader width="120px" label="Battery" sort="auto" /> -->
-				<listheader width="120px" label="Observation" sort="auto" />
-				<listheader label="Result" sort="auto" />
-				<listheader width="60px" label="Flag" />
-				<listheader width="60px" label="Status" />
-		  <!--  <listheader width="80px" label="Condition" />  -->
+	  <groupbox id="gbObr">
+	  	<vlayout width ="352px">
+		<zscript><![CDATA[
+    	import java.util.Comparator;
+    	
+        Comparator dsc = new ListitemComparator(-1, false, true);    
+     ]]></zscript>
+		<listbox id="listboxn" >
+			<listhead >
+				<listheader id="Orddate" width="90px" label="Order Date" sort="auto"  sortDescending="${dsc}" />
+				<!--  <listheader width="90px" label="Import Date" sort="auto" />   -->
+				<listheader width="155px" label="Battery"  />
+				<listheader width="105px" label="Number of Tests"  />
+			<!-- 	<listheader label="Result" sort="auto" />
+				<listheader width="60px" label="Flag" /> -->
+			<!-- <listheader width="60px" label="Final(s)" />
+				  <listheader width="80px" label="Condition" /> -->
 			</listhead>
 		</listbox>
+	  	
+	  	<hbox>	
+		<button id="btnView" label="View Battery" width="80px" />
+		</hbox>
+		
+	</vlayout>
+	</groupbox>
 	</hbox>
-
-
+  		</west>
+				
+				
+	<center flex="true" >
+		
+		<vbox>				
+		<!-- <textbox id="noteTextbox"  rows="2"  width="900px" height="625px" />-->
+		<groupbox id="gbObs" mold="default" width="640px" height="700px" style="overflow:auto;position:relative" > <!-- vflex="1" hflex="2" -->
+			<caption label="Observation(s)-Window" />
+						
+		</groupbox>
+		</vbox>
+						
+	</center>
+	</borderlayout>
+	</window>
 </window>
 </zk>

@@ -308,10 +308,10 @@ public class SoapEditWinController extends GenericForwardComposer {
 	
 	public void onClick$btnApply(Event e) throws InterruptedException {
 
-		fillTextBox(txtSubj, 0);
-		fillTextBox(txtObj, 1);
-		fillTextBox(txtAss, 2);
-		fillTextBox(txtPlan, 3);
+		fillTextBox(txtSubj, 1);
+		fillTextBox(txtObj, 2);
+		fillTextBox(txtAss, 3);
+		fillTextBox(txtPlan, 4);
 
 		btnSave.setDisabled(false);
 		btnSave.setFocus(true);

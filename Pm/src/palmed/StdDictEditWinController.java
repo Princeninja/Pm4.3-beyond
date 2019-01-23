@@ -200,6 +200,7 @@ public class StdDictEditWinController extends GenericForwardComposer {
 					break;
 				case 2:
 					data.dataUI = stdDictObjective.getValue().trim();
+					System.out.println("New Objective is: "+ stdDictObjective.getValue().trim()+","+ index);
 					break;
 				case 3:
 					data.dataUI = stdDictAssessment.getValue().trim();
@@ -213,6 +214,7 @@ public class StdDictEditWinController extends GenericForwardComposer {
 				}
 
 				textData.add(data);
+				System.out.println("data is: "+ data);
 			}
 
 			if (noTextData == true) {
@@ -279,6 +281,7 @@ public class StdDictEditWinController extends GenericForwardComposer {
 				return false;
 			}
 
+			/*	
 			// make sure it is unique in the system
 			if (StdDictSoap.findAbbrRec(abbr) == true) {
 				try {
@@ -289,7 +292,7 @@ public class StdDictEditWinController extends GenericForwardComposer {
 				}
 				return false;
 
-			}
+			}*/
 
 			ArrayList<TextData> textData = new ArrayList<TextData>();
 

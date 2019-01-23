@@ -1,45 +1,35 @@
-<?page title="Labsn" contentType="text/html;charset=UTF-8"?>
+<?page title="Labs" contentType="text/html;charset=UTF-8"?>
 <zk>
-<window border="none" vflex="1" hflex="1" >
-	<window id="labsnWin" border="none" mode="embedded" vflex="1" hflex="1" apply="palmed.LabsWinController">
-	
-	<borderlayout>			
-		<west width="40%" splittable="true" collapsible="true" >
-		
-	
+<window id="labsnWin" border="none" mode="embedded"  contentStyle="background:teal" width="640px" height="700px"  apply="palmed.labsnWinController" >
+
 	<hbox>
 		<vbox>
-			<button id="btnView" label="View Panel" width="80px" />
-			
+			<button id="btnAdd" label="New" width="80px" />
+			<button id="btnEdit" label="Edit" width="80px" />
+			<button id="btnRemove" label="Remove" width="80px" />
+			<button id="btnPrint" label="Print" width="80px" />
 		</vbox>
-
-		<listbox id="listboxn" >
-			<listhead>
-				<listheader width="85px" label="Date uploaded" sort="auto" />
-				<listheader width="120px" label="Battery" sort="auto" />
-				<listheader width="120px" label="Number of Tests" sort="auto" />
-			<!-- 	<listheader label="Result" sort="auto" />
-				<listheader width="60px" label="Flag" /> -->
-				<listheader width="60px" label="Final(s)" />
-				<!--  <listheader width="80px" label="Condition" /> -->
+		
+		<div style="overflow:auto;position:relative" > 
+		<listbox id="listbox" width="max" height="700px"  >
+			<listhead sizable="true" >
+		 	<!--<listheader width="105px" label="Date Performed" sort="auto" />
+				<listheader width="120px" label="Battery" sort="auto" /> -->
+				<listheader width="19%" label="Observation" sort="auto" />
+				<listheader width="35%" label="Result" sort="auto" />
+				<listheader width="25%" label="normal range" sort="auto" />
+				<listheader width="11%" label="Flag" />
+				<listheader width="10%" label="Status" />
+		  <!--  <listheader width="80px" label="Condition" />  -->
 			</listhead>
 		</listbox>
+		 </div>	
 	</hbox>
-  		</west>
-				
-				
-	<center flex="true" >
-		
-		<vbox>				
-		<!-- <textbox id="noteTextbox"  rows="2"  width="900px" height="625px" />-->
-		<groupbox id="gbObs" mold="default" vflex="1" hflex="2" style="overflow:auto">
-			<caption label="Obs-Window" />
-						
-		</groupbox>
-		</vbox>
-						
-	</center>
-	</borderlayout>
-	</window>
+	
+	<hbox>
+	   <!-- <button id="btnSave" label="Save" width="80px" /> -->
+		<!-- <button id="btnCancel" label="Cancel" width="80px" /> -->
+	</hbox>
+
 </window>
 </zk>

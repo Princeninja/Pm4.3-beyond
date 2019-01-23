@@ -57,8 +57,12 @@ import usrlib.ZkTools;
 // 98	Reca	conditionTextReca;
 // 102	Rec		labFacilityRec;		// lab facility test was done at
 //
-// 106	char	unused[5];			/*  unused for now  */
-// 111  char    miscabbr[15]        /* abbr for a non-panel Battery */    
+//** add allowance for Misc abbr [14] and leave [6] unused (for now).  
+//** Used to be 106 char unused[20]
+//
+// 106	char	unused[6];			/* Date of Import  */
+// 112  char    miscabbr[14];        /* abbr for a non-panel Battery */    
+// 	
 //
 // 126	byte	Status;				// status flag
 // 127	byte	Valid;				/* validity byte  */
@@ -772,7 +776,10 @@ public class LabResult implements LLItem {
     }
 
 
-// char	miscabbr[15];		// misc abbreviation, offset 111
+
+// char unused[6];         // unused, offset 106            
+    
+// char	miscabbr[14];		// misc abbreviation, offset 112
     
     /**
      * getmiscAbbr()
@@ -783,7 +790,7 @@ public class LabResult implements LLItem {
      * @return String
      */
     public String getmiscAbbr(){
-    	return StructHelpers.getString( dataStruct, 111, 15 ).trim();
+    	return StructHelpers.getString( dataStruct, 112, 14 ).trim();
     }
 
     /**
@@ -795,11 +802,11 @@ public class LabResult implements LLItem {
      * @return void
      */
     public void setmiscAbbr( String s ){
-    	StructHelpers.setStringPadded( s, dataStruct, 111, 15 );
+    	StructHelpers.setStringPadded( s, dataStruct, 112, 14 );
     	return ;
     }
     
-    
+   
 
 
 
@@ -1013,7 +1020,32 @@ public class LabResult implements LLItem {
     	return ;
     }
 
+ // 70	char	normalRange[20];  // normal range text for display
+    
+    /**
+     * getnormalRange()
+     * 
+     * Get normal range text from dataStruct.
+     * 
+     * @param none
+     * @return String
+     */
+    public String getnormalRange(){
+    	return StructHelpers.getString( dataStruct, 70, 20 ).trim();
+    }
 
+    /**
+     * setnormalRange()
+     * 
+     * Set normal Range in dataStruct.
+     * 
+     * @param String
+     * @return void
+     */
+    public void setnormalRange( String s ){
+    	StructHelpers.setStringPadded( s, dataStruct, 70, 20 );
+    	return ;
+    }  
     
     
     

@@ -433,6 +433,10 @@ public class MainMenuController extends GenericForwardComposer  {
 			
 			createlaberrWin();
 			
+		}else if ( itemID.equals( "labprg" )){
+			
+			createlabprgWin();
+			
 		}else {
 			
 			// if empty, assume category - toggle open state
@@ -1262,6 +1266,55 @@ public class MainMenuController extends GenericForwardComposer  {
 			return;
 	}
 
+
+	/**
+	 * Purge Lab Report
+	 * @throws InterruptedException 
+	 */
+
+	public void createlabprgWin() throws InterruptedException{
+		showprgWin();
+	}
+	
+	public void showprgWin() throws InterruptedException{
+		
+		if ( Messagebox.show( "Purge Lab Report ?", "Leave?", Messagebox.YES | Messagebox.NO, Messagebox.QUESTION ) == Messagebox.YES ){			
+			
+			File errrpt = new File( Pm.getOvdPath() + File.separator + "LabErr");
+			
+			File[] matchingfiles = errrpt.listFiles(new FilenameFilter() { 
+				
+				public boolean accept(File visits, String name){
+					return name.startsWith("lab")&& name.endsWith(".html");
+				}
+				
+			});
+			
+			int mflength = matchingfiles.length;
+			
+			if ( mflength > 0 ) { 
+				
+				String errr = matchingfiles[ mflength-1 ].getPath();
+				
+				
+				File errfile = new File(errr);
+				
+				errfile.delete();
+				
+				alert("File Purged!");
+				
+			}
+			
+			
+		}		
+		return;
+			
+	}
+
+	
+	
+	
+	
 	/**
 	 * Print Most Recent Lab(Error) Report
 	 */
@@ -1309,7 +1362,7 @@ public class MainMenuController extends GenericForwardComposer  {
 		sb.append(System.getProperty("line.separator"));
 		sb.append("</HTML>");*/
 		
-		sb.append("<!-- <p>ZCC</p> -->");
+		sb.append("<p>ZCC</p>");
 		// javascript to print the report
 		sb.append( "<script type='text/javascript' defer='true' >" );
 		sb.append( "window.focus();window.print();window.close();" );

@@ -104,14 +104,14 @@
 				</tabs>
 				<tabpanels>
 					<tabpanel id="tpBat" >
-						<listbox id="lboxBat" rows="20" hflex="1" vflex="1" >
+						<listbox id="lboxBat" rows="20" hflex="1" height="400px" style="overflow:auto;position:relative"  >
 							<listhead id="lhBat" >
 								<listheader id="lhdrBat" label="Lab Battery" sort="auto" />
 							</listhead>
 						</listbox>
 					</tabpanel>
 					<tabpanel id="tpObs" >
-						<listbox id="lboxObs" rows="20" hflex="1" vflex="1" >
+						<listbox id="lboxObs" rows="20" hflex="1" height="400px" style="overflow:auto;position:relative"  >
 							<listhead id="lhObs" >
 								<listheader id="lhdrObsDesc" label="Description" sort="auto" />
 							</listhead>

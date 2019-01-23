@@ -111,7 +111,8 @@
 												<treeitem id="labobstbl" label="Lab Observations" />
 												<treeitem id="labbat" label="Lab Battery" />
 												<treeitem id="labfac" label="Lab Facilities" />
-												<treeitem id="laberr" label="Lab Import Reports" />
+												<treeitem id="laberr" label="Lab Import Report" />
+												<treeitem id="labprg" label="Purge Lab Report" />
 											</treechildren>
 										</treeitem>
 										

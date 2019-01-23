@@ -187,6 +187,7 @@ public class LabObsTblWinController extends GenericForwardComposer {
 		Rec rec = (Rec) labObsTblListbox.getSelectedItem().getValue();
 		if ( ! Rec.isValid( rec )) return;
 
+		System.out.println("obs rec is: "+rec);
 		// call edit routine
 		if ( LabObsTblEdit.edit( rec, labObsTblWin )){
 			refreshList();

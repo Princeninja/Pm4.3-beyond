@@ -59,9 +59,13 @@
 			 <tabpanel >
 				<hbox> Release date : 11/01/18 </hbox>
 				<hbox> Detailed List: </hbox>
+				<hbox> ** Changes to SOAP: ** </hbox>
+					           <hbox>  -Standard Dictations display in edit and display mode properly. (Admin > Standard Dictations) </hbox>
+					           <hbox>  -Choosing the Standard Dictation will display it normally  (as above) in SOAP. </hbox>
+					           <hbox>  -If you choose the Standard Dictation and it displays wrongly, it needs to be edited in (Admin > Standard Dictations). </hbox>
 				<hbox> ** Office Visits** </hbox>
 				<hbox> **Rest  Coming Soon** </hbox>
-				</tabpanel>			 
+			</tabpanel>			 
 		</tabpanels>
 		</tabbox>
 			 </vbox>
