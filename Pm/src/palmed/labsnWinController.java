@@ -35,7 +35,7 @@ public class labsnWinController extends GenericForwardComposer {
 	
 	private Rec	ptRec;		// patient record number
 	private List<String[]> obsstrList; 
-	private String BatStr;
+	private String BatStr, date;
 
 	
 	
@@ -64,6 +64,7 @@ public class labsnWinController extends GenericForwardComposer {
 				try{ ptRec = (Rec) myMap.get( "ptRec" ); } catch ( Exception e ) { /* ignore */ };
 				try{ obsstrList = (List<String[]>) myMap.get( "obsstrList" ); } catch ( Exception e ) { /* ignore */ };
 				try{ BatStr = (String) myMap.get( "BatStr" ); } catch ( Exception e ) { /* ignore */ };
+				try{ date = (String) myMap.get( "date" ); } catch ( Exception e ) { /* ignore */ };
 			}
 		}
 		
@@ -98,7 +99,7 @@ public class labsnWinController extends GenericForwardComposer {
 		
 		for ( int j=0; j< obsstrList.size(); j++ ){
 			
-				if ( obsstrList.get(j)[5].equals(BatStr)){				
+				if ( obsstrList.get(j)[5].equals(BatStr) && obsstrList.get(j)[6].equals(date)){				
 				
 				String [] obs = obsstrList.get(j);
 				// create new Listitem and add cells to it

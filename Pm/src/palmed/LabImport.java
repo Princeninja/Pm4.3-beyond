@@ -139,9 +139,10 @@ public class LabImport {
 		String result;
 		String range;
 		String comment;
+		String Desc;
 
 		void entry( Rec obsRec, LabResult.ResultStatus resultStatus, String result, LabObsTbl.Units units, String strUnits,
-				String normalRange, LabResult.Abnormal abnormal ){
+				String normalRange, LabResult.Abnormal abnormal, String ObsDesc ){
 			this.obsRec = obsRec;
 			this.resultStatus = resultStatus;
 			this.result = result;
@@ -149,6 +150,7 @@ public class LabImport {
 			this.strUnits = strUnits;
 			this.normalRange = normalRange;
 			this.abnormal = abnormal;
+			this.Desc = ObsDesc;
 			return;
 		}
 }
@@ -403,7 +405,7 @@ public class LabImport {
     List<String> NotesList = new ArrayList<String>();
 	
 	StringBuilder Notess = new StringBuilder();
-	StringBuilder Notesobr = new StringBuilder();
+	//StringBuilder Notesobr = new StringBuilder();
 	
 	
 	public void read( BufferedReader br, StringBuilder errpt ){
@@ -463,7 +465,7 @@ public class LabImport {
 				} else if ( line.startsWith( "NTE")){
 					
 					//System.out.println("pre NTE level: "+level);
-					System.out.println("obx 1.5 is: "+obxc);
+					//System.out.println("obx 1.5 is: "+obxc);
 					parseNTE( line, obxc );
 					level = 4;
 				
@@ -636,9 +638,10 @@ public class LabImport {
 	public void parseOBR( String line ){
 		
 		obrc = obrc +1 ;
-		System.out.println("obrc 1 is: "+obrc);
+		//System.out.println("obrc 1 is: "+obrc);
 		
 		boolean BATstat = false;
+		boolean Batfound = false;
 		
 		if ( ! line.startsWith( "OBR")) return;
 		System.out.println( "in parseOBR()" );
@@ -750,18 +753,25 @@ public class LabImport {
 		
 		  if ( e.getChildByNumber(i).getChildByNumber(0).getContent().equalsIgnoreCase(Abbr) ){
 			  
+			  Batfound = true;  
 		 if ( e.getChildByNumber(i).getChildByName("IS_PANEL").getContent().equalsIgnoreCase("TRUE") ){
 			 
 			 BATstat = true;
 		 }}}
 		
-		
+		if ( !Batfound ){  errpt.append("<p> Bat Abbr/Desc "+ Abbr+"/"+batDesc  + " not found in the compendium. </p>" );}
 			
-		// look up lab batch by loinc code
+		// look up lab bat Abbr code
 		if ( Abbr.length() > 1 ){			
 			batRec = LabBat.searchAbbr( Abbr); 
 			
-			if ( batRec == null ){ System.out.println( "Bat Abbr " + Abbr + " not found." );
+			if ( batRec == null ){
+			batRec = LabBat.searchDesc(batDesc); }
+			
+						
+			if ( batRec == null ){ System.out.println( "Bat Abbr/Desc " + Abbr +"/"+batDesc + " not found." );
+			errpt.append("<p> Bat Abbr/Desc "+ Abbr+"/"+batDesc  + " not found. </p>" );
+			errpt.append(System.getProperty("line.separator"));
 			
 			if (BATstat) { 
 			LabBat p = new LabBat();
@@ -769,16 +779,24 @@ public class LabImport {
 			p.setAbbr(Abbr);
 			p.setDesc(batDesc);
 			
+			p.setStatus(LabBat.Status.ACTIVE);
+			p.setValid(Validity.VALID);
+			
 			batRec = p.writeNew();
 			
 			obsRec = LabObsTbl.searchAbbr( Abbr );
+			errpt.append("<p> New Battery created with Abbr and Rec: "+Abbr+ ", "+ batRec +"</p> ");
 			
 			if ( !(obsRec == null) ){
 			LabObsTbl labobstbl =  new LabObsTbl( obsRec );
+			
+			labobstbl.setStatus(LabObsTbl.Status.INACTIVE);
+			labobstbl.setValid(Validity.HIDDEN);
 			labobstbl.setHidden();
 			
 			System.out.println("The new Battery was deleted in LabObsTbl.");
-		
+			errpt.append("<p> Deleted from LabObsTbl: "+Abbr+"</p> ");
+			
 			labobstbl.write(obsRec); 			
 			
 		   }
@@ -836,7 +854,8 @@ public class LabImport {
 		
 		order = new Order();
 		order.entry( date1, batRec, miscabbr, resultStatus, orderID, specID, source, txtSource, condition, txtCondition, provRec, facRec );
-		System.out.println("batrec, miscabbr: "+batRec+","+miscabbr);
+		System.out.println("batrec, miscabbr: "+batRec +","+ miscabbr);
+		errpt.append("<p> End of OBR run with batRec, Abbr: "+batRec+", "+Abbr+"</p> ");
 		//MrLog.postNew( patient.ptRec, Date.today(), "", MrLog.Types.LAB_NOTE, null );
 		
 	}
@@ -845,11 +864,12 @@ public class LabImport {
 	
 	public void parseNTE( String line, int obxc ){
 		
-		System.out.println("obx 2 is: "+obxc);
-		System.out.println("numchk 1 is: "+numchck);
+		//System.out.println("obx 2 is: "+obxc);
+		//System.out.println("numchk 1 is: "+numchck);
 		StringBuilder SBNm = null;
+		SBNm = Notess;
 		
-		if ( obxc == 0) {
+		/*if ( obxc == 0) {
 			System.out.println("in obr portion");
 			SBNm = Notesobr;
 			
@@ -877,14 +897,14 @@ public class LabImport {
 				Notess.setLength(0);
 			}else { System.out.println("wokem what did you code?");
 		  
-		  		SBNm = Notess;} 
+		  		SBNm = Notess;}  
 			
-			}//else { System.out.println("wokem what did you code?");} 
+			}**/ //else { System.out.println("wokem what did you code?");} 
 		
 		++notesnum;
 				
 		if ( ! line.startsWith( "NTE")) return;
-		System.out.println( "in parseNTE()" );
+		//System.out.println( "in parseNTE()" );
 		
 		String token[] = line.split( "\\|", 4);
 		if ( token.length < 3 ){ System.out.println( "short NTE segment, "+ token.length );
@@ -899,16 +919,22 @@ public class LabImport {
 		if ( nteStr.length() > 0 ) { SBNm.append(nteStrt);
 		
 									SBNm.append(System.getProperty("line.separator"));}
-		if ( obxc > 0 ){
-		numchck = obxc ; }
+		/*if ( obxc > 0 ){
+		numchck = obxc ; }*/
 	}
 	
 	
 	
 	public void parseOBX( String line ){
 		
-		obxc = obxc + 1;
-		System.out.println("obx 1 is: "+obxc);
+		//obxc = obxc + 1;
+		//System.out.println("obx 1 is: "+obxc);
+		
+		if (Notess.toString().length() > 0){
+			
+			NotesList.add(Notess.toString());
+			Notess.setLength(0);
+		}else{ NotesList.add(""); }
 		
 		boolean obxstat = true;
 		
@@ -959,15 +985,17 @@ public class LabImport {
 					LabObsTbl labobstbl =  new LabObsTbl( obsRec );
 					Tstdesc = labobstbl.getDesc();
 				}
-			}else if ( Tstdesc.length()< 1 && obsDesc.length() > 1 ) {
+			}
+		  
+		  if ( Tstdesc.length()< 1 && obsDesc.length() > 1) {
 				obsRec = LabObsTbl.searchDesc(obsDesc);
 			}//else{}
-		
+		//System.out.println("obs rec at port of entry is?:  "+ obsRec);
 				
 		if ( obsRec == null ){
 		
 		System.out.println( "obs with desc " + obsDesc + " not found." );
-		errpt.append("<p> obs with desc " + obsDesc + " not found. </p> ");
+		errpt.append("<p> obs with desc: " + obsDesc + " not found. </p> ");
 		errpt.append(System.getProperty("line.separator"));
 		 
 		 
@@ -1017,13 +1045,16 @@ public class LabImport {
 			labobstbl.setDesc(obsDesc);
 			labobstbl.setLOINC(loinc);
 			
+			labobstbl.setStatus(LabObsTbl.Status.ACTIVE);
+			labobstbl.setValid(Validity.VALID);
+			
 			obsRec = labobstbl.writeNew();
-			errpt.append("<p> new observation with loinc code " + loinc + " created. </p> ");
+			errpt.append("<p> new observation with loinc code: " + loinc + " created. </p> ");
 			errpt.append(System.getProperty("line.separator"));
 		 	
 		} else {
 			
-			errpt.append("<p> observation with loinc code " + loinc + " is a panel according to the current compendium so the rec is null. </p> ");
+			errpt.append("<p> observation with loinc code: " + loinc + " is a panel according to the current compendium so the rec is null. </p> ");
 			errpt.append(System.getProperty("line.separator"));
 			} 
 		}
@@ -1053,15 +1084,16 @@ public class LabImport {
 		}
 		txtUnits = strUnits;
 		
-		System.out.println("units2, txtunits: "+ units + ", "+ txtUnits);
+		//System.out.println("units2, txtunits: "+ units + ", "+ txtUnits);
 		
-		//TODO normal range
+		
 		
 		//System.out.println("order is: "+order.toString());
 		Result result = new Result();
-		result.entry( obsRec, resultStatus, strResult, units, txtUnits, normalRange, abnormal );
+		result.entry( obsRec, resultStatus, strResult, units, txtUnits, normalRange, abnormal, obsDesc );
 		
-		System.out.println("results, Obsrec: "+ obsRec );
+		//System.out.println("results, Obsrec: "+ obsRec );
+		errpt.append("<p> End of Obx run for: "+ obsRec +", "+ obsDesc +" </p> ");
 		if ( order.results == null ) order.results = new Vector<Result>();
 		order.results.add( result );
 		return;
@@ -1073,7 +1105,7 @@ public class LabImport {
 		
 		System.out.println( "in processOrder()" );
 		errpt.append("<h4>NTE: </h4> ");
-		errpt.append(notesnum +" NTE lines (attempted)parsed. ");
+		errpt.append(notesnum +" NTE lines (attempted) parsed. ");
 		errpt.append(System.getProperty("line.separator"));		
 		errpt.append("<h4>process Order: </h4> ");
 		//errpt.append(System.getProperty("line.separator"));
@@ -1097,13 +1129,24 @@ public class LabImport {
 		}
 		
 		if (Notess.length() > 1) { NotesList.add(Notess.toString()); Notess.setLength(0); }
+		else { NotesList.add(""); }
+		
+		String notetext = "";
+		
+		//to test notes if need be
+		/**for ( int k = 0; k< NotesList.size(); ++k){
 			
+			System.out.println("Note "+k+" :"+NotesList.get(k));
+		}**/
+		
+		
 		for ( int i = 0; i < order.results.size(); ++i ){
 			
 			System.out.println("sizes: "+order.results.size()+","+NotesList.size());
+			
 			Result res = order.results.get( i );
 			
-			if ( ! Rec.isValid( res.obsRec )){
+			 if ( ! Rec.isValid( res.obsRec )){
 				System.out.println( "Invalid obs rec." );
 				errpt.append("<p> Invalid obs rec </p> ");
 				errpt.append(System.getProperty("line.separator"));
@@ -1125,7 +1168,9 @@ public class LabImport {
 			if ( Rec.isValid( order.facRec )) lab.setLabFacilityRec( order.facRec );
 			
 			lab.setLabObsRec( res.obsRec );
-			System.out.println("result is: "+ res.result+","+res.strUnits+","+ res.obsRec );
+			//System.out.println("result is: "+ res.result+","+res.strUnits+","+ res.obsRec );
+			errpt.append(System.getProperty("line.separator"));
+			errpt.append("<p>"+"result number "+ posted + " is: "+ res.result+" ,"+res.strUnits+", "+ res.obsRec+", "+res.Desc+"."+"</p> ");
 			lab.setResult( res.result );
 			
 			lab.setAbnormalFlag( res.abnormal );
@@ -1133,16 +1178,18 @@ public class LabImport {
 			lab.setUnitsText( res.strUnits );
 			lab.setnormalRange(res.normalRange);
 			
-			int netobxs = order.results.size() - (NotesList.size()-1) ;
-			
-			for( int j=0; j<netobxs; j++ ){
 				
-				NotesList.add("");
-			}
-			
-			if( NotesList.get(i+1).length() >1 ) {
 				
-				Class<? extends Notes> noteClass = NotesLab.class;
+				
+				if ( i == 0){ 
+					notetext = NotesList.get(0)+ NotesList.get(i+1);
+				
+				}else{ notetext = NotesList.get(i+1); }
+				
+				if ( notetext.length() > 1  ) { 
+				
+				//System.out.println("length is: "+ notetext.length());
+				Class<? extends Notes> noteClass = NotesLab.class;	
 				
 				Notes note = Notes.newInstance( noteClass );
 				
@@ -1153,36 +1200,31 @@ public class LabImport {
 				note.setUserRec( Pm.getUserRec());
 				note.setStatus( Notes.Status.CURRENT );
 				note.setNumEdits( 0 );
+				note.setDesc(res.Desc);
 				
 				note.setDate( Date.today() );
-				
-				String notetext = "";
-				
-				if ( i == 0){ 
-					notetext = NotesList.get(0)+ NotesList.get(i+1);
-				}
-				else{ notetext = NotesList.get(i+1); }
 				
 				note.setNoteText( notetext );
 				
 				lab.setResultNoteReca(note.postNew(patient.ptRec));
 				
 				// post to MrLog
-			    //MrLog.postNew( patient.ptRec, Date.today(), "", Notes.getMrLogTypes( noteClass ), lab.getResultNoteReca() );
+			    // MrLog.postNew( patient.ptRec, Date.today(), "", Notes.getMrLogTypes( noteClass ), lab.getResultNoteReca() );
 				// log the action
 				AuditLogger.recordEntry( Notes.getAuditLogActionNew( noteClass ), patient.ptRec, Pm.getUserRec(), lab.getResultNoteReca(), null );
-				 
-				//lab.setResultNoteText(Notes.toString()); 
-				System.out.println(notetext);}
+				}
+				//lab.setResultNoteText(notes.toString()); 
+				//System.out.println(notetext);
 			
 			lab.setStatus( LabResult.Status.ACTIVE );
 			lab.setValid( Validity.VALID );
 			
-			lab.postNew( patient.ptRec );
+			lab.postNew( patient.ptRec ); 
 			++posted;
-			System.out.println( "Posted: " + posted );
-			errpt.append("<p> Succesful post(s):"+posted+"</p> ");
+			//System.out.println( "Posted: " + posted );
+			errpt.append("<p> Succesful post(s): "+posted+" For obx and note: "+res.Desc+" AND "+ notetext +"</p> ");
 			//errpt.append(System.getProperty("line.separator"));
+			notetext = "";
 		}
 		obxc = 0;  NotesList.clear(); Batdesc = "";	
 		return;

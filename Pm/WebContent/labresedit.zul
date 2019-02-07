@@ -4,7 +4,7 @@
 	<label id="ptname" />
 	<hbox>
 		<!--  groupbox>-->
-			<grid>
+			<grid height="430px">
 				<columns>
 					<column label="" width="80px" />
 					<column label="" width="320px" />
@@ -81,17 +81,17 @@
 						<label value="Facility" />
 						<listbox id="lboxFacility"  width="200px" rows="1" mold="select" />
 					</row>
-					<row>
+					<!-- <row>
 						<label value="Notes" />
 						<textbox id="txtNote" rows="5" width="300px" style= "overflow:auto" />
-					</row>
+					</row>  -->
 
 				</rows>
 			</grid>
 
 		<!--</groupbox>-->
 		
-		<groupbox id="gbSrc" hflex="1">
+		<groupbox id="gbSrc" height="413.5px" >
 			<vbox vflex="1" hflex="1" >
 			<hbox>
 				<button id="btnSearch" label="Search" width="80px" />
@@ -104,14 +104,14 @@
 				</tabs>
 				<tabpanels>
 					<tabpanel id="tpBat" >
-						<listbox id="lboxBat" rows="20" hflex="1" height="400px" style="overflow:auto;position:relative"  >
+						<listbox id="lboxBat" rows="20" hflex="1" height="320px" style="overflow:auto;position:relative"  >
 							<listhead id="lhBat" >
 								<listheader id="lhdrBat" label="Lab Battery" sort="auto" />
 							</listhead>
 						</listbox>
 					</tabpanel>
 					<tabpanel id="tpObs" >
-						<listbox id="lboxObs" rows="20" hflex="1" height="400px" style="overflow:auto;position:relative"  >
+						<listbox id="lboxObs" rows="20" hflex="1" height="320px" style="overflow:auto;position:relative"  >
 							<listhead id="lhObs" >
 								<listheader id="lhdrObsDesc" label="Description" sort="auto" />
 							</listhead>
@@ -123,8 +123,23 @@
 			</vbox>
 		</groupbox>
 	</hbox>
+		<grid width="776px">
+			<columns>
+				<column label="" width="80px" />
+		  		<column label="" width="696px" />	   				
+			</columns>
+			<rows>
+			  <row>	
+				<label value="Notes" />
+				<textbox id="txtNote" rows="8" width="686px" style= "overflow:auto" />	
+			  </row>
+			</rows>
 		
-		
+		</grid>
+	<hbox>
+	
+	
+	</hbox>		
 	<hbox>
 		<button id="btnSave" label="Save" width="80px" />
 		<button id="btnCancel" label="Cancel" width="80px" />

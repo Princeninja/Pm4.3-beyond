@@ -183,7 +183,7 @@ public class LabsWinController extends GenericForwardComposer {
 				LabObsTbl obs = new LabObsTbl( lab.getLabObsRec());
 				NumTst = NumTst + 1;
 				strObs = obs.getDesc();
-				//System.out.println("obs stuff:"+obs.getDesc()+","+ obs.getAbbr()+","+obs.getLOINC()+","+obs.getRec());
+				//System.out.println("obs stuff:"+obs.getDesc()+", "+ obs.getAbbr()+","+", "+obs.getRec());
 				obzlist[0] = strObs;
 				String strResult = lab.getResult();
 				
@@ -253,7 +253,7 @@ public class LabsWinController extends GenericForwardComposer {
 		new Listcell( Integer.toString(NumTsts.get(j)) ).setParent( i );
 		//new Listcell( Integer.toString(Flags.get(j)) + "/" + Integer.toString(NumTsts.get(j)) ).setParent( i );
 		
-		i.setValue(BatList.get(j)[1]);
+		i.setValue(BatList.get(j));
 		
 		}
 		Orddate.sort(false);
@@ -282,8 +282,10 @@ public class LabsWinController extends GenericForwardComposer {
 				
 			}
 			
-		}	
-		String BatStr = (String)listboxn.getSelectedItem().getValue();
+		}
+		String[] BatString = (String[])listboxn.getSelectedItem().getValue();
+		String BatStr = BatString[1];
+		
 		if (BatStr.length() >0 ) {
 			//System.out.println("BatStr is: "+BatStr+","+labsnWin);
 			
@@ -295,6 +297,7 @@ public class LabsWinController extends GenericForwardComposer {
 			myMap.put( "ptRec", (Rec)(ptRec ));
 			myMap.put("obsstrList", (List<String[]>)(obsstrList));
 			myMap.put("BatStr", (String)(BatStr));
+			myMap.put("date", BatString[0]);
 			
 			labsnWin =(Window) Executions.createComponents("labsn.zul", gbObs, myMap );
 			labsnWin = null;
