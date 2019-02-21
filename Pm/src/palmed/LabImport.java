@@ -1,7 +1,6 @@
 package palmed;
 
 import java.io.BufferedReader;
-import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -9,27 +8,15 @@ import java.io.FilenameFilter;
 import java.io.IOException;
 import java.io.Reader;
 import java.io.StringReader;
-import java.io.StringWriter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Vector;
 
-import javax.xml.transform.Transformer;
-import javax.xml.transform.TransformerFactory;
-
 import org.apache.commons.io.FileUtils;
-import org.zkoss.util.media.AMedia;
 import org.zkoss.util.media.Media;
 import org.zkoss.zk.ui.Component;
-import org.zkoss.zk.ui.Executions;
 import org.zkoss.zul.Fileupload;
-import org.zkoss.zul.Iframe;
 import org.zkoss.zul.Messagebox;
-import org.zkoss.zul.Window;
-
-import palmed.LabResult.SpecimenSource;
-
-import sun.management.counter.Units;
 import usrlib.Date;
 import usrlib.DialogHelpers;
 import usrlib.Name;
@@ -170,11 +157,26 @@ public class LabImport {
 	
 	public static void show( Component parent, Component ptab ){
 		
-		String title = null;
-		String htmlStr = null;
+		 show(  parent,  ptab, null );
+		
+	}
+	
+	public static void show( String Filename ){
+	
+		show( null, null, Filename);
+		
+	}
+	
+	public static void show( Component parent, Component ptab, String Filename ){
+		
 		Media media = null;
 		
+		// in memory vs string
+		BufferedReader br = null;
+		Reader r = null;
 		
+		
+		if ( Filename == null ){
 		// upload the CCR file to view
         try {
 			media = Fileupload.get( "Select the lab HL7 file to upload.", "Upload HL7 Lab" );
@@ -243,9 +245,6 @@ public class LabImport {
 			
 		LabName = media.getName();
 		
-		// in memory vs string
-		BufferedReader br = null;
-		Reader r = null;
 		
 		if ( media.inMemory()){
 		
@@ -258,6 +257,29 @@ public class LabImport {
 			System.out.println("else read");
 			r = media.getReaderData();
 			br = new BufferedReader( r );
+		}
+		
+		
+		}else {
+			
+		
+			File LabFile = new File(Filename);
+			
+			LabName = LabFile.getName();
+			
+			String str = "";
+			
+			try {
+				str = FileUtils.readFileToString(LabFile);
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+			r = new StringReader( str );
+			br = new BufferedReader( r );
+			
+			
 		}
 		
 		if ( !( br == null )){
@@ -291,7 +313,8 @@ public class LabImport {
 		
 		lab.read( br, errpt );
 		
-		DialogHelpers.Messagebox( "Lab Import done. " + lab.posted + " results posted." );
+		if ( Filename == null ){
+		DialogHelpers.Messagebox( "Lab Import done. " + lab.posted + " results posted." ); }
 		
 		File errrpt = new File( Pm.getOvdPath() + File.separator + "LabErr");
 		
@@ -379,6 +402,7 @@ public class LabImport {
 			
 		}
 		
+		if ( Filename == null ){
 		try {
 			r.close();
 			br.close();
@@ -386,20 +410,26 @@ public class LabImport {
 			ptab.detach();
 		} catch (IOException e) {
 			// ignore
+		}}else {
+			
+			try {
+				r.close();
+				br.close();
+			} catch (IOException e) {
+				// ignore
+			}			
 		}
+		
 	   }
 		
-		
-		
-
 			
 		//String absPath = SystemHelpers.getRealPath(); // + "temp.xml";
-
-
-			    
+		    
 		
 		return;
 	}
+	
+	
 	int numchck = 1 ,obrc = 0, obxc = 0;; 
 	int notesnum = 0;
     List<String> NotesList = new ArrayList<String>();
@@ -520,24 +550,7 @@ public class LabImport {
 																						//6 - mother's maiden name?
 		Date bdte = parseDate( token[7] );												//7 - birthdate
 		palmed.Sex sex = Sex.get( token[8] );											//8 - sex
-																						//9 - alias
-		String strRace = token[10];														//10 - race
-		String strAddress = token[11];													//11 - address
-																						//12 - county
-		String strPhone = token[13];													//13 - home phone
-																						//14 -
-																						//15 - language
-																						//16 - marital status
-																						//17 - religion
-		//String ptSSN = token[18];														//18 - patient account number
-																						//19 - SSN
-																						//20 - driver's license
-																						//21 - mother's id
-		//String strEthnic = token[22];													//22 - ethnicity
-		
-		
-		
-		boolean match = false;
+																						boolean match = false;
 		
 		if (( ptName.getFirstName().length() > 0 ) && ( ptName.getLastName().length() > 0 )){
 			
@@ -564,10 +577,6 @@ public class LabImport {
 						}
 					}
 					
-				} else if ( false /* pt numbers entered */ ){
-					// verify some number matches
-					
-					
 				} else if (( fnd == 1 ) && ( ptName.getFirstName().length() > 1 ) && ( ptName.getMiddleName().length() > 0 ) && ( ptName.getLastName().length() > 1 )){
 					// otherwise, if full name entered and matches, we'll accept that
 					PtFoundList pt = ptFinder.getPtList().elementAt( 0 );
@@ -582,7 +591,7 @@ public class LabImport {
 		if ( ! match && ( ptID1.length() > 0 )){
 			
 			PtFinder ptFinder = new PtFinder();
-			int fnd = ptFinder.doSearchNum( ptID1, 0 );
+			//int fnd = ptFinder.doSearchNum( ptID1, 0 );
 
 			// try to match by ID number			
 
@@ -657,15 +666,13 @@ public class LabImport {
 
 
 		
-																						//0 - hdr
-		String seqNum = token[1];														//1 - seq#
-		String specID = token[2];														//2 - ??specID
+																						String specID = token[2];														//2 - ??specID
 		String orderID = token[3];														//3 - ??orderID
 		String strBattery = token[4];													//4 - battery name & id
 																						//5 - 
 		Date date1 = parseDate( token[6] );												//6 - date
-		Date date2 = parseDate( token[7] );												//7 - date
-		Date date3 = parseDate( token[8] );												//8 - date
+		parseDate( token[7] );
+		parseDate( token[8] );
 																						//9 - 
 																						//10 -
 																						//11 - 
@@ -950,10 +957,7 @@ public class LabImport {
 		Rec obsRec = null;
 		
 		
-																						//0 - hdr
-		String seqNum = token[1];														//1 - seq#
-		String specID = token[2];														//2 - 
-		String strObs = token[3];														//3 - test name & id
+																						String strObs = token[3];														//3 - test name & id
 																						//4 - 
 		String strResult = token[5];													//5 - result
 		String strUnits = token[6];														//6 - result units
@@ -962,12 +966,7 @@ public class LabImport {
 																						//9 - 
 																						//10 -
 		String strStatus = token[11];													//11 - F ????
-																						//12 - 
-		String strCondition = token[13];												//13 - 
-																						//14 - date
-		
-		
-		token = strObs.split( "\\^", 3 );
+																						token = strObs.split( "\\^", 3 );
 		if ( token.length < 3 ) System.out.println( "too few obs fields found" );
 		String loinc = token[0]	;
 		String obsDesc = token[1];
@@ -1142,7 +1141,7 @@ public class LabImport {
 		
 		for ( int i = 0; i < order.results.size(); ++i ){
 			
-			System.out.println("sizes: "+order.results.size()+","+NotesList.size());
+			//System.out.println("sizes: "+order.results.size()+","+NotesList.size());
 			
 			Result res = order.results.get( i );
 			

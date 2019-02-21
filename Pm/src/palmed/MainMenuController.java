@@ -20,9 +20,12 @@ package palmed;
 
 
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.FilenameFilter;
 import java.io.IOException;
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashMap;
@@ -80,6 +83,8 @@ import com.sun.mail.imap.protocol.FLAGS;
 import usrlib.Date;
 import usrlib.DialogHelpers;
 import usrlib.Rec;
+import usrlib.XMLElement;
+import usrlib.XMLParseException;
 import palmed.PtChartController;
 import usrlib.Dollar;
 
@@ -436,6 +441,10 @@ public class MainMenuController extends GenericForwardComposer  {
 		}else if ( itemID.equals( "labprg" )){
 			
 			createlabprgWin();
+			
+		}else if ( itemID.equals( "labimportbatch" )){
+			
+			createlabimpbatchWin();
 			
 		}else {
 			
@@ -1266,7 +1275,156 @@ public class MainMenuController extends GenericForwardComposer  {
 			return;
 	}
 
+	//createlabimpbtchWin(); 
+	
+	/**
+	 * Import a batch of Lab Reports
+	 * @throws InterruptedException 
+	 */
 
+	public void createlabimpbatchWin() throws InterruptedException{
+		showimpbatchWin();
+	}
+	
+	public void showimpbatchWin() throws InterruptedException{
+		
+		if ( Messagebox.show( "Import All the Labs in The Designated Folder?", "Import?", Messagebox.YES | Messagebox.NO, Messagebox.QUESTION ) == Messagebox.YES ){			
+			
+			String fn_config = "HL7Config.xml";
+			
+			XMLElement xml = new XMLElement();
+			FileReader reader = null;
+			
+			
+			try {
+				reader = new FileReader( Pm.getOvdPath() + File.separator + fn_config );
+		    } catch (FileNotFoundException e) {
+		    	System.out.println( "the.." + File.separator + fn_config+ "file was not found:" );
+		    	
+		    }
+			
+			try {
+				xml.parseFromReader(reader);
+			} catch (XMLParseException e ) {
+				//TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+			final XMLElement e;
+			
+			 String Name = xml.getName();
+			 //xml.countChildren();
+			 
+			 e = xml.getElementByPathName(Name);
+			 
+			String path =  e.getChildByNumber(9).getContent();
+			String Destination = e.getChildByNumber(10).getContent();
+			
+			File labs = new File( path );
+			
+			File[] matchingfiles = labs.listFiles(new FilenameFilter() { 
+				
+				public boolean accept(File labs, String name){
+					return  name.endsWith(".txt");
+				}
+				
+			});
+			
+			if ( labs.exists()) {
+			int mflength = matchingfiles.length;
+			System.out.println("Number of labs: "+mflength);
+			
+			// The Labs at the time of Import and their names
+			ArrayList<String> Labslist = new ArrayList<String>();
+			ArrayList<String> Labnames = new ArrayList<String>();
+			
+			//TODO import protocol (Send the path too) , that method archives the lab
+			
+			if ( mflength > 0 ) { 
+				
+				for ( int i = 0; i < mflength; i++){
+				
+				//System.out.println("i is: "+ i);
+				String labpath = matchingfiles[ i ].getPath();
+				String labname = matchingfiles[ i ].getName();
+				
+				//System.out.println("Alpha lab path and name: "+ labpath+ ", "+ labname);
+				
+				Labslist.add(labpath);
+				Labnames.add(labname);
+				
+								
+				}
+			
+			
+			//Labslist size
+			int ll = Labslist.size();
+			
+			for ( int i = 0; i < ll; i++){
+				
+				String Filename = Labslist.get(i);
+				//System.out.println("Imports: "+Filename);
+				LabImport.show(Filename);
+				
+			}
+			
+			//Track if export folder exists.
+			boolean exportstat = true;
+			
+			for ( int j = 0; j < ll; j++){ 
+				
+				String labfile = Labslist.get(j);
+				String labname = Labnames.get(j);
+				
+				File LabFile = new File(labfile);
+				File newLabFile = new File (Destination+labname);
+				
+				if ( !newLabFile.exists()){
+					
+					alert("Error Finding Designated Export Folder");
+					exportstat= false;
+					break;
+				}
+				
+				//System.out.println("Labfile is: "+(j+1)+", "+ LabFile+" new lab file is: "+newLabFile.getPath());
+				try {
+					FileUtils.copyFile(LabFile, newLabFile);
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				
+				LabFile.delete();
+				
+			}
+			
+			if ( exportstat ){
+			alert(Labnames.size()+" Labs have been imported and archived to: "+ Destination
+					+ ". Check lab report for import details.");
+			}else{
+				
+				alert(Labnames.size()+" Labs have been imported but were not archived to: "+ Destination
+						+ " as it doesnt exist. Check lab report for import details.");
+			}						
+			
+		  }else {
+			  
+			  alert("No Lab files were found in: "+path);
+		  } 
+			  
+			  
+			
+		}else{ alert("Error finding Designated Import Folder"); }
+		}
+		return;
+			
+	}
+
+	
+	
 	/**
 	 * Purge Lab Report
 	 * @throws InterruptedException 
@@ -1278,13 +1436,13 @@ public class MainMenuController extends GenericForwardComposer  {
 	
 	public void showprgWin() throws InterruptedException{
 		
-		if ( Messagebox.show( "Purge Lab Report ?", "Leave?", Messagebox.YES | Messagebox.NO, Messagebox.QUESTION ) == Messagebox.YES ){			
+		if ( Messagebox.show( "Purge Lab Report ?", "Purge?", Messagebox.YES | Messagebox.NO, Messagebox.QUESTION ) == Messagebox.YES ){			
 			
 			File errrpt = new File( Pm.getOvdPath() + File.separator + "LabErr");
 			
 			File[] matchingfiles = errrpt.listFiles(new FilenameFilter() { 
 				
-				public boolean accept(File visits, String name){
+				public boolean accept(File errrpts, String name){
 					return name.startsWith("lab")&& name.endsWith(".html");
 				}
 				
@@ -1301,7 +1459,7 @@ public class MainMenuController extends GenericForwardComposer  {
 				
 				errfile.delete();
 				
-				alert("File Purged!");
+				alert("Lab report file purged!");
 				
 			}
 			

@@ -113,6 +113,8 @@
 												<treeitem id="labfac" label="Lab Facilities" />
 												<treeitem id="laberr" label="Lab Import Report" />
 												<treeitem id="labprg" label="Purge Lab Report" />
+												<treeitem id="labimportbatch" label="Import Batch Labs" />
+												<treeitem id="labimport" label="Import HL7 Lab" />
 											</treechildren>
 										</treeitem>
 										
@@ -131,12 +133,13 @@
 										
 									</treechildren>
 								</treeitem>
-								 <treeitem  label="Lab" open="true" >
+								<treeitem id="labint" label="Lab Interface" />
+								<!--  <treeitem  label="Lab" open="true" >
 										 <treechildren>
 												<treeitem id="labint" label="Lab Interface" />
 												<treeitem id="labimport" label="Import HL7 Lab" />
 										</treechildren>	
-								</treeitem>
+								</treeitem>  -->
 								<treeitem id="pmimport" label="Import Documents" />
 								<treeitem id="about" label="About PAL/MED" open="false" >
 									<treechildren>
