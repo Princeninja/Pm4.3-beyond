@@ -1,6 +1,6 @@
 <?page title="The Change_log" contentType="text/html;charset=UTF-8"?>
 <zk>
-<window id="changelogWin" title="Whats new?!" mode="modal" border="normal" vflex="1" hflex="1" position="center">
+<window id="changelogWin" title="Whats new?!" mode="modal" border="normal" vflex="1" hflex="1" position="top-center">
 
 <vbox height="100%" width="100%"  align="center" pack="center" >
 
@@ -13,7 +13,7 @@
 			<tabbox id="tabbox" width="950px" > <!-- orient="vertical",mold="accordion"  --> 
 			<tabs hflex="min">
 				<tab label="4.2"  />
-				<tab label="4.29"  />
+				<tab label="4.29b"  />
 				<tab label="4.3"  /> 
 			</tabs>
 			<tabpanels>
@@ -21,9 +21,9 @@
 				<hbox> Release date : 05/10/18 </hbox>
 				<hbox> Detailed List: </hbox>
 				<hbox> ** Main Menu now has a scrollbar** </hbox>
-				<hbox> ** All new Lab interface Creates a lab request to (C:\Lab\Outgoing) </hbox>
+				<hbox> ** All new Lab interface Creates a lab request to output folder (defined in HL7Config.xml). </hbox>
 					  <hbox>  -Make sure all fields/text boxes have contents in them before submitting. The check box is for stat lab routine </hbox>
-				     <hbox>   -To switch patients click on change patients </hbox>
+				     <hbox>   -To switch patients click on change patient </hbox>
 				     <hbox>   -To add/edit test or panels go to observations </hbox>
 					  <hbox>  -Go to Edit/Add dgn codes to modify diagnosis codes**  </hbox>
 			 	<hbox> ** Patient Chart now shows the first 2 insurances for each patient if they exist. ** </hbox>
@@ -32,39 +32,60 @@
 					<hbox>   -No other similar texts should cause a repeat in the physical exam. ** </hbox> 
 				<hbox> ** New/Edit Patient Insurance tab is fully functional.  </hbox>
 					<hbox>   - The Choose Insurance button lets you search for Insurances in the database.  </hbox> 
-					<hbox>   - A user can also enter and independent Carrier by entering text and selecting Misc. </hbox>
+					<hbox>   - A user can also enter an independent Insurance Carrier by entering text and selecting Misc. </hbox>
 					<hbox>   - To remove all entered information set all the text to blank and set the dollar amounts to 0. </hbox>
 					<hbox>   - To add more insurances to the database open insurance tab in Admin. ** </hbox>    
 			 		 </tabpanel>
 			   <tabpanel >
 				<hbox> Release date : 09/28/18 </hbox>
 				<hbox> Detailed List: </hbox>
-				<hbox> ** Introducing Double-Clicking for PtSearch, InsuranceSearch and Medication Search (PtChart>Meds>Add) ** </hbox>
+				<hbox> ** Introducing Double-Clicking for PtSearch (to select patient), InsuranceSearch and Medication Search (PtChart>Meds>Add) ** </hbox>
 				<hbox> ** Lab Interface is completed and Lab Imports works on Text files** </hbox>
-				<hbox> ** All new Lab interface Creates a lab request to (C:\Lab\Outgoing) </hbox>
+				<hbox> ** All new Lab interface Creates a lab request to output folder (defined in HL7Config.xml). </hbox>
 					  <hbox>  -Lab Interface can handle all variations and n number of tests/panels. </hbox>
 				     <hbox>   -Lab Requests now include the Insurance abbreviation not the Neic code.  </hbox>
 				     <hbox>   -Lab Interface produces a requisition file when the request is saved. </hbox>
-				     <hbox>   -Lab Interface produces and extra pipe in IN with the priority number. </hbox>
-					  <hbox>  -A print protocol is shown after saving and clicking on the print button recreates the print protocol.**  </hbox>
-			 	<hbox> ** Lab import handles more complex OBR's and also quits after failed attemps or resets if an error is made. </hbox>
-			 	<hbox> ** Meds Tab was revamped it includes a Choose Provider button. ** </hbox>
+				     <hbox>   -Lab Interface produces an extra pipe (in the request file ) in the IN segment with the priority number. </hbox>
+					  <hbox>  -A print protocol is shown (for the requisition file ) after saving and clicking on the print button recreates the print protocol.**  </hbox>
+			 	<hbox> ** Lab import handles more complex OBR's and also quits (Import Hl7- single lab import ) after failed attempts or resets if an error is made. </hbox>
+			 	<hbox> ** Meds Tab was reworked; It now includes a Choose Provider button. ** </hbox>
 		  	    <hbox> ** A new verification module was added to verify which user is on the program removing the need to login every time. ** </hbox>
-			    <hbox> ** After choosing a provider the "Newrx" button is displayed allowing a prescription to be created . </hbox>
-					<hbox>   -The verification process has to be done each time. ** </hbox> 
+			    <hbox> ** After choosing a provider the "Newrx" button is displayed allowing a prescription to be created/modified . </hbox>
+					<hbox>   -The verification process has to be done each time to show the Newrx button. </hbox>
+					<hbox>   -The prescription added/modified in Newcrop displays in the SOAP sheet(in 'Old Palmed'). ** </hbox>  
 				<hbox> ** Rx Status has the same Choose provider protocol.  </hbox>
 					<hbox>   - After a provider is chosen, clicking on "Newcrop" lets you see pending prescriptions.  </hbox> 
-					<hbox>   - The prescriptions displayed are for the provider selected previously. </hbox>
+					<hbox>   - The prescriptions displayed are for the provider selected previously.** </hbox>
+				<hbox> Updated : 03/04/19 </hbox>
+				<hbox> ** Main Menu adjusted; Lab interface is now the only option available for Lab functions** </hbox>
+				<hbox> ** All new Lab components are in Admin under Lab Setups </hbox>
+					  <hbox>  -Lab Import Report allows you to view/print the lab report showing detailed info of all the labs that were imported. </hbox>
+				     <hbox>   -Purge Lab Report deletes the lab report </hbox>
+				     <hbox>   -Import Batch Labs imports all the labs in the designated folder( path defined in HL7config.xml ). </hbox>
+					 		<hbox> -When clicked it uploads all the files present at the start of the routine.</hbox>
+					 		<hbox> -Any issues with a lab in folder can be seen in the lab report after the routine is complete.</hbox> 
+					 <hbox>   -Import Hl7 (reworked) imports a single lab from a manually choosen path.**  </hbox>
+				<hbox> **Lab Tab in PtChart reworked.</hbox>
+					<hbox>   - Labs are automatically sorted based on chronological order (based on order date) and Battery, if no battery is defined, it is sorted under Misc(Miscellaneous).  </hbox> 
+					<hbox>   - To select a Battery, simply doubleclick/ select battery and click on 'View Battery' button. </hbox>
+					<hbox>   - Adjacent window shows the labs (observations) with the same buttons as before. </hbox>
+							<hbox> - Observation window now has normal range and the result displays with the right units. </hbox>
+							<hbox> - If the result is abnormal it displays as red. </hbox>			
+							<hbox> - To see more on an observation DoubleClick it/Click on it and Click edit. Notes portion reworked to be more clear and user friendly.** </hbox>
+					<hbox> **Lab Notes tab in PtChart reworked to only post non blank notes with their corresponding descriptions. **   </hbox>
+					<hbox> ** Changes to SOAP:  </hbox>
+					           <hbox>  -Standard Dictations display in edit and display properly when edited in (Admin > Standard Dictations). </hbox>
+					           <hbox>  -Choosing the Standard Dictation will display it normally in SOAP. </hbox>
+					           <hbox>  -Any issues with Standard Dictation can be solved in (Admin > Standard Dictations).** </hbox>
+				<hbox> Updated : 03/07/19 </hbox> 
+				   <hbox> **Notes column added to observation window in PtChart>Lab** </hbox>
+				   <hbox> **The date posted with LabNote(PtChart>LabNotes) is ther order date not date created. </hbox>          
 				 </tabpanel>		
 			 <tabpanel >
-				<hbox> Release date : 11/01/18 </hbox>
+				<hbox> Release date : TBD </hbox>
 				<hbox> Detailed List: </hbox>
-				<hbox> ** Changes to SOAP: ** </hbox>
-					           <hbox>  -Standard Dictations display in edit and display mode properly. (Admin > Standard Dictations) </hbox>
-					           <hbox>  -Choosing the Standard Dictation will display it normally  (as above) in SOAP. </hbox>
-					           <hbox>  -If you choose the Standard Dictation and it displays wrongly, it needs to be edited in (Admin > Standard Dictations). </hbox>
-				<hbox> ** Office Visits** </hbox>
-				<hbox> **Rest  Coming Soon** </hbox>
+				<hbox> ** Office Visits (Interactive Soap Sheet )** </hbox>
+				<hbox> **Rest TBD ** </hbox>
 			</tabpanel>			 
 		</tabpanels>
 		</tabbox>

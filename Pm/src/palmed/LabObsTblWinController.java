@@ -77,20 +77,21 @@ public class LabObsTblWinController extends GenericForwardComposer {
 	
 	
 	// Refresh listbox when needed
-	public void refreshList(){ refreshList( null ); }
+	public void refreshList(){ refreshList( null,labObsTblListbox, null ); }
 	
-	public void refreshList( String searchString ){
-
-		// which kind of list to display (from radio buttons)
+	public void refreshList( String searchString, Listbox listbox, String controller ){
+		
 		int display = 1;
+		if ( controller == null){
+		// which kind of list to display (from radio buttons)
 		if ( r_active.isSelected()) display = 1;
 		if ( r_inactive.isSelected()) display = 2;
 		if ( r_all.isSelected()) display = 3;
-		
-		if ( labObsTblListbox == null ) return;
+		}
+		if (  listbox == null ) return;
 		
 		// remove all items
-		ZkTools.listboxClear( labObsTblListbox );
+		ZkTools.listboxClear( listbox );
 		
 		
 		// search string passed?
@@ -127,11 +128,15 @@ public class LabObsTblWinController extends GenericForwardComposer {
 					
 					// create new Listitem and add cells to it
 					Listitem i;
-					(i = new Listitem()).setParent( labObsTblListbox );
+					(i = new Listitem()).setParent( listbox );
 					i.setValue( new Rec( lab.getRec().getRec()));
 					
+					if ( controller == null){
 					new Listcell( lab.getAbbr()).setParent( i );
-					new Listcell( lab.getDesc()).setParent( i );
+					new Listcell( lab.getDesc()).setParent( i ); } else{
+						
+					new Listcell( lab.getDesc()).setParent( i );	
+					}
 				}
 			}
 		}
@@ -155,7 +160,7 @@ public class LabObsTblWinController extends GenericForwardComposer {
 		//	DialogHelpers.Messagebox( "Please enter at least three letters in search field." );
 		//	return;
 		//}
-		refreshList(( s.length() < 1 ) ? null: s );
+		refreshList(( s.length() < 1 ) ? null: s, labObsTblListbox, null );
 		return;
 	}
 	

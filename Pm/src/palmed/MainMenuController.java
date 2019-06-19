@@ -499,10 +499,14 @@ public class MainMenuController extends GenericForwardComposer  {
 	public void test() throws Exception {
 		
 		
-		SoapShtExamWinController SSEW;
+		//SoapShtExamWinController SSEW;
+		
+		//alert("April is Weird but Cute!");
 		
 		//SSEW = new SoapShtExamWinController();
-		System.out.println(Themes.getThemes());
+		//System.out.println(Themes.getThemes());
+		System.out.println((char)27 +"[1m testing bold");
+
 		//if ( ! SSEW.read()) System.out.println("file.read isn't working");
 		/*
 		int b = 3;
@@ -1335,7 +1339,7 @@ public class MainMenuController extends GenericForwardComposer  {
 			
 			if ( labs.exists()) {
 			int mflength = matchingfiles.length;
-			System.out.println("Number of labs: "+mflength);
+			//System.out.println("Number of labs: "+mflength);
 			
 			// The Labs at the time of Import and their names
 			ArrayList<String> Labslist = new ArrayList<String>();
@@ -1359,7 +1363,18 @@ public class MainMenuController extends GenericForwardComposer  {
 								
 				}
 			
+			//Track if export folder exists.
+			boolean exportstat = true;
+			File exportlabs = new File( Destination );
 			
+			if ( !exportlabs.exists()){
+				
+				alert("Error Finding Designated Archive Folder");
+				exportstat= false;
+				
+			}
+				
+				
 			//Labslist size
 			int ll = Labslist.size();
 			
@@ -1369,27 +1384,14 @@ public class MainMenuController extends GenericForwardComposer  {
 				//System.out.println("Imports: "+Filename);
 				LabImport.show(Filename);
 				
-			}
-			
-			//Track if export folder exists.
-			boolean exportstat = true;
-			
-			for ( int j = 0; j < ll; j++){ 
 				
-				String labfile = Labslist.get(j);
-				String labname = Labnames.get(j);
+				//String labfile = Labslist.get(j);
+				String labname = Labnames.get(i);
 				
-				File LabFile = new File(labfile);
+				File LabFile = new File(Filename);
 				File newLabFile = new File (Destination+labname);
 				
-				if ( !newLabFile.exists()){
-					
-					alert("Error Finding Designated Export Folder");
-					exportstat= false;
-					break;
-				}
-				
-				//System.out.println("Labfile is: "+(j+1)+", "+ LabFile+" new lab file is: "+newLabFile.getPath());
+				if ( exportstat ){
 				try {
 					FileUtils.copyFile(LabFile, newLabFile);
 				} catch (IOException e1) {
@@ -1397,9 +1399,16 @@ public class MainMenuController extends GenericForwardComposer  {
 					e1.printStackTrace();
 				}
 				
-				LabFile.delete();
+				LabFile.delete(); 
 				
+				}				
 			}
+			
+			
+			
+			//for ( int j = 0; j < ll; j++){ 
+				
+			//}
 			
 			if ( exportstat ){
 			alert(Labnames.size()+" Labs have been imported and archived to: "+ Destination
@@ -1407,7 +1416,7 @@ public class MainMenuController extends GenericForwardComposer  {
 			}else{
 				
 				alert(Labnames.size()+" Labs have been imported but were not archived to: "+ Destination
-						+ " as it doesnt exist. Check lab report for import details.");
+						+ " as it doesn't exist. Check lab report for import details.");
 			}						
 			
 		  }else {
@@ -1417,7 +1426,7 @@ public class MainMenuController extends GenericForwardComposer  {
 			  
 			  
 			
-		}else{ alert("Error finding Designated Import Folder"); }
+		}else{ alert("Error finding Designated Incoming Folder"); }
 		}
 		return;
 			
@@ -1448,6 +1457,7 @@ public class MainMenuController extends GenericForwardComposer  {
 				
 			});
 			
+			if (errrpt.exists()){
 			int mflength = matchingfiles.length;
 			
 			if ( mflength > 0 ) { 
@@ -1461,9 +1471,9 @@ public class MainMenuController extends GenericForwardComposer  {
 				
 				alert("Lab report file purged!");
 				
-			}
+			}else{  alert("No files in LabErr!"); }
 			
-			
+			}else { alert("LabErr folder not found."); }
 		}		
 		return;
 			
@@ -1494,6 +1504,7 @@ public class MainMenuController extends GenericForwardComposer  {
 			
 		});
 		
+		if (errrpt.exists()){
 		int mflength = matchingfiles.length;
 		System.out.println("number of files : " + mflength  );
 		
@@ -1543,7 +1554,10 @@ public class MainMenuController extends GenericForwardComposer  {
 		iframe.setContent( amedia );
 		iframe.setParent( mainMenuWindow );
 		
-	}
+	
+		}else{  alert("No files in LabErr!"); }
+		
+	}else { alert("LabErr folder not found."); }
 		
 			return;
 	}

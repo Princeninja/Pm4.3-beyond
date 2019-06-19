@@ -81,10 +81,10 @@
 				<hbox> Lang: <label id="ptLanguage" /> </hbox>
 			</vbox>
 			<vbox>
-				<hbox> Ins1: <label id="ins1cmp" value="CompanyName1" /> </hbox>
+				<hbox> Ins 1: <label id="ins1cmp" value="CompanyName1" /> </hbox>
 				<hbox> <label id="ins1id" value="idnumxxxxx" />,  <label id="ins1grp" value="grpnumxxx" /></hbox>
 
-				<hbox> Ins2: <label id="ins2cmp" value="CompanyName2" /> </hbox>
+				<hbox> Ins 2: <label id="ins2cmp" value="CompanyName2" /> </hbox>
 				<hbox> <label id="ins2id" value="idnumxxxxx" />,  <label id="ins2grp" value="grpnumxxx" /></hbox>
 			</vbox>
 			

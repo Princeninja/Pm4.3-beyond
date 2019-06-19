@@ -10,12 +10,14 @@
 <space />
 <hbox pack="stretch" width="100%"> 
 			<vbox>
-				<hbox> Expected date : 10/12/18 </hbox>
+				<hbox> Expected release date : 04/01/19 </hbox>
 				<hbox> Update List: </hbox>
 				<hbox> 1.Office Visits ( Interactive Soap Sheets) </hbox>
+				<hbox> 2.TBD </hbox>
+				<!--  <hbox> 1.Office Visits ( Interactive Soap Sheets) </hbox>
 				<hbox> 2.Complete Patient Creating/Editing  </hbox>
 				<hbox> 3.Swap and Delete Insurance under Edit Pt </hbox>
-				<hbox> 4.??? </hbox>
+				<hbox> 4.TBD </hbox>-->
 			 </vbox>
 </hbox>
 <space />

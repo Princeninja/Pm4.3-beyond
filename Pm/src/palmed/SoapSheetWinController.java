@@ -1,17 +1,11 @@
 package palmed;
 
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
-import java.io.FileWriter;
+import java.io.FilenameFilter;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-import java.nio.file.StandardOpenOption;
 import java.util.ArrayList;
-import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -20,6 +14,7 @@ import org.apache.commons.io.FileUtils;
 import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.Execution;
 import org.zkoss.zk.ui.Executions;
+import org.zkoss.zk.ui.SuspendNotAllowedException;
 import org.zkoss.zk.ui.event.Event;
 import org.zkoss.zk.ui.event.EventListener;
 import org.zkoss.zk.ui.event.Events;
@@ -32,10 +27,8 @@ import org.zkoss.zul.Div;
 import org.zkoss.zul.Grid;
 import org.zkoss.zul.Groupbox;
 import org.zkoss.zul.Hbox;
-import org.zkoss.zul.Image;
 import org.zkoss.zul.Label;
 import org.zkoss.zul.Listbox;
-import org.zkoss.zul.Listcell;
 import org.zkoss.zul.Listitem;
 import org.zkoss.zul.Messagebox;
 import org.zkoss.zul.Row;
@@ -43,6 +36,8 @@ import org.zkoss.zul.Rows;
 import org.zkoss.zul.Tab;
 import org.zkoss.zul.Tabpanel;
 import org.zkoss.zul.Textbox;
+import org.zkoss.zul.Toolbarbutton;
+import org.zkoss.zul.Vbox;
 import org.zkoss.zul.Window;
 
 import palmed.PhyExamWinController.Impressions;
@@ -50,10 +45,8 @@ import palmed.PhyExamWinController.Impressions;
 import usrlib.Date;
 import usrlib.DialogHelpers;
 import usrlib.EditHelpers;
-import usrlib.ImageHelper;
 import usrlib.Rec;
 import usrlib.Reca;
-import usrlib.UnitHelpers;
 import usrlib.XMLElement;
 import usrlib.XMLParseException;
 import usrlib.ZkTools;
@@ -63,40 +56,22 @@ public class SoapSheetWinController extends GenericForwardComposer {
 	
 	private Rec	ptRec = null;
 	private Reca soapReca = null;
-	private String Vfile = null;
+	private String Vfilef, Vfile = null;
 	private String Debug = null;
 	Rec provRec = new Rec( 2 );
 	
 	// Display fields at top of chart (ALL AUTOWIRED)
 	private Window soapShtWin;
-	private Window ptChartWin;		// autowired
+	private Component Component = null;
 	private Label ptname;			// autowired - patient name
-	private Label ptnum;			// autowired - patient number
-	private Label ptssn;			// autowired - patient SSN
-	private Label ptrec;			// autowired - pt record number
 	private Label ptsex;			// autowired - pt sex
-	private Label ptdob;			// autowired - pt birthdate
 	private Label ptage;			// autowired - pt age
-	private Label ptRace;			// autowired
-	private Label ptEthnicity;		// autowired
-	private Label ptLanguage;		// autowired
-	
-	private Image ptImage;			// autowired - pt's picture
-	
-	private Label address1;
-	private Label address2;
-	private Label address3;
-	private Label home_ph;
-	private Label work_ph;
-	
+	private Label ptrace;			// autowired - pt age
 	private Listbox meds;			// autowired - medications listbox
 	private Listbox pars;			// autowired - pars listbox
 	private Listbox problems;		// autowired - problems listbox
 	
 	private Listbox mrlog_listbox;	// autowired - MrLog listbox
-	private Hbox ehbox;
-	
-	private Button save;
 	private Button end;
 	
 	Listbox lboxProblems2;
@@ -104,41 +79,24 @@ public class SoapSheetWinController extends GenericForwardComposer {
 	Listbox lboxAlerts;
 	Listbox lboxProviders;			// autowired - provider select box
 	
-
-	// Tabs and Tabpanels for main part of chart  (ALL AUTOWIRED)
 	private Tab tabSheet;			// autowired - tab
-	private Tabpanel tpSheet;		// autowired - tabpanel
 	private Tab tabLast;			// autowired - tab
 	private Tabpanel tpLast;		// autowired - tabpanel
 	private Tab tabSubject;			// autowired - tab
-	private Tabpanel tpSubject;		// autowired - tabpanel
 	private Tab tabROS;				// autowired - tab
-	private Tabpanel tpROS;			// autowired - tabpanel
-	private Tab tabHx;				// autowired - tab
-	private Tabpanel tpHx;			// autowired - tabpanel
 	private Tab tabVitals;			// autowired - tab
-	private Tabpanel tpVitals;		// autowired - tabpanel
 	private Tab tabExam;			// autowired - tab
-	private Tabpanel tpExam;		// autowired - tabpanel
 	private Tab tabAssess;			// autowired - tab
 	private Tabpanel tpAssess;		// autowired - tabpanel
 	private Tab tabOrders;			// autowired - tab
-	private Tabpanel tpOrders;		// autowired - tabpanel
-	private Tab tabRX;				// autowired - tab
-	private Tabpanel tpRX;			// autowired - tabpanel
 	private Tab tabFU;				// autowired - tab
-	private Tabpanel tpFU;			// autowired - tabpanel
 	private Tab tabCharge;			// autowired - tab
-	private Tabpanel tpCharge;		// autowired - tabpanel
 	private Tab tabSummary;			// autowired - tab
 	private Tabpanel tpSummary;		// autowired - tabpanel
 	
 	
 	
-	// Windows for each tab opened in main part of soap sheet  (NOT AUTOWIRED)	
-	private Window sheetWin = null;			// Window
 	private boolean lastWin = false;		// Window
-	private Window subjectWin = null;		// Window
 	private Window rosWin = null;			// Window
 	private Window hxWin = null;			// Window
 	private Window vitalsWin = null;		// Window
@@ -146,7 +104,7 @@ public class SoapSheetWinController extends GenericForwardComposer {
 	private Window assessWin = null;		// Window
 	private Window ordersWin = null;		// Window
 	private Window rxWin = null;			// Window
-	private Window fuWin = null;			// Window
+	private Window FUWin = null;			// Window
 	private Window chargeWin = null;		// Window
 	private Window summaryWin = null;		// Window
 	
@@ -157,7 +115,7 @@ public class SoapSheetWinController extends GenericForwardComposer {
 	private Groupbox gbEx;
 	private Groupbox gbOrders;
 	private Groupbox gbRX;
-	private Groupbox gbFU;
+	private Groupbox gbxFU;
 	private Groupbox gbCharge;
 	
 	private Textbox cc;
@@ -176,23 +134,20 @@ public class SoapSheetWinController extends GenericForwardComposer {
 	//private boolean newcropManagedPARs = false;	// flag that NewCrop will manage all PARs
 	
 	
-	private Div divOrders;
-	
 	private Textbox soapTextbox;			// autowired - last soap textbox
 	private Textbox noteTextbox;			// autowired - last nursing notes
 	private Textbox labTextbox;				// autowired - recent lab reports
 	
 
-	private Component parent;
-	
 	private MedPt	medPt;			// patient's medical record
 	private DirPt  dirPt;
 	private usrlib.Date lastVisitDate;		// last visit date (determine from last soap date for now)
 	
-	private String  Provider, CC , Subj,  ROS, Hx, Vitals, Exam, Assess, Orders, RX, FU, Charge, summary, Status;
+	private String  Provider, CC , Subj,  ROS, Hx, Vitals, Exam, Assess, Orders, RX, FU, Charge, summary, Status, fStatus;
 	
 	private boolean noAssessment = false;
 	
+	private Toolbarbutton ptchartbtn,docsbtn, labibtn ; 
 	
 	
 	public void doAfterCompose( Component component ){
@@ -206,7 +161,7 @@ public class SoapSheetWinController extends GenericForwardComposer {
 		}
 		//System.out.println( "in doAfterCompose()" );
 		
-
+		Component = component;
 		
 		// Get arguments from map
 		Execution exec=Executions.getCurrent();
@@ -215,14 +170,14 @@ public class SoapSheetWinController extends GenericForwardComposer {
 			Map<String, Object> myMap = exec.getArg();
 			if ( myMap != null ){
 				try{ ptRec = (Rec) myMap.get( "ptRec" ); } catch ( Exception e ) { /* ignore */ };
-				try{ Vfile = (String) myMap.get( "Vfile" ); } catch ( Exception e ) { /* ignore */ };
+				try{ Vfilef = (String) myMap.get( "Vfile" ); } catch ( Exception e ) { /* ignore */ };
 				try{ Debug = (String) myMap.get( "Debug" ); } catch ( Exception e ) { /* ignore */ };
 				
 			}
 		}
 		
 		if ( ptRec == null ) System.out.println( "ptRec == null" );
-		if ( Vfile != null ) {System.out.println("Vfile is : "+ Vfile);}
+		if ( Vfilef != null ) {System.out.println("Vfile is : "+ Vfilef);}
 		else {System.out.println( "Vfile == null" );}
 		if (Debug == null ) System.out.println( "Debug == null");
 		
@@ -251,7 +206,7 @@ public class SoapSheetWinController extends GenericForwardComposer {
 		// tpSheet.setVisible(false);		
 		 //tabLast.setVisible(false);		
 		 tpLast.setVisible(false);	
-		 tabLast.setDisabled(true);
+		 tabLast.setDisabled(false);
 		 tpLast.setVisible(false);
 		 tabROS.setVisible(false);			
 		 //tpHx.setVisible(false);			
@@ -269,6 +224,19 @@ public class SoapSheetWinController extends GenericForwardComposer {
 		FileReader reader = null;
 	
 		//System.out.println("visit is: "+ visit);
+		
+		File visitfolderf = new File(Vfilef);
+		
+		File[] matchingfile = visitfolderf.listFiles(new FilenameFilter() { 
+			
+			public boolean accept(File visitfolderf, String name){
+				return name.startsWith("Visit")&& name.endsWith("xml");
+			}
+			
+		});
+		
+		Vfile = matchingfile[0].getPath();
+		
 		try {
 			reader = new FileReader( Vfile );
 	    } catch (FileNotFoundException e) {
@@ -289,64 +257,84 @@ public class SoapSheetWinController extends GenericForwardComposer {
 		final XMLElement e;
 				
 		 String Name = xml.getName();
-		 final int NosChildren = xml.countChildren();
-		 //System.out.println("Number of children: "+NosChildren +","+Name);
+		 xml.countChildren();
 		 
 		 e = xml.getElementByPathName(Name);
 		
 		
 		 XMLElement Info = new XMLElement();
-		 XMLElement Todo = new XMLElement();
+		 new XMLElement();
 		 
 		 		 
 			
 		 Info = e.getChildByName("INFO");
 		 //Todo = e.getChildByName("TODO");
 		 Status = Info.getChildByName("Status").getContent().trim();
+		 
+		 
+		 Status = deleteachar(Status, 0);
+		
+		 Status = deleteachar(Status, Status.length()-1);
+		 
+		 fStatus = Status;
+		 
 		 System.out.println("Status is: "+Status);
 		 
 		 if ( Status.equals("Exam Room")){
 			
-			 soapShtWin.setPosition("center,left");
+			 //soapShtWin.setPosition("center");
+			 
+			 soapShtWin.setPosition("left_top");
 			 
 			 tabLast.setDisabled(false);
-			 tabLast.setSelected(true);
+			 tabSheet.setSelected(true);
+			 //Event ev = null;
+			 //onSelect$tabSheet(ev);
 			 //onSelect$tabLast(null);
 			 
 				tabExam.setVisible(true);
-				Exam = Info.getChildByName("Exam").getContent().trim();
-				 if ( !Exam.equals("QExamQ")){ ExamTextbox.setText(Exam); } else { ExamTextbox.setText(""); }
+				//Exam = Info.getChildByName("Exam").getContent().trim();
+				// if ( !Exam.equals("QExamQ")){ ExamTextbox.setText(Exam); } else { ExamTextbox.setText(""); }
 
-		 }else{ tabSubject.setSelected(true); }
+		 }else{ 
+			 
+			 soapShtWin.setPosition("left_top");
+			 
+			 tabSubject.setSelected(true); }
 		 
 		 if (  Status.equals("Triage") ){
 		 
-			 	tabOrders.setVisible(true);
-			 	Orders = Info.getChildByName("Orders").getContent().trim();
-			 	if ( !Orders.equals("QOrdersQ")){ OrdersTextbox.setText(Orders); } else { OrdersTextbox.setText(""); }
-
+			 	tabVitals.setVisible(true);
+				Vitals = Info.getChildByName("Vitals").getContent().trim();
+				if ( !Vitals.equals("QVitalsQ")){  VitalsTextbox.setText(Vitals); } else {  VitalsTextbox.setText(""); }
+				 
+			 	
 		 }
 		 
-		 if ( Status.equals("Exam Room") || Status.equals("Triage") ){
+		 if ( Status.equals("Exam Room") ){
 				
 			 	tabAssess.setVisible(true); 
 			 	 Assess = Info.getChildByName("Assesment").getContent().trim();
 			 	if ( Assess.equals("QAssessQ") || Assess.length() < 3) { noAssessment = true; }
 
-			 	 
+			 	tabOrders.setVisible(true);
+			 	Orders = Info.getChildByName("Orders").getContent().trim();
+			 	if ( !Orders.equals("QOrdersQ")){ OrdersTextbox.setText(Orders); } else { OrdersTextbox.setText(""); }
+
+			 	
 				tabVitals.setVisible(true);
 				Vitals = Info.getChildByName("Vitals").getContent().trim();
 				if ( !Vitals.equals("QVitalsQ")){  VitalsTextbox.setText(Vitals); } else {  VitalsTextbox.setText(""); }
 				 
 				
 				tabROS.setVisible(true); 
-				ROS = Info.getChildByName("ROS").getContent().trim();
-				if ( !ROS.equals("QROSQ")){ RosTextbox.setText(ROS); } else { RosTextbox.setText(""); }
+				//ROS = Info.getChildByName("ROS").getContent().trim();
+				//if ( !ROS.equals("QROSQ")){ RosTextbox.setText(ROS); } else { RosTextbox.setText(""); }
 
 		 }
 		 
 		 
-		 if ( Status.equals("Post Visit")){
+		/* if ( Status.equals("Post Visit")){
 			 	
 			 	tabFU.setVisible(true);
 			 	FU = Info.getChildByName("FU").getContent().trim();
@@ -360,20 +348,20 @@ public class SoapSheetWinController extends GenericForwardComposer {
 			 	Charge = Info.getChildByName("Charge").getContent().trim();
 			 	if ( !Charge.equals("QChargeQ")){ ChargeTextbox.setText(Charge); } else { ChargeTextbox.setText(""); }
 				
-		 }
+		 }*/
 		 
 		 if ( Status.equals("End")){
 			 
 			 end.setVisible(true);
-			 soapShtWin.setPosition("center,left");
+			 soapShtWin.setPosition("left_top");
 			 
 			 tabLast.setDisabled(false);
 			 tpLast.setVisible(true);
 			 tabLast.setVisible(true);
 						 
 			 tabExam.setVisible(true);
-			 Exam = Info.getChildByName("Exam").getContent().trim();
-				 if ( !Exam.equals("QExamQ")){ ExamTextbox.setText(Exam); } else { ExamTextbox.setText(""); }
+			 //Exam = Info.getChildByName("Exam").getContent().trim();
+			// if ( !Exam.equals("QExamQ")){ ExamTextbox.setText(Exam); } else { ExamTextbox.setText(""); }
 
 			tabOrders.setVisible(true);
 			Orders = Info.getChildByName("Orders").getContent().trim();
@@ -390,20 +378,22 @@ public class SoapSheetWinController extends GenericForwardComposer {
 				 
 				
 			tabROS.setVisible(true); 
-			ROS = Info.getChildByName("ROS").getContent().trim();
-			if ( !ROS.equals("QROSQ")){ RosTextbox.setText(ROS); } else { RosTextbox.setText(""); }
+			//ROS = Info.getChildByName("ROS").getContent().trim();
+			//if ( !ROS.equals("QROSQ")){ RosTextbox.setText(ROS); } else { RosTextbox.setText(""); }
 	 
 			tabFU.setVisible(true);
-		 	FU = Info.getChildByName("FU").getContent().trim();
-		 	if ( !FU.equals("QFUQ")){ FUTextbox.setText(FU); } else { FUTextbox.setText(""); }
+		 	//FU = Info.getChildByName("FU").getContent().trim();
+		 	//if ( !FU.equals("QFUQ")){ FUTextbox.setText(FU); } else { FUTextbox.setText(""); }
 
 		 	
 		    tabSummary.setVisible(true);
 		    summary = Info.getChildByName("Summary").getContent().trim();
 		    
-		 	tabCharge.setVisible(true);
+		    //onSelect$tabROS(ev);
+		    
+		 	/*tabCharge.setVisible(true);
 		 	Charge = Info.getChildByName("Charge").getContent().trim();
-		 	if ( !Charge.equals("QChargeQ")){ ChargeTextbox.setText(Charge); } else { ChargeTextbox.setText(""); }
+		 	if ( !Charge.equals("QChargeQ")){ ChargeTextbox.setText(Charge); } else { ChargeTextbox.setText(""); }*/
 	
 			 
 		 }
@@ -426,7 +416,7 @@ public class SoapSheetWinController extends GenericForwardComposer {
 		 if ( !Subj.equals("QHPIQ")){ subj.setText(Subj); } else { subj.setText(""); }
 		 		 
 		 
-		 if ( !Hx.equals("QHxQ")){ HxTextbox.setText(Hx); } else { HxTextbox.setText(""); }
+		// if ( !Hx.equals("QHxQ")){ HxTextbox.setText(Hx); } else { HxTextbox.setText(""); }
 			
 		 		 
 		 if ( !RX.equals("QRXQ")){ RxTextbox.setText(RX); } else { RxTextbox.setText(""); }
@@ -435,7 +425,9 @@ public class SoapSheetWinController extends GenericForwardComposer {
 		 
 		 
 		soapShtWin.setClosable(true);
-		
+		//soapShtWin.setMinimizable(true);
+		soapShtWin.setSizable(true);
+		soapShtWin.setMaximizable(true);
 		
 		/* java.util.Calendar calendar00 = GregorianCalendar.getInstance(); 
 		 int hour00 = calendar00.get(java.util.Calendar.HOUR_OF_DAY);
@@ -483,7 +475,7 @@ public class SoapSheetWinController extends GenericForwardComposer {
 		//ptdob.setValue( dirPt.getBirthdate().getPrintable( 9 ));
 		ptage.setValue( Date.getPrintableAge( dirPt.getBirthdate()));
 		
-		//ptRace.setValue( dirPt.getRace().getLabel());
+		ptrace.setValue( dirPt.getRace().getLabel());
 		//ptEthnicity.setValue( dirPt.getEthnicity().getLabel());
 		//ptLanguage.setValue( dirPt.getLanguage().getLabel());
 
@@ -504,8 +496,86 @@ public class SoapSheetWinController extends GenericForwardComposer {
 		work_ph.setValue( dirPt.getAddress().getWork_ph());
 		home_ph.setValue( dirPt.getAddress().getHome_ph());
 		}*/
+			
+		// get patient's medical record
+		medPt = new MedPt( dirPt.getMedRec());
+		
+
+		ERxConfig eRx = new ERxConfig();
+		eRx.read();
+				
+		
+		
+		refreshProblems();
+		
+		// register Prob list callback
+		Notifier.registerCallback( new NotifierCallback(){
+			public boolean callback( Rec ptRec, Notifier.Event event ){
+				refreshProblems();
+				return true;
+			}
+		}, ptRec, Notifier.Event.PROB );
+		
+		
+		refreshMeds();
+		
+		// register Med list callback
+		Notifier.registerCallback( new NotifierCallback(){
+			public boolean callback( Rec ptRec, Notifier.Event event ){
+				refreshMeds();
+				return true;
+			}
+		}, ptRec, Notifier.Event.MED );
+		
+		
+		refreshPARs();
+		
+		// register PAR list callback
+		Notifier.registerCallback( new NotifierCallback(){
+			public boolean callback( Rec ptRec, Notifier.Event event ){
+				refreshPARs();
+				return true;
+			}
+		}, ptRec, Notifier.Event.PAR );
+		
+		
+		// Register Alert list for callbacks
+		Notifier.registerCallback( new NotifierCallback(){
+			public boolean callback( Rec ptRec, Notifier.Event event ){
+				refreshAlerts();
+				return true;
+			}
+		}, ptRec, Notifier.Event.PROB );
+		
+		Notifier.registerCallback( new NotifierCallback(){
+			public boolean callback( Rec ptRec, Notifier.Event event ){
+				refreshAlerts();
+				return true;
+			}
+		}, ptRec, Notifier.Event.MED );
+
+		Notifier.registerCallback( new NotifierCallback(){
+			public boolean callback( Rec ptRec, Notifier.Event event ){
+				refreshAlerts();
+				return true;
+			}
+		}, ptRec, Notifier.Event.LAB );
+		
+		Notifier.registerCallback( new NotifierCallback(){
+			public boolean callback( Rec ptRec, Notifier.Event event ){
+				refreshAlerts();
+				return true;
+			}
+		}, ptRec, Notifier.Event.VITALS );
 
 		
+		
+		
+		 if ( Status.equals("Exam Room")){
+			 
+			 tabSheet.setSelected(true);
+			 			 
+		 }
 		
 		// Fill some listboxes
 		Prov.fillListbox( lboxProviders, true );
@@ -560,12 +630,6 @@ public class SoapSheetWinController extends GenericForwardComposer {
 
 		return;
 	}
-	
-	
-	
-	
-	
-	
 	
 	
 	
@@ -666,6 +730,8 @@ public class SoapSheetWinController extends GenericForwardComposer {
 			
 			Cmed med = new Cmed( reca );
 			String code = med.getDrugCode();
+			//TODO use different method for speed test else move whole method.
+			//med.getDrugName();
 			NCFull nc = NCFull.readMedID( code );
 			if ( nc != null ){
 				String etc = nc.getMedEtc();
@@ -688,7 +754,7 @@ public class SoapSheetWinController extends GenericForwardComposer {
 	
 	
 	
-	private void build_carelog(){
+	/*private void build_carelog(){
 	
 		// populate MrLog listbox 
 		for ( Reca reca = medPt.getMrLogReca(); Reca.isValid( reca ); ){
@@ -707,11 +773,11 @@ public class SoapSheetWinController extends GenericForwardComposer {
 		}
 
 	}
-	
+	*/
 	
 	//Sheet Tab
 	
-	public void onSelect$tabSheet( Event e ){ 
+	/*public void onSelect$tabSheet( Event e ){ 
 		
 
 		// get patient's medical record
@@ -722,11 +788,6 @@ public class SoapSheetWinController extends GenericForwardComposer {
 		eRx.read();
 		//newcropManagedMeds = eRx.getNewcropManagedMeds();
 		//newcropManagedPARs = eRx.getNewcropManagedPARs();
-		
-		
-
-		
-		
 		
 		
 		
@@ -766,7 +827,7 @@ public class SoapSheetWinController extends GenericForwardComposer {
 		
 		
 		
-		refreshAlerts();
+		//refreshAlerts();
 		
 		// Register Alert list for callbacks
 		Notifier.registerCallback( new NotifierCallback(){
@@ -802,17 +863,21 @@ public class SoapSheetWinController extends GenericForwardComposer {
 		
 		
 	}
-	
+	*/
 	
 	// Exam Tab
 
 	public void onSelect$tabExam( Event e ){
+		
+		soapShtWin.setPosition("left,top");
+		
 		if ( Status.equals("End") || Status.equals("Exam Room")){
 			
 		if ( examWin == null ) examWin = build_examWin();}
 		//System.out.println("window?");
 	}
-
+	
+	Xmlwindow exam = null;
 	private Window build_examWin(){
 		
 		// pass parameters to new window
@@ -821,291 +886,132 @@ public class SoapSheetWinController extends GenericForwardComposer {
 		//myMap.put("Vfile", Vfile);
 		myMap.put("Textbox", ExamTextbox);
 		//System.out.println("here exam");
-		return (Window) Executions.createComponents("phyexam.zul", gbEx, myMap );
+		//return (Window) Executions.createComponents("phyexam.zul", gbEx, myMap );
+	
+		Window build_examWin = new Window();
+		exam = new Xmlwindow();
+		
+		XMLElement xml = new XMLElement();
+		FileReader reader = null;
+		
+		String fn_config = "H&P.xml";
+		String fullpath = Pm.getOvdPath() + File.separator + fn_config;
+						
+		try {
+			reader = new FileReader( exam.MainFile(fullpath, ptRec, "Exam", Vfilef).getAbsolutePath() );
+	    } catch (FileNotFoundException e) {
+	    	System.out.println( "the.." + File.separator + fn_config+ "file was not found:" );
+	    	
+	    }
+		
+		try {
+			xml.parseFromReader(reader);
+		} catch (XMLParseException e ) {
+			//TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		build_examWin =  exam.setXmlWin(gbEx, exam);
+		String[] Tabboxms = new String[] {"550px", "875px"};
+		exam.initializexml( Tabboxms, "PAGE", "SYSTEM", "FINDING",  xml, false, "","",true,"","CODE");
+		exam.createxml();	
+		
+		
+		return build_examWin;
+		
 		
 	}
-	 List<Object> Imps = new ArrayList<Object>();
-	 Textbox Te30 = new Textbox();
-	 Textbox t30 = new Textbox();
+
+	boolean boolass = true;
+	Button Bass;
 	// Assesment Tab
 	
-	public void onSelect$tabAssess( Event e )
-	
-	{ if ( Status.equals("Exam Room") || Status.equals("Triage") ){
+	public void onSelect$tabAssess( Event e ){
+		
+		
+		boolass = true;
+		if ( Status.equals("Exam Room") || Status.equals("Triage") || Status.equals("End") ){
 		
 		if ( assessWin == null ) assessWin = build_AssessWin();}
 		//System.out.println("window?");
 	}
 	
-	
+	Assessment assess = new Assessment();
 	
 	private Window build_AssessWin(){
-		
+							
 		Window build_AssessWin = new Window();
+		build_AssessWin = assess.setAssessvar(tpAssess,0);
 		
-		build_AssessWin.setParent(tpAssess);
-		System.out.println("condition?: "+ noAssessment);
-		if( noAssessment == true  ) {
+		assess.createassessment(noAssessment, ptRec, Assess, true);
 		
-		 Hbox hbox03 = new Hbox();
-		 hbox03.setParent(build_AssessWin);
+		assess.setfocus(tabAssess);
 		
-		 Groupbox gbox03 = new Groupbox();
-		 gbox03.setWidth("380px");
-		 gbox03.setParent(hbox03);
-		 
-		 new Caption ("Assessments: ").setParent(gbox03);
-		
-		 Hbox ButtonHbox00 = new Hbox();
-		 ButtonHbox00.setParent(gbox03);
-		 ButtonHbox00.setWidth(gbox03.getWidth());
-		 ButtonHbox00.setPack("end");
-		 
-		 Button Add = new Button();
-		 
-		 Add.setParent(ButtonHbox00);
-		 Add.setLabel("Add Assessment");
-		 Add.setMold("trendy");
-		 
-		 Button Remove = new Button();
-		 
-		 Remove.setParent(ButtonHbox00);
-		 Remove.setLabel("Remove Assessment:");
-		 Remove.setMold("trendy");
-		 
-		 final Listbox Impslist = new Listbox();
-		 Impslist.setParent(ButtonHbox00);
-		 Impslist.setRows(1);
-		 Impslist.setMold("select");
-		 
-		 		 
-		 Grid grid01 = new Grid();
-		 grid01.setParent(gbox03);
-		 
-		 
-		 Columns Columns00 = new Columns();
-		 Columns00.setParent(grid01);
-		 
-		 Column Column00 = new Column();
-		 Column00.setWidth("23px");
-		 Column00.setParent(Columns00);
-		 
-		 Column Column01 = new Column();
-		 Column01.setParent(Columns00);
-		 
-		 final Rows rows01 = new Rows();
-		 rows01.setParent(grid01);
-		 
-		 Row row10 = new Row();
-		 row10.setParent(rows01);
-		 		 
-		 
-		 Label l10 = new Label();
-		 l10.setValue("1 ");
-		 l10.setParent(row10);
-		 
-		 t30 = new Textbox();
-		 t30.setRows(2);
-		 t30.setCols(50);
-		 t30.setParent(row10);
-		 
-		 tabAssess.addEventListener(Events.ON_CLICK, new EventListener(){
-
-			public void onEvent(Event arg0) throws Exception {
-				t30.setFocus(true);
-				
-			}
-			 
-		 });
-		 
-		 Imps = new ArrayList<Object>();
-		 final PhyExamWinController PhyEx = new PhyExamWinController();					 
-		 
-		 Add.addEventListener(Events.ON_CLICK, new EventListener(){
-
-				public void onEvent(Event arg0) throws Exception {
-					// TODO Auto-generated method stub
-					
-					 Impressions Imp = PhyEx.new Impressions(rows01);
-					 
-					 int i = 2;
-					 String num = Integer.toString(Imps.size()+i);  
-					 
-					 Imp.createImpression(num);
-					 Imps.add(Imp);		
-					 
-					 Listitem jj = new Listitem();
-					 jj.setLabel(num);
-					 jj.setParent(Impslist);
-					 
-					 Impslist.setSelectedItem(Impslist.getItemAtIndex(0));
-					
-				}});
-		 	 	 
-		 		 
-		 Remove.addEventListener(Events.ON_CLICK, new EventListener(){
-
-			public void onEvent(Event arg0) throws Exception {
-				// TODO Auto-generated method stub
-				
-				if ( Impslist.getSelectedCount() < 1 ){
-					try {Messagebox.show( "No Assessment is currently available to remove. ");  } catch  (InterruptedException e) { /*ignore*/ }
-				return;
-				}
-				
-				int nos = Integer.parseInt(Impslist.getSelectedItem().getLabel().toString().trim()) - 2;
-								
-				Object O = Imps.get(nos);
-												
-				((Impressions) O).deleteImpression();
-				
-				if ( Imps.size() > nos +1 ){
-				
-				Object I = Imps.get(nos+1);
-				((Impressions) I).newlbl(Impslist.getSelectedItem().getLabel().toString().trim());
-								
-				if ( Imps.size() > (nos+2) ){
-					
-					for ( int i=0; i < (Imps.size()-(nos+2)); i++) {
-						
-						int s = Integer.parseInt(Impslist.getSelectedItem().getLabel().toString().trim())+i;
-												
-						Object J = Imps.get(s);
-												
-						int sn = s+1;
-						
-						((Impressions) J).newlbl(Integer.toString(sn));
-												
-					}
-					
-				}
-				
-				}
-							
-				
-				if ( Impslist.getItemCount() > (nos + 1)){
-										
-					Impslist.removeItemAt(Impslist.getItemCount()-1);
-			
-				}
-				
-				 else if( Impslist.getItemCount() <= (nos+1)) { 
-								
-					Impslist.removeItemAt(nos);	
-				
-				}
-				
-				Impslist.setSelectedItem(Impslist.getItemAtIndex(Impslist.getItemCount()-1));
-				Impslist.setFocus(true);
-				Imps.remove(O);
-				
-			
-			}});
-				 
-		 Groupbox gbox05 = new Groupbox();
-		 gbox05.setParent(hbox03);
-		 gbox05.setMold("3d");
-				 
-		 new Caption("Current Problems: ").setParent(gbox05);
-		 
-		 final Listbox li30 = new Listbox();
-		 li30.setRows(8);
-		 li30.setParent(gbox05);
-		 li30.setWidth("353px");
-		 
-		 ProbUtils.fillListbox(li30, ptRec);
-		 
-		 Hbox ButtonHbox01 = new Hbox();
-		 ButtonHbox01.setParent(gbox05);
-		 ButtonHbox01.setWidth("353px");
-		 ButtonHbox01.setPack("center");
-		 ButtonHbox01.setStyle("border: 1px solid teal");
-		 		 
-		 Button Add01 = new Button();
-		 Add01.setLabel("Add Problem");
-		 Add01.setParent(ButtonHbox01);
-		 Add01.setMold("trendy");
-		 Add01.addEventListener(Events.ON_CLICK, new EventListener(){
-
-			public void onEvent(Event arg0) throws Exception {
-				// TODO Auto-generated method stub
-				
-				if ( li30.getSelectedCount() < 1 ){
-				try {Messagebox.show( "No Problem is currently selected. ");  } catch  (InterruptedException e) { /*ignore*/ }
-					return;
-			}		
-				
-				String Problem =  li30.getSelectedItem().getLabel().toString();
-				
-				boolean Duplicate  = false;
-				
-				if ( t30.getValue().contains(Problem) ){ Duplicate = true; }
-				
-				for ( int i=0; i < Imps.size(); i++ ){
-					
-				 if (((Impressions)  Imps.get(i)).text().contains(Problem)){ Duplicate = true ;}
-					
-				}
-				
-							
-				if ( !Duplicate ){
-				
-				if ( t30.getValue().length() == 0 || t30.getValue().equals(" ") ){
-					
-					t30.setValue(Problem);
-				}
-				
-								
-				
-				else {
-				
-				Impressions Imp01 = PhyEx.new Impressions(rows01);
-				
-				int i = 2;
-				String num = Integer.toString(Imps.size()+i);  
-				 
-				Imp01.createImpression(num,Problem);
-				Imps.add(Imp01);		
-				 
-				Listitem jj = new Listitem();
-				jj.setLabel(num);
-				jj.setParent(Impslist);
-				
-				}
-				}
-				
-				else { try {Messagebox.show("An Impression with that problem already exists!");  } catch  (InterruptedException e) { /*ignore*/ }
-			//	return;
-				
-				}
-				
-				
-			}}); }
-		 
-		else if ( !noAssessment == true ) {
-			
-		Hbox hbox03 = new Hbox();
-		hbox03.setParent(build_AssessWin);
-			
-		 Groupbox gbox06 = new Groupbox();
-		 gbox06.setParent(hbox03);
-		 gbox06.setMold("3d");
-			 
-		 new Caption("Assessment-Text: ").setParent(gbox06);
-		 
-		 Te30 = new Textbox();
-		 Te30.setRows(8);
-		 Te30.setParent(gbox06);
-		 Te30.setWidth("353px"); 
-		 Te30.setText(Assess);
-		 
-		}
-		 
 		return build_AssessWin;
-		
-	
+			
 		}
 	
+	/* public void onDoubleClick( Event ev ){ 
+		 
+		 System.out.println("At doubleclick");
+		Bass.getEventHandler(Events.ON_CLICK);
+		 
+		 
+	 }*/
+	 
+	 
+	// FU Tab
+
+	public void onSelect$tabFU( Event e ){
+		if ( Status.equals("End") || Status.equals("Exam Room") || Status.equals("Triage") ){
+	
+		if ( FUWin == null ) FUWin = build_FUWin();}
+	}
+
+	
+	Xmlwindow FUF = null;
+	private Window build_FUWin(){
+					
+		Window build_FUWin = new Window();
+		FUF = new Xmlwindow();
+		
+		XMLElement xml = new XMLElement();
+		FileReader reader = null;
+		
+		String fn_config = "FUF.xml";
+		String fullpath = Pm.getOvdPath() + File.separator + fn_config;
+						
+		try {
+			reader = new FileReader( FUF.MainFile(fullpath, ptRec, "FU", Vfilef).getAbsolutePath() );
+	    } catch (FileNotFoundException e) {
+	    	System.out.println( "the.." + File.separator + fn_config+ "file was not found:" );
+	    	
+	    }
+		
+		try {
+			xml.parseFromReader(reader);
+		} catch (XMLParseException e ) {
+			//TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		build_FUWin =  FUF.setXmlWin(gbxFU, FUF);
+		String[] Tabboxms = new String[] {"525px", "850px"};
+		FUF.initializexml( Tabboxms, "Follow_Box", "", "Follow_Plan_Item",  xml, false, "","",true,"","Status");
+		FUF.createxml();	
+		
+		
+		return build_FUWin;	
+	
+	}
+	
+		
 	
 	// ROS Tab
 
@@ -1115,13 +1021,54 @@ public class SoapSheetWinController extends GenericForwardComposer {
 		if ( rosWin == null ) rosWin = build_rosWin();}
 	}
 
+	
+	Xmlwindow rosF = null;
 	private Window build_rosWin(){
 		
 		// pass parameters to new window
 		Map<String, Rec> myMap = new HashMap();
 		myMap.put( "ptRec", (Rec)(ptRec ));	
 		//return (Window) Executions.createComponents("phyexam.zul", gbROS, myMap );
-		return (Window) Executions.createComponents("soap_ros.zul", gbROS, myMap );
+		//return (Window) Executions.createComponents("soap_ros.zul", gbROS, myMap );
+		
+		
+		Window build_rosWin = new Window();
+		rosF = new Xmlwindow();
+		
+		
+		XMLElement xml = new XMLElement();
+		FileReader reader = null;
+		String fn_config = "SoapROSF.xml";
+		String fullpath = Pm.getOvdPath() + File.separator + fn_config;
+		
+		
+		try {
+			reader = new FileReader( rosF.MainFile(fullpath, ptRec, "ROS", Vfilef).getAbsolutePath() );
+	    } catch (FileNotFoundException e) {
+	    	System.out.println( "the.." + File.separator + fn_config+ "file was not found:" );
+	    	
+	    }
+		
+		try {
+			xml.parseFromReader(reader);
+		} catch (XMLParseException e ) {
+			//TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
+	
+		
+		build_rosWin =  rosF.setXmlWin(gbROS, rosF);
+		String[] Tabboxms = new String[] {"485px","875px"};
+		rosF.initializexml(Tabboxms, "ROS_tab", "ROS_findingBox", "ROS_findingBoxSub", xml, true, "ROS_General", "ROS_Tabs", true,"ROS_finding","Status");
+		rosF.createxml();	
+		
+		
+		return build_rosWin;
 	}
 	
 	
@@ -1185,10 +1132,9 @@ public class SoapSheetWinController extends GenericForwardComposer {
 	// Last Tab
 
 	public void onSelect$tabLast( Event e ){
-		if ( Status.equals("End") || Status.equals("Exam Room")){
-			
+		
 		if ( lastWin == false ) lastWin = build_lastWin(); }
-	}
+	
 
 	private boolean build_lastWin(){
 		
@@ -1200,7 +1146,8 @@ public class SoapSheetWinController extends GenericForwardComposer {
 		
 		lastVisitDate = new Date();
 		
-		soapReca = medPt.getSoapReca();
+		if (!( medPt.getSoapReca() == null) ){
+		soapReca = medPt.getSoapReca(); }
 		
 		if (( soapReca != null ) && ( soapReca.getRec() > 1 )){
 			
@@ -1413,22 +1360,263 @@ public class SoapSheetWinController extends GenericForwardComposer {
 	
 	public void onClose$soapShtWin( Event e ) throws InterruptedException{
 		//alert( "onCloset event");
-		if ( Messagebox.show( "Leave without saving ?", "Leave?", Messagebox.YES | Messagebox.NO, Messagebox.QUESTION ) == Messagebox.YES ){
+		closeWin();
+		/*if ( Messagebox.show( "Leave without saving ?", "Leave?", Messagebox.YES | Messagebox.NO, Messagebox.QUESTION ) == Messagebox.YES ){
 			closeWin();
-		}
+		}*/
 		return;
 	}
 	
+	public void onClick$labibtn( Event ev ){ 
+		
+		final Window PtChartwin = new Window();	
+		
+		//labintWin
+		PtChartwin.setParent(Component);
+		PtChartwin.setPosition("center");
+		
+		PtChartwin.setHeight("922px");
+		PtChartwin.setWidth("1013px");
+		PtChartwin.setVflex("1");
+		PtChartwin.setHflex("1");
+		PtChartwin.setBorder("normal");
+		
+		PtChartwin.setTitle("Labint-Window");
+		PtChartwin.setClosable(true);
+		PtChartwin.setMaximizable(true);
+		
+		//PtChartwin.doPopup();
+				
+		 Vbox  MVbox = new Vbox();
+		 MVbox.setHeight("857px");
+		 MVbox.setWidth("991px");
+		 MVbox.setParent(PtChartwin);
+		 
+		 Groupbox PtGroupbox = new Groupbox();
+		 PtGroupbox.setHflex( "1" );
+		 PtGroupbox.setVflex( "1" );
+		 PtGroupbox.setStyle("overflow:auto");
+		 PtGroupbox.setMold("3d");
+		 PtGroupbox.setParent( MVbox );
+		 
+		 Labintwin.show( ptRec, PtGroupbox );
+		 
+
+			Hbox SecondHbox = new Hbox();
+			SecondHbox.setHeight("26px");
+			SecondHbox.setWidth("950px");
+			SecondHbox.setPack("end");
+			SecondHbox.setParent(PtChartwin);
+			
+			
+			
+			Div end = new Div();
+			end.setParent(SecondHbox);
+			end.setStyle("text-align: right");
+			end.setAlign("end");
+			
+			//SecondHbox.setAlign("end");
+					
+			Button Close = new Button();
+			Close.setParent(end);
+			Close.setLabel("Close");
+			Close.setWidth("105px");
+			Close.setHeight("23px");
+			Close.addEventListener(Events.ON_CLICK, new EventListener(){
+
+				public void onEvent(Event arg0) throws Exception {
+					
+					//if ( Messagebox.show( "Do you wish to close the PtChart? "," Close the PtChart ?", Messagebox.YES | Messagebox.NO, Messagebox.QUESTION ) != Messagebox.YES ) return;
+					PtChartwin.detach();
+					
+					
+				}
+				
+			});	
+			
+			
+			try {
+				PtChartwin.doModal();
+			} catch (SuspendNotAllowedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+		 
+		 
+		
+	
+	}
+	
+	public void onClick$docsbtn( Event ev ){ 
+		
+		
+		Window PtChartwin = new Window();	
+		
+		
+		//labintWin
+		PtChartwin.setParent(Component);
+		PtChartwin.setPosition("center");
+		
+		PtChartwin.setHeight("922px");
+		PtChartwin.setWidth("1013px");
+		PtChartwin.setVflex("1");
+		PtChartwin.setHflex("1");
+		PtChartwin.setBorder("normal");
+		
+		PtChartwin.setTitle("Docs-Window");
+		PtChartwin.setClosable(true);
+		PtChartwin.setMaximizable(true);
+		
+		//PtChartwin.doPopup();
+				
+		 Vbox  MVbox = new Vbox();
+		 MVbox.setHeight("857px");
+		 MVbox.setWidth("991px");
+		 MVbox.setParent(PtChartwin);
+		 
+		 Groupbox PtGroupbox = new Groupbox();
+		 PtGroupbox.setHflex( "1" );
+		 PtGroupbox.setVflex( "1" );
+		 PtGroupbox.setStyle("overflow:auto");
+		 PtGroupbox.setMold("3d");
+		 PtGroupbox.setParent( MVbox );
+		 
+		 HashMap<String, Object> myMap = new HashMap<String, Object>();
+		 myMap.put( "ptRec", (Rec)(ptRec ));
+		
+		 //Window PtChartwin2 = new Window();
+		 PtChartwin = (Window) Executions.createComponents("docs.zul", PtGroupbox, myMap );
+		
+		
+			
+			
+			try {
+				PtChartwin.doModal();
+			} catch (SuspendNotAllowedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		
+		
+	}
 	
 	
-	public void onClick$save( Event ev ){
+	public void onClick$ptchartbtn( Event ev ){ 
+		
+		final Window PtChartwin = new Window();	
+		
+		//soapShtWin
+		PtChartwin.setParent(Component);
+		PtChartwin.setPosition("center");
+		
+		PtChartwin.setHeight("922px");
+		PtChartwin.setWidth("1013px");
+		PtChartwin.setVflex("1");
+		PtChartwin.setHflex("1");
+		PtChartwin.setBorder("normal");
+		
+		PtChartwin.setTitle("PtChart-Window");
+		PtChartwin.setClosable(true);
+		PtChartwin.setMaximizable(true);
+		
+		//PtChartwin.doPopup();
+				
+		 Vbox  MVbox = new Vbox();
+		 MVbox.setHeight("857px");
+		 MVbox.setWidth("991px");
+		 MVbox.setParent(PtChartwin);
+		 
+		 Groupbox PtGroupbox = new Groupbox();
+		 PtGroupbox.setHflex( "1" );
+		 PtGroupbox.setVflex( "1" );
+		 PtGroupbox.setStyle("overflow:auto");
+		 PtGroupbox.setMold("3d");
+		 PtGroupbox.setParent( MVbox );
+		 
+		// Create PtChart
+		PtChart.show( ptRec, PtGroupbox, true );
+		
+		Hbox SecondHbox = new Hbox();
+		SecondHbox.setHeight("26px");
+		SecondHbox.setWidth("950px");
+		SecondHbox.setPack("end");
+		SecondHbox.setParent(PtChartwin);
+		
+		
+		
+		Div end = new Div();
+		end.setParent(SecondHbox);
+		end.setStyle("text-align: right");
+		end.setAlign("end");
+		
+		//SecondHbox.setAlign("end");
+				
+		Button Close = new Button();
+		Close.setParent(end);
+		Close.setLabel("Close PtChart");
+		Close.setWidth("105px");
+		Close.setHeight("23px");
+		Close.addEventListener(Events.ON_CLICK, new EventListener(){
+
+			public void onEvent(Event arg0) throws Exception {
+				
+				//if ( Messagebox.show( "Do you wish to close the PtChart? "," Close the PtChart ?", Messagebox.YES | Messagebox.NO, Messagebox.QUESTION ) != Messagebox.YES ) return;
+				PtChartwin.detach();
+				
+				
+			}
+			
+		});	
+		
 		
 		try {
-			if ( Messagebox.show( "Do you wish to save and close this Soap? "," Save the changes?", Messagebox.YES | Messagebox.NO, Messagebox.QUESTION ) != Messagebox.YES ) return;
+			PtChartwin.doModal();
+		} catch (SuspendNotAllowedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
+		
+	}
+	
+	public void onClick$save( Event ev ){
+		
+		save();
+		
+	}
+	
+	public void selecttabs(){
+		
+		if (assess == null ) {build_AssessWin();}
+		if (exam == null ) {build_examWin(); }
+		if (ROS == null ) {build_rosWin();}
+		if (FUF == null ) {build_FUWin();}
+		//build_hxWin();
+		if (RxTextbox == null ) {build_rxWin();}
+		if (VitalsTextbox == null ) {build_vitalsWin(); }
+		if (OrdersTextbox == null ) {build_ordersWin();}
+		
+		
+	}
+		
+	public void save(){	
+	  /*	try {
+			if ( Messagebox.show( "Do you wish to save and close this Soap? "," Save the changes?", Messagebox.YES | Messagebox.NO, Messagebox.QUESTION ) != Messagebox.YES ) return;
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} */
+		
 		String putData = "";
 		File CurrentFile = new File ( Vfile );
 		try {
@@ -1438,18 +1626,20 @@ public class SoapSheetWinController extends GenericForwardComposer {
 			e.printStackTrace();
 		}
 		
+		selecttabs();
+		
 		//System.out.println("putdata info: "+putData.toString());
-		//System.out.println(CC+" ,"+Subj+" ,"+Exam+" ,"+Asses+" ,"+ROS+Vitals+" ,"+Charge);
-		if ( !(CC == null) && CC.length()>1 ){
+		System.out.println(CC+" ,"+Subj+" ,"+Exam+" ,"+Vitals+" ,"+Charge);
+		if ( !(CC == null) && cc.getText().length()>1 ){
 		putData = putData.replace(CC.trim(), cc.getText());}
-		if ( !(Subj == null) && Subj.length()>1 ){
+		if ( !(Subj == null) && subj.getText().length()>1 ){
 		putData = putData.replace(Subj.trim(), subj.getText());}
-		System.out.println("Exam is: "+Exam);
-		if ( !(Exam == null) && Exam.length()>1 ){
-		putData = putData.replace(Exam.trim(), ExamTextbox.getText());}
+		//System.out.println("Exam is: "+Exam);
+		//if ( !(Exam == null) && Exam.length()>1 ){
+		//putData = putData.replace(Exam.trim(), ExamTextbox.getText());}
 		
 		//System.out.println("Te30: "+t30.getText());
-		StringBuilder Impressions = new StringBuilder();
+		/*StringBuilder Impressions = new StringBuilder();
 		if ( noAssessment ){
 		Impressions.append("1:"+t30.getText());
 		Impressions.append(System.getProperty("line.separator"));
@@ -1463,28 +1653,30 @@ public class SoapSheetWinController extends GenericForwardComposer {
 		
 		putData = putData.replace(Assess.trim(), Impressions.toString());}
 		else if ( !(Assess == null) && !(noAssessment)  ) {
-			putData = putData.replace(Assess.trim(), Te30.getText().trim());}
+			putData = putData.replace(Assess.trim(), Te30.getText().trim());}*/
+		System.out.println("noAssessment in save is: "+noAssessment);
+		if ( !(Assess == null)) { putData = putData.replace(Assess.trim(),assess.getimpressions(noAssessment) );  }
 		
-		if ( !(ROS == null) && ROS.length()>1 ){
-		putData = putData.replace(ROS.trim(), RosTextbox.getText());}
+		//if ( !(ROS == null) && ROS.length()>1 ){
+		//putData = putData.replace(ROS.trim(), RosTextbox.getText());}
 		
-		if ( !(Vitals == null) && Vitals.length()>1 ){
+		if ( !(Vitals == null) && VitalsTextbox.getText().length()>1 ){
 		putData = putData.replace(Vitals.trim(), VitalsTextbox.getText());}
 		
-		if ( !(FU == null) && FU.length()>1 ){
-		putData = putData.replace(FU.trim(), FUTextbox.getText());}
+		//if ( !(FU == null) && FUTextbox.getText().length()>1 ){
+		//putData = putData.replace(FU.trim(), FUTextbox.getText());}
 		
-		if ( !(Charge == null) && Charge.length()>1){
+		if ( !(Charge == null) && ChargeTextbox.getText().length()>1){
 		putData = putData.replace(Charge.trim(), ChargeTextbox.getText());}
 		
-		if ( !(Orders == null) && Orders.length()>1){
+		if ( !(Orders == null) && OrdersTextbox.getText().length()>1){
 		putData = putData.replace(Orders.trim(), OrdersTextbox.getText());}
 		
-		if ( !(RX == null) && RX.length()>1 ){
+		if ( !(RX == null) && RxTextbox.getText().length()>1 ){
 		putData = putData.replace(RX.trim(), RxTextbox.getText());}
 		
-		if ( !(Hx == null) && Hx.length()>1){
-		putData = putData.replace(Hx.trim(), HxTextbox.getText());}
+		//if ( !(Hx == null) && Hx.length()>1){
+		//putData = putData.replace(Hx.trim(), HxTextbox.getText());}
         
 		System.out.println("putdata info: "+putData.toString());
 		
@@ -1528,12 +1720,15 @@ public class SoapSheetWinController extends GenericForwardComposer {
 	
 	public void onClick$end( Event ev ){
 		
+		
 		try {
-			if ( Messagebox.show( "Do you wish to end this vist? ","Create Soap?", Messagebox.YES | Messagebox.NO, Messagebox.QUESTION ) != Messagebox.YES ) return;
+			if ( Messagebox.show( "Do you wish to end this vist? ","Go to Review?", Messagebox.YES | Messagebox.NO, Messagebox.QUESTION ) != Messagebox.YES ) return;
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
+		save();
 		
 		// make sure we have a patient
 		if ( ! Rec.isValid( ptRec )) SystemHelpers.seriousError( "bad ptRec=" );
@@ -1543,56 +1738,96 @@ public class SoapSheetWinController extends GenericForwardComposer {
 		
 		//Rec provRec = (Rec) ZkTools.getListboxSelectionValue( lboxProviders );
 		if ( ! Rec.isValid( provRec )){ DialogHelpers.Messagebox( "You must select a provider." ); return; }
-
+		
+		String ros = "  ", examstr = "   ", FUstr = "  ";
+		if ( !(rosF == null) ) { ros = rosF.examtext(true); 
+		}else { build_rosWin(); ros = rosF.examtext(true); }
+		if ( !(exam == null) ) { examstr = exam.examtext(true); 
+		}else { build_examWin(); examstr = exam.examtext(true); }
+		if ( !(FUF == null) ) { FUstr = FUF.examtext(true); 
+		}else { build_FUWin(); FUstr = FUF.examtext(true); }
+		
 		String desc = cc.getText().trim();
-		String subj = this.subj.getText().trim()+RosTextbox.getText().trim()+HxTextbox.getText().trim();
-		String obj = VitalsTextbox.getText().trim()+ExamTextbox.getText().trim();
+		String subj = this.subj.getText().trim() +". "+  ros ;
+		String obj = VitalsTextbox.getText().trim()+".  "+ examstr;
 		String ass = "";
-		if ( noAssessment ){
-		StringBuilder Impressions = new StringBuilder();
+		ass = assess.getimpressions(noAssessment);
 		
-		Impressions.append("1:"+t30.getText());
-		Impressions.append(System.getProperty("line.separator"));
+		String assf = ass.trim();
+		assf = assf.replace("\n", "").replace(System.getProperty("line.separator"), "").replace("\r", "");
 		
-		for ( int j = 0; j < Imps.size() ; j++ ){
+		String orders, rxstr;
+		orders = OrdersTextbox.getText().trim();
+		rxstr = RxTextbox.getText().trim();
+		
+		
+		String ordersf, rxstrf, fustrf, subjf; 
+		
+		if (orders.substring(orders.length()-1).equals(".")){
 			
-			Impressions.append(((Impressions) Imps.get(j)).getTextN());
-			Impressions.append(System.getProperty("line.separator"));
+			ordersf = orders+"  ";
+		}else { ordersf = orders+".  "; }
+		
+		if (rxstr.substring(rxstr.length()-1).equals(".")){
+			
+			rxstrf = rxstr+"  ";
+		}else { rxstrf = rxstr+".  "; }
+		System.out.println("FUstr is: "+ FUstr);
+		System.out.println("exam is: "+ examstr);
+		System.out.println("ros is: "+ ros);
+
+		if (FUstr.substring(FUstr.length()-1).equals(".")){
+	
+			fustrf = FUstr+"  ";
+		}else { fustrf = FUstr+".  "; }
+		
+		if (subj.substring(subj.length()-1).equals(".")){
+			
+			subjf = subj+"  ";
+		}else { subjf = subj+".  "; }
+		
+		String plan = ordersf+ rxstrf + fustrf ;
+		
+		
+		String putData = "";
+		File CurrentFile = new File ( Vfile );
+		try {
+			 putData = FileUtils.readFileToString( CurrentFile );
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		putData = putData.replace( "Q"+Status+"Q", "QReview VisitQ");
+		
+		putData = putData.replace( "QdescQ", desc);
+		
+		putData = putData.replace("QProvrecQ", provRec.toString());
+		putData = putData.replace( "QdateQ", date.getPrintable());
+		putData = putData.replace( "QdescQ", desc);
+				
+		
+		putData = putData.replace( "QSubjQ", subjf);
+		
+		putData = putData.replace( "QObjQ", obj);
+		
+		putData = putData.replace( "QPAssessPQ", assf);
+		
+		putData = putData.replace( "QPPlanPQ", plan);
+		
+			
+		
+		try {
+			FileUtils.writeStringToFile(CurrentFile, putData);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 		
 		
-		 ass = Impressions.toString();}
-		else {  ass = Te30.getText().trim(); }
-		String plan = OrdersTextbox.getText().trim()+RxTextbox.getText().trim()+FUTextbox.getText().trim();
 		
-		
-		
-		/*// get vitals info
-		boolean flgVitals = false;
-		
-		double temp = EditHelpers.parseDouble( txtTemp.getValue());
-		if ( temp > 0 ) temp = UnitHelpers.getCelcius( temp );
-		
-		int hr = EditHelpers.parseInt( txtHR.getValue());
-		int resp = EditHelpers.parseInt( txtResp.getValue());
-		int sbp = EditHelpers.parseInt( txtSystolic.getValue());
-		int dbp = EditHelpers.parseInt( txtDiastolic.getValue());
-		int pO2 = EditHelpers.parseInt( txtPO2.getValue());
-		
-		double ht = EditHelpers.parseDouble( txtHeight.getValue());
-		if ( ht > 0 ) ht = UnitHelpers.getCentimeters( ht );
-		
-		double wt = EditHelpers.parseDouble( txtWeight.getValue());
-		if ( wt > 0 ) wt = UnitHelpers.getGramsFromPounds( wt );
-		
-		double hc = EditHelpers.parseDouble( txtHead.getValue());
-		if ( hc > 0 ) hc = UnitHelpers.getCentimeters( hc );
-
-		if (( temp > 0 ) || ( hr > 0 ) || ( resp > 0 ) || ( sbp > 0 ) || ( dbp > 0 ) || ( pO2 > 0 )
-				|| ( ht > 0 ) || ( wt > 0 ) || ( hc > 0 )){
-				flgVitals = true;
-		} */
-		
+		boolean ready = false;
+		if ( ready ){
 		SoapNote soapnt = null;
 		
 		//if ( operation == SoapEdit.Operation.EDIT ){			
@@ -1608,7 +1843,7 @@ public class SoapSheetWinController extends GenericForwardComposer {
 		soapnt.setDate( date );
 		soapnt.setDesc( desc );
 		
-		soapnt.setText( subj + '\n' + obj + '\n' + ass + '\n' + plan + '\n' );
+		soapnt.setText( subjf + '\n' + obj + '\n' + assf + '\n' + plan + '\n' );
 		
 		/*if ( operation == SoapEdit.Operation.EDIT ){
 			// write edited SOAP note
@@ -1632,13 +1867,13 @@ public class SoapSheetWinController extends GenericForwardComposer {
 			AuditLogger.recordEntry( AuditLog.Action.SOAP_ADD, ptRec, Pm.getUserRec(), null, null );
 		//}
 		
-		File CurrentFile = new File ( Vfile );
-		System.out.println("Current file: "+ CurrentFile.getAbsolutePath());
-		CurrentFile.delete();
+		//File CurrentFile = new File ( Vfile );
+		//System.out.println("Current file: "+ CurrentFile.getAbsolutePath());
+		//CurrentFile.delete();
 		
 		//OfficeVisitWinController Ovwc = new OfficeVisitWinController();
 		//Ovwc.onCheck$r_new(ev);
-		
+		}
 		soapShtWin.detach();
 		
 		
@@ -1803,5 +2038,15 @@ public class SoapSheetWinController extends GenericForwardComposer {
 	}
 
 
+	/**
+	 * Deletes a character from a string .
+	 * 
+	 * @param str
+	 * @param index
+	 * @return
+	 */	
+	private static String deleteachar(String str, int index){
+		return str.substring(0,index)+ str.substring(index+1);		
+	}
 
 }

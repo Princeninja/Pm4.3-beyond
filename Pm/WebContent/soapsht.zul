@@ -3,17 +3,17 @@
 <window id="soapShtWin" title="Interactive Soap Sheet" border="normal" vflex="max" hflex="max" position="center" mode="modal" apply="palmed.SoapSheetWinController" >
 <!-- position="center,left"  -->
 
-	<hbox> Pt: <label id="ptname" /> </hbox>
-	<hbox> Age: <label id="ptage" /> Sex: <label id="ptsex" /> </hbox>	
+	<hbox> Patient: <label id="ptname" /> </hbox>
+	<hbox> Age: <label id="ptage" /> Sex: <label id="ptsex" /> Race: <label id="ptrace" /> </hbox>	
 			
 	<tabbox vflex="max" hflex="max"  >
 		<tabs>
+			<tab id="tabSheet" label="Sheet" />
 			<tab id="tabLast" label="Last" />
 			<tab id="tabSubject" label="Subj" />
-			<tab id="tabSheet" label="Sheet" />
-			<tab id="tabROS" label="ROS" />
-			<tab id="tabHx" label="Hx" />
 			<tab id="tabVitals" label="Vitals" />
+			<tab id="tabROS" label="ROS" />
+			<!-- <tab id="tabHx" label="Hx" /> -->			
 			<tab id="tabExam" label="Exam" /> 
 			<tab id="tabAssess" label="Assess" />
 			<tab id="tabOrders" label="Orders" />
@@ -24,56 +24,13 @@
 			
 		</tabs>
 		<toolbar>
-			<toolbarbutton label="Vitals" />
-			<toolbarbutton label="Docs" />
-			<toolbarbutton label="Rx" />
-			<toolbarbutton label="Orders" />		
+			<toolbarbutton id="ptchartbtn" label="PtChart" />
+			<!--<toolbarbutton id="docsbtn" label="Docs" /> -->
+			<toolbarbutton id="labibtn" label="LabInterface" />
+			<!-- <toolbarbutton label="Orders" />  -->		
 		</toolbar>
 		<tabpanels style="overflow:auto" >
 		
-
-			<!-- Last Progress Note, etc -->			
-			<tabpanel id="tpLast" vflex="1" hflex="1" >
-
-				<hbox>
-				<vbox>
-					<groupbox mold="default" width="600px" >
-						<caption label="Last Progress Note" />
-						<textbox id="soapTextbox" rows="12" hflex="1" />
-					</groupbox>
-
-					<groupbox mold="default" width="600px" >
-						<caption label="Recent Nursing Notes" />
-						<textbox id="noteTextbox" rows="8" hflex="1" />
-					</groupbox>
-	
-				</vbox>
-
-					<groupbox mold="default" width="300px" >
-						<caption label="Recent Labs" />
-						<textbox id="labTextbox" rows="12" hflex="1" />
-					</groupbox>
-	
-				</hbox>
-
-			</tabpanel>
-			
-
-
-
-
-			<!-- Subjective -->			
-			<tabpanel id="tpSubject" vflex="1" hflex="1" >
-				<vbox>
-					<hbox>Prov: <listbox id="lboxProviders" mold="select" width="300px" /></hbox>
-					<hbox>CC: <textbox id="cc" rows="1" width="300px" /></hbox>
-					<groupbox mold="default" width="600px" >
-						<caption label="Subjective/HPI" />
-						<textbox id="subj" rows="12" hflex="1" />
-					</groupbox>
-				</vbox>
-			</tabpanel>
-			
 				<!-- Soap Sheet Main Summary Window -->
 			<tabpanel id="tpSheet" vflex="1" hflex="1" >
 			<div>
@@ -110,32 +67,110 @@
 			</div>
 			
 			</tabpanel>
+
+			<!-- Last Progress Note, etc -->			
+			<tabpanel id="tpLast" vflex="1" hflex="1" >
+
+				<hbox>
+				<vbox>
+					<groupbox mold="default" width="600px" >
+						<caption label="Last Progress Note" />
+						<textbox id="soapTextbox" rows="12" hflex="1" />
+					</groupbox>
+
+					<groupbox mold="default" width="600px" >
+						<caption label="Recent Nursing Notes" />
+						<textbox id="noteTextbox" rows="8" hflex="1" />
+					</groupbox>
+	
+				</vbox>
+
+					<groupbox mold="default" width="300px" >
+						<caption label="Recent Labs" />
+						<textbox id="labTextbox" rows="12" hflex="1" />
+					</groupbox>
+	
+				</hbox>
+
+			</tabpanel>
+			
+			<!-- Subjective -->			
+			<tabpanel id="tpSubject" vflex="1" hflex="1" >
+				<vbox>
+					<hbox>Prov: <listbox id="lboxProviders" mold="select" width="300px" /></hbox>
+					<hbox>CC: <textbox id="cc" rows="1" width="300px" /></hbox>
+					<groupbox mold="default" width="600px" >
+						<caption label="Subjective/HPI" />
+						<textbox id="subj" rows="12" hflex="1" />
+					</groupbox>
+				</vbox>
+			</tabpanel>
+			
+			<!-- Vitals -->
+			<tabpanel id="tpVitals" vflex="1" hflex="1" >
+				<!-- include src="vitals_new.zul" /> -->
+				
+				<hbox>
+				<vbox>
+					<groupbox id="gbVi" mold="default" width="800px" height="625px" style="overflow:auto">
+						<caption label="Vitals-Window" />
 						
+					</groupbox>
+						
+				</vbox>
+
+					<groupbox mold="default" width="300px" height="300px" >
+						<caption label="Vitals-Text" />
+						<textbox id="VitalsTextbox" rows="12" hflex="1" />
+					</groupbox>
+	
+				</hbox>
+			</tabpanel>
+					
 			
 			<!-- ROS -->
 			<tabpanel id="tpROS" hflex="max" vflex="max" > 
 				<!-- include src="soap_ros.zul" /> -->
 				<hbox >
 				<vbox>
-					<groupbox id="gbROS" mold="default" width="900px" height="625px" style="overflow:auto">
+					<groupbox id="gbROS" mold="default" width="800px" height="625px" > <!-- style="overflow:auto"  -->
 						<caption label="ROS" />
 						
 					</groupbox>
 						
 				</vbox>
 
-					<groupbox mold="default" height="300px" width="300px" >
+				<!--  	<groupbox mold="default" height="300px" width="300px" >
 						<caption label="ROS-Text" />
 						<textbox id="RosTextbox" rows="12" hflex="1" />
-					</groupbox>
+					</groupbox> -->
 	
 				</hbox>
 			</tabpanel>
 			
+						
+			<!-- Exam -->
+		    <tabpanel id="tpExam" vflex="1" hflex="1" > 
+				<!-- <include src="soap_exam.zul" /> -->
+				<hbox>
+				<vbox>
+					<groupbox id="gbEx" mold="default" width="800px" height="625px" > <!-- style="overflow:auto"  -->
+						<caption label="Exam-Window" />
+						
+					</groupbox>
+						
+				</vbox>
+
+				<!--  	<groupbox mold="default" width="300px" height="300px" >
+						<caption label="Exam-Text" />
+						<textbox id="ExamTextbox" rows="12" hflex="1" />
+					</groupbox>
+				-->
+				</hbox>
+			</tabpanel>  
+						
 			
-			
-			
-			<!-- History -->
+			<!-- History 
 			<tabpanel id="tpHx" vflex="1" hflex="1" > 
 				<hbox>
 				<vbox>
@@ -154,57 +189,7 @@
 				</hbox>
 			
 			
-			</tabpanel>
-			
-			
-			
-			
-			<!-- Vitals -->
-			<tabpanel id="tpVitals" vflex="1" hflex="1" >
-				<!-- include src="vitals_new.zul" /> -->
-				
-				<hbox>
-				<vbox>
-					<groupbox id="gbVi" mold="default" width="900px" height="625px" style="overflow:auto">
-						<caption label="Vitals-Window" />
-						
-					</groupbox>
-						
-				</vbox>
-
-					<groupbox mold="default" width="300px" height="300px" >
-						<caption label="Vitals-Text" />
-						<textbox id="VitalsTextbox" rows="12" hflex="1" />
-					</groupbox>
-	
-				</hbox>
-			</tabpanel>
-			
-			
-			
-			
-			<!-- Exam -->
-		    <tabpanel id="tpExam" vflex="1" hflex="1" > 
-				<!-- <include src="soap_exam.zul" /> -->
-				<hbox>
-				<vbox>
-					<groupbox id="gbEx" mold="default" width="900px" height="625px" style="overflow:auto">
-						<caption label="Exam-Window" />
-						
-					</groupbox>
-						
-				</vbox>
-
-					<groupbox mold="default" width="300px" height="300px" >
-						<caption label="Exam-Text" />
-						<textbox id="ExamTextbox" rows="12" hflex="1" />
-					</groupbox>
-	
-				</hbox>
-			</tabpanel>  
-			
-			
-			
+			</tabpanel>-->
 			
 			
 			<!-- Assessment -->
@@ -228,9 +213,6 @@
 			</tabpanel>
 			
 			
-			
-			
-			
 			<!-- Orders -->
 			<tabpanel id="tpOrders" vflex="1" hflex="1" > 
 				<div id="divOrders" vflex="1" >
@@ -239,7 +221,7 @@
 				
 				<hbox>
 				<vbox>
-					<groupbox id="gbOrders" mold="default" width="900px" height="625px" style="overflow:auto" >
+					<groupbox id="gbOrders" mold="default" width="800px" height="625px" style="overflow:auto" >
 						<caption label="Orders" />
 						
 					</groupbox>
@@ -256,16 +238,12 @@
 			</tabpanel>
 			
 			
-			
-			
-			
-			
 			<!-- RX -->
 			<tabpanel id="tpRX" vflex="1" hflex="1" >
 			
 			<hbox>
 				<vbox>
-					<groupbox id="gbRX" mold="default" width="900px" height="625px" style="overflow:auto" >
+					<groupbox id="gbRX" mold="default" width="800px" height="625px" style="overflow:auto" >
 						<caption label="Rx-Window" />
 						
 					</groupbox>
@@ -283,12 +261,10 @@
 			
 			
 			
-			
-			
 			<!-- Follow Up -->
 			<tabpanel id="tpFU" vflex="1" hflex="1" >
 				 <hbox vflex="1" hflex="1" >
-				<vbox>
+			<!-- <vbox>
 					<button id="btnSaveFU" label="Save" width="80px" />
 					<button id="btnCancelFU" label="Cancel" width="80px" />
 				</vbox>
@@ -368,14 +344,14 @@
 						
 					</groupbox>
 						
-				</vbox>  
+				</vbox>  -->
 
-					<groupbox mold="default" width="300px" >
-						<caption label="F/U-Text" />
-						<textbox id="FUTextbox" rows="12" hflex="1" />
+					<groupbox id= "gbxFU" mold="default" width="800px" >
+						<caption label="F/U-Window" />
+						<!--<textbox id="FUTextbox" rows="12" hflex="1" /> -->
 					</groupbox>
 	
-				</hbox>
+				</hbox> 
 			
 			</tabpanel>
 			
@@ -407,7 +383,7 @@
 	</tabbox>
 	
 	<hbox id = "ehbox" > <button id="save" label="Save" width="80px" /> <!--&amp; Minimize  -->
-						<button id="cancel" label="Close ISS" width="80px" />
+						<button id="cancel" label="Cancel" width="80px" />
 						<button id="end" label="End Visit" width="80px" visible="false" /> </hbox>
 
 

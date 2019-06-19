@@ -29,9 +29,19 @@ import usrlib.Rec;
 		
 
 		/**
+		 * super call method for when not in soap 
+		 */
+		
+		public static void show( Rec ptRec, Component parent ) {
+			
+			 show(  ptRec,  parent, false );
+		}
+		
+		
+		/**
 		 * The Call method.
 		 */
-		public static boolean show( Rec ptRec, Component parent ) {
+		public static boolean show( Rec ptRec, Component parent, Boolean soap ) {
 
 			// if ptrec not valid, return
 			if ( ptRec.getRec() < 2 ) return false;
@@ -40,7 +50,7 @@ import usrlib.Rec;
 			AuditLogger.recordEntry( AuditLog.Action.PT_CHART, ptRec, Pm.getUserRec(), null, null );
 			
 			// open the chart
-			new PtChart( ptRec, parent );
+			new PtChart( ptRec, parent, soap );
 			return true;
 		}
 
@@ -48,18 +58,20 @@ import usrlib.Rec;
 		 * private constructor. So it can only be created with the static show()
 		 * method.
 		 */
-		private PtChart( Rec ptRec, Component parent ) {
+		private PtChart( Rec ptRec, Component parent, Boolean soap ) {
 			super();
 
-			createBox( ptRec, parent );
+			createBox( ptRec, parent, soap );
 		}
 
-		private void createBox( Rec ptRec, Component parent ) {
+		private void createBox( Rec ptRec, Component parent, Boolean soap ) {
 
 			
 			// pass parameters to new window
-			Map<String, Rec> myMap = new HashMap();
+			Map<String, Object> myMap = new HashMap<String, Object>();
 			myMap.put( "ptRec", ptRec );
+			myMap.put( "soap", soap );
+			
 			
 			System.out.println( "in ptchart  ptrec=" + ptRec.getRec());
 

@@ -19,7 +19,7 @@
 				
 						<listbox id="notesListbox" vflex="1" hflex="1" >
 							<listhead>
-								<listheader width="80px" label="Date" sort="auto" />
+								<listheader width="80px" label="Order Date" sort="auto" />
 								<listheader width="200px" label="Description" />
 								<listheader width="80px" label="User" sort="auto" />
 							</listhead>

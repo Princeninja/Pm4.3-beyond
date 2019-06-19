@@ -15,18 +15,44 @@
 				<hbox> ** How do I create a prescription?** </hbox>
 					<hbox>  -To access the button to create a prescription, choose a provider and follow the prompts. </hbox>
 				<hbox> ** How do I double-click?** </hbox>
-					<hbox>  -Simply double click on the intended Patient/Insurance/Medication. </hbox>
-				<hbox> ** How do see prescription status?** </hbox>
-					<hbox>  -To access the Newcrop button to create a status window, choose a provider and follow the prompts. </hbox>
+					<hbox>  -Simply double click on the intended Patient/Insurance/Medication/Battery/Lab. </hbox>
+				<hbox> ** How do I see a prescription status?** </hbox>
+					<hbox>  -To access the Newcrop button to create a status interface, choose a provider and follow the prompts. </hbox>
 				<hbox> ** Do I have to verify my Identity each time?** </hbox>
 					<hbox>  -Yes, to access Newcrop the program needs to know who is currently at the computer. </hbox>
 				<hbox> ** Why can't I import a Lab?** </hbox>
 					<hbox>  -Currently, the program only imports text files (.txt). When an import fails the ideal file path is displayed. </hbox>
 				<hbox> ** I imported a Lab how do I see it?** </hbox>
-					<hbox> -If the lab was imported, open PtChart for patient and check Lab and Lab Notes tabs. </hbox>
-				<hbox> ** Why can't I print a lab request?** </hbox>
-					<hbox>  -To print a lab, make sure you have a request completed and saved before clicking on the print button. </hbox>
+					<hbox> -If the lab was imported (properly), open the patient' PtChart and check Lab and Lab Notes tabs. </hbox>
+				<hbox> ** Why can't I print a lab requisition file?** </hbox>
+					<hbox>  -To print a lab requisition file, make sure you have a request completed and saved before clicking on the print button. </hbox>
+				<hbox> Update : 03/04/19 (Pm 4.29b) </hbox>
+				<hbox> ** How do I import a Lab?** </hbox>
+					<hbox>  -To import a lab, go to Admin>Lab Setups> and select Import HL7 Lab (for one lab) or Import Batch Labs ( for n number of labs in the designated folder ). </hbox>
+				<hbox> ** Where is the designated folder?** </hbox>
+					<hbox>  -The designated folder is defined in a configuration file (HL7Config.xml) ask the System Administrator(Randy Palen). </hbox>
+				<hbox> ** I Imported a Lab but can't find it in the report, why?** </hbox>
+					<hbox>  -The lab report gets larger which import, either search the document (Ctrl+F) or slowly check in chronological order. </hbox>
+				<hbox> ** The lab report is large can I purge it?** </hbox>
+					<hbox>  -Please do not purge the Lab report for clarity reasons. It will be done at the designated time.  </hbox>
+				<hbox> ** Is there a limit to how many times I can use Import Batch Labs?** </hbox>
+					<hbox>  -No, It can be used as long as there is a lab(s) in the designated folder. </hbox>
+				<hbox> ** The Lab i just imported has n observations but the notification said less than n labs were posted, why?** </hbox>
+					<hbox>  -There are several reasons why an observation won't post, refer to the Lab report to find what happened/which one didn't post. </hbox>
+				<hbox> ** Which Labs are the most recent?** </hbox>
+					<hbox>  -Labs in PtChart are sorted based on order date, those at the top are the most recent. </hbox>
+				<hbox> **Why is an observation red?** </hbox>
+					<hbox>  -An observation is displayed as red if it is abnormal (Flag in result). </hbox>
+				<hbox> ** How do I see the Notes in an observation?** </hbox>
+					<hbox>  -To see the notes, DoubleClick the Battery then the corresponding Observation. A window should appear and the notes are on the bottom. </hbox>
+				<hbox> ** Standard dictation is still not posting properly to the right sections, why?** </hbox>
+					<hbox>  -Standard dictation was fixed to post properly, however some older dictations were edited to work in the old routine 
+							they simply need to be edited in Admin>Standard Dictations. </hbox>
+				<hbox> ** Other Questions?** </hbox>
+					<hbox>  -Ask the System Administrator(Randy Palen) . </hbox>
 				
+				
+			
 				
 				</vbox>
 </hbox>

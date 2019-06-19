@@ -32,7 +32,7 @@ import usrlib.ZkTools;
 public class PtChartController extends GenericForwardComposer {
 
 	private Rec	ptRec = null;
-
+	private Boolean soap = false;
 	
 	// Display fields at top of chart (ALL AUTOWIRED)
 	public Window ptChartWin;		// autowired
@@ -151,13 +151,29 @@ public class PtChartController extends GenericForwardComposer {
 		Execution exec=Executions.getCurrent();
 
 		if ( exec != null ){
-			Map<String, Rec> myMap = exec.getArg();
+			Map<String, Object> myMap = exec.getArg();
 			if ( myMap != null ){
 				try{ ptRec = (Rec) myMap.get( "ptRec" ); } catch ( Exception e ) { /* ignore */ };
+				try{ soap = (Boolean) myMap.get( "soap" ); } catch ( Exception e ) { /* ignore */ };
 			}
 		}
 		
-		
+		if ( soap ){
+			
+			t_orders.setVisible(false);
+			t_meds.setVisible(false);
+			t_nurse.setVisible(false);
+			t_treat.setVisible(false);
+			t_labnotes.setVisible(false);
+			t_image.setVisible(false);
+			//t_docs.setVisible(false);
+			t_exam.setVisible(false);
+			t_follow.setVisible(false);
+			t_vitals.setVisible(false);
+			t_interv.setVisible(false);
+			
+			
+		}
 
 		// make sure we have valid ptRec
 		if ( ! Rec.isValid( ptRec )) SystemHelpers.seriousError( "ptChartWinController() invalid ptRec" );

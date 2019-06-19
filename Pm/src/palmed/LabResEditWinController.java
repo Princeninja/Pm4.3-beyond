@@ -568,19 +568,22 @@ public class LabResEditWinController extends GenericForwardComposer {
 
 	
 	// Search for matching entries in corresponding listbox
+	public void onOK$txtSearch( Event ev ){ onClick$btnSearch( ev ); }
 	
 	public void onClick$btnSearch( Event ev ){
 
 		String s = txtSearch.getValue().trim();
-		if ( s.length() == 0 ) s = null;
+		//if ( s.length() == 0 ) s = null;
 		
 		if ( tabObs.isSelected()){
 
 			ZkTools.listboxClear( lboxObs );		
-			refreshObsList( s );
+			//refreshObsList( s );
+			LabObsTblWinController searchtool = new LabObsTblWinController();
+			searchtool.refreshList(( s.length() < 1 ) ? null: s, lboxObs ,"Yes");
 			
 		} else if ( tabBat.isSelected()){
-			
+			if ( s.length() == 0 ) s = null;
 			ZkTools.listboxClear( lboxBat );		
 			refreshBatList( s );
 		}

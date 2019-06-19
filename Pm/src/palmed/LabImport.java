@@ -1137,8 +1137,12 @@ public class LabImport {
 			
 			System.out.println("Note "+k+" :"+NotesList.get(k));
 		}**/
-		
-		
+		/*while ( 1==1){
+			System.out.println(order.results.size());
+			System.out.println(order.results.toString());
+					break;
+		}*/
+		if (!(order.results == null)){
 		for ( int i = 0; i < order.results.size(); ++i ){
 			
 			//System.out.println("sizes: "+order.results.size()+","+NotesList.size());
@@ -1201,7 +1205,7 @@ public class LabImport {
 				note.setNumEdits( 0 );
 				note.setDesc(res.Desc);
 				
-				note.setDate( Date.today() );
+				note.setDate( order.date );
 				
 				note.setNoteText( notetext );
 				
@@ -1224,6 +1228,81 @@ public class LabImport {
 			errpt.append("<p> Succesful post(s): "+posted+" For obx and note: "+res.Desc+" AND "+ notetext +"</p> ");
 			//errpt.append(System.getProperty("line.separator"));
 			notetext = "";
+		}}else{
+			
+			Rec nonobsRec = null;
+			nonobsRec = LabObsTbl.searchDesc("No Observation");
+			
+			
+			
+			 if ( ! Rec.isValid( nonobsRec )){
+				System.out.println( "Invalid obs rec." );
+				errpt.append("<p> Invalid obs rec </p> ");
+				errpt.append(System.getProperty("line.separator"));
+				
+			}
+			
+			
+			LabResult lab = new LabResult();
+			
+			lab.setPtRec( patient.ptRec );
+			
+			lab.setDate( order.date );
+			if ( Rec.isValid( order.batRec )) { lab.setLabBatRec( order.batRec );} else { lab.setmiscAbbr( order.miscabbr ); }
+			
+			lab.setSpecimenSource( order.source );
+			lab.setSourceText( order.txtSource );
+			lab.setSpecimenCondition( order.condition );
+			lab.setConditionText( order.txtCondition );
+			if ( Rec.isValid( order.facRec )) lab.setLabFacilityRec( order.facRec );
+			
+			lab.setLabObsRec( nonobsRec );
+				 
+				notetext = NotesList.get(0);			
+								
+				if ( notetext.length() > 1  ) { 
+				
+				//System.out.println("length is: "+ notetext.length());
+				Class<? extends Notes> noteClass = NotesLab.class;	
+				
+				Notes note = Notes.newInstance( noteClass );
+				
+				note = Notes.newInstance( noteClass );
+				//try { note = noteClass.newInstance(); } catch ( Exception e ){ e.printStackTrace(); }
+				
+				note.setPtRec( patient.ptRec );
+				note.setUserRec( Pm.getUserRec());
+				note.setStatus( Notes.Status.CURRENT );
+				note.setNumEdits( 0 );
+				note.setDesc("No Observation");
+				
+				note.setDate( order.date );
+				
+				note.setNoteText( notetext );
+				
+				lab.setResultNoteReca(note.postNew(patient.ptRec));
+				
+				// post to MrLog
+			    // MrLog.postNew( patient.ptRec, Date.today(), "", Notes.getMrLogTypes( noteClass ), lab.getResultNoteReca() );
+				// log the action
+				AuditLogger.recordEntry( Notes.getAuditLogActionNew( noteClass ), patient.ptRec, Pm.getUserRec(), lab.getResultNoteReca(), null );
+				}
+				//lab.setResultNoteText(notes.toString()); 
+				//System.out.println(notetext);
+			
+			lab.setStatus( LabResult.Status.ACTIVE );
+			lab.setValid( Validity.VALID );
+			
+			lab.postNew( patient.ptRec ); 
+			++posted;
+			//System.out.println( "Posted: " + posted );
+			errpt.append("<p> Succesful post(s): "+posted+" For obx and note: "+"No Observation"+" AND "+ notetext +"</p> ");
+			//errpt.append(System.getProperty("line.separator"));
+			notetext = "";
+			
+			
+	
+			
 		}
 		obxc = 0;  NotesList.clear(); Batdesc = "";	
 		return;

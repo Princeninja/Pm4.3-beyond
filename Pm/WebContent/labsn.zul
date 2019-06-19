@@ -17,9 +17,10 @@
 				<listheader width="120px" label="Battery" sort="auto" /> -->
 				<listheader width="19%" label="Observation" sort="auto" />
 				<listheader width="35%" label="Result" sort="auto" />
-				<listheader width="25%" label="normal range" sort="auto" />
+				<listheader width="18%" label="normal range" sort="auto" />
 				<listheader width="11%" label="Flag" />
 				<listheader width="10%" label="Status" />
+				<listheader width="7%" label="Notes?" />
 		  <!--  <listheader width="80px" label="Condition" />  -->
 			</listhead>
 		</listbox>

@@ -134,6 +134,20 @@ public class labsnWinController extends GenericForwardComposer {
 				// store PAR reca in listitem's value
 				i.setValue( obsreca );
 				
+				LabResult lab = new LabResult( obsreca );
+				
+				Class<? extends Notes> noteClass = NotesLab.class;
+				
+				Notes note = null;
+				note = Notes.newInstance( noteClass );
+				note.read( lab.getResultNoteReca() );
+				String Notestat = "";
+				
+				if (note.getNoteText().length() > 1) { Notestat = "Yes";}
+				else { Notestat = "No"; }
+				
+				new Listcell( Notestat ).setParent( i );
+				
 			}
 			
 			
@@ -150,7 +164,7 @@ public class labsnWinController extends GenericForwardComposer {
 		
 		LabResEdit.add( ptRec, labsWin );
 		Notifier.notify( ptRec, Notifier.Event.LAB );
-		//refreshList();
+		refreshList(BatStr);
 		return;
 	}
 	
@@ -171,7 +185,7 @@ public class labsnWinController extends GenericForwardComposer {
 		
 		LabResEdit.edit( ptRec, labReca, labsWin );
 		Notifier.notify( ptRec, Notifier.Event.LAB );
-		//refreshList();
+		refreshList(BatStr);
 		return;
 	}
 	

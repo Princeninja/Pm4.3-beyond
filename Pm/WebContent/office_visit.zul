@@ -1,6 +1,6 @@
 <?page title="The Office Visit" contentType="text/html;charset=UTF-8"?>
 <zk>
-<window title="The Office Visit Hub" border="normal" apply="palmed.OfficeVisitWinController" 
+<window title="Office Visit Hub" border="normal" apply="palmed.OfficeVisitWinController" 
 
  id="officevWin"  mode="embedded" vflex="1" hflex="1" >
 
@@ -9,14 +9,12 @@
 			<vbox>							
 			
 				<groupbox mold="3d"  >
-					<caption label="ToDO">
+					<caption label="ToDo">
 					<menubar orient="vertical"  width="80">
 			        <menu label="Menu" > <!--  image="/widgets/menu/pull-down_menu/img/luggage.png"--> 
 						<menupopup>
-							<menuitem id="btnCurrentT" label="Current Tasks" />
-							<menuitem id="btnCompletedT" label="Completed Tasks" />
 							<menuitem id="btnCreateT" label="Create Tasks" />
-							<menuitem id="btnNotes" label="Notes" />
+							<menuitem id="btnCompletedT" label="Completed Tasks" />
 						</menupopup>
 					</menu> 
 				</menubar>
@@ -56,10 +54,10 @@
 					<separator />
 					<radio id="r_examrm" label="Exam Room" />
 					<separator />
-					<radio id="r_end" label="Post Visit" />
-					<separator />
 					<radio id="r_done" label="End" />
 					<separator />
+					<radio id="r_end" label="Review Visit" />
+					<separator /> 
 					<radio id="r_all" label="All" />					
 				</radiogroup>
 			</groupbox>

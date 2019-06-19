@@ -91,7 +91,6 @@ public class PhyExamWinController extends GenericForwardComposer {
 	private Groupbox phyexHtmlGroupbox;
 	private Vbox MainVbox;
 	private Tabbox Maintabbox;
-	private Tab tab;
 	private Window phyexWin;
 	
 	
@@ -522,36 +521,7 @@ public class PhyExamWinController extends GenericForwardComposer {
 			//System.out.println("Here");
 			//tab02.setFocus(true); }
 					
-		
-		XMLElement xml = new XMLElement();
-		FileReader reader = null;
-		
-		
-		try {
-			//reader = new FileReader(new File("C:"+File.separator +"Users"+File.separator +"program"+File.separator +"Heliosworkspace"+File.separator +"Pm"+File.separator +"WebContent"+File.separator +fn_config));
-			reader = new FileReader( Pm.getOvdPath() + File.separator + fn_config );
-	    } catch (FileNotFoundException e) {
-	    	System.out.println( "the.." + File.separator + fn_config+ "file was not found:" );
-	    	
-	    }
-		
-		try {
-			xml.parseFromReader(reader);
-		} catch (XMLParseException e ) {
-			//TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	    
-		final XMLElement e;
 				
-		 String Name = xml.getName();
-		 final int NosChildren = xml.countChildren();
-		 
-		 e = xml.getElementByPathName(Name);
-		
 		 MainVbox = new Vbox();
 		 MainVbox.setHeight("557px"); //reduced from 667px
 		 MainVbox.setWidth("791px");
@@ -987,7 +957,7 @@ public class PhyExamWinController extends GenericForwardComposer {
 		
 		new Caption("Surgical History").setParent(gbox10);
 		
-        Tab tab02 = new Tab();
+         Tab tab02 = new Tab();
 				 				
 		 tab02.setLabel("Physical Exam");
 		 tab02.setParent(tabs1);
@@ -1004,246 +974,42 @@ public class PhyExamWinController extends GenericForwardComposer {
 		 if ( ExamTextbox != null ){	
 			 System.out.println("Here");
 			 tabpanel02.setFocus(true); }
+		 	 
 		 
-		 Vbox SecondaryVbox = new Vbox();
-		 SecondaryVbox.setVflex("1");
-		 SecondaryVbox.setHflex("1");
-		 SecondaryVbox.setParent(tabpanel02);
+		 final Xmlwindow physicalexam = new Xmlwindow();
+		 physicalexam.setXmlWin(tabpanel02, physicalexam);
 		 
-	 	 Tabbox Secondarytabbox = new Tabbox();
-	 	 Secondarytabbox.setHflex("1");
-	 	 Secondarytabbox.setHeight("525px"); //reduced from 625px
-	 	 Secondarytabbox.setOrient("vertical");
-		 
-		 SecondaryVbox.appendChild(Secondarytabbox);
-		 
-		 Tabs tabs = new Tabs();
-		 Secondarytabbox.appendChild(tabs);
-		 tabs.setWidth("85px");
-		 
-		 Tabpanels tabpanels = new Tabpanels();
-		 Secondarytabbox.appendChild(tabpanels);
-		 
-		 final List<Object> Findings = new ArrayList<Object>();
-		 
-		 
-		 for ( int j=0; j< NosChildren ; j++){
-		 XMLElement Childj = e.getChildByNumber( j );
-		 
-		 if ( Childj.getName().equals("PAGE")){
-			 //Creates a tab with the Label: Childj.getAttribute("label")
-			 tab = new Tab();
-			 tab.setLabel((String) Childj.getAttribute("label"));
-			 tab.setParent(tabs);
-			 Findings.add(tab);
-						 
-			 //Creates a tabpanel
-			 Tabpanel tabpanel = new Tabpanel();
-			 tabpanel.setStyle("overflow:auto");
-			 tabpanel.setVflex("1");
-			 tabpanel.setHflex("1");
-			 tabpanel.setParent(tabpanels);
+		 XMLElement xml = new XMLElement();
+		 FileReader reader = null;
 			
 		 
+			try {
+				//reader = new FileReader(new File("C:"+File.separator +"Users"+File.separator +"program"+File.separator +"Heliosworkspace"+File.separator +"Pm"+File.separator +"WebContent"+File.separator +fn_config));
+				reader = new FileReader( Pm.getOvdPath() + File.separator + fn_config );
+		    } catch (FileNotFoundException e) {
+		    	System.out.println( "the.." + File.separator + fn_config+ "file was not found:" );
+		    	
+		    }
+			
+			try {
+				xml.parseFromReader(reader);
+			} catch (XMLParseException e ) {
+				//TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		    
+				String Name = xml.getName();
+			 xml.countChildren();
+			 
+			 xml.getElementByPathName(Name);
+		 String[] Tabboxms = new String[] {"550px", "875px"};
+		 physicalexam.initializexml( Tabboxms , "PAGE", "SYSTEM", "FINDING",  xml, false, "","",false,"","CODE");
+		 physicalexam.createxml();
 		 
-		 XMLElement Childjj = Childj.getChildByNumber(0);
-		 
-		 if (Childjj.getName().equals("SYSTEM")){
-			 
-			 Hbox hbox1 = new Hbox();
-			 hbox1.setParent(tabpanel);
-			 
-			 for ( int k = 0; k < Childj.countChildren(); k++ ){
-				 
-				 XMLElement Childk = Childj.getChildByNumber(k);
-				 				 
-				//Creates a groupbox
-				 Groupbox gbox = new Groupbox();
-				 new Caption((String) Childk.getAttribute("ID")).setParent(gbox);
-				 gbox.setParent(hbox1);
-				 gbox.setWidth("305px");
-				
-								 
-				 for( int l =0; l < Childk.countChildren(); l++){
-				 XMLElement Childkk = Childk.getChildByNumber(l);
-				 
-				 if (Childkk.getName().equals("FINDING")){
-					 if (!Childkk.toString().contains("Misc")){ 
-					 if ( Childkk.getAttribute("Type").equals("checkbox")){
-						
-												
-						Cbox gen = new Cbox(Childkk, gbox);
-						gen.createCbox();
-						Findings.add(gen);
-						 
-											 
-					}else if( Childkk.getAttribute("Type").equals("lateral") ){
-						
-						//Creates a "+Childkk.getAttribute("Type")+" named: "+Childkk.getAttribute("ID")
-						Lateral lat0 = new Lateral(Childkk, gbox);
-						lat0.createLateral("R", "L");
-						Findings.add(lat0);
-						
-						
-											 
-					 }else if( Childkk.getAttribute("Type").equals("text-check")){
-						 
-						 //Creates a text-check
-						 Cbox tgen = new Cbox(Childkk, gbox);
-						 tgen.createCbox();
-						 Findings.add(tgen);
-						 
-						 Separator sep = new Separator();
-						 sep.setParent(gbox);
-						 
-						 Tbox text01 = new Tbox(Childkk, gbox);
-						 text01.createTbox(40, 3);
-						 Findings.add(text01);
-						 
-					
-					 }else if( Childkk.getAttribute("Type").equals("lateral-text")){
-						 
-						 Lateral lat01 = new Lateral(Childkk, gbox);
-						 lat01.createLateral("R", "L");
-						 Findings.add(lat01);
-						 
-												 
-						 Separator sep = new Separator();
-						 sep.setParent(gbox);
-						 
-						 Tbox text02 = new Tbox(Childkk, gbox);
-						 text02.createTbox(40, 3);
-						 Findings.add(text02);
-						 
-						 
-					   }
-					 else{
-						 alert("The type:"+ Childkk.getAttribute("Type")+" isn't availabe in this version of the software!");
-					  }
-					 
-					 }else if (Childkk.toString().contains("Misc")){
-						 
-						if (Childkk.getAttribute("Type").equals("lateral") && Childkk.getAttribute("Misc").equals("U/L")){
-							
-							Lateral lat02 = new Lateral(Childkk, gbox);
-							lat02.createLateral("U", "L");
-							Findings.add(lat02);
-							
-							
-						}else if (Childkk.getAttribute("Type").equals("checkbox") && Childkk.getAttribute("Misc").equals("textbox/r/s/'/6'")){
-							
-							Cbox misc1  = new Cbox(Childkk, gbox);	
-							misc1.createCbox( 4, 1, "/6");
-							Findings.add(misc1);
-							
-							
-						}else if (Childkk.getAttribute("Type").equals("lateral") && Childkk.getAttribute("Misc").equals("textbox/r/s")){
-							
-							Lateral lat03 = new Lateral(Childkk, gbox);
-							lat03.createLateral("R", "L", 2, 1, "");
-							Findings.add(lat03);
-							
-													
-							
-						}else if (Childkk.getAttribute("Type").equals("checkbox") && Childkk.getAttribute("Misc").equals("textbox/r/s")){
-							
-							Cbox misc2 = new Cbox(Childkk, gbox);
-							misc2.createCbox( 2, 1, "");
-							Findings.add(misc2);
-							
-						}else if (Childkk.getAttribute("Type").equals("lateral") && Childkk.getAttribute("Misc").equals("textbox/r/s/'/5'")){
-							
-							Lateral lat04 = new Lateral(Childkk, gbox);
-							lat04.createLateral("R", "L", 2, 1, "/5");
-							Findings.add(lat04);
-							
-							
-							
-							
-						}else if (Childkk.getAttribute("Type").equals("lateral") && Childkk.getAttribute("Misc").equals("+/-")){
-							
-							Lateral lat05 = new Lateral(Childkk, gbox);
-							lat05.createLateral("+", "-");
-							Findings.add(lat05);
-							
-							
-							
-						}else if (Childkk.getAttribute("Type").equals("lateral-text") && Childkk.getAttribute("Misc").equals("+/-")){
-							
-							Lateral lat06 = new Lateral(Childkk, gbox);
-							lat06.createLateral("+", "-");
-							Findings.add(lat06);
-														
-							Tbox text03 = new Tbox(Childkk, gbox);
-							text03.createTbox(40, 3);
-							Findings.add(text03);
-							
-							
-						}else { alert("No provision exists for: "+Childkk.getAttribute("Misc")+" in this version");} 
-						 
-					 }
-					 
-				   }
-				 } 
-			 }
-			 
-		 }
-		
-		
-		 else if(Childjj.getName().equals("FINDING")){
-			 
-		 Groupbox gbox1 = new Groupbox();
-		 gbox1.setParent(tabpanel);
-		 new Caption((String)Childj.getAttribute("label")).setParent(gbox1);
-		 		
-		 
-		 for ( int i=0; i < Childj.countChildren(); i++ ){
-			 
-		 XMLElement Child11 = Childj.getChildByNumber(i);
-		 if (Child11.getAttribute("Type").equals("checkbox")){
-		
-			 
-		 Cbox gen1 = new Cbox(Child11, gbox1);
-		 gen1.createCbox();
-		 Findings.add(gen1);
-		 
-		 if ( i % 4 ==0 ){	 
-			 Separator Sep = new Separator();
-			 Sep.setParent(gbox1);
-		 }
-		 			 
-		 	 
-		 //Creates a "+Child11.getAttribute("Type")+" named: "+Child11.getAttribute("ID")
-		 	 }else if ( Child11.getAttribute("Type").equals("text-check")){
-		 		
-		 		 Cbox tgen = new Cbox(Child11, gbox1);
-		 		 tgen.createCbox();
-		 		 Findings.add(tgen);
-		 		 
-				 Separator sep = new Separator();
-				 sep.setParent(gbox1);
-				 
-				 
-				 Tbox text04 = new Tbox(Child11, gbox1);
-				 text04.createTbox(80, 4);
-				 Findings.add(text04);
-				 
-				 
-		 	  }else if ( Child11.getAttribute("Type").equals("text-check/s")){
-			 		
-			 		 Cbox tvit = new Cbox(Child11, gbox1);
-			 		 tvit.createCbox(60, 1, "");
-			 		 Findings.add(tvit);					 										 
-					 
-			 	  }else {alert("This Type: "+ Child11.getAttribute("Type")+" is not available in this version.");} 
-		        
-		 	}
-		   } 
-		 }else {alert("Provision for \"child\" not named (Page) hasn't been made in this version.");}
-		
-		} 
-		
-				  
+		 	  
 		 Tab tab04 = new Tab();
 		 tab04.setLabel("Impressions");
 		 tab04.setParent(tabs1);
@@ -1254,240 +1020,13 @@ public class PhyExamWinController extends GenericForwardComposer {
 		 tabpanel04.setParent(tabpanels1);
 		 tabpanel04.setStyle("overflow:auto");
 		 
+		 final Assessment impressions = new Assessment();
 		 
-		 Hbox hbox03 = new Hbox();
-		 hbox03.setParent(tabpanel04);
-		
-		 Groupbox gbox03 = new Groupbox();
-		 gbox03.setWidth("380px");
-		 gbox03.setParent(hbox03);
+		 impressions.setAssessvar(tabpanel04, 1);
 		 
-		 new Caption ("Impressions: ").setParent(gbox03);
-		
-		 Hbox ButtonHbox00 = new Hbox();
-		 ButtonHbox00.setParent(gbox03);
-		 ButtonHbox00.setWidth(gbox03.getWidth());
-		 ButtonHbox00.setPack("end");
+		 impressions.createassessment(true, ptRec, "", false);
 		 
-		 Button Add = new Button();
-		 
-		 Add.setParent(ButtonHbox00);
-		 Add.setLabel("Add Impression");
-		 Add.setMold("trendy");
-		 
-		 Button Remove = new Button();
-		 
-		 Remove.setParent(ButtonHbox00);
-		 Remove.setLabel("Remove Impression:");
-		 Remove.setMold("trendy");
-		 
-		 final Listbox Impslist = new Listbox();
-		 Impslist.setParent(ButtonHbox00);
-		 Impslist.setRows(1);
-		 Impslist.setMold("select");
-		 
-		 		 
-		 Grid grid01 = new Grid();
-		 grid01.setParent(gbox03);
-		 
-		 
-		 Columns Columns00 = new Columns();
-		 Columns00.setParent(grid01);
-		 
-		 Column Column00 = new Column();
-		 Column00.setWidth("23px");
-		 Column00.setParent(Columns00);
-		 
-		 Column Column01 = new Column();
-		 Column01.setParent(Columns00);
-		 
-		 final Rows rows01 = new Rows();
-		 rows01.setParent(grid01);
-		 
-		 Row row10 = new Row();
-		 row10.setParent(rows01);
-		 		 
-		 
-		 Label l10 = new Label();
-		 l10.setValue("1 ");
-		 l10.setParent(row10);
-		 
-		 final Textbox t30 = new Textbox();
-		 t30.setRows(2);
-		 t30.setCols(50);
-		 t30.setParent(row10);
-		 
-		 tab04.addEventListener(Events.ON_CLICK, new EventListener(){
-
-			public void onEvent(Event arg0) throws Exception {
-				t30.setFocus(true);
-				
-			}
- 			 
-		 });
-		 
-		 final List<Object> Imps = new ArrayList<Object>();
-		 
-		 Add.addEventListener(Events.ON_CLICK, new EventListener(){
-
-				public void onEvent(Event arg0) throws Exception {
-					// TODO Auto-generated method stub
-					
-										 
-					 Impressions Imp = new Impressions(rows01);
-					 
-					 int i = 2;
-					 String num = Integer.toString(Imps.size()+i);  
-					 
-					 Imp.createImpression(num);
-					 Imps.add(Imp);		
-					 
-					 Listitem jj = new Listitem();
-					 jj.setLabel(num);
-					 jj.setParent(Impslist);
-					 
-					 Impslist.setSelectedItem(Impslist.getItemAtIndex(0));
-					
-				}});
-		 	 	 
-		 		 
-		 Remove.addEventListener(Events.ON_CLICK, new EventListener(){
-
-			public void onEvent(Event arg0) throws Exception {
-				// TODO Auto-generated method stub
-				
-				if ( Impslist.getSelectedCount() < 1 ){
-					try {Messagebox.show( "No Impression is currently available to remove. ");  } catch  (InterruptedException e) { /*ignore*/ }
-					return;
-				}
-				
-				int nos = Integer.parseInt(Impslist.getSelectedItem().getLabel().toString().trim()) - 2;
-								
-				Object O = Imps.get(nos);
-												
-				((Impressions) O).deleteImpression();
-				
-				if ( Imps.size() > nos +1 ){
-				
-				Object I = Imps.get(nos+1);
-				((Impressions) I).newlbl(Impslist.getSelectedItem().getLabel().toString().trim());
-								
-				if ( Imps.size() > (nos+2) ){
-					
-					for ( int i=0; i < (Imps.size()-(nos+2)); i++) {
-						
-						int s = Integer.parseInt(Impslist.getSelectedItem().getLabel().toString().trim())+i;
-												
-						Object J = Imps.get(s);
-												
-						int sn = s+1;
-						
-						((Impressions) J).newlbl(Integer.toString(sn));
-												
-					}
-					
-				}
-				
-				}
-							
-				
-				if ( Impslist.getItemCount() > (nos + 1)){
-										
-					Impslist.removeItemAt(Impslist.getItemCount()-1);
-			
-				}
-				
-				 else if( Impslist.getItemCount() <= (nos+1)) { 
-								
-					Impslist.removeItemAt(nos);	
-				
-				}
-				
-				Impslist.setSelectedItem(Impslist.getItemAtIndex(Impslist.getItemCount()-1));
-				Impslist.setFocus(true);
-				Imps.remove(O);
-				
-			
-			}});
-				 
-		 Groupbox gbox05 = new Groupbox();
-		 gbox05.setParent(hbox03);
-		 gbox05.setMold("3d");
-				 
-		 new Caption("Current Problems: ").setParent(gbox05);
-		 
-		 final Listbox li30 = new Listbox();
-		 li30.setRows(8);
-		 li30.setParent(gbox05);
-		 
-		 ProbUtils.fillListbox(li30, ptRec);
-		 
-		 Hbox ButtonHbox01 = new Hbox();
-		 ButtonHbox01.setParent(gbox05);
-		 ButtonHbox01.setWidth("353px");
-		 ButtonHbox01.setPack("center");
-		 ButtonHbox01.setStyle("border: 1px solid teal");
-		 		 
-		 Button Add01 = new Button();
-		 Add01.setLabel("Add Problem");
-		 Add01.setParent(ButtonHbox01);
-		 Add01.setMold("trendy");
-		 Add01.addEventListener(Events.ON_CLICK, new EventListener(){
-
-			public void onEvent(Event arg0) throws Exception {
-				// TODO Auto-generated method stub
-				
-				if ( li30.getSelectedCount() < 1 ){
-					try {Messagebox.show( "No Problem is currently selected. ");  } catch  (InterruptedException e) { /*ignore*/ }
-					return;
-				}		
-				
-				String Problem =  li30.getSelectedItem().getLabel().toString();
-				
-				boolean Duplicate  = false;
-				
-				if ( t30.getValue().contains(Problem) ){ Duplicate = true; }
-				
-				for ( int i=0; i < Imps.size(); i++ ){
-					
-				 if (((Impressions)  Imps.get(i)).text().contains(Problem)){ Duplicate = true ;}
-					
-				}
-				
-							
-				if ( !Duplicate ){
-				
-				if ( t30.getValue().length() == 0 || t30.getValue().equals(" ") ){
-					
-					t30.setValue(Problem);
-				}
-				
-								
-				
-				else {
-				
-				Impressions Imp01 = new Impressions(rows01);
-				
-				int i = 2;
-				String num = Integer.toString(Imps.size()+i);  
-				 
-				Imp01.createImpression(num,Problem);
-				Imps.add(Imp01);		
-				 
-				Listitem jj = new Listitem();
-				jj.setLabel(num);
-				jj.setParent(Impslist);
-				
-				}
-				}
-				
-				else { try {Messagebox.show("An Impression with that problem already exists!");  } catch  (InterruptedException e) { /*ignore*/ }
-				return;
-				
-				}
-				
-				
-			}});
+		 impressions.setfocus(tab04);
 		 
 		 
 		 
@@ -1549,11 +1088,11 @@ public class PhyExamWinController extends GenericForwardComposer {
 						return;
 					}}
 					
-					for (int i=0; i < Findings.size(); i++){
+					/*for (int i=0; i < Findings.size(); i++){
 						
 						getfstatus(Findings.get(i));
 						
-					}
+					}*/
 					
 					
 					/*for ( int j = 0; j < Imps.size() ; j++ ){
@@ -1589,6 +1128,8 @@ public class PhyExamWinController extends GenericForwardComposer {
 					htmlString = htmlString.replace("<p>illness", "<p>"+t11.getText());
 										
 					Tablebuilder TB00 = new Tablebuilder();
+					Listbox li30 = new Listbox();
+					ProbUtils.fillListbox( li30, ptRec );
 					String rows00 = TB00.rows(TB00, li30);				
 					String Table00 = TB00.createtable(2, rows00);
 					htmlString = htmlString.replace("TableCP", Table00);
@@ -1700,59 +1241,10 @@ public class PhyExamWinController extends GenericForwardComposer {
 					//TODO add years of education + occupation
 								
 					htmlString = htmlString.replace("social historysz", Shx.getText());
-			 					
-					StringBuilder PhysicalExam = new StringBuilder();
-					
-					for (int i=0; i < Findings.size(); i++){
-					
-					 String Physicalcomp = getfstatus(Findings.get(i));
-					 
-					 if (Physicalcomp == null ){ Physicalcomp = ""; }
-					 PhysicalExam.append(Physicalcomp);	
-					 
-					 if (Findings.get(i) instanceof Tab){ TabsList.add(((Tab) Findings.get(i)).getLabel().trim());}
-					
-					}
-					
-					String PhysicalEx = PhysicalExam.toString();
-					
-					for (int i=0; i < 4; i++){
-					PhysicalEx = deleteachar(PhysicalEx, 0);}
-					
-					PhysicalEx = PhysicalEx+"</p>";
-					
-					String PhysicalExamFinal = null;
+			 										
+					htmlString = htmlString.replace("physical examsz", physicalexam.examtext(false));
 										
-					String tabcont =  "<p align=\"justify\"><b>%s: </b></p>";
-																										
-					PhysicalExamFinal = PhysicalEx.replace(String.format(tabcont, TabsList.get(0)), "").replace(String.format(tabcont, TabsList.get(1)), "")						
-													.replace(String.format(tabcont, TabsList.get(2)), "").replace(String.format(tabcont, TabsList.get(3)), "")	
-													.replace(String.format(tabcont, TabsList.get(4)), "").replace(String.format(tabcont, TabsList.get(5)), "")
-													.replace(String.format(tabcont, TabsList.get(6)), "").replace(String.format(tabcont, TabsList.get(7)), "")
-													.replace(String.format(tabcont, TabsList.get(8)), "").replace(String.format(tabcont, TabsList.get(9)), "")
-													.replace(String.format(tabcont, TabsList.get(10)), "").replace(String.format(tabcont, TabsList.get(11)), "");
-										
-					
-					htmlString = htmlString.replace("physical examsz", PhysicalExamFinal);
-					
-					String SoapExam =  PhysicalExamFinal.replace("<p align=\"justify\">", "").replace("<b>", "").replace("</b>", "")
-					.replace("<p>", "").replace("</p>", "");
-								
-					if ( ExamTextbox != null){
-					ExamTextbox.setText( SoapExam ); }
-					
-					StringBuilder Impressions = new StringBuilder();
-					
-					Impressions.append("1:"+t30.getText());
-					Impressions.append(System.getProperty("line.separator"));
-					
-					for ( int j = 0; j < Imps.size() ; j++ ){
-						
-						Impressions.append(((Impressions) Imps.get(j)).getText());
-						Impressions.append(System.getProperty("line.separator"));
-					}
-					
-					htmlString = htmlString.replace("impressionssz", Impressions.toString());
+					htmlString = htmlString.replace("impressionssz", impressions.getimpressions(true));
 										
 					htmlString = htmlString.replace("plansz", t40.getText());
 					if ( ExamTextbox == null){					
