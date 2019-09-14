@@ -53,7 +53,7 @@ public class PmLogin /*extends Window*/ {
 	 */
 	
 	public static int show(Component parent, String Verify) {
-				new PmLogin(parent, "true").getStatus();
+				new PmLogin(parent, Verify).getStatus();
 				  r = getUserRec();
 				return r;
 	}

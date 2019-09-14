@@ -70,12 +70,13 @@
 			</hbox>
 			<listbox id="officevListbox" vflex="1" >
 				<listhead>
-					<listheader width="150px" label="Name" sort="auto" />
+					<listheader width="130px" label="Name" sort="auto" />
 					<listheader label="Current Status" sort="auto" />
 					<listheader label="Visit Type" width="100px" sort="auto" />
 					<listheader label="Provider" width="80px" sort="auto" />
 					<listheader label="Duration" width="80px" sort="auto" />
 					<listheader label="Priority"  width="100px" sort="auto" />
+					<listheader label="View Status" sort="auto" />
 				</listhead>
 			</listbox>
 	<!--  <hbox>

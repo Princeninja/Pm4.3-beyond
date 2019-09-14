@@ -107,6 +107,7 @@ public class SoapSheetWinController extends GenericForwardComposer {
 	private Window FUWin = null;			// Window
 	private Window chargeWin = null;		// Window
 	private Window summaryWin = null;		// Window
+	private int tabint = 0;   			//Window-tab
 	
 	
 	private Groupbox gbROS;
@@ -144,6 +145,7 @@ public class SoapSheetWinController extends GenericForwardComposer {
 	private usrlib.Date lastVisitDate;		// last visit date (determine from last soap date for now)
 	
 	private String  Provider, CC , Subj,  ROS, Hx, Vitals, Exam, Assess, Orders, RX, FU, Charge, summary, Status, fStatus;
+	private XMLElement Info3 = null;
 	
 	private boolean noAssessment = false;
 	
@@ -263,11 +265,9 @@ public class SoapSheetWinController extends GenericForwardComposer {
 		
 		
 		 XMLElement Info = new XMLElement();
-		 new XMLElement();
-		 
-		 		 
-			
+					
 		 Info = e.getChildByName("INFO");
+		 Info3 = Info;
 		 //Todo = e.getChildByName("TODO");
 		 Status = Info.getChildByName("Status").getContent().trim();
 		 
@@ -389,10 +389,9 @@ public class SoapSheetWinController extends GenericForwardComposer {
 		    tabSummary.setVisible(true);
 		    summary = Info.getChildByName("Summary").getContent().trim();
 		    
-		    //onSelect$tabROS(ev);
-		    
-		 	/*tabCharge.setVisible(true);
-		 	Charge = Info.getChildByName("Charge").getContent().trim();
+		   		    
+		 	tabCharge.setVisible(true);
+		 	/*Charge = Info.getChildByName("Charge").getContent().trim();
 		 	if ( !Charge.equals("QChargeQ")){ ChargeTextbox.setText(Charge); } else { ChargeTextbox.setText(""); }*/
 	
 			 
@@ -869,6 +868,9 @@ public class SoapSheetWinController extends GenericForwardComposer {
 
 	public void onSelect$tabExam( Event e ){
 		
+		whichtab();
+		tabint = 5;
+				
 		soapShtWin.setPosition("left,top");
 		
 		if ( Status.equals("End") || Status.equals("Exam Room")){
@@ -931,7 +933,7 @@ public class SoapSheetWinController extends GenericForwardComposer {
 	
 	public void onSelect$tabAssess( Event e ){
 		
-		
+		whichtab();
 		boolass = true;
 		if ( Status.equals("Exam Room") || Status.equals("Triage") || Status.equals("End") ){
 		
@@ -966,6 +968,9 @@ public class SoapSheetWinController extends GenericForwardComposer {
 	// FU Tab
 
 	public void onSelect$tabFU( Event e ){
+		
+		whichtab();
+		tabint = 9;
 		if ( Status.equals("End") || Status.equals("Exam Room") || Status.equals("Triage") ){
 	
 		if ( FUWin == null ) FUWin = build_FUWin();}
@@ -1017,7 +1022,9 @@ public class SoapSheetWinController extends GenericForwardComposer {
 
 	public void onSelect$tabROS( Event e ){
 		if ( Status.equals("End") || Status.equals("Exam Room") || Status.equals("Triage") ){
-	
+		
+		whichtab();
+		tabint = 4;
 		if ( rosWin == null ) rosWin = build_rosWin();}
 	}
 
@@ -1080,7 +1087,8 @@ public class SoapSheetWinController extends GenericForwardComposer {
 
 	public void onSelect$tabVitals( Event e ){
 		if ( Status.equals("End") || Status.equals("Exam Room") || Status.equals("Triage")){
-			
+		
+		whichtab();	
 		if ( vitalsWin == null ) vitalsWin = build_vitalsWin(); }
 	}
 
@@ -1106,6 +1114,7 @@ public class SoapSheetWinController extends GenericForwardComposer {
 	// RX Tab
 
 	public void onSelect$tabRX( Event e ){
+		whichtab();
 		if ( rxWin == null ) rxWin = build_rxWin();
 	}
 
@@ -1127,12 +1136,17 @@ public class SoapSheetWinController extends GenericForwardComposer {
 	
 	
 	
+	//Sheet tab select 
+	public void onSelect$tabSheet( Event e ){
+		
+		whichtab();}
+	
 	
 	
 	// Last Tab
-
 	public void onSelect$tabLast( Event e ){
 		
+		whichtab();
 		if ( lastWin == false ) lastWin = build_lastWin(); }
 	
 
@@ -1159,19 +1173,28 @@ public class SoapSheetWinController extends GenericForwardComposer {
 			String txt = soap.getText();
 			//System.out.println( "Soap text ==>" + txt );
 			
+		
+			String sub = "";
 			int o = txt.indexOf( '\n' );
-			String sub = txt.substring( 0, o );
 			
+			if ( o > 0 ){
+				
+			//System.out.println("length and index: "+ txt.length()+", "+ o);
+					
+			sub = txt.substring( 0, o ); 
+						
 			int a = txt.indexOf( '\n', o+1 );
+			
 			String obj = txt.substring( o+1, a );
 			
 			int p = txt.indexOf( '\n', a+1 );
+			
 			String ass = txt.substring( a+1, p );
 			
 			String plan = txt.substring( p+1, txt.length());
 			
 			soapTextbox.setValue( soap.getDate().getPrintable(9) + "  " + new Prov( soap.getProvRec()).getName() + "\n" + SoapNote.soapDot[0] + sub + "\r\n" + SoapNote.soapDot[1] + obj + "\r\n" + 
-					SoapNote.soapDot[2] + ass + "\r\n" + SoapNote.soapDot[3] + plan );
+					SoapNote.soapDot[2] + ass + "\r\n" + SoapNote.soapDot[3] + plan ); }
 		}
 
 		
@@ -1277,6 +1300,7 @@ public class SoapSheetWinController extends GenericForwardComposer {
 	// Orders Tab
 
 	public void onSelect$tabOrders( Event e ){
+		whichtab();
 		if ( ordersWin == null ) ordersWin = build_ordersWin();
 	}
 
@@ -1295,19 +1319,51 @@ public class SoapSheetWinController extends GenericForwardComposer {
 	// Charge Tab
 
 	public void onSelect$tabCharge( Event e ){
-		if ( Status.equals("End") || Status.equals("Post Visit")){
+		
+		whichtab();
+		tabint = 10;
+		if ( Status.equals("End") ){
 			
 		if ( chargeWin == null ) chargeWin = build_chargeWin(); }
 	}
 
+	Xmlwindow ChargeW = null;
+	
 	private Window build_chargeWin(){
 		
-		// pass parameters to new window
-		Map<String, Object> myMap = new HashMap();
-		myMap.put( "ptRec", (Rec)(ptRec ));
-
-		// create new charge window in tabpanel
-		return (Window) Executions.createComponents("soap_charge.zul", gbCharge, myMap );
+		Window build_chargeWin = new Window();
+		ChargeW = new Xmlwindow();
+		
+		XMLElement xml = new XMLElement();
+		FileReader reader = null;
+		
+		String fn_config = "ChargesF.xml";
+		String fullpath = Pm.getOvdPath() + File.separator + fn_config;
+						
+		try {
+			reader = new FileReader( ChargeW.MainFile(fullpath, ptRec, "Charge", Vfilef).getAbsolutePath() );
+	    } catch (FileNotFoundException e) {
+	    	System.out.println( "the.." + File.separator + fn_config+ "file was not found:" );
+	    	
+	    }
+		
+		try {
+			xml.parseFromReader(reader);
+		} catch (XMLParseException e ) {
+			//TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		build_chargeWin =  ChargeW.setXmlWin(gbCharge, ChargeW);
+		String[] Tabboxms = new String[] {"525px", "850px"};
+		ChargeW.initializexml( Tabboxms, "CHG_TAB", "CHG_TAB_BOX", "CHG_TAB_BOX_sub",  xml, false, "","",true,"","Status");
+		ChargeW.createxml();	
+		
+		
+		return build_chargeWin;	
 	}
 	
 	
@@ -1328,22 +1384,14 @@ public class SoapSheetWinController extends GenericForwardComposer {
 		return (Window) Executions.createComponents("history.zul", gbHx, myMap );
 	}
 	
-	
-	
-	
-	
-	
-	
-	
-
-	
-	
+		
 	
 	// Summary Tab
 
 	public void onSelect$tabSummary( Event e ){
 		if ( Status.equals("End") || Status.equals("Post Visit")){
 			
+		whichtab();	
 		if ( summaryWin == null ) summaryWin = build_summaryWin(); }
 	}
 
@@ -1595,7 +1643,7 @@ public class SoapSheetWinController extends GenericForwardComposer {
 		
 	}
 	
-	public void selecttabs(){
+	private void selecttabs(){
 		
 		if (assess == null ) {build_AssessWin();}
 		if (exam == null ) {build_examWin(); }
@@ -1605,6 +1653,21 @@ public class SoapSheetWinController extends GenericForwardComposer {
 		if (RxTextbox == null ) {build_rxWin();}
 		if (VitalsTextbox == null ) {build_vitalsWin(); }
 		if (OrdersTextbox == null ) {build_ordersWin();}
+		
+		
+	}
+	
+	private void whichtab() {
+		
+		if ( tabint == 4) { rosF.update();     }
+		
+		if ( tabint == 5) { exam.update();    }
+		
+		if ( tabint == 9) { FUF.update();   }
+		
+		if ( tabint == 10) { ChargeW.update(); }
+		
+	
 		
 		
 	}
@@ -1634,49 +1697,27 @@ public class SoapSheetWinController extends GenericForwardComposer {
 		putData = putData.replace(CC.trim(), cc.getText());}
 		if ( !(Subj == null) && subj.getText().length()>1 ){
 		putData = putData.replace(Subj.trim(), subj.getText());}
-		//System.out.println("Exam is: "+Exam);
-		//if ( !(Exam == null) && Exam.length()>1 ){
-		//putData = putData.replace(Exam.trim(), ExamTextbox.getText());}
 		
-		//System.out.println("Te30: "+t30.getText());
-		/*StringBuilder Impressions = new StringBuilder();
-		if ( noAssessment ){
-		Impressions.append("1:"+t30.getText());
-		Impressions.append(System.getProperty("line.separator"));
+		 rosF.update(); 
+		 exam.update(); 
+		 FUF.update();
+		 ChargeW.update(); 		
 		
-		for ( int j = 0; j < Imps.size() ; j++ ){
-			
-			Impressions.append(((Impressions) Imps.get(j)).getTextN());
-			Impressions.append(System.getProperty("line.separator"));
-		}
-		//System.out.println("Asses is: "+Assess);}
-		
-		putData = putData.replace(Assess.trim(), Impressions.toString());}
-		else if ( !(Assess == null) && !(noAssessment)  ) {
-			putData = putData.replace(Assess.trim(), Te30.getText().trim());}*/
 		System.out.println("noAssessment in save is: "+noAssessment);
 		if ( !(Assess == null)) { putData = putData.replace(Assess.trim(),assess.getimpressions(noAssessment) );  }
 		
-		//if ( !(ROS == null) && ROS.length()>1 ){
-		//putData = putData.replace(ROS.trim(), RosTextbox.getText());}
+		
 		
 		if ( !(Vitals == null) && VitalsTextbox.getText().length()>1 ){
 		putData = putData.replace(Vitals.trim(), VitalsTextbox.getText());}
 		
-		//if ( !(FU == null) && FUTextbox.getText().length()>1 ){
-		//putData = putData.replace(FU.trim(), FUTextbox.getText());}
-		
-		if ( !(Charge == null) && ChargeTextbox.getText().length()>1){
-		putData = putData.replace(Charge.trim(), ChargeTextbox.getText());}
 		
 		if ( !(Orders == null) && OrdersTextbox.getText().length()>1){
 		putData = putData.replace(Orders.trim(), OrdersTextbox.getText());}
 		
 		if ( !(RX == null) && RxTextbox.getText().length()>1 ){
 		putData = putData.replace(RX.trim(), RxTextbox.getText());}
-		
-		//if ( !(Hx == null) && Hx.length()>1){
-		//putData = putData.replace(Hx.trim(), HxTextbox.getText());}
+	
         
 		System.out.println("putdata info: "+putData.toString());
 		
@@ -1686,32 +1727,8 @@ public class SoapSheetWinController extends GenericForwardComposer {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
-		/*try{
-            String verify, putData;
-          
-            FileWriter fw = new FileWriter(Vfile);
-            BufferedWriter bw = new BufferedWriter(fw);
-           
-            FileReader fr = new FileReader(Vfile);
-            BufferedReader br = new BufferedReader(fr);
-
-            while( (verify=br.readLine()) != null ){ //***editted
-                       //**deleted**verify = br.readLine();**
-                if(verify != null){ //***edited
-                    putData = verify.replaceAll(CC, cc.getText()).replace(Subj, subj.getText())
-                    .replace(Exam, ExamTextbox.getText()).replace(Asses, txtAssess.getText());
-                    
-                    bw.write(putData);
-                }
-            }
-            br.close();
-
-
-        }catch(IOException ex){
-        ex.printStackTrace();
-        }*/
-		
+				
+		Info3.getChildByName("ViewStatus").setContent("QClosedQ");
 		soapShtWin.detach();
 	
 	}
@@ -1739,13 +1756,19 @@ public class SoapSheetWinController extends GenericForwardComposer {
 		//Rec provRec = (Rec) ZkTools.getListboxSelectionValue( lboxProviders );
 		if ( ! Rec.isValid( provRec )){ DialogHelpers.Messagebox( "You must select a provider." ); return; }
 		
-		String ros = "  ", examstr = "   ", FUstr = "  ";
+		String ros = "  ", examstr = "   ", FUstr = "  ",chargestr = "  ", FUpstr="  ";
 		if ( !(rosF == null) ) { ros = rosF.examtext(true); 
 		}else { build_rosWin(); ros = rosF.examtext(true); }
 		if ( !(exam == null) ) { examstr = exam.examtext(true); 
 		}else { build_examWin(); examstr = exam.examtext(true); }
-		if ( !(FUF == null) ) { FUstr = FUF.examtext(true); 
-		}else { build_FUWin(); FUstr = FUF.examtext(true); }
+		if ( !(FUF == null) ) { FUstr = FUF.examtext(true); FUpstr = FUF.examtext(true);
+		}else { build_FUWin(); FUstr = FUF.examtext(true);  FUpstr = FUF.examtext(true);}
+		if ( !(ChargeW == null) ) { chargestr = ChargeW.examtext(true); 
+		}else { build_chargeWin(); chargestr = ChargeW.examtext(true); }
+		
+		if ( !(assess == null) ) {
+		}else { build_AssessWin(); }
+		
 		
 		String desc = cc.getText().trim();
 		String subj = this.subj.getText().trim() +". "+  ros ;
@@ -1753,15 +1776,19 @@ public class SoapSheetWinController extends GenericForwardComposer {
 		String ass = "";
 		ass = assess.getimpressions(noAssessment);
 		
+		System.out.println("assessment is: "+ ass);
+		
 		String assf = ass.trim();
 		assf = assf.replace("\n", "").replace(System.getProperty("line.separator"), "").replace("\r", "");
+		
+		
 		
 		String orders, rxstr;
 		orders = OrdersTextbox.getText().trim();
 		rxstr = RxTextbox.getText().trim();
 		
 		
-		String ordersf, rxstrf, fustrf, subjf; 
+		String ordersf, rxstrf, fustrf, subjf, fupstrf, chargestrf; 
 		
 		if (orders.substring(orders.length()-1).equals(".")){
 			
@@ -1772,9 +1799,12 @@ public class SoapSheetWinController extends GenericForwardComposer {
 			
 			rxstrf = rxstr+"  ";
 		}else { rxstrf = rxstr+".  "; }
+		
+		
 		System.out.println("FUstr is: "+ FUstr);
 		System.out.println("exam is: "+ examstr);
 		System.out.println("ros is: "+ ros);
+		System.out.println("assessmentf is: "+ assf);
 
 		if (FUstr.substring(FUstr.length()-1).equals(".")){
 	
@@ -1785,6 +1815,17 @@ public class SoapSheetWinController extends GenericForwardComposer {
 			
 			subjf = subj+"  ";
 		}else { subjf = subj+".  "; }
+		
+		if (FUpstr.substring(FUpstr.length()-1).equals(".")){
+			
+			fupstrf = FUpstr+"  ";
+		}else { fupstrf = FUpstr+".  "; }
+		
+		if (chargestr.substring(chargestr.length()-1).equals(".")){
+			
+			chargestrf = chargestr+"  ";
+		}else { chargestrf = chargestr+".  "; }
+		
 		
 		String plan = ordersf+ rxstrf + fustrf ;
 		
@@ -1814,6 +1855,14 @@ public class SoapSheetWinController extends GenericForwardComposer {
 		putData = putData.replace( "QPAssessPQ", assf);
 		
 		putData = putData.replace( "QPPlanPQ", plan);
+		
+		putData = putData.replace( "QCCFQ", desc);
+		
+		putData = putData.replace( "QAssessFQ", assf);
+		
+		putData = putData.replace( "QFUPQ", fupstrf);
+		
+		putData = putData.replace( "QChargesQ", chargestrf );
 		
 			
 		
@@ -1874,6 +1923,7 @@ public class SoapSheetWinController extends GenericForwardComposer {
 		//OfficeVisitWinController Ovwc = new OfficeVisitWinController();
 		//Ovwc.onCheck$r_new(ev);
 		}
+		Info3.getChildByName("ViewStatus").setContent("QClosedQ");
 		soapShtWin.detach();
 		
 		
@@ -2033,6 +2083,9 @@ public class SoapSheetWinController extends GenericForwardComposer {
 
 	private void closeWin() {
 		
+		System.out.println("name of file"+Info3.getName());
+		
+		Info3.getChildByName("ViewStatus").setContent("QClosedQ");
 		soapShtWin.detach();
 		return;
 	}

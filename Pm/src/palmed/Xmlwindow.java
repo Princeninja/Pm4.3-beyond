@@ -19,7 +19,9 @@ import org.zkoss.zul.Checkbox;
 import org.zkoss.zul.Div;
 import org.zkoss.zul.Groupbox;
 import org.zkoss.zul.Hbox;
+import org.zkoss.zul.Html;
 import org.zkoss.zul.Label;
+import org.zkoss.zul.Popup;
 import org.zkoss.zul.Separator;
 import org.zkoss.zul.Space;
 import org.zkoss.zul.Tab;
@@ -28,6 +30,7 @@ import org.zkoss.zul.Tabpanel;
 import org.zkoss.zul.Tabpanels;
 import org.zkoss.zul.Tabs;
 import org.zkoss.zul.Textbox;
+import org.zkoss.zul.Timer;
 import org.zkoss.zul.Vbox;
 import org.zkoss.zul.Window;
 
@@ -50,12 +53,12 @@ import usrlib.XMLElement;
  * <p>Company: PAL/MED </p>
  * 
  * @author Prince A Antigha
- * @version TBD
+ * @version 1.2 [9/6/2019]
  */
 
 public class Xmlwindow {
 	
-	private String MainChild, SecondChild, ThirdChild, SuperChild, AdoptedChild;
+	private String Typestr, MainChild, SecondChild, ThirdChild, SuperChild, AdoptedChild;
 	private XMLElement e, emain, emainchild, xml = new XMLElement();
 	private int  NosChildren;
 	private Tab tab;
@@ -77,7 +80,7 @@ public class Xmlwindow {
 		 this.SuperParent = parent;
 		 this.xmlwindow = xmlwindow;
 		 
-		 //build_XmlWin.setWidth("850px");
+		 
 		 
 		 return build_XmlWin;
 		 
@@ -86,9 +89,9 @@ public class Xmlwindow {
 	public File MainFile(String xmlpath, Rec ptRec, final String Type, String folder) {
 		
 		File MainFile = null;
-			//new File("");
 		boolean filefound = false;
-		System.out.println("folder is: "+ folder+","+ Type );
+		//System.out.println("folder is: "+ folder+","+ Type );
+		Typestr = Type;
 		
 		File xmls = new File(folder);
 		
@@ -156,17 +159,14 @@ public class Xmlwindow {
 		 Vbox SecondaryVbox = new Vbox();
 		 SecondaryVbox.setVflex("1");
 		 SecondaryVbox.setHflex("1");
-		 //SecondaryVbox.setWidth("850px");
 		 SecondaryVbox.setParent(build_XmlWin);
 		 
 	 	 Tabbox Secondarytabbox = new Tabbox();
-	 	 //Secondarytabbox.setHflex("min");
-	 	 Secondarytabbox.setHeight(Tabboxms[0]); //reduced from 625px
+	 	 Secondarytabbox.setHeight(Tabboxms[0]); 
 	 	 Secondarytabbox.setWidth(Tabboxms[1]);
 	 	 Secondarytabbox.setOrient("vertical");
 		 
 		 SecondaryVbox.appendChild(Secondarytabbox);
-		 //System.out.println("Vbox and tabbox width: "+ SecondaryVbox.getWidth()+", "+ Secondarytabbox.getWidth());
 		 
 		this.xml = xml;
 		this.MainChild = MainChild;
@@ -177,23 +177,23 @@ public class Xmlwindow {
 		Secondarytabbox.appendChild(tabs);
 		tabs.setWidth("85px");		
 		Secondarytabbox.appendChild(tabpanels);
-		//tabpanels.setHflex("max");
+		
 		 
 		if ( !(xml==null)){
 			
 			String Name = xml.getName();
-			
+			System.out.println("Name is: "+ Name);
 			
 			 if ( moreChildren) {
 				 				
 				emain = xml.getElementByPathName(Name);
-				System.out.println("emain is: "+emain.getName());
+				//System.out.println("emain is: "+emain.getName());
 				
 				emainchild = emain.getChildByName(SuperChild); this.SuperChild = SuperChild;
-				System.out.println("emainchild is: "+emainchild.getName());
+				//System.out.println("emainchild is: "+emainchild.getName());
 				
 				e = emain.getChildByName(ContentChild); 
-				System.out.println("e is: "+e.getName());
+				//System.out.println("e is: "+e.getName());
 				
 				NosChildren = e.countChildren();
 				
@@ -229,6 +229,39 @@ public class Xmlwindow {
 						
 						update();
 						
+						//notification popup module 
+						final Popup done = new Popup();
+						done.setWidth("200px");
+						Groupbox popupgbox = new Groupbox();
+						new Caption("Notification:").setParent(popupgbox);
+						popupgbox.setParent(done);
+						popupgbox.setClosable(false);
+						
+						Label notcontent = new Label();
+						notcontent.setValue(Typestr +" Xml Updated! ");
+						notcontent.setParent(popupgbox);
+												
+						done.setParent(build_XmlWin);
+						done.open("500px", "500px");
+						
+						
+						final Timer popuptimer = new Timer();
+						
+						popuptimer.setParent(build_XmlWin);
+						
+						popuptimer.setDelay(1200);
+						//System.out.println( "onTimer delay set, about to start");
+						popuptimer.start();
+												
+						popuptimer.addEventListener( Events.ON_TIMER, new EventListener(){
+							public void onEvent(Event ev) throws Exception {
+								//System.out.println( "onTimer event");
+								done.close();
+								popuptimer.stop();
+								popuptimer.detach();
+							}
+						});
+						
 					}
 					
 				});
@@ -237,14 +270,10 @@ public class Xmlwindow {
 	}
 	
 	public void refreshXW (XMLElement newxml) {
-		
-		//build_XmlWin.detach();
-		
-		System.out.println("this is the parent:" + this.SuperParent );
+					
+		//System.out.println("this is the parent:" + this.SuperParent );
 		
 		this.xmlwindow.setXmlWin(this.SuperParent, this.xmlwindow);
-		//this.xmlwindow.initializexml("85px", this.MainChild, this.SecondChild, this.ThirdChild, newxml, this.moreChildren, 
-				//this.SuperChild, this.ContentChild, this.standAlone, this.AdoptedChild, this.Statuschild );
 		this.xmlwindow.createxml();		
 		
 	}
@@ -258,7 +287,6 @@ public class Xmlwindow {
 			 Groupbox gbox = new Groupbox();
 			 new Caption(SuperChild).setParent(gbox);
 			 gbox.setParent(main);
-			 //gbox.setWidth("825px");
 			 gbox.setVflex("min");
 			 gbox.setHflex("min");
 			 
@@ -270,14 +298,13 @@ public class Xmlwindow {
 			 for ( int i = 1; i<emainchild.countChildren()+1; i++){		 
 			 
 			 if ( (i == 1) || ((i&3) == 0) ){
-				 //System.out.println("i is: "+ i);
+				
 				 Vbox vboxs = new Vbox();
 				 vboxs.setParent(main2);
 				 Vboxes.add(vboxs);
 			 }
 			 
-			 //System.out.println("Vbox size is: "+Vboxes.size());
-			 
+			 			 
 			 Cbox gen = new Cbox(emainchild.getChildByNumber(i-1), Vboxes.get(Vboxes.size()-1));
 			 gen.createCbox();
 			 Findings.add(gen);
@@ -288,9 +315,8 @@ public class Xmlwindow {
 		 for ( int j=0; j< NosChildren ; j++){
 		 XMLElement Childj = e.getChildByNumber( j );
 		 
-		 //System.out.println("Childjj name is: "+Childj.getName());
-		 
 		 if ( Childj.getName().equals(MainChild)){
+			
 			 //Creates a tab with the Label: Childj.getAttribute("label")
 			 tab = new Tab();
 			 tab.setLabel((String) Childj.getAttribute("label"));
@@ -303,7 +329,6 @@ public class Xmlwindow {
 			 tabpanel.setStyle("overflow:auto");
 			 tabpanel.setVflex("1");
 			 tabpanel.setHflex("max");
-			 //tabpanel.setWidth("800px");
 			 tabpanel.setParent(tabpanels);
 			
 		   XMLElement Childjj; 
@@ -311,8 +336,7 @@ public class Xmlwindow {
 		 
 			 
 		 Childjj = Childj.getChildByNumber(0);
-		 //System.out.println("Window,Hboxmain, tab, tabpanel is: "+ build_XmlWin.getWidth()+", "+ main.getWidth()+", "+tab.getWidth()+", "+tabpanel.getWidth());
-		 			 		 		 		 
+				 			 		 		 		 
 		 if ( (Childjj.getName().equals(SecondChild)) || (Childjj.getName().equals(AdoptedChild)) ){
 			 
 			 Hbox  hboxA1 = new Hbox();
@@ -340,14 +364,14 @@ public class Xmlwindow {
 					 Findings.add(gen);
 					
 				}else if(Childj.getChildByNumber(k).getName().equals(SecondChild)){
-				//Creates a groupbox
+				
+				 //Creates a groupbox
 				 Groupbox gbox = new Groupbox();
 				 new Caption((String) Childk.getAttribute("ID")).setParent(gbox);
 				 gbox.setParent(Vbox1);
 				 gbox.setWidth("305px");
-				 //gbox.setWidth("max");
-				
-								 
+												 
+				 
 				 for( int l =0; l < Childk.countChildren(); l++){
 				 XMLElement Childkk = Childk.getChildByNumber(l);
 				 
@@ -385,12 +409,6 @@ public class Xmlwindow {
 						 tgen.createCbox(40, 3, "",  true);
 						 Findings.add(tgen);
 						 
-						 /* Separator sep = new Separator();
-						 sep.setParent(gbox);
-						 
-						 Tbox text01 = new Tbox(Childkk, gbox);
-						 text01.createTbox(40, 3);
-						 Findings.add(text01);*/
 						 
 					
 					 }else if( Childkk.getAttribute("Type").equals("lateral-text")){
@@ -398,14 +416,6 @@ public class Xmlwindow {
 						 Lateral lat01 = new Lateral(Childkk, gbox);
 						 lat01.createLateral("L", "R", 40, 3,"", true);
 						 Findings.add(lat01);
-						 
-						/*						 
-						 Separator sep = new Separator();
-						 sep.setParent(gbox);
-						 
-						 Tbox text02 = new Tbox(Childkk, gbox);
-						 text02.createTbox(40, 3);
-						 Findings.add(text02); */
 						 
 						 
 					   }
@@ -466,10 +476,6 @@ public class Xmlwindow {
 							lat06.createLateral("+", "-",40,3,"", true);
 							Findings.add(lat06);
 							
-							/*
-							Tbox text03 = new Tbox(Childkk, gbox);
-							text03.createTbox(40, 3);
-							Findings.add(text03);*/
 							
 							
 						}else if (Childkk.getAttribute("Type").equals("binary-text") && Childkk.getAttribute("Misc").equals("/")){
@@ -522,15 +528,6 @@ public class Xmlwindow {
 		 		 Cbox tgen = new Cbox(Child11, gbox1);
 		 		 tgen.createCbox(80, 4, "", true );
 		 		 Findings.add(tgen);
-		 		 
-		 		 /*
-		 		 Separator sep = new Separator();
-				 sep.setParent(gbox1);
-				 
-				 
-				 Tbox text04 = new Tbox(Child11, gbox1);
-				 text04.createTbox(80, 4);
-				 Findings.add(text04);*/
 				 
 				 
 		 	  }else if ( Child11.getAttribute("Type").equals("binary-text") ){
@@ -615,13 +612,13 @@ public class Xmlwindow {
 			
 		}else { examtext = PhysicalExamFinal;}
 		
-		System.out.println("XmlText is: "+ examtext);
+		//System.out.println("XmlText is: "+ examtext);
 		return examtext;
 	}
 	
 	private String Statuschild; 
 	
-	private void update() {
+	public void update() {
 		
 		
 		
@@ -638,8 +635,7 @@ public class Xmlwindow {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
-		
-		//refreshXW( xml );
+				
 		
 	}
 	
@@ -701,8 +697,7 @@ public class Xmlwindow {
 			}
 			
 		}
-		
-		
+				
 		void createBinarY ( String left, String right, final int cols, final int rows){
 			
 			vbox = new Vbox();
@@ -811,10 +806,7 @@ public class Xmlwindow {
 			}
 		return status;
 		}
-		
-		
-		
-		
+				
 		
 		public void setStatus() {
 		
@@ -875,10 +867,7 @@ public class Xmlwindow {
 			//this.gbox = gbox;
 			this.parent = parent;
 			
-		}
-		
-		
-		
+		}	
 
 		void createLateral(String left, String right){
 			
@@ -913,7 +902,6 @@ public class Xmlwindow {
 			
 		}
 		
-
 		void createLateral(String left, String right, int Cols, int Rows, String label, boolean sepa ){
 			
 			hbox = new Hbox();
@@ -1053,9 +1041,7 @@ public class Xmlwindow {
 		this.parent = parent;
 		
 		}
-		
-	
-
+			
 		void createCbox(){
 			
 			hbox = new Hbox();

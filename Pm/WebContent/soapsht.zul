@@ -360,17 +360,17 @@
 			<tabpanel id="tpCharge" vflex="1" hflex="1" > 
 				<hbox>
 				<vbox>
-					<groupbox id="gbCharge" mold="default" width="600px" style="overflow:auto" >
-						<caption label="Charge" />
+					<groupbox id="gbCharge" mold="default" width="800px" style="overflow:auto" >
+						<caption label="Charge-Window" />
 						
 					</groupbox>
 						
 				</vbox>
 
-					<groupbox mold="default" width="300px" >
+					<!-- <groupbox mold="default" width="300px" >
 						<caption label="Charge-Text" />
 						<textbox id="ChargeTextbox" rows="12" hflex="1" />
-					</groupbox>
+					</groupbox>  -->
 	
 				</hbox>
 			

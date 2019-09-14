@@ -208,7 +208,7 @@ public class OfficeVisitWinController extends GenericForwardComposer {
 				
 			});
 			
-			System.out.println("mf is: "+ matchingfile.length );
+			//System.out.println("mf is: "+ matchingfile.length );
 			if (  matchingfile.length > 0 || !(matchingfile == null)){
 				
 			File visit = new File(matchingfile[0].getPath());
@@ -216,7 +216,7 @@ public class OfficeVisitWinController extends GenericForwardComposer {
 			XMLElement xml = new XMLElement();
 			FileReader reader = null;
 			
-			System.out.println("visit is: "+ matchingfile[0].getPath());
+			//System.out.println("visit is: "+ matchingfile[0].getPath());
 			try {
 				reader = new FileReader( visit );
 		    } catch (FileNotFoundException e) {
@@ -256,8 +256,8 @@ public class OfficeVisitWinController extends GenericForwardComposer {
 			 int fnd = 1;
 			 
 			 String status = Info.getChildByName("Status").getContent().trim();
-			 System.out.println("status is: "+status);
-			 System.out.println("second caser: "+ display );
+			 //System.out.println("status is: "+status);
+			//System.out.println("second caser: "+ display );
 			 
 			 if ( All || display.trim().equalsIgnoreCase(status.trim())){
 				
@@ -276,7 +276,7 @@ public class OfficeVisitWinController extends GenericForwardComposer {
 				 Statuses.add(status);	
 				 Filez.add(visitfolder);
 				 DFilez.add(Info.getChildByName("FreeText").getContent().trim());
-				 System.out.println("HERE>.");
+				 //System.out.println("HERE>.");
 				// create new List item and add cells to it
 					Listitem j;
 					(j = new Listitem()).setParent( officevListbox );
@@ -307,7 +307,7 @@ public class OfficeVisitWinController extends GenericForwardComposer {
 					int hour = calendar.get(java.util.Calendar.HOUR_OF_DAY);
 					int mins = calendar.get(java.util.Calendar.MINUTE);
 					//int seconds = calendar.get(java.util.Calendar.SECOND);
-					System.out.println("hour,mins "+hour +","+ mins);
+					//System.out.println("hour,mins "+hour +","+ mins);
 					//(hour+24)%24)
 					String timenow = (String.format("%02d", hour))+ (String.format("%02d", mins));
 					String starttime = Info.getChildByName("Start").getContent().trim();
@@ -327,7 +327,7 @@ public class OfficeVisitWinController extends GenericForwardComposer {
 				            hrsDiff--;
 				        }
 
-				        System.out.println("The difference between times is " + hrsDiff + " hours " + minDiff + " minutes.");
+				       // System.out.println("The difference between times is " + hrsDiff + " hours " + minDiff + " minutes.");
 
 				    } else {
 				         minDiff = Integer.parseInt(min1) - Integer.parseInt(min2);
@@ -337,7 +337,7 @@ public class OfficeVisitWinController extends GenericForwardComposer {
 				            hrsDiff--;
 				        }
 
-				        System.out.println("The difference between times is " + hrsDiff + " hours " + minDiff + " minutes.");
+				        //System.out.println("The difference between times is " + hrsDiff + " hours " + minDiff + " minutes.");
 				    }
 					/*int tn = Integer.parseInt(timenow);
 					int st = Integer.parseInt(starttime);
@@ -394,6 +394,24 @@ public class OfficeVisitWinController extends GenericForwardComposer {
 					Listcell C3 = new Listcell( Info.getChildByName("Priority").getContent() );
 					C3.setStyle("border-right:2px dotted black;");
 					C3.setParent(j);
+					
+					
+					String vsstr = Info.getChildByName("ViewStatus").getContent().trim();
+					
+					//System.out.println("vsstr is: "+ vsstr);
+					
+					String vsstrf = "Unknown";
+					
+					if (vsstr.equalsIgnoreCase("QClosedQ")){
+						
+						vsstrf = "Not in use.";
+							
+					}else { vsstrf = "Currently being used."; }
+					
+					Listcell C4 = new Listcell( vsstrf );
+					C4.setStyle("border-right:2px dotted black;");
+					C4.setParent(j);
+					
 				}				 
 				 
 			 }
@@ -404,7 +422,7 @@ public class OfficeVisitWinController extends GenericForwardComposer {
 		
 	  }
 	}
-		System.out.println("New List size:"+ Filez.size());
+		//System.out.println("New List size:"+ Filez.size());
 		return;
 		
 	}
@@ -973,35 +991,15 @@ public class OfficeVisitWinController extends GenericForwardComposer {
 	
 	public void onClick$view( Event ev ){
 		
-		openISS = true;
 		if ( officevListbox.getSelectedCount() < 1 ){
 			try { Messagebox.show( "No Visit is currently selected." ); } catch (InterruptedException e) { /*ignore*/ }
 			return;
 		}
-
-		int no = officevListbox.getSelectedIndex();
+		
+		int no = officevListbox.getSelectedIndex();		
 		String Vfile = Filez.get(no);
-		String Debug = DFilez.get(no);
 		
-		// get selected item's rec
-		Rec rec = (Rec) officevListbox.getSelectedItem().getValue();
 		
-		System.out.println("rec is: "+rec);
-		
-		//TODO add review window 
-		
-		if (( rec == null ) || ( rec.getRec() < 2 ))return;
-		
-		if ( !Statuses.get(no).equals("QReview VisitQ")){
-		if	( SoapSheetWin.show( Debug, Vfile, rec, officevWin ));{
-			
-			refreshVisits();
-			openISS = false;			
-			 ptRec =  rec ;	
-		
-	}}else{
-		
-				
 		File visitfolderf = new File(Vfile);
 		
 		File[] matchingfile = visitfolderf.listFiles(new FilenameFilter() { 
@@ -1014,6 +1012,7 @@ public class OfficeVisitWinController extends GenericForwardComposer {
 		
 		final String Vfilef = matchingfile[0].getPath();
 		
+		System.out.println("path of visit xml is: "+ matchingfile[0].getPath());
 		
 		XMLElement xml = new XMLElement();
 		FileReader reader = null;
@@ -1040,13 +1039,66 @@ public class OfficeVisitWinController extends GenericForwardComposer {
 		 String Name = xml.getName();
 		 xml.countChildren();
 		 
+		 System.out.println("e's kids: "+ xml.countChildren());
+		 
 		 e = xml.getElementByPathName(Name);
 		
 		
-		 XMLElement Endgame = new XMLElement();		 
+		XMLElement Info2 = new XMLElement();		 
+		Info2 = e.getChildByName("INFO");
+				
+		final XMLElement Info = Info2;
+		
+		String vsstr = Info.getChildByName("ViewStatus").getContent().trim();
+		
+		if ( vsstr.equalsIgnoreCase("QOpenQ")){ try { Messagebox.show( "This visit is currently in use." ); } catch (InterruptedException e1) { /*ignore*/ }
+		return;}
+		
+		
+		openISS = true;					
+		String Debug = DFilez.get(no);
+		
+		// get selected item's rec
+		Rec rec = (Rec) officevListbox.getSelectedItem().getValue();
+		
+		System.out.println("rec is: "+rec);
+		
+		//TODO add review window 
+		
+		if (( rec == null ) || ( rec.getRec() < 2 ))return;
+		
+		if ( !Statuses.get(no).equals("QReview VisitQ")){
+		if	( SoapSheetWin.show( Debug, Vfile, rec, officevWin ));{
+			
+			Info.getChildByName("ViewStatus").setContent("QOpenQ");
+			refreshVisits();
+			openISS = false;			
+			 ptRec =  rec ;	
+		
+		}}else{
+					
+		Info.getChildByName("ViewStatus").setContent("QOpenQ");
 		 
-		 Endgame = e.getChildByName("ENDGAME");
-		 
+		XMLElement Endgame = new XMLElement();			 
+		Endgame = e.getChildByName("ENDGAME");
+		
+		XMLElement Summaryf = new XMLElement();				 
+		Summaryf = e.getChildByName("SUMM");
+		
+		XMLElement Summary = new XMLElement();				 
+		Summary = Summaryf;
+		
+		final String CCF;
+		final String AssessF;
+		final String FUP, Charges;		
+		
+		//System.out.println("Summary nos of  children are: "+ Summary.countChildren() );
+		CCF = Summary.getChildByName("CCF").getContent().trim();
+		AssessF = Summary.getChildByName("AssesmentF").getContent().trim();
+		FUP = Summary.getChildByName("FUP").getContent().trim();
+		Charges = Summary.getChildByName("Charges").getContent().trim();		
+									
+		
 		final Window HandP = new Window();	
 		
 		HandP.setParent(officevWin);
@@ -1124,6 +1176,7 @@ public class OfficeVisitWinController extends GenericForwardComposer {
 		 Bhx.setStyle("overflow:auto");
 		 
 		 new Caption("Assessment:").setParent(gbox09);
+		 //System.out.println("Assess text is: "+ Endgame.getChildByName("Assess").getContent().trim() );
 		 Bhx.setText( Endgame.getChildByName("Assess").getContent().trim() );
 		 
 		 Groupbox gbox10 = new Groupbox();
@@ -1277,7 +1330,7 @@ public class OfficeVisitWinController extends GenericForwardComposer {
 						e.printStackTrace();
 					}
 					
-				
+					Info.getChildByName("ViewStatus").setContent("QClosedQ");
 					HandP.detach();
 					refreshVisits();
 										
@@ -1299,6 +1352,7 @@ public class OfficeVisitWinController extends GenericForwardComposer {
 					//Final check
 					if ( Messagebox.show( "Any information entered wont be saved, close?", "Verify close?", Messagebox.YES | Messagebox.NO , Messagebox.QUESTION ) != Messagebox.YES )return;
 					
+					Info.getChildByName("ViewStatus").setContent("QClosedQ");
 					HandP.detach();
 					refreshVisits();
 										
@@ -1315,13 +1369,9 @@ public class OfficeVisitWinController extends GenericForwardComposer {
 			Div end = new Div();
 			end.setParent(ThirdHbox);
 			end.setStyle("text-align: right");
+					
 			
-			XMLElement Info = new XMLElement();		 
-			 
-			Info = e.getChildByName("INFO");
-			
-			String soapstat = Info.getChildByName("Soap").getContent().trim();
-			
+			String soapstat = Info.getChildByName("Soap").getContent().trim();		
 			
 			
 			Button Save = new Button();
@@ -1403,27 +1453,6 @@ public class OfficeVisitWinController extends GenericForwardComposer {
 				});
 				
 								
-				
-				XMLElement Summary = new XMLElement();		 
-				 
-				Summary = e.getChildByName("SUMM");
-				final String CCF;
-				final String AssessF;
-				final String FUP, FUP2, FUW,  SRVI, SRVI2, Charges, Charges2, PROCEED, LabsB;
-				
-				
-				CCF = Summary.getChildByName("CCF").getContent().trim();
-				AssessF = Summary.getChildByName("AssesmentF").getContent().trim();
-				FUP = Summary.getChildByName("FUP").getContent().trim();
-				FUP2 = Summary.getChildByName("FUP2").getContent().trim();
-				FUW = Summary.getChildByName("FUW").getContent().trim();
-				SRVI = Summary.getChildByName("SRVI").getContent().trim();
-				SRVI2 = Summary.getChildByName("SRVI2").getContent().trim();
-				Charges = Summary.getChildByName("Charges").getContent().trim();
-				Charges2 = Summary.getChildByName("Charges2").getContent().trim();
-				PROCEED = Summary.getChildByName("PROCEED").getContent().trim();
-				LabsB =Summary.getChildByName("LabsB").getContent().trim();
-											
 								
 				Button Print = new Button();
 				Print.setParent(end);
@@ -1480,14 +1509,8 @@ public class OfficeVisitWinController extends GenericForwardComposer {
 						htmlString = htmlString.replace("QCCQ", CCF );
 						htmlString = htmlString.replace("QAssessQ", AssessF );
 						htmlString = htmlString.replace("QInterventQ", FUP );
-						htmlString = htmlString.replace("QInstructQ", FUP2 );
-						htmlString = htmlString.replace("QFollowUpWithQ", FUW );
-						htmlString = htmlString.replace("QRTCNumberQ", SRVI );
-						htmlString = htmlString.replace("QRTCPeriodQ", SRVI2 );
-						htmlString = htmlString.replace("QNewPatientQ", Charges );
-						htmlString = htmlString.replace("QLevelQ", Charges2 );
-						htmlString = htmlString.replace("QproceeduresQ", PROCEED );
-						htmlString = htmlString.replace("QLabsBilledQ", LabsB );
+						htmlString = htmlString.replace("QChargesQ", Charges );
+						
 						
 						StringBuilder sb2 = new StringBuilder();
 						
